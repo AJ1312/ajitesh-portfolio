@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+import os
+
+PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentinel-Stream — The Sharma Dispatch</title>
+    <title>{title} — The Sharma Dispatch</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
@@ -117,7 +119,18 @@
         </header>
 
         <main class="dispatch-content">
+{content}
+        </main>
+        
+        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 20px 0; text-align: center;">
+            <p class="meta">PRINTED IN VELLORE &middot; AJITESH SHARMA &copy; 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
+"""
 
+SENTINEL_CONTENT = """
             <section class="portfolio-case-study">
                 <div class="project-header rv">
                     <span class="project-badge">AI CYBERSECURITY & UEBA</span>
@@ -212,9 +225,9 @@
                     <div class="text-block">
                         <h3 class="heading-lg" style="margin-bottom: 20px;">Key Technical Innovations</h3>
                         <ul>
-                            <li><b>O(1) Streaming Profiler:</b> Replaces raw event arrays with Exponentially Weighted Moving Averages (EWMA) and Count-Min Sketch tables ($4	ext{ KB}$ matrix), bounding memory per entity.</li>
-                            <li><b>Zero Cold-Start Vulnerability:</b> Stage 1 Isolation Forest calculates structural anomaly scores ($s_{	ext{iso}}$) for newly onboarded entities without historical baseline logs.</li>
-                            <li><b>Inline TreeSHAP Explainability:</b> Computes exact directional feature risk attributions in $pprox 30\ \mu	ext{s}$ per alert.</li>
+                            <li><b>O(1) Streaming Profiler:</b> Replaces raw event arrays with Exponentially Weighted Moving Averages (EWMA) and Count-Min Sketch tables ($4\text{ KB}$ matrix), bounding memory per entity.</li>
+                            <li><b>Zero Cold-Start Vulnerability:</b> Stage 1 Isolation Forest calculates structural anomaly scores ($s_{\text{iso}}$) for newly onboarded entities without historical baseline logs.</li>
+                            <li><b>Inline TreeSHAP Explainability:</b> Computes exact directional feature risk attributions in $\approx 30\ \mu\text{s}$ per alert.</li>
                         </ul>
                     </div>
                     <div class="text-block">
@@ -240,44 +253,32 @@
                     let f1 = 0, f2 = 0, f3 = 0, f4 = 0;
 
                     if (type === 'brute') {
-                        logText = `[${ts}] [ALERT CRITICAL] Entity: user_adm_82 | Event: AUTH_FAILURE (x45 in 10s)
-` +
-                                  `[${ts}] [INFERENCE] P99 Latency: 1.84ms | Memory: 1.98 KB
-` +
-                                  `[${ts}] [STAGE 1 IsoForest] Score: 0.88 | [STAGE 2 LightGBM] Class: BRUTE_FORCE (0.965)
-` +
+                        logText = `[${ts}] [ALERT CRITICAL] Entity: user_adm_82 | Event: AUTH_FAILURE (x45 in 10s)\n` +
+                                  `[${ts}] [INFERENCE] P99 Latency: 1.84ms | Memory: 1.98 KB\n` +
+                                  `[${ts}] [STAGE 1 IsoForest] Score: 0.88 | [STAGE 2 LightGBM] Class: BRUTE_FORCE (0.965)\n` +
                                   `[${ts}] [TreeSHAP] Top Contributor: failed_logins_1m (+0.54), event_rate_delta (+0.32)`;
                         f1 = 88; f2 = 64; f3 = 10; f4 = 15;
                     } else if (type === 'travel') {
-                        logText = `[${ts}] [ALERT HIGH] Entity: user_exec_04 | Event: LOGIN_SUCCESS (Location: Tokyo, Previous: New York)
-` +
-                                  `[${ts}] [INFERENCE] P99 Latency: 2.12ms | Memory: 2.01 KB
-` +
-                                  `[${ts}] [STAGE 1 IsoForest] Score: 0.81 | [STAGE 2 LightGBM] Class: IMPOSSIBLE_TRAVEL (0.912)
-` +
+                        logText = `[${ts}] [ALERT HIGH] Entity: user_exec_04 | Event: LOGIN_SUCCESS (Location: Tokyo, Previous: New York)\n` +
+                                  `[${ts}] [INFERENCE] P99 Latency: 2.12ms | Memory: 2.01 KB\n` +
+                                  `[${ts}] [STAGE 1 IsoForest] Score: 0.81 | [STAGE 2 LightGBM] Class: IMPOSSIBLE_TRAVEL (0.912)\n` +
                                   `[${ts}] [TreeSHAP] Top Contributor: geo_velocity_kmh (+0.68), event_rate_delta (+0.18)`;
                         f1 = 12; f2 = 36; f3 = 92; f4 = 20;
                     } else if (type === 'exfil') {
-                        logText = `[${ts}] [ALERT CRITICAL] Entity: dev_service_acct | Event: DB_EXPORT (Outbound: 14.2 GB to unknown ASN)
-` +
-                                  `[${ts}] [INFERENCE] P99 Latency: 1.95ms | Memory: 1.99 KB
-` +
-                                  `[${ts}] [STAGE 1 IsoForest] Score: 0.94 | [STAGE 2 LightGBM] Class: DATA_EXFILTRATION (0.984)
-` +
+                        logText = `[${ts}] [ALERT CRITICAL] Entity: dev_service_acct | Event: DB_EXPORT (Outbound: 14.2 GB to unknown ASN)\n` +
+                                  `[${ts}] [INFERENCE] P99 Latency: 1.95ms | Memory: 1.99 KB\n` +
+                                  `[${ts}] [STAGE 1 IsoForest] Score: 0.94 | [STAGE 2 LightGBM] Class: DATA_EXFILTRATION (0.984)\n` +
                                   `[${ts}] [TreeSHAP] Top Contributor: outbound_bytes_ewma (+0.76), event_rate_delta (+0.25)`;
                         f1 = 15; f2 = 50; f3 = 25; f4 = 95;
                     } else {
-                        logText = `[${ts}] [INFO NOMINAL] Entity: user_staff_11 | Event: FILE_READ (Normal Baseline)
-` +
-                                  `[${ts}] [INFERENCE] P99 Latency: 1.45ms | Memory: 1.97 KB
-` +
-                                  `[${ts}] [STAGE 1 IsoForest] Score: 0.12 | [STAGE 2 LightGBM] Class: BENIGN (0.998)
-` +
+                        logText = `[${ts}] [INFO NOMINAL] Entity: user_staff_11 | Event: FILE_READ (Normal Baseline)\n` +
+                                  `[${ts}] [INFERENCE] P99 Latency: 1.45ms | Memory: 1.97 KB\n` +
+                                  `[${ts}] [STAGE 1 IsoForest] Score: 0.12 | [STAGE 2 LightGBM] Class: BENIGN (0.998)\n` +
                                   `[${ts}] [TreeSHAP] Baseline metrics nominal. Zero threat indicators detected.`;
                         f1 = 2; f2 = 5; f3 = 2; f4 = 4;
                     }
 
-                    log.innerText += '\n\n' + logText;
+                    log.innerText += '\\n\\n' + logText;
                     log.scrollTop = log.scrollHeight;
 
                     document.getElementById('f1_bar').style.width = f1 + '%';
@@ -293,12 +294,129 @@
                     document.getElementById('f4_val').innerText = '+' + (f4 / 100).toFixed(2);
                 }
             </script>
+"""
 
-        </main>
-        
-        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 20px 0; text-align: center;">
-            <p class="meta">PRINTED IN VELLORE &middot; AJITESH SHARMA &copy; 2026</p>
-        </footer>
-    </div>
-</body>
-</html>
+CIPHERPULSE_CONTENT = """
+            <section class="portfolio-case-study">
+                <div class="project-header rv">
+                    <span class="project-badge">HIGH-PERFORMANCE C++17 DPI</span>
+                    <h2 class="display-lg" style="margin-bottom: 10px;">CipherPulse: Multi-Threaded Encrypted Traffic Intelligence</h2>
+                    <p class="tagline">Line-Rate Packet Inspection, JA4+ Fingerprinting & Non-SNI Traffic Classification</p>
+                </div>
+
+                <!-- Metrics Grid -->
+                <div class="metrics-row rv">
+                    <div class="metric-box">
+                        <span class="metric-val">100k+</span>
+                        <span class="metric-lbl">Single-Core pps</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-val">ZERO</span>
+                        <span class="metric-lbl">Hot-Path Lock Contention</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-val">100%</span>
+                        <span class="metric-lbl">C2 Beaconing Detection</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-val">Zero</span>
+                        <span class="metric-lbl">External Dependencies</span>
+                    </div>
+                </div>
+
+                <!-- Architectural Flow Diagram -->
+                <div class="arch-diagram-box rv">
+                    <span class="kicker-label">C++17 FAST-PATH ARCHITECTURE</span>
+                    <h4 class="heading-md" style="margin: 10px 0 15px 0;">Lock-Free 5-Tuple Consistent Hashing &amp; JA4+ Fingerprinting</h4>
+                    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px;">
+                        <div class="arch-node">RAW Socket Capture<br><small style="font-weight:normal;">AF_PACKET / eBPF</small></div>
+                        <span class="arch-arrow">&rarr;</span>
+                        <div class="arch-node">5-Tuple Consistent Hash<br><small style="font-weight:normal;">Zero-Mutex Dispatch</small></div>
+                        <span class="arch-arrow">&rarr;</span>
+                        <div class="arch-node">Fast-Path Worker Threads<br><small style="font-weight:normal;">C++17 Ring Buffers</small></div>
+                        <span class="arch-arrow">&rarr;</span>
+                        <div class="arch-node">JA4+ &amp; Entropy Engine<br><small style="font-weight:normal;">Welford CoV Profiler</small></div>
+                        <span class="arch-arrow">&rarr;</span>
+                        <div class="arch-node">C2 Beaconing Alert<br><small style="font-weight:normal;">Non-SNI ETI Stream</small></div>
+                    </div>
+                </div>
+
+                <!-- Interactive Live Simulation Widget -->
+                <div class="sim-box rv">
+                    <span class="kicker-label" style="color: var(--stamp);">INTERACTIVE DPI PACKET SIMULATOR</span>
+                    <h3 class="heading-lg" style="margin: 5px 0 15px 0;">C++ Multi-Threaded Packet Stream Simulator</h3>
+                    <p class="body" style="margin-bottom: 15px; font-family: var(--font-text);">Simulate line-rate packet parsing, 5-tuple consistent hashing, and JA4+ TLS fingerprinting on encrypted streams:</p>
+
+                    <div>
+                        <button class="sim-btn" onclick="runPcap('tls')">▶ Stream Normal TLS 1.3 Traffic</button>
+                        <button class="sim-btn" onclick="runPcap('c2')">🚨 Inject Non-SNI C2 Beaconing</button>
+                        <button class="sim-btn" onclick="runPcap('threads')">⚙️ Fast-Path Worker Thread Distribution</button>
+                    </div>
+
+                    <div class="sim-terminal" id="dpiTerminal">
+[DPI INIT] C++17 Multi-Threaded Engine Initialized.
+[DPI CONFIG] Fast-Path Worker Threads: 4 | Consistent Hash Ring: ACTIVE.
+[DPI CONFIG] Zero external dependencies. Strict-aliasing safe memcpy enabled.
+Ready. Select a test stream scenario above...
+                    </div>
+                </div>
+
+                <div class="case-study-grid rv">
+                    <div class="text-block">
+                        <h3 class="heading-lg" style="margin-bottom: 20px;">Key Technical Innovations</h3>
+                        <ul>
+                            <li><b>Lock-Free Consistent Hashing:</b> Packets are routed via 5-tuple consistent hashing to isolated Fast Path (FP) threads, eliminating cross-thread mutex bottlenecks.</li>
+                            <li><b>Non-SNI Traffic Intelligence (ETI):</b> Classifies encrypted traffic when Encrypted Client Hello (ECH) hides SNI using JA4+ TLS fingerprinting and Welford online flow statistics ($\text{CoV} < 0.12$ beaconing).</li>
+                            <li><b>Pure C++17 Memory Safety:</b> Strict-aliasing safe packet parsing using <code>std::memcpy</code> without external dependencies.</li>
+                        </ul>
+                    </div>
+                    <div class="text-block">
+                        <h3 class="heading-lg" style="margin-bottom: 20px;">The Real-World Scenario</h3>
+                        <p class="body-lg"><span class="dropcap">M</span>odern malware and C2 frameworks (such as Cobalt Strike or Sliver) hide command channels inside standard TLS 1.3 encrypted streams, rendering traditional Deep Packet Inspection (DPI) helpless without full SSL decryption.</p>
+                        <p class="body-lg" style="margin-top: 15px;">CipherPulse inspects packets at line-rate without TLS decryption by extracting JA4+ client fingerprints and tracking flow inter-arrival times using Welford's algorithm to flag periodic beaconing.</p>
+                    </div>
+                </div>
+                
+                <!-- Links -->
+                <div class="project-links rv">
+                    <a href="https://github.com/AJ1312/CipherPulse" target="_blank" class="btn-github">⭐ View Code on GitHub</a>
+                </div>
+            </section>
+
+            <script>
+                function runPcap(type) {
+                    const term = document.getElementById('dpiTerminal');
+                    const ts = new Date().toISOString().substring(11, 19);
+
+                    let msg = '';
+                    if (type === 'tls') {
+                        msg = `[${ts}] [FP-THREAD-01] PKT #10482: 192.168.1.45:54321 -> 142.250.190.46:443 [TLS 1.3]\n` +
+                              `[${ts}] [JA4+ ENGINE] Hash: t13d151600_8daaf6152702_202020202020 | SNI: www.google.com\n` +
+                              `[${ts}] [WELFORD STATS] Inter-arrival mean: 452ms | StdDev: 310ms | CoV: 0.686 (NON-PERIODIC)\n` +
+                              `[${ts}] [CLASSIFICATION] Status: CLEAN (BENIGN_BROWSING) | Throughput: 114,200 pps`;
+                    } else if (type === 'c2') {
+                        msg = `[${ts}] [FP-THREAD-03] PKT #10483: 10.0.4.12:49152 -> 185.220.101.5:443 [TLS 1.3 (ECH)]\n` +
+                              `[${ts}] [JA4+ ENGINE] Hash: t13d190800_c84a8b291410_000000000000 | SNI: HIDDEN (ECH)\n` +
+                              `[${ts}] [WELFORD STATS] Inter-arrival mean: 5000ms | StdDev: 12ms | CoV: 0.0024 (< 0.12 THRESHOLD)\n` +
+                              `[${ts}] [ALERT CRITICAL] Non-SNI C2 Beaconing Detected! Target: 185.220.101.5 | Action: ETI STREAM ALERT`;
+                    } else {
+                        msg = `[${ts}] [HASH RING DIST] Distributing 100,000 packets across 4 Fast-Path Workers:\n` +
+                              `  -> FP-Worker-0: 25,014 pkts (0 mutex locks, 0 drops)\n` +
+                              `  -> FP-Worker-1: 24,982 pkts (0 mutex locks, 0 drops)\n` +
+                              `  -> FP-Worker-2: 25,008 pkts (0 mutex locks, 0 drops)\n` +
+                              `  -> FP-Worker-3: 24,996 pkts (0 mutex locks, 0 drops)\n` +
+                              `[PERF METRIC] Zero Hot-Path Lock Contention | Total System Throughput: 448,000 pps (Combined)`;
+                    }
+
+                    term.innerText += '\\n\\n' + msg;
+                    term.scrollTop = term.scrollHeight;
+                }
+            </script>
+"""
+
+with open('pages/sentinel-stream.html', 'w') as f:
+    f.write(PAGE_TEMPLATE.replace('{title}', 'Sentinel-Stream').replace('{content}', SENTINEL_CONTENT))
+
+with open('pages/cipherpulse.html', 'w') as f:
+    f.write(PAGE_TEMPLATE.replace('{title}', 'CipherPulse').replace('{content}', CIPHERPULSE_CONTENT))
+print("Successfully generated self-contained interactive project pages!")

@@ -1,0 +1,43 @@
+{
+  "consoleErrors": [],
+  "failedRequests": [],
+  "brokenImages": [],
+  "pageStatuses": [
+    {
+      "page": "index",
+      "status": 200
+    },
+    {
+      "page": "sentinel-stream",
+      "status": 200
+    },
+    {
+      "page": "cipherpulse",
+      "status": 200
+    },
+    {
+      "page": "snapseat",
+      "status": 200
+    },
+    {
+      "page": "nutrivision",
+      "status": 200
+    },
+    {
+      "page": "internship",
+      "status": 200
+    },
+    {
+      "page": "patents",
+      "status": 200
+    },
+    {
+      "page": "paper-compsac",
+      "status": 200
+    },
+    {
+      "page": "certifications",
+      "status": 200
+    }
+  ]
+}
