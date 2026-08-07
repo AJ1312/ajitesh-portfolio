@@ -5,120 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CipherPulse | The Sharma Dispatch</title>
     
-    <!-- Google Fonts -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>A</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
     
-    <!-- CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <link rel="stylesheet" href="../css/styles.css">
-    
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
-<body class="editorial-theme page-transition">
-
-    <!-- Navigation -->
-    <nav class="site-nav top-nav border-bottom-double">
-        <div class="nav-container grid-layout">
-            <div class="nav-brand">
-                <a href="../index.html" class="nav-link font-serif uppercase tracking-wide">Ajitesh Sharma</a>
-                <span class="nav-separator font-mono muted">&larr; Back to Dispatch</span>
-            </div>
-            <div class="nav-links font-sans text-sm font-semibold uppercase tracking-wider">
-                <a href="../index.html#dispatches" class="nav-link">Dispatches</a>
-                <a href="../index.html#contact" class="nav-link">Contact</a>
-                <a href="mailto:ajitesh@example.com" class="btn btn-solid ml-4">Hire Him</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="project-detail-container">
+<body class="newspaper-theme">
+    <div class="container">
         
-        <!-- Hero Section -->
-        <header class="project-hero border-bottom-triple section-padding bg-paper">
-            <div class="container wrapper-lg">
-                <div class="hero-kicker font-mono text-sm uppercase tracking-widest muted mb-4">
-                    DISPATCH A &mdash; FIELD REPORT
-                </div>
-                <h1 class="hero-title font-serif text-6xl md:text-8xl font-black mb-6 leading-tight">
-                    CipherPulse
-                </h1>
-                <h2 class="hero-subtitle font-sans text-xl md:text-3xl font-medium text-ink mb-8 leading-snug max-w-4xl">
-                    High-Performance Multi-Threaded C++17 DPI &amp; Encrypted Traffic Intelligence Engine
-                </h2>
-                
-                <div class="hero-meta flex flex-wrap items-center gap-6 font-mono text-sm uppercase">
-                    <div class="status-badge flex items-center gap-2 text-accent border border-accent px-3 py-1 font-bold tracking-widest">
-                        <span class="status-indicator w-2 h-2 bg-accent inline-block"></span>
-                        STATUS: DEPLOYED
-                    </div>
-                    <div class="meta-item text-ink font-semibold">
-                        DATE: March 2026
-                    </div>
-                    <div class="meta-item">
-                        <a href="https://github.com/AJ1312/CipherPulse" target="_blank" rel="noopener noreferrer" class="link-underline font-semibold text-ink hover:text-accent transition-colors">
-                            github.com/AJ1312/CipherPulse &nearr;
-                        </a>
+        <!-- SUBPAGE HEADER -->
+        <header class="masthead section-rule--double" style="margin-top: 20px;">
+            <nav class="nav" id="main-nav" style="border-bottom: 4px solid var(--rule-dark); padding: 15px 0;">
+                <div class="newspaper-grid" style="align-items: center;">
+                    <div class="col-span-6 heading-md" style="margin:0;"><a href="../index.html" style="text-decoration: none; color: inherit;">&larr; THE SHARMA DISPATCH</a></div>
+                    <div class="col-span-6" style="display: flex; justify-content: flex-end; gap: 25px; align-items: center;">
+                        <a href="../index.html#projects" class="meta bold">WORK</a>
+                        <a href="../index.html#contact" class="meta bold">CONTACT</a>
+                        <a href="mailto:13ajitesh@gmail.com" style="background: var(--ink); color: var(--paper); padding: 6px 16px;" class="meta bold">HIRE HIM</a>
                     </div>
                 </div>
-            </div>
+            </nav>
         </header>
 
-        <!-- Metadata Grid -->
-        <section class="project-metadata border-bottom-double bg-paper">
-            <div class="container wrapper-lg">
-                <div class="metadata-grid grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 border-left border-right border-ink">
-                    <div class="meta-card p-6 border-right border-ink border-bottom border-ink lg:border-bottom-0">
-                        <div class="meta-label font-mono text-xs uppercase tracking-widest muted mb-2">Classification</div>
-                        <div class="meta-value font-sans font-semibold text-sm leading-tight">Network Security /<br>Deep Packet Inspection</div>
-                    </div>
-                    <div class="meta-card p-6 border-right border-ink border-bottom border-ink lg:border-bottom-0">
-                        <div class="meta-label font-mono text-xs uppercase tracking-widest muted mb-2">Language</div>
-                        <div class="meta-value font-sans font-semibold text-sm">C++17</div>
-                    </div>
-                    <div class="meta-card p-6 border-right border-ink border-bottom border-ink lg:border-bottom-0">
-                        <div class="meta-label font-mono text-xs uppercase tracking-widest muted mb-2">Threading</div>
-                        <div class="meta-value font-sans font-semibold text-sm leading-tight">Multi-threaded<br>Producer-Consumer<br>Pipeline</div>
-                    </div>
-                    <div class="meta-card p-6 border-right border-ink border-bottom border-ink md:border-bottom-0">
-                        <div class="meta-label font-mono text-xs uppercase tracking-widest muted mb-2">Architecture</div>
-                        <div class="meta-value font-sans font-semibold text-sm leading-tight">Lock-free<br>Per-Thread State</div>
-                    </div>
-                    <div class="meta-card p-6">
-                        <div class="meta-label font-mono text-xs uppercase tracking-widest muted mb-2">Key Tech</div>
-                        <div class="meta-value font-sans font-semibold text-sm leading-tight">JA4+ TLS Fingerprinting,<br>Shannon Entropy,<br>Welford's Algorithm</div>
+        <main class="dispatch-content">
+            
+            <!-- HERO -->
+            <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <p class="kicker-label rv">DISPATCH A — FIELD REPORT</p>
+                        <h1 class="display-xl rv" style="margin-bottom: 20px;">CipherPulse</h1>
+                        <p class="display-sm rv" style="max-width: 800px;">High-Performance Multi-Threaded C++17 DPI & Encrypted Traffic Intelligence Engine</p>
+                        <div class="newspaper-grid" style="margin-top: 30px; border-top: 1px solid var(--rule); padding-top: 20px;"><div class="col-span-2 rv column-bordered"><p class="meta" style="margin-bottom: 5px;">Classification</p><p class="body-sm">Network Security / Deep Packet Inspection</p></div><div class="col-span-2 rv column-bordered"><p class="meta" style="margin-bottom: 5px;">Language</p><p class="body-sm">C++17</p></div><div class="col-span-2 rv column-bordered"><p class="meta" style="margin-bottom: 5px;">Threading</p><p class="body-sm">Multi-threaded Producer-Consumer Pipeline</p></div><div class="col-span-2 rv column-bordered"><p class="meta" style="margin-bottom: 5px;">Architecture</p><p class="body-sm">Lock-free Per-Thread State</p></div><div class="col-span-2 rv column-bordered"><p class="meta" style="margin-bottom: 5px;">Key Tech</p><p class="body-sm">JA4+ TLS Fingerprinting, Shannon Entropy, Welford's Algorithm</p></div></div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Interactive Simulation -->
-        <section class="project-simulation section-padding border-bottom-double bg-ink text-paper">
-            <div class="container wrapper-xl">
-                <div class="section-header mb-8 text-center">
-                    <h3 class="font-mono text-sm uppercase tracking-widest text-muted-dark">Interactive Telemetry</h3>
-                    <h2 class="font-serif text-3xl mt-2">DPI Particle Network Visualization</h2>
-                </div>
-                
-                <div class="simulation-wrapper border border-muted-dark p-2 relative">
-                    <!-- The Simulation Container -->
-                    <div id="dpi-simulation" class="w-full h-[500px] bg-black relative overflow-hidden" style="height: 500px;">
-                        <!-- Canvas or DOM elements injected via JS -->
-                        <div class="absolute inset-0 flex items-center justify-center opacity-50 font-mono text-sm text-accent">
+            </section>
+    
+            <!-- SIMULATION -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12 rv" style="background: var(--ink); color: var(--paper); padding: 20px;">
+                        <h3 class="meta" style="margin-bottom: 20px; color: var(--paper);">LIVE TELEMETRY</h3>
+                        
+ The Simulation Container 
+<div class="w-full h-[500px] bg-black relative overflow-hidden" id="dpi-simulation" style="height: 500px;">
+<!-- Canvas or DOM elements injected via JS -->
+<div class="absolute inset-0 flex items-center justify-center opacity-50 font-mono text-sm text-accent">
                             [ INITIATING SENSOR MATRIX ]
                         </div>
-                    </div>
-                    
-                    <!-- Decorative elements -->
-                    <div class="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
-                    <div class="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
-                    <div class="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
-                    <div class="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
-                </div>
-                <script>
+</div>
+ Decorative elements 
+<div class="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
+<div class="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
+<div class="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
+<div class="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
+
+                        <script>
                     document.addEventListener('DOMContentLoaded', () => { 
                         if(typeof initDPISimulation === 'function') {
                             initDPISimulation('dpi-simulation'); 
@@ -127,163 +73,59 @@
                         }
                     });
                 </script>
-            </div>
-        </section>
-
-        <!-- The Incident (Problem Statement) -->
-        <section class="project-incident section-padding border-bottom-double bg-paper">
-            <div class="container wrapper-md">
-                <h3 class="section-kicker font-mono text-sm uppercase tracking-widest muted mb-6 border-bottom inline-block pb-2">The Incident</h3>
-                
-                <div class="editorial-text font-serif text-xl leading-relaxed text-ink drop-cap-wrapper">
-                    <p class="drop-cap">Modern enterprise networks carry over 80% encrypted traffic. Traditional deep packet inspection breaks down when payloads are wrapped in TLS 1.3. Security teams are blind to encrypted command-and-control channels, data exfiltration over HTTPS, and lateral movement disguised as legitimate cloud traffic. CipherPulse was built to see through the encryption without breaking it.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- The Engineering (Technical Deep-Dive) -->
-        <section class="project-engineering section-padding border-bottom-double bg-paper">
-            <div class="container wrapper-lg">
-                <h3 class="section-kicker font-mono text-sm uppercase tracking-widest muted mb-12 border-bottom inline-block pb-2">The Engineering</h3>
-                
-                <div class="engineering-grid grid grid-cols-1 md:grid-cols-12 gap-12">
-                    
-                    <!-- Subsection 1 -->
-                    <div class="md:col-span-4 border-top border-ink pt-6">
-                        <div class="subsection-number font-mono text-3xl font-bold text-accent mb-4">01</div>
-                        <h4 class="font-sans text-xl font-bold uppercase tracking-wide mb-4">Multi-Threaded Producer-Consumer Pipeline</h4>
-                        <ul class="editorial-list font-sans text-base text-ink-muted leading-relaxed space-y-3 list-disc pl-5">
-                            <li>Consistent 5-tuple flow hashing (src_ip, dst_ip, src_port, dst_port, protocol)</li>
-                            <li>Lock-free per-thread state eliminates shared-lock contention</li>
-                            <li>Worker threads process flows independently with no mutex overhead</li>
-                            <li>High throughput: packets distributed by flow hash, maintaining per-flow ordering</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Subsection 2 -->
-                    <div class="md:col-span-4 border-top border-ink pt-6">
-                        <div class="subsection-number font-mono text-3xl font-bold text-accent mb-4">02</div>
-                        <h4 class="font-sans text-xl font-bold uppercase tracking-wide mb-4">Post-SNI Encrypted Traffic Intelligence</h4>
-                        <ul class="editorial-list font-sans text-base text-ink-muted leading-relaxed space-y-3 list-disc pl-5">
-                            <li>JA4+ TLS fingerprinting captures cipher-suite and extension ordering</li>
-                            <li>GREASE filtering removes randomized values that would pollute fingerprints</li>
-                            <li>Encrypted flow classification without decryption</li>
-                            <li>Fingerprint matching against published threat-intel databases</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Subsection 3 -->
-                    <div class="md:col-span-4 border-top border-ink pt-6">
-                        <div class="subsection-number font-mono text-3xl font-bold text-accent mb-4">03</div>
-                        <h4 class="font-sans text-xl font-bold uppercase tracking-wide mb-4">Real-Time Threat Scoring Engine</h4>
-                        <ul class="editorial-list font-sans text-base text-ink-muted leading-relaxed space-y-3 list-disc pl-5">
-                            <li>Welford's online algorithm for IAT (inter-arrival time) variance computation</li>
-                            <li>Shannon payload entropy calculation for detecting encrypted payloads vs structured data</li>
-                            <li>JA4+ IOC matching against Cobalt Strike, Sliver C2 fingerprints</li>
-                            <li>C2 beaconing pattern detection in under 1.2ms per flow</li>
-                        </ul>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
-
-        <!-- Architecture Overview -->
-        <section class="project-architecture section-padding border-bottom-double bg-paper">
-            <div class="container wrapper-lg">
-                <h3 class="section-kicker font-mono text-sm uppercase tracking-widest muted mb-8 border-bottom inline-block pb-2">Architecture Overview</h3>
-                
-                <div class="architecture-diagram bg-white border border-ink p-8 overflow-x-auto">
-                    <!-- HTML/CSS Diagram representation -->
-                    <div class="flex items-center justify-between min-w-[800px] font-mono text-sm font-bold text-center">
-                        
-                        <div class="diagram-node border-2 border-ink p-4 bg-gray-50 flex-1">
-                            Packet Capture<br><span class="text-xs font-normal muted">(pcap/PF_RING)</span>
-                        </div>
-                        
-                        <div class="diagram-arrow text-2xl text-accent mx-2">&rarr;</div>
-                        
-                        <div class="diagram-node border-2 border-ink p-4 bg-gray-50 flex-1">
-                            Flow Hashing<br><span class="text-xs font-normal muted">(5-Tuple Hash)</span>
-                        </div>
-                        
-                        <div class="diagram-arrow text-2xl text-accent mx-2">&rarr;</div>
-                        
-                        <div class="diagram-node border-2 border-ink p-4 bg-gray-50 flex-1 relative group">
-                            Worker Threads<br><span class="text-xs font-normal muted">(Lock-Free State)</span>
-                            
-                            <!-- Sub-engine box -->
-                            <div class="absolute top-[120%] left-0 right-0 border-2 border-dashed border-ink p-4 bg-paper z-10 text-left">
-                                <div class="text-accent uppercase mb-2 border-b border-ink pb-1">[DPI Engine]</div>
-                                <div class="mb-1">&bull; TLS Fingerprinting</div>
-                                <div>&bull; Threat Scoring</div>
-                            </div>
-                        </div>
-                        
-                        <div class="diagram-arrow text-2xl text-accent mx-2">&rarr;</div>
-                        
-                        <div class="diagram-node border-2 border-ink p-4 bg-ink text-paper flex-1">
-                            Alert / Action<br><span class="text-xs font-normal text-gray-400">(SIEM / Drop)</span>
-                        </div>
-                        
-                    </div>
-                    <!-- Spacer for absolutely positioned dropdown -->
-                    <div class="h-32"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Key Results -->
-        <section class="project-results section-padding bg-paper">
-            <div class="container wrapper-lg">
-                <h3 class="section-kicker font-mono text-sm uppercase tracking-widest muted mb-8 border-bottom inline-block pb-2">Service Record</h3>
-                
-                <div class="results-grid grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="stat-box border border-ink p-8 bg-white flex flex-col justify-center items-center text-center transition-transform hover:-translate-y-1 duration-300">
-                        <div class="stat-value font-serif text-5xl font-black text-ink mb-3">&lt; 1.2ms</div>
-                        <div class="stat-label font-sans font-bold uppercase tracking-wider text-sm text-ink-muted">Average threat scoring latency</div>
-                    </div>
-                    
-                    <div class="stat-box border border-ink p-8 bg-white flex flex-col justify-center items-center text-center transition-transform hover:-translate-y-1 duration-300">
-                        <div class="stat-value font-serif text-5xl font-black text-ink mb-3">Zero</div>
-                        <div class="stat-label font-sans font-bold uppercase tracking-wider text-sm text-ink-muted">Shared-mutex contention (Lock-free)</div>
-                    </div>
-                    
-                    <div class="stat-box border border-ink p-8 bg-white flex flex-col justify-center items-center text-center transition-transform hover:-translate-y-1 duration-300">
-                        <div class="stat-value font-serif text-4xl font-black text-accent mb-3">Real-time</div>
-                        <div class="stat-label font-sans font-bold uppercase tracking-wider text-sm text-ink-muted">C2 beaconing detection</div>
-                    </div>
-                    
-                    <div class="stat-box border border-ink p-8 bg-white flex flex-col justify-center items-center text-center transition-transform hover:-translate-y-1 duration-300">
-                        <div class="stat-value font-serif text-4xl font-black text-ink mb-3">JA4+ Matched</div>
-                        <div class="stat-label font-sans font-bold uppercase tracking-wider text-sm text-ink-muted">Fingerprint matching against known threat-intel</div>
                     </div>
                 </div>
+            </section>
+            
+            <!-- DETAILS -->
+            <section class="section" style="border-bottom: 1px solid var(--rule); padding: 40px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <h3 class="heading-lg" style="margin-bottom: 20px;">The Incident</h3>
+                        <p class="body-lg rv"><span class="dropcap">M</span>odern enterprise networks carry over 80% encrypted traffic. Traditional deep packet inspection breaks down when payloads are wrapped in TLS 1.3. Security teams are blind to encrypted command-and-control channels, data exfiltration over HTTPS, and lateral movement disguised as legitimate cloud traffic. CipherPulse was built to see through the encryption without breaking it.</p>
+                    </div>
+                </div>
+            </section>
+                
+            <!-- ENGINEERING -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <h3 class="heading-lg" style="margin-bottom: 20px;">The Engineering</h3>
+                    </div>
+        
+                    <div class="col-span-6 rv column-bordered">
+                        <h4 class="heading-md" style="margin-bottom: 15px;">Multi-Threaded Producer-Consumer Pipeline</h4>
+                        <p class="body rv" style="margin-bottom: 10px;">&bull; Consistent 5-tuple flow hashing (src_ip, dst_ip, src_port, dst_port, protocol)</p><p class="body rv" style="margin-bottom: 10px;">&bull; Lock-free per-thread state eliminates shared-lock contention</p><p class="body rv" style="margin-bottom: 10px;">&bull; Worker threads process flows independently with no mutex overhead</p><p class="body rv" style="margin-bottom: 10px;">&bull; High throughput: packets distributed by flow hash, maintaining per-flow ordering</p>
+                    </div>
+            
+                    <div class="col-span-6 rv column-bordered">
+                        <h4 class="heading-md" style="margin-bottom: 15px;">Post-SNI Encrypted Traffic Intelligence</h4>
+                        <p class="body rv" style="margin-bottom: 10px;">&bull; JA4+ TLS fingerprinting captures cipher-suite and extension ordering</p><p class="body rv" style="margin-bottom: 10px;">&bull; GREASE filtering removes randomized values that would pollute fingerprints</p><p class="body rv" style="margin-bottom: 10px;">&bull; Encrypted flow classification without decryption</p><p class="body rv" style="margin-bottom: 10px;">&bull; Fingerprint matching against published threat-intel databases</p>
+                    </div>
+            
+                    <div class="col-span-6 rv column-bordered">
+                        <h4 class="heading-md" style="margin-bottom: 15px;">Real-Time Threat Scoring Engine</h4>
+                        <p class="body rv" style="margin-bottom: 10px;">&bull; Welford's online algorithm for IAT (inter-arrival time) variance computation</p><p class="body rv" style="margin-bottom: 10px;">&bull; Shannon payload entropy calculation for detecting encrypted payloads vs structured data</p><p class="body rv" style="margin-bottom: 10px;">&bull; JA4+ IOC matching against Cobalt Strike, Sliver C2 fingerprints</p><p class="body rv" style="margin-bottom: 10px;">&bull; C2 beaconing pattern detection in under 1.2ms per flow</p>
+                    </div>
+            
+                </div>
+            </section>
+        
+        </main>
+        
+        <!-- FOOTER -->
+        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0;">
+            <div class="newspaper-grid">
+                <div class="col-span-12 text-center rv">
+                    <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
+                </div>
             </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="site-footer border-top-double section-padding bg-ink text-paper">
-        <div class="container wrapper-lg grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div class="footer-brand">
-                <h2 class="font-serif text-3xl font-bold mb-4">The Sharma Dispatch</h2>
-                <p class="font-sans text-sm text-gray-400 max-w-md">Chronicles of software engineering, network security, and robust systems architecture.</p>
-            </div>
-            <div class="footer-links flex flex-col md:items-end justify-center space-y-4 font-mono text-sm uppercase tracking-widest">
-                <a href="#" class="hover:text-accent transition-colors">Back to Top &uarr;</a>
-                <a href="../index.html" class="hover:text-accent transition-colors">Return to Index &larr;</a>
-            </div>
-        </div>
-        <div class="container wrapper-lg mt-12 pt-6 border-t border-gray-800 text-center font-mono text-xs text-gray-500">
-            &copy; 2026 Ajitesh Sharma. All systems operational.
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="../js/main.js"></script>
-    <script src="../js/animations.js"></script>
-    <script src="../js/simulations.js"></script>
+        </footer>
+    </div>
+    
+    <script src="../js/main.js" defer></script>
+    <script src="../js/animations.js" defer></script>
+    <script src="../js/simulations.js" defer></script>
 </body>
 </html>

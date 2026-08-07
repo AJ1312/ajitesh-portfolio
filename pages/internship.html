@@ -3,441 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hindalco Industries Internship — The Sharma Dispatch</title>
+    <title>Hindalco Industries Internship — The Sharma Dispatch | The Sharma Dispatch</title>
     
-    <!-- Google Fonts -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>A</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
     
-    <!-- CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <link rel="stylesheet" href="../css/styles.css">
-    
-    <style>
-        :root {
-            --paper: #F9F8F4;
-            --paper-warm: #F2EFE9;
-            --ink: #1A1A1A;
-            --ink-faint: #888888;
-            --accent: #C41E3A;
-            --muted: #555555;
-            --rule: #E0E0E0;
-        }
-        
-        body {
-            background-color: var(--paper);
-            color: var(--ink);
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .drop-cap::first-letter {
-            font-family: 'Playfair Display', serif;
-            font-size: 5rem;
-            line-height: 0.8;
-            float: left;
-            margin-right: 0.75rem;
-            margin-top: 0.1rem;
-            color: var(--ink);
-            text-transform: uppercase;
-        }
-        
-        .dispatch-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1px;
-            background-color: var(--rule);
-            border-top: 2px solid var(--ink);
-            border-bottom: 2px solid var(--ink);
-            margin: 2rem 0;
-        }
-        
-        .dispatch-grid > * {
-            background-color: var(--paper);
-            padding: 2rem;
-        }
-        
-        .col-span-full { grid-column: span 12; }
-        .col-span-3 { grid-column: span 3; }
-        .col-span-4 { grid-column: span 4; }
-        .col-span-6 { grid-column: span 6; }
-        .col-span-8 { grid-column: span 8; }
-        
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border: 1px solid currentColor;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .badge.completed {
-            color: #2E7D32;
-            border-color: #2E7D32;
-        }
-
-        .badge.tech {
-            color: var(--ink);
-            border-color: var(--ink);
-            background-color: transparent;
-        }
-        
-        .top-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid var(--rule);
-            font-family: 'Inter', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
-        .nav-logo {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 1.25rem;
-            text-decoration: none;
-            color: var(--ink);
-        }
-        
-        .nav-subtitle {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--muted);
-            margin-left: 1rem;
-            text-transform: none;
-        }
-        
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-            margin: 0;
-            padding: 0;
-            font-size: 0.85rem;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--ink);
-            font-weight: 500;
-        }
-        
-        .nav-cta {
-            background-color: var(--ink);
-            color: var(--paper) !important;
-            padding: 0.35rem 0.85rem;
-        }
-        
-        .kicker {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-            display: block;
-        }
-        
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
-            font-weight: 700;
-            line-height: 1.1;
-            margin: 0 0 1rem 0;
-            letter-spacing: -0.02em;
-        }
-        
-        .hero-subtitle {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--muted);
-            margin-bottom: 2rem;
-            max-width: 800px;
-        }
-        
-        .meta-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--muted);
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            display: block;
-            letter-spacing: 0.05em;
-        }
-        
-        .meta-value {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-        
-        .section-header {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.125rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            border-bottom: 3px double var(--ink);
-            padding-bottom: 0.5rem;
-            margin-top: 4rem;
-            margin-bottom: 2rem;
-        }
-        
-        .article-body {
-            font-size: 1.125rem;
-            line-height: 1.8;
-            color: var(--ink);
-            max-width: 800px;
-        }
-        
-        .figure-caption {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            text-align: center;
-            color: var(--muted);
-            margin-top: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
-        .stat-box {
-            text-align: center;
-            padding: 2rem 1rem;
-            border-right: 1px solid var(--rule);
-        }
-        
-        .stat-box:last-child {
-            border-right: none;
-        }
-        
-        .stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--ink);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            color: var(--muted);
-        }
-
-        .feature-list {
-            list-style-type: square;
-            padding-left: 1.5rem;
-        }
-        
-        .feature-list li {
-            margin-bottom: 0.75rem;
-        }
-        
-        .feature-list strong {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-        }
-        
-        @media (max-width: 768px) {
-            .dispatch-grid {
-                display: flex;
-                flex-direction: column;
-                gap: 1px;
-            }
-            .stat-box {
-                border-right: none;
-                border-bottom: 1px solid var(--rule);
-            }
-            .stat-box:last-child {
-                border-bottom: none;
-            }
-            .nav-links {
-                display: none;
-            }
-            .hero-title {
-                font-size: 3rem;
-            }
-        }
-    </style>
 </head>
-<body>
-
-<div class="container">
-    <nav class="top-nav">
-        <div class="nav-brand">
-            <a href="../index.html" class="nav-logo">Ajitesh Sharma <span class="nav-subtitle">← Back to Dispatch</span></a>
-        </div>
-        <ul class="nav-links">
-            <li><a href="../index.html#dispatches">DISPATCHES</a></li>
-            <li><a href="../index.html#contact">CONTACT</a></li>
-            <li><a href="mailto:ajitesh@example.com" class="nav-cta">HIRE HIM</a></li>
-        </ul>
-    </nav>
-
-    <main class="gsap-reveal">
-        <header style="margin-top: 4rem;">
-            <span class="kicker">DISPATCH E — SERVICE RECORD</span>
-            <h1 class="hero-title">Hindalco Industries Ltd.</h1>
-            <p class="hero-subtitle">Aditya Birla Group — Software Engineering Internship</p>
-            
-            <div class="dispatch-grid" style="border: none; background: transparent; padding: 0; margin-top: 1rem; margin-bottom: 2rem;">
-                <div class="col-span-4" style="padding: 0; background: transparent;">
-                    <span class="meta-label">LOCATION</span>
-                    <span class="meta-value">Renukoot, India</span>
+<body class="newspaper-theme">
+    <div class="container">
+        
+        <!-- SUBPAGE HEADER -->
+        <header class="masthead section-rule--double" style="margin-top: 20px;">
+            <nav class="nav" id="main-nav" style="border-bottom: 4px solid var(--rule-dark); padding: 15px 0;">
+                <div class="newspaper-grid" style="align-items: center;">
+                    <div class="col-span-6 heading-md" style="margin:0;"><a href="../index.html" style="text-decoration: none; color: inherit;">&larr; THE SHARMA DISPATCH</a></div>
+                    <div class="col-span-6" style="display: flex; justify-content: flex-end; gap: 25px; align-items: center;">
+                        <a href="../index.html#projects" class="meta bold">WORK</a>
+                        <a href="../index.html#contact" class="meta bold">CONTACT</a>
+                        <a href="mailto:13ajitesh@gmail.com" style="background: var(--ink); color: var(--paper); padding: 6px 16px;" class="meta bold">HIRE HIM</a>
+                    </div>
                 </div>
-                <div class="col-span-4" style="padding: 0; background: transparent;">
-                    <span class="meta-label">DURATION</span>
-                    <span class="meta-value">May 2026 – Jul 2026</span>
-                </div>
-                <div class="col-span-4" style="padding: 0; background: transparent;">
-                    <span class="meta-label">STATUS</span>
-                    <span class="badge completed">● COMPLETED</span>
-                </div>
-            </div>
+            </nav>
         </header>
 
-        <section style="margin: 3rem 0;">
-            <div class="cert-placeholder" style="width:100%;height:400px;border:3px dashed var(--rule);display:flex;align-items:center;justify-content:center;background:var(--paper-warm);">
-                <div style="text-align:center;color:var(--ink-faint);">
-                    <p style="font-size:48px; margin:0;">📋</p>
-                    <p style="font-family:var(--font-mono);font-size:14px; margin-bottom:0;">Internship Certificate</p>
-                    <p style="font-family:var(--font-mono);font-size:12px;margin-top:8px;">Add certificate image to: images/internship-cert.jpg</p>
-                </div>
-            </div>
-            <p class="figure-caption">INTERNSHIP CERTIFICATE — Hindalco Industries Ltd., Aditya Birla Group</p>
-        </section>
-
-        <div class="dispatch-grid" style="border: none; background: transparent; display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem;">
-            <div class="col-span-8" style="padding: 0; background: transparent;">
-                <h2 class="section-header">The Brief</h2>
-                <div class="article-body">
-                    <p class="drop-cap">Hindalco's Renukoot smelting complex runs 24/7 operations with over 1,200 site personnel across shifts. Employee scheduling was entirely paper-based — supervisors maintained handwritten rosters, assignment changes propagated through physical notice boards, and status updates required in-person communication. The result: scheduling conflicts, delayed updates, and zero real-time visibility into workforce allocation.</p>
-                </div>
-
-                <h2 class="section-header">The Solution</h2>
-                <div class="article-body">
-                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-top: 2rem;">1. Automated Role-Based Queue Management Platform</h3>
-                    <ul class="feature-list">
-                        <li>Digitized the entire paper-based scheduling process.</li>
-                        <li>Real-time status updates for all 1,200+ site personnel.</li>
-                        <li>Role-based access: Operators view their queue position, Supervisors manage assignments, Managers have full visibility.</li>
-                        <li>Digital notice board replacing physical bulletin boards entirely.</li>
-                    </ul>
-
-                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-top: 2rem;">2. Spring Boot REST API Architecture</h3>
-                    <ul class="feature-list">
-                        <li>Developed highly scalable RESTful APIs for queue management, status updates, and reporting.</li>
-                        <li>Seamlessly integrated with existing on-premises Oracle database infrastructure.</li>
-                        <li>Generated comprehensive endpoint documentation for the plant IT team for future maintenance.</li>
-                    </ul>
-
-                    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-top: 2rem;">3. PL/SQL-Enforced Role-Based Access Control</h3>
-                    <ul class="feature-list">
-                        <li>15 internal Oracle APEX reporting endpoints secured.</li>
-                        <li>Database-level security enforcement to ensure integrity independently of the application layer.</li>
-                        <li>Defined strict Role hierarchy: Worker < Supervisor < Plant Manager < Admin.</li>
-                        <li>Implemented robust audit logging for all access requests and database modifications.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-span-4" style="padding: 0; background: transparent;">
-                <h2 class="section-header" style="margin-top: 0;">Impact Metrics</h2>
-                <div class="dispatch-grid" style="display: flex; flex-direction: column; gap: 1px; margin-top: 1rem;">
-                    <div class="stat-box" style="padding: 1.5rem; text-align: left; border-right: none;">
-                        <div class="stat-number">1,200+</div>
-                        <div class="stat-label">Site Personnel Digitized</div>
-                    </div>
-                    <div class="stat-box" style="padding: 1.5rem; text-align: left; border-right: none;">
-                        <div class="stat-number">15</div>
-                        <div class="stat-label">Oracle APEX Endpoints Secured</div>
-                    </div>
-                    <div class="stat-box" style="padding: 1.5rem; text-align: left; border-right: none;">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">Paper-Free Scheduling Achieved</div>
-                    </div>
-                    <div class="stat-box" style="padding: 1.5rem; text-align: left; border-right: none;">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Real-Time Status Visibility</div>
+        <main class="dispatch-content">
+            
+            <!-- HERO -->
+            <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <p class="kicker-label rv">DISPATCH</p>
+                        <h1 class="display-xl rv" style="margin-bottom: 20px;">Hindalco Industries Ltd.</h1>
+                        <p class="display-sm rv" style="max-width: 800px;">Aditya Birla Group — Software Engineering Internship</p>
+                        
                     </div>
                 </div>
-
-                <h2 class="section-header">Tech Stack</h2>
-                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                    <span class="badge tech">Spring Boot</span>
-                    <span class="badge tech">PL/SQL</span>
-                    <span class="badge tech">Oracle APEX</span>
-                    <span class="badge tech">RBAC</span>
-                    <span class="badge tech">REST APIs</span>
-                    <span class="badge tech">Java</span>
-                </div>
-            </div>
-        </div>
-
-        <section style="margin: 4rem 0;">
-            <div id="queue-simulation" style="width: 100%; height: 500px; border: 2px solid var(--ink); background-color: #ffffff; position: relative;">
-                <!-- Simulation will be mounted here by scripts -->
-                <div style="display: flex; justify-content: center; align-items: center; height: 100%; color: var(--muted); font-family: var(--font-mono);">
-                    Initializing Queue Simulation Engine...
-                </div>
-            </div>
-            <p class="figure-caption">SIMULATION — Queue Management System Demo</p>
-        </section>
-
-    </main>
-
-    <footer style="margin-top: 6rem; padding: 2rem 0; border-top: 1px solid var(--rule); text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">
-        <p>&copy; 2026 Ajitesh Sharma. All rights reserved.</p>
-    </footer>
-</div>
-
-<!-- Scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="../js/main.js"></script>
-<script src="../js/animations.js"></script>
-<script src="../js/simulations.js"></script>
-
-<script>
-    // Local GSAP initialization for specific elements on this page
-    document.addEventListener("DOMContentLoaded", (event) => {
-        gsap.registerPlugin(ScrollTrigger);
+            </section>
+    
+        </main>
         
-        gsap.from(".hero-title, .hero-subtitle", {
-            y: 30,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power3.out"
-        });
-
-        // Initialize simulation if available
-        if (typeof initQueueSimulation === 'function') {
-            try {
-                initQueueSimulation('queue-simulation');
-            } catch (e) {
-                console.log('Simulation script placeholder. Implementation pending in simulations.js');
-            }
-        }
-    });
-</script>
-
+        <!-- FOOTER -->
+        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0;">
+            <div class="newspaper-grid">
+                <div class="col-span-12 text-center rv">
+                    <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="../js/main.js" defer></script>
+    <script src="../js/animations.js" defer></script>
+    <script src="../js/simulations.js" defer></script>
 </body>
 </html>
