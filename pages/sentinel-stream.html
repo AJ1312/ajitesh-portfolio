@@ -12,7 +12,25 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    
+    <!-- Mermaid.js for architecture diagrams -->
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({{ startOnLoad: true, theme: 'neutral', fontFamily: 'JetBrains Mono', fontSize: 14 }});
+    </script>
+    
     <link rel="stylesheet" href="../css/styles.css">
+    
+    <style>
+        /* Diagram specific overrides for newspaper theme */
+        .mermaid {{
+            background: var(--paper-bright);
+            border: 2px solid var(--rule-dark);
+            padding: 20px;
+            margin: 30px 0;
+            overflow-x: auto;
+        }}
+    </style>
 </head>
 <body class="newspaper-theme">
     <div class="container">
@@ -37,85 +55,39 @@
             <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0;">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
-                        <p class="kicker-label rv">DISPATCH B — FIELD REPORT</p>
+                        <p class="kicker-label rv">DISPATCH B &mdash; OPEN INVESTIGATIONS</p>
                         <h1 class="display-xl rv" style="margin-bottom: 20px;">Sentinel-Stream</h1>
-                        <p class="display-sm rv" style="max-width: 800px;">O(1)-Memory Real-Time Behavioral Anomaly Detection & XAI Framework</p>
-                        <div class="newspaper-grid" style="margin-top: 30px; border-top: 1px solid var(--rule); padding-top: 20px;"><div class="col-span-2 rv column-bordered"><p class="meta" style="margin-bottom: 5px;">Classification</p><p class="body-sm">Network Security / Anomaly Detection</p></div><div class="col-span-2 rv column-bordered"><p class="meta" style="margin-bottom: 5px;">Memory</p><p class="body-sm">O(1) — Strictly bounded < 50MB RAM</p></div><div class="col-span-2 rv column-bordered"><p class="meta" style="margin-bottom: 5px;">ML Pipeline</p><p class="body-sm">Two-Stage LightGBM</p></div><div class="col-span-2 rv column-bordered"><p class="meta" style="margin-bottom: 5px;">Benchmark</p><p class="body-sm">CIC-IDS2017 (0.992 ROC-AUC)</p></div><div class="col-span-2 rv column-bordered"><p class="meta" style="margin-bottom: 5px;">XAI</p><p class="body-sm">TreeSHAP Explainability</p></div><div class="col-span-2 rv column-bordered"><p class="meta" style="margin-bottom: 5px;">API</p><p class="body-sm">Async FastAPI + WebSocket</p></div></div>
-                    </div>
-                </div>
-            </section>
-    
-            <!-- SIMULATION -->
-            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
-                <div class="newspaper-grid">
-                    <div class="col-span-12 rv" style="background: var(--ink); color: var(--paper); padding: 20px;">
-                        <h3 class="meta" style="margin-bottom: 20px; color: var(--paper);">LIVE TELEMETRY</h3>
+                        <p class="display-sm rv" style="max-width: 800px; font-style: italic;">O(1)-Memory anomaly detection pipeline using LightGBM and Fast-Hoeffding Trees.</p>
                         
- The Simulation Container 
-<div class="w-full h-[600px] bg-[#0a0a0a] relative overflow-hidden font-mono text-xs" id="anomaly-dashboard" style="height: 600px;">
-<div class="absolute inset-0 flex items-center justify-center opacity-50 text-accent">
-                            [ ESTABLISHING WEBSOCKET CONNECTION... ]
+                        <div class="newspaper-grid" style="margin-top: 30px; border-top: 1px solid var(--rule); padding-top: 20px;">
+                            <div class="col-span-4 rv column-bordered">
+                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">GITHUB REPOSITORY</p>
+                                <a href="https://github.com/AJ1312/sentinel-stream" target="_blank" class="body-sm" style="color: var(--stamp); font-weight: bold; text-decoration: underline;">AJ1312/sentinel-stream &nearr;</a>
+                            </div>
+                            <div class="col-span-4 rv column-bordered">
+                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">CORE TECH</p>
+                                <p class="body-sm">LightGBM, FastAPI, TreeSHAP</p>
+                            </div>
+                            <div class="col-span-4 rv column-bordered">
+                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">CONSTRAINTS</p>
+                                <p class="body-sm">Strict O(1) Memory Footprint</p>
+                            </div>
                         </div>
-</div>
- Decorative elements 
-<div class="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
-<div class="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
-<div class="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
-<div class="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
+                    </div>
+                </div>
+            </section>
 
-                        <script>
-                    document.addEventListener('DOMContentLoaded', () => { 
-                        if(typeof initAnomalyDashboard === 'function') {
-                            initAnomalyDashboard('anomaly-dashboard'); 
-                        } else {
-                            console.warn('initAnomalyDashboard function not found.');
-                        }
-                    });
-                </script>
-                    </div>
-                </div>
-            </section>
-            
             <!-- DETAILS -->
-            <section class="section" style="border-bottom: 1px solid var(--rule); padding: 40px 0;">
+            <section class="section" style="padding: 40px 0;">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
-                        <h3 class="heading-lg" style="margin-bottom: 20px;">The Incident</h3>
-                        <p class="body-lg rv"><span class="dropcap">S</span>ecurity Operations Centers drown in alerts. Analysts face alert fatigue from systems that generate thousands of notifications per hour with no context on why an event was flagged. Meanwhile, high-frequency network telemetry demands processing pipelines that can keep pace without ballooning memory consumption. Sentinel-Stream was built to solve both problems simultaneously.</p>
+                        <span class="kicker-label">THE REAL-WORLD SCENARIO</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0; font-size: 32px;">Streaming Data Under Constraint</h3>
+                        <p class="body-lg rv"><span class="dropcap">I</span>n edge-computing environments (like IoT gateways or industrial controllers), memory is strictly bounded. Traditional machine learning models require batching data, which causes Out-Of-Memory (OOM) crashes in these environments. Sentinel-Stream implements Fast-Hoeffding Trees which update their weights iteratively. This guarantees an O(1) memory footprint regardless of the incoming data stream's velocity, deployed via a low-latency FastAPI inference server with TreeSHAP for explainability.</p>
                     </div>
                 </div>
             </section>
-                
-            <!-- ENGINEERING -->
-            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
-                <div class="newspaper-grid">
-                    <div class="col-span-12">
-                        <h3 class="heading-lg" style="margin-bottom: 20px;">The Engineering</h3>
-                    </div>
-        
-                    <div class="col-span-6 rv column-bordered">
-                        <h4 class="heading-md" style="margin-bottom: 15px;">O(1)-Memory Streaming Architecture</h4>
-                        <p class="body rv" style="margin-bottom: 10px;">&bull; Strictly bounded to < 50MB RAM during continuous high-frequency ingestion</p><p class="body rv" style="margin-bottom: 10px;">&bull; Sliding window feature computation without storing raw data</p><p class="body rv" style="margin-bottom: 10px;">&bull; Online statistics (running mean, variance) replace batch computation</p>
-                    </div>
-            
-                    <div class="col-span-6 rv column-bordered">
-                        <h4 class="heading-md" style="margin-bottom: 15px;">Two-Stage LightGBM Pipeline</h4>
-                        <p class="body rv" style="margin-bottom: 10px;">&bull; Stage 1: Coarse filter eliminates 65% of benign traffic</p><p class="body rv" style="margin-bottom: 10px;">&bull; Stage 2: Fine-grained classification on remaining flows</p><p class="body rv" style="margin-bottom: 10px;">&bull; Combined: 0.992 ROC-AUC on CIC-IDS2017 benchmark</p><p class="body rv" style="margin-bottom: 10px;">&bull; Gradient boosting optimized for streaming inference</p>
-                    </div>
-            
-                    <div class="col-span-6 rv column-bordered">
-                        <h4 class="heading-md" style="margin-bottom: 15px;">TreeSHAP Explainability</h4>
-                        <p class="body rv" style="margin-bottom: 10px;">&bull; Real-time attribution vectors for every flagged anomaly</p><p class="body rv" style="margin-bottom: 10px;">&bull; Analysts see which features drove each alert (e.g., payload entropy, IAT variance)</p><p class="body rv" style="margin-bottom: 10px;">&bull; Feature importance ranking per-alert, not just global</p>
-                    </div>
-            
-                    <div class="col-span-6 rv column-bordered">
-                        <h4 class="heading-md" style="margin-bottom: 15px;">Async FastAPI + WebSocket Microservice</h4>
-                        <p class="body rv" style="margin-bottom: 10px;">&bull; Live anomaly alerts streamed to SOC-facing dashboard</p><p class="body rv" style="margin-bottom: 10px;">&bull; Risk scores updated in real-time</p><p class="body rv" style="margin-bottom: 10px;">&bull; WebSocket connections for zero-latency alert delivery</p>
-                    </div>
-            
-                </div>
-            </section>
-        
+
         </main>
         
         <!-- FOOTER -->
@@ -123,6 +95,7 @@
             <div class="newspaper-grid">
                 <div class="col-span-12 text-center rv">
                     <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
+                    <p class="body-sm" style="margin-top: 10px;">High-level architectures; implementation-specific patent details omitted for compliance.</p>
                 </div>
             </div>
         </footer>
@@ -130,6 +103,5 @@
     
     <script src="../js/main.js" defer></script>
     <script src="../js/animations.js" defer></script>
-    <script src="../js/simulations.js" defer></script>
 </body>
 </html>

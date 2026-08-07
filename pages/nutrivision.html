@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NutriVision Pro — The Sharma Dispatch | The Sharma Dispatch</title>
+    <title>NutriVision Pro | The Sharma Dispatch</title>
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>A</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,25 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    
+    <!-- Mermaid.js for architecture diagrams -->
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({{ startOnLoad: true, theme: 'neutral', fontFamily: 'JetBrains Mono', fontSize: 14 }});
+    </script>
+    
     <link rel="stylesheet" href="../css/styles.css">
+    
+    <style>
+        /* Diagram specific overrides for newspaper theme */
+        .mermaid {{
+            background: var(--paper-bright);
+            border: 2px solid var(--rule-dark);
+            padding: 20px;
+            margin: 30px 0;
+            overflow-x: auto;
+        }}
+    </style>
 </head>
 <body class="newspaper-theme">
     <div class="container">
@@ -37,14 +55,39 @@
             <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0;">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
-                        <p class="kicker-label rv">DISPATCH</p>
+                        <p class="kicker-label rv">DISPATCH D &mdash; OPEN INVESTIGATION</p>
                         <h1 class="display-xl rv" style="margin-bottom: 20px;">NutriVision Pro</h1>
-                        <p class="display-sm rv" style="max-width: 800px;">AI-Powered Dietary Intelligence & Nutrition Tracking</p>
+                        <p class="display-sm rv" style="max-width: 800px; font-style: italic;">AI-powered dietary analysis tool leveraging Gemini Vision API.</p>
                         
+                        <div class="newspaper-grid" style="margin-top: 30px; border-top: 1px solid var(--rule); padding-top: 20px;">
+                            <div class="col-span-4 rv column-bordered">
+                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">LIVE DEPLOYMENT</p>
+                                <a href="https://nutrivison-pro.vercel.app/" target="_blank" class="body-sm" style="color: var(--stamp); font-weight: bold; text-decoration: underline;">nutrivison-pro.vercel.app &nearr;</a>
+                            </div>
+                            <div class="col-span-4 rv column-bordered">
+                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">GITHUB REPOSITORY</p>
+                                <a href="https://github.com/AJ1312/nutrivison-pro" target="_blank" class="body-sm" style="color: var(--stamp); font-weight: bold; text-decoration: underline;">AJ1312/nutrivison-pro &nearr;</a>
+                            </div>
+                            <div class="col-span-4 rv column-bordered">
+                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">CORE TECH</p>
+                                <p class="body-sm">Next.js, Google Gemini Pro Vision API</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
-    
+
+            <!-- DETAILS -->
+            <section class="section" style="padding: 40px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label">THE REAL-WORLD SCENARIO</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0; font-size: 32px;">Frictionless Nutrition Tracking</h3>
+                        <p class="body-lg rv"><span class="dropcap">T</span>raditional calorie counting apps suffer from high user drop-off rates due to the sheer friction of manually logging every ingredient. NutriVision Pro bridges this gap by allowing users to simply take a photo of their meal. Leveraging the multimodal capabilities of the Gemini Vision API, the application identifies food items, estimates portion sizes, and instantly returns a comprehensive macro-nutritional breakdown.</p>
+                    </div>
+                </div>
+            </section>
+
         </main>
         
         <!-- FOOTER -->
@@ -52,6 +95,7 @@
             <div class="newspaper-grid">
                 <div class="col-span-12 text-center rv">
                     <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
+                    <p class="body-sm" style="margin-top: 10px;">High-level architectures; implementation-specific patent details omitted for compliance.</p>
                 </div>
             </div>
         </footer>
@@ -59,6 +103,5 @@
     
     <script src="../js/main.js" defer></script>
     <script src="../js/animations.js" defer></script>
-    <script src="../js/simulations.js" defer></script>
 </body>
 </html>
