@@ -1450,6 +1450,49 @@ hr.section-rule--double, div.section-rule--double {
     color: var(--ink);
 }
 
+/* Action Button Group in Footer & Contact */
+.action-btn-group {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+.action-btn-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+}
+.action-btn-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.action-btn-primary {
+    background: var(--stamp);
+    color: #ffffff !important;
+    border: 1px solid var(--stamp);
+}
+.action-btn-secondary {
+    background: var(--ink);
+    color: var(--paper) !important;
+    border: 1px solid var(--ink);
+}
+.action-btn-outline {
+    background: transparent;
+    border: 1px solid var(--ink);
+    color: var(--ink) !important;
+}
+
 @media screen and (max-width: 768px) {
     .metrics-row {
         grid-template-columns: repeat(2, 1fr);
@@ -1495,6 +1538,19 @@ hr.section-rule--double, div.section-rule--double {
         flex: 1 1 calc(50% - 10px);
         text-align: center;
     }
+    .action-btn-group {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto 40px auto;
+    }
+    .action-btn-link {
+        width: 100%;
+        text-align: center;
+        padding: 14px 20px;
+        box-sizing: border-box;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -1504,5 +1560,10 @@ hr.section-rule--double, div.section-rule--double {
     .metrics-grid-4 {
         grid-template-columns: 1fr !important;
     }
+    .action-btn-group {
+        max-width: 100%;
+        padding: 0 10px;
+    }
 }
+
 
