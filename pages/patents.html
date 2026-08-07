@@ -117,32 +117,7 @@
                     </div>
                     
                     <div class="col-span-12 rv">
-                        <div class="mermaid">
-flowchart TD
-    A[VIDEO INPUT] --> B[FRAME EXTRACTION]
-    B --> C[FACE / LIP REGION EXTRACTION]
-    C --> D[PAIRED LIP FRAMES]
-    
-    D --> E1
-    D --> E2
-    
-    subgraph Path 1: Learned Visual Path
-    E1[Attention CNN] --> F1[Learned Features]
-    end
-    
-    subgraph Path 2: Forensic Feature Path
-    E2[Spatial Analysis\nFrame Correlation, Pixel Difference, Edge Density] --> F2
-    E3[Spectral Analysis\n2D FFT, Frequency Features] --> F2[Forensic Features]
-    end
-    
-    F1 & F2 --> G[FEATURE FUSION\nSpatial + Spectral + Learned Features]
-    G --> H[AUTHENTICITY DECISION]
-    
-    H --> I1[REAL_SYNC]
-    H --> I2[FAKE_DESYNC]
-    
-    I1 & I2 --> J[EXPLAINABLE FORENSIC REPORT\nAttention Maps\nFFT Visualization\nFeature Evidence]
-                        </div>
+                        <div class="featured-image rv" style="filter: grayscale(100%) contrast(1.1); border: 2px solid var(--rule-dark);"><img src="../images/lipsync_detection_patent_1786102092150.jpg" alt="Lip-Sync Patent Architecture" style="width:100%;"></div>
                     </div>
                 </div>
             </section>
