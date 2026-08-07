@@ -58,7 +58,7 @@ ajitesh-portfolio/
 
 ## 👤 Contact
 
-- **Email**: 13ajitesh@gmail.com
+- **Email**: hello@ajiteshsharma.dev
 - **LinkedIn**: [linkedin.com/in/ajitesh-sharma](https://linkedin.com/in/ajitesh-sharma)
 - **GitHub**: [github.com/AJ1312](https://github.com/AJ1312)
 

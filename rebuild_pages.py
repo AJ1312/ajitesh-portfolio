@@ -28,7 +28,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
                     <div class="col-span-6" style="display: flex; justify-content: flex-end; gap: 25px; align-items: center;">
                         <a href="../index.html#projects" class="meta bold">WORK</a>
                         <a href="../index.html#contact" class="meta bold">CONTACT</a>
-                        <a href="mailto:13ajitesh@gmail.com" style="background: var(--ink); color: var(--paper); padding: 6px 16px;" class="meta bold">HIRE HIM</a>
+                        <a href="mailto:hello@ajiteshsharma.dev" style="background: var(--ink); color: var(--paper); padding: 6px 16px;" class="meta bold">HIRE HIM</a>
                     </div>
                 </div>
             </nav>

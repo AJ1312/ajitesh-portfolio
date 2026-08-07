@@ -180,7 +180,7 @@ html_projects = """
                     <p class="body-lg" style="max-width: 600px; margin: 0 auto 30px auto;">Correspondence accepted via electronic mail, or physical courier to Vellore, India.</p>
                     
                     <div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 60px;">
-                        <a href="mailto:13ajitesh@gmail.com" class="meta bold" style="background: var(--stamp); color: var(--paper-bright); padding: 15px 30px; font-size: 14px;">13AJITESH@GMAIL.COM</a>
+                        <a href="mailto:hello@ajiteshsharma.dev" class="meta bold" style="background: var(--stamp); color: var(--paper-bright); padding: 15px 30px; font-size: 14px;">HELLO@AJITESHSHARMA.DEV</a>
                         <a href="https://linkedin.com/in/ajitesh-sharma" target="_blank" class="meta bold" style="background: var(--ink); color: var(--paper); padding: 15px 30px; font-size: 14px;">LINKEDIN</a>
                         <a href="https://github.com/AJ1312" target="_blank" class="meta bold" style="background: transparent; border: 1px solid var(--ink); color: var(--ink); padding: 15px 30px; font-size: 14px;">GITHUB</a>
                     </div>
