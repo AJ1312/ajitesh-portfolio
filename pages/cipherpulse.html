@@ -9,235 +9,224 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
     <style>
-        .sim-box {{
+        .work-sim-container {{
             border: 2px solid var(--rule-dark);
-            background: var(--paper-warm);
-            padding: 25px;
-            margin: 30px 0;
+            background: #0f172a;
+            color: #f8fafc;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 40px 0;
             font-family: var(--font-mono, monospace);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }}
-        .sim-btn {{
-            background: var(--ink);
-            color: var(--paper);
-            border: 1px solid var(--ink);
-            padding: 8px 14px;
+        .work-sim-header {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }}
+        .status-dot {{
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #22c55e;
+            border-radius: 50%;
+            margin-right: 8px;
+        }}
+        .work-btn {{
+            background: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #475569;
+            padding: 10px 16px;
             font-size: 12px;
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-right: 8px;
-            margin-bottom: 8px;
+            border-radius: 4px;
+            margin-right: 10px;
+            margin-bottom: 10px;
             transition: all 0.2s ease;
         }}
-        .sim-btn:hover {{
-            background: var(--stamp);
-            border-color: var(--stamp);
+        .work-btn:hover {{
+            background: #3b82f6;
+            border-color: #3b82f6;
             color: #fff;
         }}
-        .sim-terminal {{
-            background: #111;
-            color: #00ff66;
-            padding: 15px;
-            border-radius: 4px;
-            height: 180px;
+        .work-btn--danger:hover {{
+            background: #ef4444;
+            border-color: #ef4444;
+        }}
+        .console-output {{
+            background: #020617;
+            color: #38bdf8;
+            padding: 20px;
+            border-radius: 6px;
+            height: 220px;
             overflow-y: auto;
             font-size: 13px;
-            line-height: 1.4;
-            margin-top: 15px;
-            border: 1px solid var(--rule-dark);
+            line-height: 1.6;
+            border: 1px solid #1e293b;
+            margin-top: 20px;
         }}
-        .shap-bar-container {{
-            margin-top: 15px;
-            background: var(--paper-bright);
-            padding: 15px;
-            border: 1px solid var(--rule);
-        }}
-        .shap-row {{
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
+        .metric-badge {{
+            background: #1e293b;
+            padding: 8px 14px;
+            border-radius: 4px;
+            border: 1px solid #334155;
             font-size: 12px;
-        }}
-        .shap-label {{
-            width: 180px;
-            font-weight: bold;
-        }}
-        .shap-track {{
-            flex: 1;
-            background: #eee;
-            height: 14px;
-            position: relative;
-            margin: 0 10px;
-        }}
-        .shap-fill {{
-            height: 100%;
-            background: var(--stamp);
-            width: 0%;
-            transition: width 0.4s ease;
-        }}
-        .shap-val {{
-            width: 50px;
-            text-align: right;
-            font-weight: bold;
-        }}
-        .arch-diagram-box {{
-            background: var(--paper-bright);
-            border: 2px solid var(--rule-dark);
-            padding: 20px;
-            margin: 25px 0;
-            text-align: center;
-        }}
-        .arch-node {{
-            display: inline-block;
-            border: 1px solid var(--rule-dark);
-            background: var(--paper-warm);
-            padding: 10px 15px;
-            margin: 5px;
-            font-size: 13px;
-            font-weight: bold;
-        }}
-        .arch-arrow {{
-            display: inline-block;
-            margin: 0 5px;
-            font-weight: bold;
-            color: var(--stamp);
         }}
     </style>
 </head>
 <body class="newspaper-theme">
-    <div class="container">
+    <div class="container" style="max-width: 1100px;">
         <header class="masthead" style="margin-top: 20px;">
-            <div class="newspaper-grid" style="border-bottom: 1px solid var(--rule); padding: 5px 0;">
+            <div class="newspaper-grid" style="border-bottom: 1px solid var(--rule); padding: 10px 0;">
                 <div class="col-span-12 meta uppercase" style="display:flex; justify-content: space-between;">
                     <span>BY THE ENGINEERING DESK</span>
-                    <span><a href="../index.html">&larr; Back to Front Page</a></span>
+                    <span><a href="../index.html" style="font-weight:bold;">&larr; Back to Front Page</a></span>
                 </div>
             </div>
         </header>
 
         <main class="dispatch-content">
 
-            <section class="portfolio-case-study">
-                <div class="project-header rv">
-                    <span class="project-badge">HIGH-PERFORMANCE C++17 DPI</span>
-                    <h2 class="display-lg" style="margin-bottom: 10px;">CipherPulse: Multi-Threaded Encrypted Traffic Intelligence</h2>
-                    <p class="tagline">Line-Rate Packet Inspection, JA4+ Fingerprinting & Non-SNI Traffic Classification</p>
+            <!-- HEADER -->
+            <section class="section" style="padding: 40px 0 20px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="project-badge" style="background:var(--ink); color:var(--paper); padding:4px 10px; font-weight:bold; font-size:12px;">HIGH-PERFORMANCE C++17 DPI</span>
+                        <h1 class="display-lg" style="margin: 15px 0 10px 0; font-size: 42px;">CipherPulse: Multi-Threaded Encrypted DPI Engine</h1>
+                        <p class="tagline" style="font-size: 20px; font-style: italic; color: #444;">Line-Rate Packet Inspection, JA4+ Fingerprinting & Non-SNI Traffic Classification</p>
+                    </div>
                 </div>
+            </section>
 
-                <!-- Metrics Grid -->
-                <div class="metrics-row rv">
+            <!-- KEY METRICS BAR -->
+            <section class="section" style="padding: 20px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-bottom: 40px;">
+                <div class="metrics-row" style="margin:0; border:none; padding:0;">
                     <div class="metric-box">
-                        <span class="metric-val">100k+</span>
+                        <span class="metric-val" style="font-size:36px; color:var(--stamp);">100k+</span>
                         <span class="metric-lbl">Single-Core pps</span>
                     </div>
                     <div class="metric-box">
-                        <span class="metric-val">ZERO</span>
+                        <span class="metric-val" style="font-size:36px; color:var(--stamp);">ZERO</span>
                         <span class="metric-lbl">Hot-Path Lock Contention</span>
                     </div>
                     <div class="metric-box">
-                        <span class="metric-val">100%</span>
+                        <span class="metric-val" style="font-size:36px; color:var(--stamp);">100%</span>
                         <span class="metric-lbl">C2 Beaconing Detection</span>
                     </div>
                     <div class="metric-box">
-                        <span class="metric-val">Zero</span>
+                        <span class="metric-val" style="font-size:36px; color:var(--stamp);">Zero</span>
                         <span class="metric-lbl">External Dependencies</span>
                     </div>
                 </div>
+            </section>
 
-                <!-- Architectural Flow Diagram -->
-                <div class="arch-diagram-box rv">
-                    <span class="kicker-label">C++17 FAST-PATH ARCHITECTURE</span>
-                    <h4 class="heading-md" style="margin: 10px 0 15px 0;">Lock-Free 5-Tuple Consistent Hashing &amp; JA4+ Fingerprinting</h4>
-                    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px;">
+            <!-- REAL WORK-LIFE NETWORK FORENSIC SIMULATOR -->
+            <section class="section" style="padding: 10px 0 30px 0;">
+                <span class="kicker-label" style="color: var(--stamp); font-size: 14px;">REAL WORK-LIFE SIMULATION</span>
+                <h3 class="heading-lg" style="margin: 5px 0 20px 0;">Network Forensic Incident Commander Workstation</h3>
+
+                <div class="work-sim-container">
+                    <div class="work-sim-header">
+                        <div>
+                            <span class="status-dot"></span>
+                            <span style="font-weight:bold; color:#e2e8f0;">CIPHERPULSE // LINE-RATE FORENSIC CONSOLE</span>
+                        </div>
+                        <div style="display:flex; gap:10px;">
+                            <span class="metric-badge">Capture: AF_PACKET / eBPF</span>
+                            <span class="metric-badge">Engine: C++17 Ring Buffer</span>
+                        </div>
+                    </div>
+
+                    <p style="color:#94a3b8; font-size:13px; margin-bottom:15px;">Simulate Network Security Engineer commands against encrypted malware beaconing:</p>
+
+                    <div>
+                        <button class="work-btn" onclick="simDpi('inspect')">🔍 Run JA4+ TLS Fingerprinting</button>
+                        <button class="work-btn work-btn--danger" onclick="simDpi('block')">🚨 Block C2 Beaconing IP</button>
+                        <button class="work-btn" onclick="simDpi('ring')">⚙️ Inspect Ring Buffer Locks</button>
+                        <button class="work-btn" onclick="simDpi('clear')">🔄 Clear Workstation</button>
+                    </div>
+
+                    <div class="console-output" id="dpiTerminal">
+[DPI SYSTEM] CipherPulse Fast-Path Workers listening on 4 CPU cores...
+[FORENSIC DESK] Standby for Network Security Engineer command. Select an action button above...
+                    </div>
+                </div>
+            </section>
+
+            <!-- SYSTEM ARCHITECTURE -->
+            <section class="section" style="padding: 30px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-bottom: 40px;">
+                <div class="arch-diagram-box" style="background: var(--paper-warm); border: 2px solid var(--rule-dark); padding: 30px; text-align: center;">
+                    <span class="kicker-label" style="color: var(--stamp);">C++17 FAST-PATH ARCHITECTURE</span>
+                    <h4 class="heading-md" style="margin: 10px 0 20px 0;">Lock-Free 5-Tuple Consistent Hashing &amp; JA4+ Fingerprinting</h4>
+                    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px; font-family: var(--font-mono, monospace);">
                         <div class="arch-node">RAW Socket Capture<br><small style="font-weight:normal;">AF_PACKET / eBPF</small></div>
-                        <span class="arch-arrow">&rarr;</span>
-                        <div class="arch-node">5-Tuple Consistent Hash<br><small style="font-weight:normal;">Zero-Mutex Dispatch</small></div>
-                        <span class="arch-arrow">&rarr;</span>
+                        <span class="arch-arrow" style="font-size:18px;">&rarr;</span>
+                        <div class="arch-node">5-Tuple Hash Dispatch<br><small style="font-weight:normal;">Zero-Mutex Hashing</small></div>
+                        <span class="arch-arrow" style="font-size:18px;">&rarr;</span>
                         <div class="arch-node">Fast-Path Worker Threads<br><small style="font-weight:normal;">C++17 Ring Buffers</small></div>
-                        <span class="arch-arrow">&rarr;</span>
+                        <span class="arch-arrow" style="font-size:18px;">&rarr;</span>
                         <div class="arch-node">JA4+ &amp; Entropy Engine<br><small style="font-weight:normal;">Welford CoV Profiler</small></div>
-                        <span class="arch-arrow">&rarr;</span>
+                        <span class="arch-arrow" style="font-size:18px;">&rarr;</span>
                         <div class="arch-node">C2 Beaconing Alert<br><small style="font-weight:normal;">Non-SNI ETI Stream</small></div>
                     </div>
                 </div>
+            </section>
 
-                <!-- Interactive Live Simulation Widget -->
-                <div class="sim-box rv">
-                    <span class="kicker-label" style="color: var(--stamp);">INTERACTIVE DPI PACKET SIMULATOR</span>
-                    <h3 class="heading-lg" style="margin: 5px 0 15px 0;">C++ Multi-Threaded Packet Stream Simulator</h3>
-                    <p class="body" style="margin-bottom: 15px; font-family: var(--font-text);">Simulate line-rate packet parsing, 5-tuple consistent hashing, and JA4+ TLS fingerprinting on encrypted streams:</p>
-
-                    <div>
-                        <button class="sim-btn" onclick="runPcap('tls')">▶ Stream Normal TLS 1.3 Traffic</button>
-                        <button class="sim-btn" onclick="runPcap('c2')">🚨 Inject Non-SNI C2 Beaconing</button>
-                        <button class="sim-btn" onclick="runPcap('threads')">⚙️ Fast-Path Worker Thread Distribution</button>
-                    </div>
-
-                    <div class="sim-terminal" id="dpiTerminal">
-[DPI INIT] C++17 Multi-Threaded Engine Initialized.
-[DPI CONFIG] Fast-Path Worker Threads: 4 | Consistent Hash Ring: ACTIVE.
-[DPI CONFIG] Zero external dependencies. Strict-aliasing safe memcpy enabled.
-Ready. Select a test stream scenario above...
-                    </div>
-                </div>
-
-                <div class="case-study-grid rv">
-                    <div class="text-block">
-                        <h3 class="heading-lg" style="margin-bottom: 20px;">Key Technical Innovations</h3>
-                        <ul>
-                            <li><b>Lock-Free Consistent Hashing:</b> Packets are routed via 5-tuple consistent hashing to isolated Fast Path (FP) threads, eliminating cross-thread mutex bottlenecks.</li>
-                            <li><b>Non-SNI Traffic Intelligence (ETI):</b> Classifies encrypted traffic when Encrypted Client Hello (ECH) hides SNI using JA4+ TLS fingerprinting and Welford online flow statistics ($	ext{CoV} < 0.12$ beaconing).</li>
+            <!-- TECHNICAL SPECS & IMPACT -->
+            <section class="section" style="padding: 20px 0 40px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-6 column-bordered">
+                        <h3 class="heading-lg" style="margin-bottom: 20px;">Technical Innovations</h3>
+                        <ul style="list-style:square; padding-left:20px; line-height:1.7; font-size:16px;">
+                            <li style="margin-bottom:15px;"><b>Lock-Free Consistent Hashing:</b> Packets are routed via 5-tuple consistent hashing to isolated Fast Path (FP) threads, eliminating cross-thread mutex bottlenecks.</li>
+                            <li style="margin-bottom:15px;"><b>Non-SNI Traffic Intelligence (ETI):</b> Classifies encrypted traffic when Encrypted Client Hello (ECH) hides SNI using JA4+ TLS fingerprinting and Welford online flow statistics ($	ext{CoV} < 0.12$ beaconing).</li>
                             <li><b>Pure C++17 Memory Safety:</b> Strict-aliasing safe packet parsing using <code>std::memcpy</code> without external dependencies.</li>
                         </ul>
                     </div>
-                    <div class="text-block">
+
+                    <div class="col-span-6">
                         <h3 class="heading-lg" style="margin-bottom: 20px;">The Real-World Scenario</h3>
-                        <p class="body-lg"><span class="dropcap">M</span>odern malware and C2 frameworks (such as Cobalt Strike or Sliver) hide command channels inside standard TLS 1.3 encrypted streams, rendering traditional Deep Packet Inspection (DPI) helpless without full SSL decryption.</p>
-                        <p class="body-lg" style="margin-top: 15px;">CipherPulse inspects packets at line-rate without TLS decryption by extracting JA4+ client fingerprints and tracking flow inter-arrival times using Welford's algorithm to flag periodic beaconing.</p>
+                        <p class="body-lg" style="line-height:1.7;"><span class="dropcap">M</span>odern malware and Command &amp; Control (C2) frameworks (such as Cobalt Strike or Sliver) hide command channels inside standard TLS 1.3 encrypted streams, rendering traditional Deep Packet Inspection (DPI) helpless without full SSL decryption.</p>
+                        <p class="body-lg" style="line-height:1.7; margin-top:15px;">CipherPulse inspects packets at line-rate without TLS decryption by extracting JA4+ client fingerprints and tracking flow inter-arrival times using Welford's algorithm to flag periodic beaconing.</p>
                     </div>
                 </div>
-                
-                <!-- Links -->
-                <div class="project-links rv">
+
+                <div style="margin-top: 40px;">
                     <a href="https://github.com/AJ1312/CipherPulse" target="_blank" class="btn-github">⭐ View Code on GitHub</a>
                 </div>
             </section>
 
             <script>
-                function runPcap(type) {
+                function simDpi(type) {
                     const term = document.getElementById('dpiTerminal');
                     const ts = new Date().toISOString().substring(11, 19);
 
                     let msg = '';
-                    if (type === 'tls') {
-                        msg = `[${ts}] [FP-THREAD-01] PKT #10482: 192.168.1.45:54321 -> 142.250.190.46:443 [TLS 1.3]
-` +
-                              `[${ts}] [JA4+ ENGINE] Hash: t13d151600_8daaf6152702_202020202020 | SNI: www.google.com
-` +
-                              `[${ts}] [WELFORD STATS] Inter-arrival mean: 452ms | StdDev: 310ms | CoV: 0.686 (NON-PERIODIC)
-` +
-                              `[${ts}] [CLASSIFICATION] Status: CLEAN (BENIGN_BROWSING) | Throughput: 114,200 pps`;
-                    } else if (type === 'c2') {
-                        msg = `[${ts}] [FP-THREAD-03] PKT #10483: 10.0.4.12:49152 -> 185.220.101.5:443 [TLS 1.3 (ECH)]
-` +
-                              `[${ts}] [JA4+ ENGINE] Hash: t13d190800_c84a8b291410_000000000000 | SNI: HIDDEN (ECH)
-` +
-                              `[${ts}] [WELFORD STATS] Inter-arrival mean: 5000ms | StdDev: 12ms | CoV: 0.0024 (< 0.12 THRESHOLD)
-` +
-                              `[${ts}] [ALERT CRITICAL] Non-SNI C2 Beaconing Detected! Target: 185.220.101.5 | Action: ETI STREAM ALERT`;
+                    if (type === 'inspect') {
+                        msg = `[${ts}] [JA4+ ENGINE] Fingerprinted TLS 1.3 Handshake (#PKT-84910)\n` +
+                              `  -> JA4+ Hash: t13d151600_8daaf6152702_000000000000\n` +
+                              `  -> Target: 185.220.101.5:443 | SNI: HIDDEN (Encrypted Client Hello)\n` +
+                              `  -> Welford Flow CoV: 0.004 (< 0.12 Threshold)\n` +
+                              `  -> Incident Finding: CONFIRMED MALICIOUS C2 BEACONING`;
+                    } else if (type === 'block') {
+                        msg = `[${ts}] [FORENSIC ACTION] BPF Rule Injected to Kernel eBPF Map\n` +
+                              `  -> Dropping 185.220.101.5 at AF_PACKET Ingress Level\n` +
+                              `  -> C2 Beaconing Channel Nullified (Latency: 0.8ms)`;
+                    } else if (type === 'ring') {
+                        msg = `[${ts}] [RING BUFFER HEALTH] 4 Workers Active:\n` +
+                              `  -> Worker 0: 124,000 pps | Mutex Contention: 0.00%\n` +
+                              `  -> Worker 1: 124,000 pps | Mutex Contention: 0.00%\n` +
+                              `  -> Worker 2: 124,000 pps | Mutex Contention: 0.00%\n` +
+                              `  -> Worker 3: 124,000 pps | Mutex Contention: 0.00%\n` +
+                              `  -> Overall Throughput: 496,000 pps (Zero Packet Drops)`;
                     } else {
-                        msg = `[${ts}] [HASH RING DIST] Distributing 100,000 packets across 4 Fast-Path Workers:
-` +
-                              `  -> FP-Worker-0: 25,014 pkts (0 mutex locks, 0 drops)
-` +
-                              `  -> FP-Worker-1: 24,982 pkts (0 mutex locks, 0 drops)
-` +
-                              `  -> FP-Worker-2: 25,008 pkts (0 mutex locks, 0 drops)
-` +
-                              `  -> FP-Worker-3: 24,996 pkts (0 mutex locks, 0 drops)
-` +
-                              `[PERF METRIC] Zero Hot-Path Lock Contention | Total System Throughput: 448,000 pps (Combined)`;
+                        msg = `[${ts}] [FORENSIC CONSOLE RESET] Fast-Path Workers listening on 4 CPU cores...`;
                     }
 
                     term.innerText += '\n\n' + msg;
@@ -247,8 +236,8 @@ Ready. Select a test stream scenario above...
 
         </main>
         
-        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 20px 0; text-align: center;">
-            <p class="meta">PRINTED IN VELLORE &middot; AJITESH SHARMA &copy; 2026</p>
+        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0; text-align: center; margin-top: 60px;">
+            <p class="meta">&copy; 2026 AJITESH SHARMA &middot; THE SHARMA DISPATCH &middot; VOL. I</p>
         </footer>
     </div>
 </body>

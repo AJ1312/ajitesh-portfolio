@@ -9,295 +9,236 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
     <style>
-        .sim-box {{
+        .work-sim-container {{
             border: 2px solid var(--rule-dark);
-            background: var(--paper-warm);
-            padding: 25px;
-            margin: 30px 0;
+            background: #0f172a;
+            color: #f8fafc;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 40px 0;
             font-family: var(--font-mono, monospace);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }}
-        .sim-btn {{
-            background: var(--ink);
-            color: var(--paper);
-            border: 1px solid var(--ink);
-            padding: 8px 14px;
+        .work-sim-header {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }}
+        .status-dot {{
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #22c55e;
+            border-radius: 50%;
+            margin-right: 8px;
+        }}
+        .work-btn {{
+            background: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #475569;
+            padding: 10px 16px;
             font-size: 12px;
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-right: 8px;
-            margin-bottom: 8px;
+            border-radius: 4px;
+            margin-right: 10px;
+            margin-bottom: 10px;
             transition: all 0.2s ease;
         }}
-        .sim-btn:hover {{
-            background: var(--stamp);
-            border-color: var(--stamp);
+        .work-btn:hover {{
+            background: #3b82f6;
+            border-color: #3b82f6;
             color: #fff;
         }}
-        .sim-terminal {{
-            background: #111;
-            color: #00ff66;
-            padding: 15px;
-            border-radius: 4px;
-            height: 180px;
+        .work-btn--danger:hover {{
+            background: #ef4444;
+            border-color: #ef4444;
+        }}
+        .console-output {{
+            background: #020617;
+            color: #38bdf8;
+            padding: 20px;
+            border-radius: 6px;
+            height: 220px;
             overflow-y: auto;
             font-size: 13px;
-            line-height: 1.4;
-            margin-top: 15px;
-            border: 1px solid var(--rule-dark);
+            line-height: 1.6;
+            border: 1px solid #1e293b;
+            margin-top: 20px;
         }}
-        .shap-bar-container {{
-            margin-top: 15px;
-            background: var(--paper-bright);
-            padding: 15px;
-            border: 1px solid var(--rule);
-        }}
-        .shap-row {{
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
+        .metric-badge {{
+            background: #1e293b;
+            padding: 8px 14px;
+            border-radius: 4px;
+            border: 1px solid #334155;
             font-size: 12px;
-        }}
-        .shap-label {{
-            width: 180px;
-            font-weight: bold;
-        }}
-        .shap-track {{
-            flex: 1;
-            background: #eee;
-            height: 14px;
-            position: relative;
-            margin: 0 10px;
-        }}
-        .shap-fill {{
-            height: 100%;
-            background: var(--stamp);
-            width: 0%;
-            transition: width 0.4s ease;
-        }}
-        .shap-val {{
-            width: 50px;
-            text-align: right;
-            font-weight: bold;
-        }}
-        .arch-diagram-box {{
-            background: var(--paper-bright);
-            border: 2px solid var(--rule-dark);
-            padding: 20px;
-            margin: 25px 0;
-            text-align: center;
-        }}
-        .arch-node {{
-            display: inline-block;
-            border: 1px solid var(--rule-dark);
-            background: var(--paper-warm);
-            padding: 10px 15px;
-            margin: 5px;
-            font-size: 13px;
-            font-weight: bold;
-        }}
-        .arch-arrow {{
-            display: inline-block;
-            margin: 0 5px;
-            font-weight: bold;
-            color: var(--stamp);
         }}
     </style>
 </head>
 <body class="newspaper-theme">
-    <div class="container">
+    <div class="container" style="max-width: 1100px;">
         <header class="masthead" style="margin-top: 20px;">
-            <div class="newspaper-grid" style="border-bottom: 1px solid var(--rule); padding: 5px 0;">
+            <div class="newspaper-grid" style="border-bottom: 1px solid var(--rule); padding: 10px 0;">
                 <div class="col-span-12 meta uppercase" style="display:flex; justify-content: space-between;">
                     <span>BY THE ENGINEERING DESK</span>
-                    <span><a href="../index.html">&larr; Back to Front Page</a></span>
+                    <span><a href="../index.html" style="font-weight:bold;">&larr; Back to Front Page</a></span>
                 </div>
             </div>
         </header>
 
         <main class="dispatch-content">
 
-            <section class="portfolio-case-study">
-                <div class="project-header rv">
-                    <span class="project-badge">AI CYBERSECURITY & UEBA</span>
-                    <h2 class="display-lg" style="margin-bottom: 10px;">SENTINEL-STREAM: O(1)-Memory Streaming Anomaly Detection</h2>
-                    <p class="tagline">Sub-3ms Real-Time Behavioural UEBA Engine with TreeSHAP Explainability</p>
+            <!-- HEADER -->
+            <section class="section" style="padding: 40px 0 20px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="project-badge" style="background:var(--ink); color:var(--paper); padding:4px 10px; font-weight:bold; font-size:12px;">AI CYBERSECURITY &amp; UEBA</span>
+                        <h1 class="display-lg" style="margin: 15px 0 10px 0; font-size: 42px;">SENTINEL-STREAM: O(1)-Memory UEBA Engine</h1>
+                        <p class="tagline" style="font-size: 20px; font-style: italic; color: #444;">Sub-3ms Real-Time Behavioural Anomaly Detection with TreeSHAP Explainability</p>
+                    </div>
                 </div>
+            </section>
 
-                <!-- Metrics Grid -->
-                <div class="metrics-row rv">
+            <!-- KEY METRICS BAR -->
+            <section class="section" style="padding: 20px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-bottom: 40px;">
+                <div class="metrics-row" style="margin:0; border:none; padding:0;">
                     <div class="metric-box">
-                        <span class="metric-val">2.64 ms</span>
+                        <span class="metric-val" style="font-size:36px; color:var(--stamp);">2.64 ms</span>
                         <span class="metric-lbl">P99 Inference Latency</span>
                     </div>
                     <div class="metric-box">
-                        <span class="metric-val">~2 KB</span>
+                        <span class="metric-val" style="font-size:36px; color:var(--stamp);">~2 KB</span>
                         <span class="metric-lbl">Fixed Memory / Entity</span>
                     </div>
                     <div class="metric-box">
-                        <span class="metric-val">0.9403</span>
-                        <span class="metric-lbl">NSL-KDD 5-Fold Macro F1</span>
+                        <span class="metric-val" style="font-size:36px; color:var(--stamp);">0.9403</span>
+                        <span class="metric-lbl">NSL-KDD Macro F1</span>
                     </div>
                     <div class="metric-box">
-                        <span class="metric-val">24.6×</span>
+                        <span class="metric-val" style="font-size:36px; color:var(--stamp);">24.6×</span>
                         <span class="metric-lbl">Faster than Random Forest</span>
                     </div>
                 </div>
+            </section>
 
-                <!-- Architectural Flow Diagram (Pure CSS/HTML Broadside) -->
-                <div class="arch-diagram-box rv">
-                    <span class="kicker-label">SYSTEM ARCHITECTURE PIPELINE</span>
-                    <h4 class="heading-md" style="margin: 10px 0 15px 0;">O(1) Streaming Profiler &amp; Two-Stage Inference</h4>
-                    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px;">
-                        <div class="arch-node">Event Stream Ingestion<br><small style="font-weight:normal;">JSON Logs / Kafka</small></div>
-                        <span class="arch-arrow">&rarr;</span>
-                        <div class="arch-node">O(1) EWMA Profiler<br><small style="font-weight:normal;">4 KB Count-Min Sketch</small></div>
-                        <span class="arch-arrow">&rarr;</span>
-                        <div class="arch-node">Stage 1: Isolation Forest<br><small style="font-weight:normal;">Cold-Start Risk Score</small></div>
-                        <span class="arch-arrow">&rarr;</span>
-                        <div class="arch-node">Stage 2: LightGBM<br><small style="font-weight:normal;">Multi-Class Threat Classifier</small></div>
-                        <span class="arch-arrow">&rarr;</span>
-                        <div class="arch-node">TreeSHAP Explainability<br><small style="font-weight:normal;">Sub-30&mu;s Risk Rationale</small></div>
+            <!-- REAL WORK-LIFE SOC ANALYST SIMULATOR -->
+            <section class="section" style="padding: 10px 0 30px 0;">
+                <span class="kicker-label" style="color: var(--stamp); font-size: 14px;">REAL WORK-LIFE SIMULATION</span>
+                <h3 class="heading-lg" style="margin: 5px 0 20px 0;">SOC Analyst Incident Response Workstation</h3>
+
+                <div class="work-sim-container">
+                    <div class="work-sim-header">
+                        <div>
+                            <span class="status-dot"></span>
+                            <span style="font-weight:bold; color:#e2e8f0;">SENTINEL-STREAM // LIVE SOC ALERT CONSOLE</span>
+                        </div>
+                        <div style="display:flex; gap:10px;">
+                            <span class="metric-badge">Memory: O(1) 1.98 KB</span>
+                            <span class="metric-badge">Engine: LightGBM + IsoForest</span>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Interactive Live Simulation Widget -->
-                <div class="sim-box rv">
-                    <span class="kicker-label" style="color: var(--stamp);">INTERACTIVE THREAT SIMULATOR</span>
-                    <h3 class="heading-lg" style="margin: 5px 0 15px 0;">Live UEBA Stream &amp; TreeSHAP Rationale Generator</h3>
-                    <p class="body" style="margin-bottom: 15px; font-family: var(--font-text);">Inject simulated network events into the O(1) profiling pipeline to trigger real-time anomaly decisions and feature attribution values:</p>
+                    <p style="color:#94a3b8; font-size:13px; margin-bottom:15px;">Simulate real-world SOC Analyst triage actions against incoming enterprise threats:</p>
 
                     <div>
-                        <button class="sim-btn" onclick="triggerScenario('brute')">⚡ Scenario A: Brute Force Surge</button>
-                        <button class="sim-btn" onclick="triggerScenario('travel')">🌍 Scenario B: Impossible Travel</button>
-                        <button class="sim-btn" onclick="triggerScenario('exfil')">📤 Scenario C: Data Exfiltration</button>
-                        <button class="sim-btn" onclick="triggerScenario('normal')">✅ Scenario D: Normal Baseline</button>
+                        <button class="work-btn" onclick="simWork('triage')">🔍 Triage Active Alerts</button>
+                        <button class="work-btn work-btn--danger" onclick="simWork('isolate')">🛡️ Isolate Compromised Host</button>
+                        <button class="work-btn" onclick="simWork('shap')">📊 Run TreeSHAP Attribution</button>
+                        <button class="work-btn" onclick="simWork('reset')">🔄 Clear Workstation</button>
                     </div>
 
-                    <div class="sim-terminal" id="terminalLog">
-[SYSTEM INIT] SENTINEL-STREAM Engine active...
-[SYSTEM INFO] O(1) Memory Profiler allocated (2.04 KB per entity).
-[SYSTEM INFO] Ready for event stream ingestion. Click a scenario button above...
-                    </div>
-
-                    <div class="shap-bar-container">
-                        <span class="meta bold" style="display:block; margin-bottom:10px;">TREESHAP FEATURE RISK ATTRIBUTION (PER ALERT)</span>
-                        
-                        <div class="shap-row">
-                            <span class="shap-label" id="f1_label">failed_logins_1m</span>
-                            <div class="shap-track"><div class="shap-fill" id="f1_bar"></div></div>
-                            <span class="shap-val" id="f1_val">+0.00</span>
-                        </div>
-                        <div class="shap-row">
-                            <span class="shap-label" id="f2_label">event_rate_delta</span>
-                            <div class="shap-track"><div class="shap-fill" id="f2_bar"></div></div>
-                            <span class="shap-val" id="f2_val">+0.00</span>
-                        </div>
-                        <div class="shap-row">
-                            <span class="shap-label" id="f3_label">geo_velocity_kmh</span>
-                            <div class="shap-track"><div class="shap-fill" id="f3_bar"></div></div>
-                            <span class="shap-val" id="f3_val">+0.00</span>
-                        </div>
-                        <div class="shap-row">
-                            <span class="shap-label" id="f4_label">outbound_bytes_ewma</span>
-                            <div class="shap-track"><div class="shap-fill" id="f4_bar"></div></div>
-                            <span class="shap-val" id="f4_val">+0.00</span>
-                        </div>
+                    <div class="console-output" id="socTerminal">
+[SYSTEM MONITOR] SENTINEL-STREAM monitoring 50,000 active enterprise entity pipelines...
+[SOC DESK] Standby for analyst triage command. Select an action button above...
                     </div>
                 </div>
+            </section>
 
-                <!-- Case Study Details -->
-                <div class="case-study-grid rv">
-                    <div class="text-block">
-                        <h3 class="heading-lg" style="margin-bottom: 20px;">Key Technical Innovations</h3>
-                        <ul>
-                            <li><b>O(1) Streaming Profiler:</b> Replaces raw event arrays with Exponentially Weighted Moving Averages (EWMA) and Count-Min Sketch tables ($4	ext{ KB}$ matrix), bounding memory per entity.</li>
-                            <li><b>Zero Cold-Start Vulnerability:</b> Stage 1 Isolation Forest calculates structural anomaly scores ($s_{	ext{iso}}$) for newly onboarded entities without historical baseline logs.</li>
+            <!-- SYSTEM ARCHITECTURE -->
+            <section class="section" style="padding: 30px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-bottom: 40px;">
+                <div class="arch-diagram-box" style="background: var(--paper-warm); border: 2px solid var(--rule-dark); padding: 30px; text-align: center;">
+                    <span class="kicker-label" style="color: var(--stamp);">SYSTEM ARCHITECTURE PIPELINE</span>
+                    <h4 class="heading-md" style="margin: 10px 0 20px 0;">O(1) Streaming Profiler &amp; Two-Stage ML Pipeline</h4>
+                    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px; font-family: var(--font-mono, monospace);">
+                        <div class="arch-node">Event Ingestion<br><small style="font-weight:normal;">Kafka / Audit Logs</small></div>
+                        <span class="arch-arrow" style="font-size:18px;">&rarr;</span>
+                        <div class="arch-node">O(1) EWMA Profiler<br><small style="font-weight:normal;">4 KB Matrix / Entity</small></div>
+                        <span class="arch-arrow" style="font-size:18px;">&rarr;</span>
+                        <div class="arch-node">Stage 1: IsoForest<br><small style="font-weight:normal;">Cold-Start Risk Score</small></div>
+                        <span class="arch-arrow" style="font-size:18px;">&rarr;</span>
+                        <div class="arch-node">Stage 2: LightGBM<br><small style="font-weight:normal;">Multi-Class Classifier</small></div>
+                        <span class="arch-arrow" style="font-size:18px;">&rarr;</span>
+                        <div class="arch-node">TreeSHAP Rationale<br><small style="font-weight:normal;">Sub-30&mu;s Per-Alert Explanation</small></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TECHNICAL SPECS & IMPACT -->
+            <section class="section" style="padding: 20px 0 40px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-6 column-bordered">
+                        <h3 class="heading-lg" style="margin-bottom: 20px;">Technical Innovations</h3>
+                        <ul style="list-style:square; padding-left:20px; line-height:1.7; font-size:16px;">
+                            <li style="margin-bottom:15px;"><b>O(1) Streaming Profiler:</b> Replaces raw event arrays with EWMA rolling statistics and Count-Min Sketch tables, guaranteeing a fixed memory footprint.</li>
+                            <li style="margin-bottom:15px;"><b>Zero Cold-Start Vulnerability:</b> Stage 1 Isolation Forest calculates structural anomaly scores ($s_{	ext{iso}}$) for newly onboarded entities without historical baseline logs.</li>
                             <li><b>Inline TreeSHAP Explainability:</b> Computes exact directional feature risk attributions in $pprox 30\ \mu	ext{s}$ per alert.</li>
                         </ul>
                     </div>
-                    <div class="text-block">
+
+                    <div class="col-span-6">
                         <h3 class="heading-lg" style="margin-bottom: 20px;">The Real-World Scenario</h3>
-                        <p class="body-lg"><span class="dropcap">E</span>nterprise Security Operations Centers (SOCs) ingest tens of millions of audit events daily. Existing UEBA solutions store historical raw event arrays per user, causing memory consumption to scale linearly $O(N)$ and leading to Out-Of-Memory (OOM) failures under burst traffic.</p>
-                        <p class="body-lg" style="margin-top: 15px;">SENTINEL-STREAM guarantees strict $O(1)$ memory consumption per entity while rendering sub-3ms anomaly classification with exact TreeSHAP feature attributions.</p>
+                        <p class="body-lg" style="line-height:1.7;"><span class="dropcap">E</span>nterprise Security Operations Centers ingest tens of millions of audit events daily. Existing UEBA solutions store historical raw event arrays per user, causing memory consumption to scale linearly $O(N)$ and leading to Out-Of-Memory (OOM) failures under burst traffic.</p>
+                        <p class="body-lg" style="line-height:1.7; margin-top:15px;">SENTINEL-STREAM guarantees strict $O(1)$ memory consumption per entity while rendering sub-3ms anomaly classification with exact TreeSHAP feature attributions.</p>
                     </div>
                 </div>
 
-                <!-- Links -->
-                <div class="project-links rv">
+                <div style="margin-top: 40px; display:flex; gap:20px;">
                     <a href="https://github.com/AJ1312/sentinel-stream" target="_blank" class="btn-github">⭐ View Code on GitHub</a>
                     <a href="https://github.com/AJ1312/sentinel-stream-research" target="_blank" class="btn-research">🔬 View IEEE Research Artifacts</a>
                 </div>
             </section>
 
             <script>
-                function triggerScenario(type) {
-                    const log = document.getElementById('terminalLog');
+                function simWork(type) {
+                    const term = document.getElementById('socTerminal');
                     const ts = new Date().toISOString().substring(11, 19);
-                    
-                    let logText = '';
-                    let f1 = 0, f2 = 0, f3 = 0, f4 = 0;
 
-                    if (type === 'brute') {
-                        logText = `[${ts}] [ALERT CRITICAL] Entity: user_adm_82 | Event: AUTH_FAILURE (x45 in 10s)
-` +
-                                  `[${ts}] [INFERENCE] P99 Latency: 1.84ms | Memory: 1.98 KB
-` +
-                                  `[${ts}] [STAGE 1 IsoForest] Score: 0.88 | [STAGE 2 LightGBM] Class: BRUTE_FORCE (0.965)
-` +
-                                  `[${ts}] [TreeSHAP] Top Contributor: failed_logins_1m (+0.54), event_rate_delta (+0.32)`;
-                        f1 = 88; f2 = 64; f3 = 10; f4 = 15;
-                    } else if (type === 'travel') {
-                        logText = `[${ts}] [ALERT HIGH] Entity: user_exec_04 | Event: LOGIN_SUCCESS (Location: Tokyo, Previous: New York)
-` +
-                                  `[${ts}] [INFERENCE] P99 Latency: 2.12ms | Memory: 2.01 KB
-` +
-                                  `[${ts}] [STAGE 1 IsoForest] Score: 0.81 | [STAGE 2 LightGBM] Class: IMPOSSIBLE_TRAVEL (0.912)
-` +
-                                  `[${ts}] [TreeSHAP] Top Contributor: geo_velocity_kmh (+0.68), event_rate_delta (+0.18)`;
-                        f1 = 12; f2 = 36; f3 = 92; f4 = 20;
-                    } else if (type === 'exfil') {
-                        logText = `[${ts}] [ALERT CRITICAL] Entity: dev_service_acct | Event: DB_EXPORT (Outbound: 14.2 GB to unknown ASN)
-` +
-                                  `[${ts}] [INFERENCE] P99 Latency: 1.95ms | Memory: 1.99 KB
-` +
-                                  `[${ts}] [STAGE 1 IsoForest] Score: 0.94 | [STAGE 2 LightGBM] Class: DATA_EXFILTRATION (0.984)
-` +
-                                  `[${ts}] [TreeSHAP] Top Contributor: outbound_bytes_ewma (+0.76), event_rate_delta (+0.25)`;
-                        f1 = 15; f2 = 50; f3 = 25; f4 = 95;
+                    let msg = '';
+                    if (type === 'triage') {
+                        msg = `[${ts}] [SOC TRIAGE ALERT] High-Priority Incident #SOC-9421 Detected\n` +
+                              `  -> Entity: dev_service_admin (IP: 10.0.12.84)\n` +
+                              `  -> Anomaly Score: 0.942 (CRITICAL) | P99 Latency: 2.14ms\n` +
+                              `  -> Pattern: 1,400 Database Queries in 10s + Outbound S3 Dump to unknown ASN\n` +
+                              `  -> Recommendation: Immediate Host Containment`;
+                    } else if (type === 'isolate') {
+                        msg = `[${ts}] [WORKSTATION ACTION] Host Isolation Triggered for dev_service_admin\n` +
+                              `  -> Network Quarantine Policy Pushed to EKS Security Group\n` +
+                              `  -> Active Session Revoked | OAuth Tokens Invalidated\n` +
+                              `  -> Incident Log #SOC-9421 Status: CONTAINED (Response Time: 4.2s)`;
+                    } else if (type === 'shap') {
+                        msg = `[${ts}] [TREESHAP ANALYSIS] Per-Alert Feature Risk Breakdown (#SOC-9421):\n` +
+                              `  1. outbound_bytes_ewma:  +0.64 (64% Risk Contribution)\n` +
+                              `  2. event_rate_delta:     +0.22 (22% Risk Contribution)\n` +
+                              `  3. off_hours_flag:       +0.08 (8% Risk Contribution)\n` +
+                              `  -> Decision Rationale Verified by SOC Lead Analyst`;
                     } else {
-                        logText = `[${ts}] [INFO NOMINAL] Entity: user_staff_11 | Event: FILE_READ (Normal Baseline)
-` +
-                                  `[${ts}] [INFERENCE] P99 Latency: 1.45ms | Memory: 1.97 KB
-` +
-                                  `[${ts}] [STAGE 1 IsoForest] Score: 0.12 | [STAGE 2 LightGBM] Class: BENIGN (0.998)
-` +
-                                  `[${ts}] [TreeSHAP] Baseline metrics nominal. Zero threat indicators detected.`;
-                        f1 = 2; f2 = 5; f3 = 2; f4 = 4;
+                        msg = `[${ts}] [SOC CONSOLE RESET] System Monitoring Resumed. Standby for events...`;
                     }
 
-                    log.innerText += '\n\n' + logText;
-                    log.scrollTop = log.scrollHeight;
-
-                    document.getElementById('f1_bar').style.width = f1 + '%';
-                    document.getElementById('f1_val').innerText = '+' + (f1 / 100).toFixed(2);
-
-                    document.getElementById('f2_bar').style.width = f2 + '%';
-                    document.getElementById('f2_val').innerText = '+' + (f2 / 100).toFixed(2);
-
-                    document.getElementById('f3_bar').style.width = f3 + '%';
-                    document.getElementById('f3_val').innerText = '+' + (f3 / 100).toFixed(2);
-
-                    document.getElementById('f4_bar').style.width = f4 + '%';
-                    document.getElementById('f4_val').innerText = '+' + (f4 / 100).toFixed(2);
+                    term.innerText += '\n\n' + msg;
+                    term.scrollTop = term.scrollHeight;
                 }
             </script>
 
         </main>
         
-        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 20px 0; text-align: center;">
-            <p class="meta">PRINTED IN VELLORE &middot; AJITESH SHARMA &copy; 2026</p>
+        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0; text-align: center; margin-top: 60px;">
+            <p class="meta">&copy; 2026 AJITESH SHARMA &middot; THE SHARMA DISPATCH &middot; VOL. I</p>
         </footer>
     </div>
 </body>
