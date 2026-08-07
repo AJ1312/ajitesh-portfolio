@@ -36,7 +36,7 @@
     <div class="container">
         
         <!-- SUBPAGE HEADER -->
-        <header class="masthead section-rule--double" style="margin-top: 20px;">
+        <header class="masthead" style="margin-top: 20px;">
             <nav class="nav" id="main-nav" style="border-bottom: 4px solid var(--rule-dark); padding: 15px 0;">
                 <div class="newspaper-grid" style="align-items: center;">
                     <div class="col-span-6 heading-md" style="margin:0;"><a href="../index.html" style="text-decoration: none; color: inherit;">&larr; THE SHARMA DISPATCH</a></div>
@@ -84,6 +84,31 @@
                         <span class="kicker-label">THE REAL-WORLD SCENARIO</span>
                         <h3 class="heading-lg" style="margin: 10px 0 20px 0; font-size: 32px;">The Double-Booking Crisis</h3>
                         <p class="body-lg rv"><span class="dropcap">I</span>n high-demand event ticketing, legacy monolithic systems crash under sudden traffic spikes ("ticket drops"), leading to race conditions and double-booked seats. SeatSnap solves this by decoupling the reservation engine from the user gateway, utilizing a highly available, containerized microservices architecture built from the ground up with cloud-native DevOps principles.</p>
+                    </div>
+                </div>
+            </section>
+
+                        <!-- THE ARCHITECTURE FLOW -->
+            <section class="section" style="padding: 30px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <div class="arch-diagram-box" style="background: var(--paper-warm); border: 2px solid var(--rule-dark); padding: 25px; text-align: center;">
+                            <span class="kicker-label" style="color: var(--stamp);">SYSTEM ARCHITECTURE PIPELINE</span>
+                            <h4 class="heading-md" style="margin: 10px 0 15px 0;">Containerized Microservices &amp; Distributed Locking</h4>
+                            <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; font-family: var(--font-mono, monospace);">
+                                <div class="arch-node">Client Gateway<br><small style="font-weight:normal;">Web / Mobile App</small></div>
+                                <span class="arch-arrow">&rarr;</span>
+                                <div class="arch-node">NGINX Ingress<br><small style="font-weight:normal;">TLS &amp; Rate Limiting</small></div>
+                                <span class="arch-arrow">&rarr;</span>
+                                <div class="arch-node">AWS EKS Cluster<br><small style="font-weight:normal;">User, Booking &amp; Payment Pods</small></div>
+                                <span class="arch-arrow">&rarr;</span>
+                                <div class="arch-node">Redis Redlock<br><small style="font-weight:normal;">Zero Double-Booking Lock</small></div>
+                                <span class="arch-arrow">&rarr;</span>
+                                <div class="arch-node">PostgreSQL Cluster<br><small style="font-weight:normal;">ACID Seat Transactions</small></div>
+                                <span class="arch-arrow">&rarr;</span>
+                                <div class="arch-node">Prometheus &amp; Grafana<br><small style="font-weight:normal;">Pod Metrics &amp; Tracing</small></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

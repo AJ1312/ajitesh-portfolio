@@ -362,13 +362,16 @@ h6 {
   margin: 0;
 }
 
-.section-rule--double {
+hr.section-rule--double, div.section-rule--double {
   width: 100%;
   height: 3px;
   border-top: 1px solid var(--rule-dark);
   border-bottom: 1px solid var(--rule-dark);
   background: transparent;
   margin: 0;
+}
+.section-rule--double {
+  border-top: 3px double var(--rule-dark);
 }
 
 .section-rule--hairline {
@@ -1029,7 +1032,7 @@ h6 {
    ========================================================================== */
 /* Base reveal classes */
 .rv {
-  opacity: 0;
+  opacity: 1;
 }
 
 /* Applied by GSAP when in view */
