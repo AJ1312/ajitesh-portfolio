@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+import os
+
+internship_content = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -230,30 +232,36 @@
 
             let msg = '';
             if (type === 'queue') {
-                msg = `[${ts}] [PLANT GATE DISPATCH] Executing 06:00 AM Shift Queue Audit...\n` +
-                      `  -> Total Checked In: 1,214 Personnel (Shift A)\n` +
-                      `  -> Gate Processing Latency: 420ms per 100 scans (PL/SQL Stored Procedure)\n` +
-                      `  -> Gate Bottlenecks: 0 | Concurrency Lock Contention: 0.00%\n` +
+                msg = `[${ts}] [PLANT GATE DISPATCH] Executing 06:00 AM Shift Queue Audit...\\n` +
+                      `  -> Total Checked In: 1,214 Personnel (Shift A)\\n` +
+                      `  -> Gate Processing Latency: 420ms per 100 scans (PL/SQL Stored Procedure)\\n` +
+                      `  -> Gate Bottlenecks: 0 | Concurrency Lock Contention: 0.00%\\n` +
                       `  -> Allocation Status: 100% DEPLOYED TO SECTORS 1 - 8`;
             } else if (type === 'swap') {
-                msg = `[${ts}] [SHIFT SWAP PROCEDURE] Emergency Shift Swap Request #HIN-8812\n` +
-                      `  -> Outgoing Worker: ID #4920 (Furnace Sector B)\n` +
-                      `  -> Replacement Worker: ID #5104 (Certified Standby Pool)\n` +
-                      `  -> Validation: Skill Matrix Verified &amp; RBAC Approved\n` +
+                msg = `[${ts}] [SHIFT SWAP PROCEDURE] Emergency Shift Swap Request #HIN-8812\\n` +
+                      `  -> Outgoing Worker: ID #4920 (Furnace Sector B)\\n` +
+                      `  -> Replacement Worker: ID #5104 (Certified Standby Pool)\\n` +
+                      `  -> Validation: Skill Matrix Verified &amp; RBAC Approved\\n` +
                       `  -> Result: Shift Roster Updated &amp; Gate RFID Badge Permissions Synced`;
             } else if (type === 'rbac') {
-                msg = `[${ts}] [SECURITY RBAC AUDIT] Verifying Access Levels:\n` +
-                      `  -> Floor Supervisor: Tier 2 (Sector Allocation Only)\n` +
-                      `  -> Security Gate Kiosk: Tier 1 (Read/Verify RFID Only)\n` +
-                      `  -> Plant Manager: Tier 3 (Full Roster &amp; Labor Cost Analytics)\n` +
+                msg = `[${ts}] [SECURITY RBAC AUDIT] Verifying Access Levels:\\n` +
+                      `  -> Floor Supervisor: Tier 2 (Sector Allocation Only)\\n` +
+                      `  -> Security Gate Kiosk: Tier 1 (Read/Verify RFID Only)\\n` +
+                      `  -> Plant Manager: Tier 3 (Full Roster &amp; Labor Cost Analytics)\\n` +
                       `  -> Compliance Status: 100% AUDIT PASS (Zero Unauthorized Privilege Escalations)`;
             } else {
                 msg = `[${ts}] [PLANT CONSOLE RESET] System monitoring active. Standby for supervisor commands...`;
             }
 
-            term.innerText += '\n\n' + msg;
+            term.innerText += '\\n\\n' + msg;
             term.scrollTop = term.scrollHeight;
         }
     </script>
 </body>
 </html>
+"""
+
+with open("pages/internship.html", "w") as f:
+    f.write(internship_content)
+
+print("Successfully generated rich, complete Hindalco Workforce Queue System page!")
