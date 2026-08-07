@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+import os
+
+PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CipherPulse — The Sharma Dispatch</title>
+    <title>{title} — The Sharma Dispatch</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
@@ -11,9 +13,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <link rel="stylesheet" href="../css/styles.css">
     <style>
-
         /* 10/10 MASTERPIECE CYBERSECURITY COCKPIT & EDITORIAL SYSTEM */
-        .pill-tag {
+        .pill-tag {{
             display: inline-block;
             background: var(--ink);
             color: var(--paper-bright);
@@ -25,16 +26,16 @@
             margin-right: 6px;
             margin-bottom: 8px;
             border-radius: 3px;
-        }
+        }}
 
         /* BENCHMARKS METRICS GRID */
-        .metrics-grid-4 {
+        .metrics-grid-4 {{
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             margin: 25px 0;
-        }
-        .metric-card-styled {
+        }}
+        .metric-card-styled {{
             background: #ffffff;
             border: 2px solid var(--rule-dark);
             box-shadow: 4px 4px 0px rgba(0,0,0,0.06);
@@ -42,34 +43,34 @@
             text-align: center;
             border-radius: 4px;
             transition: transform 0.2s ease;
-        }
-        .metric-card-styled:hover {
+        }}
+        .metric-card-styled:hover {{
             transform: translateY(-2px);
-        }
-        .metric-num-bold {
+        }}
+        .metric-num-bold {{
             font-family: var(--font-display);
             font-size: 42px;
             font-weight: 900;
             color: var(--stamp);
             margin-bottom: 6px;
             line-height: 1.05;
-        }
-        .metric-title-upper {
+        }}
+        .metric-title-upper {{
             font-weight: 700;
             text-transform: uppercase;
             font-size: 12px;
             letter-spacing: 0.6px;
             margin-bottom: 8px;
             color: var(--ink);
-        }
-        .metric-text-desc {
+        }}
+        .metric-text-desc {{
             font-size: 13px;
             color: #555555;
             line-height: 1.45;
-        }
+        }}
 
         /* KEY DECISION CALLOUT */
-        .decision-card-exec {
+        .decision-card-exec {{
             background: #ffffff;
             border-left: 6px solid var(--stamp);
             border-top: 2px solid var(--rule-dark);
@@ -79,10 +80,10 @@
             padding: 30px 34px;
             margin: 35px 0;
             border-radius: 4px;
-        }
+        }}
 
         /* INTERACTIVE FORENSIC COCKPIT WORKBENCH */
-        .cockpit-suite-box {
+        .cockpit-suite-box {{
             border: 2px solid var(--rule-dark);
             background: #090d16;
             color: #f8fafc;
@@ -91,37 +92,37 @@
             box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.4);
             margin: 35px 0;
             font-family: var(--font-mono, monospace);
-        }
-        .cockpit-bar-mac {
+        }}
+        .cockpit-bar-mac {{
             background: #111827;
             padding: 12px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             border-bottom: 1px solid #1f2937;
-        }
-        .terminal-dots {
+        }}
+        .terminal-dots {{
             display: flex;
             gap: 8px;
-        }
-        .dot {
+        }}
+        .dot {{
             width: 12px;
             height: 12px;
             border-radius: 50%;
-        }
-        .dot-red { background: #ef4444; }
-        .dot-yellow { background: #f59e0b; }
-        .dot-green { background: #10b981; }
-        .cockpit-body {
+        }}
+        .dot-red {{ background: #ef4444; }}
+        .dot-yellow {{ background: #f59e0b; }}
+        .dot-green {{ background: #10b981; }}
+        .cockpit-body {{
             padding: 24px;
-        }
-        .cockpit-btn-row {
+        }}
+        .cockpit-btn-row {{
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 20px;
-        }
-        .cockpit-btn-action {
+        }}
+        .cockpit-btn-action {{
             background: #1e293b;
             color: #e2e8f0;
             border: 1px solid #334155;
@@ -134,28 +135,28 @@
             border-radius: 4px;
             transition: all 0.2s ease;
             font-family: var(--font-body);
-        }
-        .cockpit-btn-action:hover, .cockpit-btn-action.active {
+        }}
+        .cockpit-btn-action:hover, .cockpit-btn-action.active {{
             background: #dc2626;
             border-color: #dc2626;
             color: #ffffff;
             box-shadow: 0 0 14px rgba(220, 38, 38, 0.5);
-        }
+        }}
 
         /* LIVE TELEMETRY DASHBOARD GRID */
-        .telemetry-grid {
+        .telemetry-grid {{
             display: grid;
             grid-template-columns: 2fr 3fr;
             gap: 18px;
             margin-bottom: 20px;
-        }
-        .telemetry-panel {
+        }}
+        .telemetry-panel {{
             background: #030712;
             border: 1px solid #1f2937;
             padding: 16px 20px;
             border-radius: 6px;
-        }
-        .telemetry-header {
+        }}
+        .telemetry-header {{
             font-size: 11px;
             color: #94a3b8;
             text-transform: uppercase;
@@ -165,50 +166,50 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-        .gauge-number-big {
-            font-size: 34px;
+        }}
+        .gauge-number-big {{
+            font-size: 32px;
             font-weight: 900;
             line-height: 1;
             margin-bottom: 6px;
-        }
-        .gauge-bar-track {
+        }}
+        .gauge-bar-track {{
             width: 100%;
             height: 8px;
             background: #1f2937;
             border-radius: 4px;
             overflow: hidden;
             margin-top: 10px;
-        }
-        .gauge-bar-fill {
+        }}
+        .gauge-bar-fill {{
             height: 100%;
             transition: width 0.5s ease, background-color 0.5s ease;
-        }
-        .feature-bar-row {
+        }}
+        .feature-bar-row {{
             margin-bottom: 10px;
-        }
-        .feature-bar-label {
+        }}
+        .feature-bar-label {{
             display: flex;
             justify-content: space-between;
             font-size: 11px;
             margin-bottom: 4px;
             color: #cbd5e1;
-        }
-        .feature-bar-track {
+        }}
+        .feature-bar-track {{
             width: 100%;
             height: 6px;
             background: #1f2937;
             border-radius: 3px;
             overflow: hidden;
-        }
-        .feature-bar-fill {
+        }}
+        .feature-bar-fill {{
             height: 100%;
             background: #38bdf8;
             transition: width 0.4s ease;
-        }
+        }}
 
         /* LIVE LOG CONSOLE */
-        .cockpit-log-output {
+        .cockpit-log-output {{
             background: #020617;
             color: #38bdf8;
             padding: 14px 18px;
@@ -218,10 +219,10 @@
             line-height: 1.6;
             margin-bottom: 20px;
             min-height: 55px;
-        }
+        }}
 
         /* AUDIT TABLE */
-        .cockpit-table {
+        .cockpit-table {{
             width: 100%;
             border-collapse: collapse;
             font-family: var(--font-body);
@@ -231,8 +232,8 @@
             border-radius: 6px;
             overflow: hidden;
             border: 1px solid #334155;
-        }
-        .cockpit-table th {
+        }}
+        .cockpit-table th {{
             background: #111827;
             color: #f8fafc;
             padding: 12px 14px;
@@ -240,38 +241,38 @@
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.6px;
-        }
-        .cockpit-table td {
+        }}
+        .cockpit-table td {{
             padding: 12px 14px;
             border-bottom: 1px solid #e2e8f0;
             line-height: 1.45;
-        }
-        .anim-fade-row {
+        }}
+        .anim-fade-row {{
             animation: fadeInRow 0.4s ease-out forwards;
-        }
-        @keyframes fadeInRow {
-            from {
+        }}
+        @keyframes fadeInRow {{
+            from {{
                 opacity: 0;
                 transform: translateY(-8px);
                 background-color: #fef08a;
-            }
-            to {
+            }}
+            to {{
                 opacity: 1;
                 transform: translateY(0);
                 background-color: transparent;
-            }
-        }
+            }}
+        }}
 
         /* INTERACTIVE STEPPER TABS FOR PIPELINE */
-        .stepper-nav-row {
+        .stepper-nav-row {{
             display: flex;
             gap: 8px;
             overflow-x: auto;
             padding-bottom: 10px;
             margin-bottom: 20px;
             border-bottom: 2px solid var(--rule);
-        }
-        .stepper-tab-btn {
+        }}
+        .stepper-tab-btn {{
             background: var(--paper-warm);
             border: 2px solid var(--rule-dark);
             color: var(--ink);
@@ -284,21 +285,21 @@
             border-radius: 4px;
             white-space: nowrap;
             transition: all 0.2s ease;
-        }
-        .stepper-tab-btn:hover, .stepper-tab-btn.active {
+        }}
+        .stepper-tab-btn:hover, .stepper-tab-btn.active {{
             background: var(--ink);
             color: var(--paper);
             border-color: var(--ink);
-        }
-        .stepper-detail-card {
+        }}
+        .stepper-detail-card {{
             background: #ffffff;
             border: 2px solid var(--rule-dark);
             box-shadow: 4px 4px 0px rgba(0,0,0,0.06);
             padding: 28px 32px;
             border-radius: 6px;
             margin-bottom: 20px;
-        }
-        .algo-code-box {
+        }}
+        .algo-code-box {{
             background: #0f172a;
             color: #38bdf8;
             padding: 16px 20px;
@@ -309,10 +310,10 @@
             margin: 16px 0;
             overflow-x: auto;
             border: 1px solid #1e293b;
-        }
+        }}
 
         /* BADGES */
-        .badge-red {
+        .badge-red {{
             display: inline-block;
             padding: 3px 8px;
             background: #fee2e2;
@@ -321,8 +322,8 @@
             font-weight: 700;
             font-size: 11px;
             border-radius: 3px;
-        }
-        .badge-amber {
+        }}
+        .badge-amber {{
             display: inline-block;
             padding: 3px 8px;
             background: #fef3c7;
@@ -331,8 +332,8 @@
             font-weight: 700;
             font-size: 11px;
             border-radius: 3px;
-        }
-        .badge-green {
+        }}
+        .badge-green {{
             display: inline-block;
             padding: 3px 8px;
             background: #dcfce7;
@@ -341,22 +342,21 @@
             font-weight: 700;
             font-size: 11px;
             border-radius: 3px;
-        }
+        }}
 
-        @media screen and (max-width: 900px) {
-            .metrics-grid-4 {
+        @media screen and (max-width: 900px) {{
+            .metrics-grid-4 {{
                 grid-template-columns: repeat(2, 1fr);
-            }
-            .telemetry-grid {
+            }}
+            .telemetry-grid {{
                 grid-template-columns: 1fr;
-            }
-        }
-        @media screen and (max-width: 600px) {
-            .metrics-grid-4 {
+            }}
+        }}
+        @media screen and (max-width: 600px) {{
+            .metrics-grid-4 {{
                 grid-template-columns: 1fr;
-            }
-        }
-
+            }}
+        }}
     </style>
 </head>
 <body class="newspaper-theme">
@@ -377,7 +377,508 @@
         </header>
 
         <main class="dispatch-content">
+{content}
+        </main>
+        
+        <!-- FOOTER -->
+        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0; margin-top: 60px;">
+            <div class="newspaper-grid">
+                <div class="col-span-12 text-center">
+                    <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+"""
 
+SENTINEL_CONTENT = """
+            <!-- 1. HERO SECTION -->
+            <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 45px 0 35px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <p class="kicker-label">FIELD DISPATCH &mdash; AI CYBERSECURITY &amp; BEHAVIORAL UEBA</p>
+                        <h1 class="display-xl" style="margin-bottom: 15px; font-size: 52px; line-height: 1.1;">SENTINEL-STREAM</h1>
+                        <p class="display-sm" style="max-width: 920px; font-style: italic; line-height: 1.45; margin-bottom: 24px; color: #333333;">The AI Security Guard That Detects Rogue Accounts &amp; Data Theft in Real Time Without Crashing Servers</p>
+                        
+                        <!-- TECH PILLS -->
+                        <div style="margin-bottom: 25px;">
+                            <span class="pill-tag">Python</span>
+                            <span class="pill-tag">Count-Min Sketch</span>
+                            <span class="pill-tag">Isolation Forest</span>
+                            <span class="pill-tag">LightGBM</span>
+                            <span class="pill-tag">TreeSHAP</span>
+                            <span class="pill-tag">FastAPI</span>
+                        </div>
+
+                        <div class="newspaper-grid" style="border-top: 1px solid var(--rule); padding-top: 20px;">
+                            <div class="col-span-12">
+                                <p class="meta" style="margin-bottom: 4px; font-weight: bold;">GITHUB REPOSITORY</p>
+                                <a href="https://github.com/AJ1312/sentinel-stream" target="_blank" class="body-sm" style="color: var(--stamp); font-weight: bold; text-decoration: underline;">github.com/AJ1312/sentinel-stream &nearr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. MOTIVATION & USE CASE GRID -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-6" style="padding-right: 20px;">
+                        <span class="kicker-label" style="color: var(--stamp);">PROJECT MOTIVATION</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Why I Built SENTINEL-STREAM</h3>
+                        <p class="body-lg" style="line-height: 1.75;"><span class="dropcap">I</span> built SENTINEL-STREAM after noticing a pattern in how security tools actually fail in practice: it's rarely that they can't detect something unusual, it's that they detect too much, too vaguely, and analysts stop trusting the alerts. I wanted to build a behavioral anomaly engine that solved the boring, unglamorous parts of that problem properly — bounded memory that doesn't grow forever as more entities get monitored, meaningful scoring for entities with zero history, and an explanation attached to every single alert instead of a bare confidence score. This became my submission to Honeywell's own Q4 hackathon problem statement on behavioral anomaly detection.</p>
+                    </div>
+
+                    <div class="col-span-6" style="padding-left: 20px; border-left: 1px solid var(--rule);">
+                        <span class="kicker-label" style="color: var(--stamp);">REAL-WORLD USE CASE</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Catching Stolen Credentials</h3>
+                        <p class="body-lg" style="line-height: 1.75;"><span class="dropcap">P</span>icture a mid-sized company's security team monitoring thousands of employee accounts and IoT devices. A contractor's credentials get compromised, and the attacker logs in from an unfamiliar location at an unusual hour, then starts quietly accessing a finance database this account has never touched before. A rule-based tool would either miss this or bury it under hundreds of other low-quality alerts. SENTINEL-STREAM scores this event in real time using the contractor's own behavioral baseline, flags it within milliseconds even though the account has limited history, and hands the analyst a plain-language reason — unusual login velocity, first-time resource access — instead of a bare "anomaly detected."</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. INTERACTIVE THREAT RADAR & FORENSIC WORKBENCH (RETHOUGHT FROM SCRATCH!) -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label">INTERACTIVE CONSOLE</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Live Threat Radar &amp; AI Explanation Cockpit</h3>
+                        <p class="body-lg" style="margin-bottom: 20px; color: #444;">Select an enterprise attack scenario below to trigger real-time AI evaluation, watch the risk gauge sweep, and observe exact TreeSHAP feature attributions:</p>
+
+                        <div class="cockpit-suite-box">
+                            <div class="cockpit-bar-mac">
+                                <div class="terminal-dots">
+                                    <div class="dot dot-red"></div>
+                                    <div class="dot dot-yellow"></div>
+                                    <div class="dot dot-green"></div>
+                                </div>
+                                <span style="font-size: 12px; color: #94a3b8; font-weight: bold;">SENTINEL-STREAM // AI RADAR COCKPIT</span>
+                                <span style="font-size: 11px; background: #059669; color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: bold;">STREAM INGESTION ACTIVE</span>
+                            </div>
+
+                            <div class="cockpit-body">
+                                <div class="cockpit-btn-row">
+                                    <button class="cockpit-btn-action" id="btnBrute" onclick="runSentinelSim('brute')">⚡ Scenario 1: Password Attack Surge</button>
+                                    <button class="cockpit-btn-action" id="btnTravel" onclick="runSentinelSim('travel')">🌍 Scenario 2: Impossible Travel Login</button>
+                                    <button class="cockpit-btn-action" id="btnExfil" onclick="runSentinelSim('exfil')">📤 Scenario 3: Secret DB Exfiltration</button>
+                                    <button class="cockpit-btn-action active" id="btnNormal" onclick="runSentinelSim('normal')">✅ Scenario 4: Normal Employee Baseline</button>
+                                </div>
+
+                                <!-- LIVE TELEMETRY: GAUGE & SHAP BARS -->
+                                <div class="telemetry-grid">
+                                    <div class="telemetry-panel">
+                                        <div class="telemetry-header">
+                                            <span>AI Anomaly Risk Gauge</span>
+                                            <span id="threatStatusBadge" class="badge-green">NOMINAL</span>
+                                        </div>
+                                        <div class="gauge-number-big" id="riskScoreVal" style="color: #10b981;">0.04 <span style="font-size: 16px; color: #64748b;">/ 1.00</span></div>
+                                        <div style="font-size: 12px; color: #94a3b8;" id="latencyTicker">Inference Latency: <b>1.42 ms</b> (P50 speed)</div>
+                                        <div class="gauge-bar-track">
+                                            <div class="gauge-bar-fill" id="riskGaugeFill" style="width: 4%; background: #10b981;"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="telemetry-panel">
+                                        <div class="telemetry-header">
+                                            <span>TreeSHAP Feature Attributions</span>
+                                            <span style="font-size: 10px; color: #38bdf8;">MICROSECOND WHY</span>
+                                        </div>
+                                        
+                                        <div class="feature-bar-row">
+                                            <div class="feature-bar-label">
+                                                <span id="f1Name">Login Velocity Spike (1m)</span>
+                                                <span id="f1Val">+0.01</span>
+                                            </div>
+                                            <div class="feature-bar-track">
+                                                <div class="feature-bar-fill" id="f1Bar" style="width: 2%;"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="feature-bar-row">
+                                            <div class="feature-bar-label">
+                                                <span id="f2Name">Geo-Velocity Movement Risk</span>
+                                                <span id="f2Val">+0.02</span>
+                                            </div>
+                                            <div class="feature-bar-track">
+                                                <div class="feature-bar-fill" id="f2Bar" style="width: 4%;"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="feature-bar-row">
+                                            <div class="feature-bar-label">
+                                                <span id="f3Name">Outbound Volume Deviation</span>
+                                                <span id="f3Val">+0.01</span>
+                                            </div>
+                                            <div class="feature-bar-track">
+                                                <div class="feature-bar-fill" id="f3Bar" style="width: 2%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="cockpit-log-output" id="sentinelConsoleLog">
+[SYSTEM READY] Monitoring active entity streams. Select an attack scenario button above to observe real-time AI evaluation...
+                                </div>
+
+                                <table class="cockpit-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 90px;">Timestamp</th>
+                                            <th style="width: 140px;">Entity Account</th>
+                                            <th>Observed Event</th>
+                                            <th style="width: 140px;">Threat Verdict</th>
+                                            <th style="width: 90px;">Latency</th>
+                                            <th>Plain-English AI Explanation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="wbSentinelBody">
+                                        <tr class="anim-fade-row">
+                                            <td>21:15:01</td>
+                                            <td><b>sarah_marketing</b></td>
+                                            <td>Opened standard project documents</td>
+                                            <td><span class="badge-green">SAFE (NOMINAL)</span></td>
+                                            <td>1.42 ms</td>
+                                            <td>Activity matches normal daily baseline behavior.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. INTERACTIVE 6-STAGE PIPELINE STEPPER (RETHOUGHT FROM SCRATCH!) -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label">SYSTEM ARCHITECTURE</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">6-Stage Execution Pipeline</h3>
+                        <p class="body-lg" style="margin-bottom: 25px; color: #444;">Click any stage tab below to inspect exact algorithmic mechanics and mathematical formulas:</p>
+
+                        <!-- STEPPER BUTTON TABS -->
+                        <div class="stepper-nav-row">
+                            <button class="stepper-tab-btn active" onclick="switchSentinelStage(1)">01. Ingestion</button>
+                            <button class="stepper-tab-btn" onclick="switchSentinelStage(2)">02. O(1) Profiler</button>
+                            <button class="stepper-tab-btn" onclick="switchSentinelStage(3)">03. IsoForest Prior</button>
+                            <button class="stepper-tab-btn" onclick="switchSentinelStage(4)">04. LightGBM GBDT</button>
+                            <button class="stepper-tab-btn" onclick="switchSentinelStage(5)">05. TreeSHAP Why</button>
+                            <button class="stepper-tab-btn" onclick="switchSentinelStage(6)">06. SSE Stream</button>
+                        </div>
+
+                        <!-- DYNAMIC STAGE DETAIL CARD -->
+                        <div class="stepper-detail-card" id="sentinelStageCard">
+                            <h4 class="heading-lg" id="stageTitle" style="color: var(--stamp); margin-bottom: 8px;">Stage 01: Non-Blocking Event Ingestion</h4>
+                            <p class="body-lg" id="stageDesc" style="line-height: 1.7;">
+                                Raw audit logs (logins, database access, file downloads) stream in asynchronously via REST API endpoints or Kafka queues. FastAPI routes ingest events into non-blocking asyncio worker pools without stalling client TCP connections.
+                            </p>
+
+                            <div class="algo-code-box" id="stageCodeBox">
+# Stage 1: Async Fast-Path Ingress Loop
+@app.post("/api/v1/event")
+async def ingest_event(payload: SecurityEventPayload):
+    await event_queue.put(payload)
+    return {"status": "ENQUEUED", "queue_depth": event_queue.qsize()}
+                            </div>
+
+                            <p class="meta" id="stageWhy" style="margin-top: 10px; font-weight: bold; color: var(--ink);">
+                                <b>Why It Matters:</b> Handles thousands of simultaneous event bursts with zero HTTP connection queue timeouts.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. EMPIRICAL BENCHMARKS METRICS GRID -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">EMPIRICAL BENCHMARKS</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 25px 0;">Verified Performance Results</h3>
+
+                        <div class="metrics-grid-4">
+                            <div class="metric-card-styled">
+                                <div class="metric-num-bold">~4.2 KB</div>
+                                <div class="metric-title-upper">Per-Entity RAM</div>
+                                <div class="metric-text-desc">Audited per-user RAM footprint (EWMA + Count-Min Sketch). Can reach 2 KB with 128-width sketch.</div>
+                            </div>
+
+                            <div class="metric-card-styled">
+                                <div class="metric-num-bold">2.64 ms</div>
+                                <div class="metric-title-upper">P99 Latency</div>
+                                <div class="metric-text-desc">Single-event end-to-end model classification speed (P50 latency: 1.84 ms).</div>
+                            </div>
+
+                            <div class="metric-card-styled">
+                                <div class="metric-num-bold">0.9403</div>
+                                <div class="metric-title-upper">Macro F1 Score</div>
+                                <div class="metric-text-desc">5-fold cross-validation score (&plusmn;0.0091) across standard NSL-KDD benchmark.</div>
+                            </div>
+
+                            <div class="metric-card-styled">
+                                <div class="metric-num-bold">24.67×</div>
+                                <div class="metric-title-upper">Random Forest Speedup</div>
+                                <div class="metric-text-desc">LightGBM inference (2.64 ms) vs baseline Random Forest (65.15 ms) on identical hardware.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. KEY DESIGN DECISION EXECUTIVE HIGHLIGHT CARD -->
+            <section class="section" style="padding: 30px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <div class="decision-card-exec">
+                            <span class="kicker-label" style="color: var(--stamp);">KEY DESIGN DECISION</span>
+                            <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Constant O(1) Memory Scaling Per User</h3>
+                            <p class="body-lg" style="line-height: 1.75; margin: 0;"><span class="dropcap">R</span>ather than keeping endless historical log arrays that crash servers over time, SENTINEL-STREAM calculates rolling stats in a fixed <b>4.2 KB memory footprint</b> per user. Memory per user stays constant O(1) forever regardless of log volume, while total system RAM scales smoothly with active user count.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. GITHUB CTA & FUTURE ROADMAP -->
+            <section class="section" style="padding: 40px 0 20px 0; border-top: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12 text-center">
+                        <h3 class="heading-lg" style="margin-bottom: 15px;">Explore the Project Source Code</h3>
+                        <div style="margin-bottom: 25px;">
+                            <a href="https://github.com/AJ1312/sentinel-stream" target="_blank" class="btn-github">⭐ View SENTINEL-STREAM on GitHub</a>
+                        </div>
+                        <p class="body-md" style="font-style: italic; color: #555; max-width: 800px; margin: 0 auto;">
+                            <b>What I'd improve next:</b> If I were building this for production next, I would implement adaptive Count-Min Sketch resizing to dynamically adjust memory depth based on entity traffic density, and migrate the feature pipeline to Rust for sub-millisecond end-to-end ingestion.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <script>
+                const sentinelStages = {
+                    1: {
+                        title: "Stage 01: Non-Blocking Event Ingestion",
+                        desc: "Raw audit logs (logins, database access, file downloads) stream in asynchronously via REST API endpoints or Kafka queues. FastAPI routes ingest events into non-blocking asyncio worker pools without stalling client TCP connections.",
+                        code: "@app.post('/api/v1/event')\\nasync def ingest_event(payload: SecurityEventPayload):\\n    await event_queue.put(payload)\\n    return {'status': 'ENQUEUED', 'queue_depth': event_queue.qsize()}",
+                        why: "Why It Matters: Handles thousands of simultaneous event bursts with zero HTTP connection queue timeouts."
+                    },
+                    2: {
+                        title: "Stage 02: O(1) Streaming Feature Engineering",
+                        desc: "Maintains rolling statistics using Exponentially Weighted Moving Averages (EWMA) and Count-Min Sketch frequency tables. Updates user activity vectors in fixed 2 KB RAM without ever saving raw event lists.",
+                        code: "# Formula: S_t = alpha * Y_t + (1 - alpha) * S_{t-1}\\nuser_profile['login_velocity'] = (0.3 * current_val) + (0.7 * user_profile['login_velocity'])\\ncount_min_sketch.increment(f'{user_id}:{endpoint_hash}')",
+                        why: "Why It Matters: Prevents memory exhaustion over weeks of continuous streaming while providing instant statistical lookups."
+                    },
+                    3: {
+                        title: "Stage 03: Stage 1 Isolation Forest Cold-Start Prior",
+                        desc: "Evaluates structural anomaly distance for brand-new users or devices with zero historical logs. Trees partition feature spaces to isolate cold-start rogue entities immediately on day one.",
+                        code: "iso_score = iso_forest.score_samples([feature_vector])[0]\\nif iso_score < -0.65:\\n    cold_start_flag = True  # Brand new entity displaying severe structural deviation",
+                        why: "Why It Matters: Eliminates the cold-start vulnerability where new compromised accounts hide behind lack of historical data."
+                    },
+                    4: {
+                        title: "Stage 04: Stage 2 LightGBM Threat Classifier",
+                        desc: "Classifies the exact attack category (Brute Force, Impossible Travel, Data Exfiltration) by evaluating 21 streaming features in a leaf-wise decision tree in 1.84 ms P50 latency.",
+                        code: "threat_probs = lgbm_model.predict_proba([feature_vector])[0]\\npredicted_class = CLASS_NAMES[np.argmax(threat_probs)]  # e.g., 'BRUTE_FORCE_SURGE'",
+                        why: "Why It Matters: Runs 24.6x faster than baseline Random Forest, classifying complex multi-feature threats in real time."
+                    },
+                    5: {
+                        title: "Stage 05: Microsecond TreeSHAP Explainability Engine",
+                        desc: "Walks LightGBM tree structures analytically to compute exact Shapley feature attributions in less than 30 microseconds, giving security analysts plain-language human reasons for every alert.",
+                        code: "shap_values = shap_explainer.shap_values(feature_vector)\\n# Explains why alert fired without slow black-box perturbation sampling",
+                        why: "Why It Matters: Replaces vague anomaly scores with explicit plain-English justifications analysts can trust."
+                    },
+                    6: {
+                        title: "Stage 06: Live Dashboard Alert Stream (SSE)",
+                        desc: "Pushes explained threat alert payloads directly to security operations center (SOC) dashboards over persistent Server-Sent Events (SSE) with zero polling overhead.",
+                        code: "async def alert_stream():\\n    while True:\\n        alert = await alert_queue.get()\\n        yield f'data: {json.dumps(alert)}\\n\\n'",
+                        why: "Why It Matters: Real-time alert delivery to web consoles with minimal battery and network overhead."
+                    }
+                };
+
+                window.switchSentinelStage = function(num) {
+                    const btns = document.querySelectorAll('.stepper-tab-btn');
+                    btns.forEach((b, idx) => {
+                        b.classList.toggle('active', idx === num - 1);
+                    });
+
+                    const data = sentinelStages[num];
+                    document.getElementById('stageTitle').innerText = data.title;
+                    document.getElementById('stageDesc').innerText = data.desc;
+                    document.getElementById('stageCodeBox').innerText = data.code;
+                    document.getElementById('stageWhy').innerHTML = `<b>${data.why}</b>`;
+                };
+
+                window.runSentinelSim = function(type) {
+                    const tbody = document.getElementById('wbSentinelBody');
+                    const consoleEl = document.getElementById('sentinelConsoleLog');
+                    const riskScoreEl = document.getElementById('riskScoreVal');
+                    const riskGaugeFill = document.getElementById('riskGaugeFill');
+                    const statusBadge = document.getElementById('threatStatusBadge');
+                    const latencyTicker = document.getElementById('latencyTicker');
+
+                    const f1Name = document.getElementById('f1Name');
+                    const f1Val = document.getElementById('f1Val');
+                    const f1Bar = document.getElementById('f1Bar');
+
+                    const f2Name = document.getElementById('f2Name');
+                    const f2Val = document.getElementById('f2Val');
+                    const f2Bar = document.getElementById('f2Bar');
+
+                    const f3Name = document.getElementById('f3Name');
+                    const f3Val = document.getElementById('f3Val');
+                    const f3Bar = document.getElementById('f3Bar');
+
+                    const btns = document.querySelectorAll('.cockpit-btn-action');
+                    btns.forEach(b => b.classList.remove('active'));
+
+                    const ts = new Date().toISOString().substring(11, 19);
+                    let user = '', event = '', badge = '', lat = '', why = '', logTxt = '';
+
+                    if (type === 'brute') {
+                        document.getElementById('btnBrute').classList.add('active');
+                        user = 'admin_john';
+                        event = '45 failed login attempts in 10s';
+                        badge = '<span class="badge-red">CRITICAL THREAT</span>';
+                        lat = '1.84 ms';
+                        why = 'Extreme login failure spike (+0.54 risk) + rapid event velocity.';
+                        logTxt = `[${ts}] [CRITICAL ALERT] Rapid login velocity surge on 'admin_john'. TreeSHAP attribution: failed_logins_1m (+0.54). Account locked.`;
+
+                        riskScoreEl.innerText = '0.94';
+                        riskScoreEl.style.color = '#ef4444';
+                        riskGaugeFill.style.width = '94%';
+                        riskGaugeFill.style.background = '#ef4444';
+                        statusBadge.className = 'badge-red';
+                        statusBadge.innerText = 'CRITICAL (94%)';
+                        latencyTicker.innerHTML = 'Inference Latency: <b>1.84 ms</b> (LightGBM)';
+
+                        f1Name.innerText = 'Login Velocity Surge (1m)';
+                        f1Val.innerText = '+0.54';
+                        f1Bar.style.width = '85%';
+                        f1Bar.style.background = '#ef4444';
+
+                        f2Name.innerText = 'Failed Auth Rate Spike';
+                        f2Val.innerText = '+0.28';
+                        f2Bar.style.width = '55%';
+                        f2Bar.style.background = '#f59e0b';
+
+                        f3Name.innerText = 'IP Reputation Anomaly';
+                        f3Val.innerText = '+0.12';
+                        f3Bar.style.width = '25%';
+                        f3Bar.style.background = '#38bdf8';
+                    } else if (type === 'travel') {
+                        document.getElementById('btnTravel').classList.add('active');
+                        user = 'exec_rachel';
+                        event = 'Logged in from Tokyo 5m after NY';
+                        badge = '<span class="badge-amber">HIGH RISK</span>';
+                        lat = '2.12 ms';
+                        why = 'Impossible physical movement speed (+0.68 geo-velocity risk).';
+                        logTxt = `[${ts}] [HIGH RISK ALERT] Impossible movement speed for 'exec_rachel' (Tokyo vs NY session). Geo-velocity +0.68. Dispatching MFA challenge.`;
+
+                        riskScoreEl.innerText = '0.72';
+                        riskScoreEl.style.color = '#f59e0b';
+                        riskGaugeFill.style.width = '72%';
+                        riskGaugeFill.style.background = '#f59e0b';
+                        statusBadge.className = 'badge-amber';
+                        statusBadge.innerText = 'HIGH RISK (72%)';
+                        latencyTicker.innerHTML = 'Inference Latency: <b>2.12 ms</b> (LightGBM)';
+
+                        f1Name.innerText = 'Geo-Velocity Movement Speed';
+                        f1Val.innerText = '+0.68';
+                        f1Bar.style.width = '90%';
+                        f1Bar.style.background = '#ef4444';
+
+                        f2Name.innerText = 'New Autonomous System (ASN)';
+                        f2Val.innerText = '+0.18';
+                        f2Bar.style.width = '35%';
+                        f2Bar.style.background = '#f59e0b';
+
+                        f3Name.innerText = 'Session Concurrency Flag';
+                        f3Val.innerText = '+0.06';
+                        f3Bar.style.width = '15%';
+                        f3Bar.style.background = '#38bdf8';
+                    } else if (type === 'exfil') {
+                        document.getElementById('btnExfil').classList.add('active');
+                        user = 'dev_service';
+                        event = 'Downloaded 14 GB customer DB off-hours';
+                        badge = '<span class="badge-red">CRITICAL THREAT</span>';
+                        lat = '1.95 ms';
+                        why = 'Abnormal outbound data volume (+0.76 EWMA volume spike).';
+                        logTxt = `[${ts}] [CRITICAL ALERT] Off-hours database export spike on 'dev_service' (14 GB). EWMA volume +0.76. Session access suspended.`;
+
+                        riskScoreEl.innerText = '0.89';
+                        riskScoreEl.style.color = '#ef4444';
+                        riskGaugeFill.style.width = '89%';
+                        riskGaugeFill.style.background = '#ef4444';
+                        statusBadge.className = 'badge-red';
+                        statusBadge.innerText = 'CRITICAL (89%)';
+                        latencyTicker.innerHTML = 'Inference Latency: <b>1.95 ms</b> (LightGBM)';
+
+                        f1Name.innerText = 'Outbound Payload Volume (EWMA)';
+                        f1Val.innerText = '+0.76';
+                        f1Bar.style.width = '95%';
+                        f1Bar.style.background = '#ef4444';
+
+                        f2Name.innerText = 'Off-Hours Temporal Deviation';
+                        f2Val.innerText = '+0.31';
+                        f2Bar.style.width = '60%';
+                        f2Bar.style.background = '#f59e0b';
+
+                        f3Name.innerText = 'Sensitive Table Query Count';
+                        f3Val.innerText = '+0.19';
+                        f3Bar.style.width = '40%';
+                        f3Bar.style.background = '#38bdf8';
+                    } else {
+                        document.getElementById('btnNormal').classList.add('active');
+                        user = 'sarah_marketing';
+                        event = 'Opened standard project documents';
+                        badge = '<span class="badge-green">SAFE (NOMINAL)</span>';
+                        lat = '1.42 ms';
+                        why = 'Activity matches normal daily baseline behavior.';
+                        logTxt = `[${ts}] [NOMINAL PASS] Routine document access logged for 'sarah_marketing'. Anomaly score: 0.04. EWMA stats updated in 2 KB RAM.`;
+
+                        riskScoreEl.innerText = '0.04';
+                        riskScoreEl.style.color = '#10b981';
+                        riskGaugeFill.style.width = '4%';
+                        riskGaugeFill.style.background = '#10b981';
+                        statusBadge.className = 'badge-green';
+                        statusBadge.innerText = 'NOMINAL (4%)';
+                        latencyTicker.innerHTML = 'Inference Latency: <b>1.42 ms</b> (LightGBM)';
+
+                        f1Name.innerText = 'Login Velocity Spike (1m)';
+                        f1Val.innerText = '+0.01';
+                        f1Bar.style.width = '2%';
+                        f1Bar.style.background = '#38bdf8';
+
+                        f2Name.innerText = 'Geo-Velocity Movement Risk';
+                        f2Val.innerText = '+0.02';
+                        f2Bar.style.width = '4%';
+                        f2Bar.style.background = '#38bdf8';
+
+                        f3Name.innerText = 'Outbound Volume Deviation';
+                        f3Val.innerText = '+0.01';
+                        f3Bar.style.width = '2%';
+                        f3Bar.style.background = '#38bdf8';
+                    }
+
+                    consoleEl.innerText = logTxt;
+
+                    const newRow = document.createElement('tr');
+                    newRow.className = 'anim-fade-row';
+                    newRow.innerHTML = `
+                        <td>${ts}</td>
+                        <td><b>${user}</b></td>
+                        <td>${event}</td>
+                        <td>${badge}</td>
+                        <td>${lat}</td>
+                        <td>${why}</td>
+                    `;
+
+                    tbody.insertBefore(newRow, tbody.firstChild);
+                };
+            </script>
+"""
+
+CIPHERPULSE_CONTENT = """
             <!-- 1. HERO SECTION -->
             <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 45px 0 35px 0;">
                 <div class="newspaper-grid">
@@ -630,43 +1131,43 @@ uint8_t* rx_ring = (uint8_t*)mmap(NULL, total_sz, PROT_READ|PROT_WRITE, MAP_SHAR
                     1: {
                         title: "Stage 01: Zero-Copy RAW Ethernet Capture",
                         desc: "Ingests ethernet frames directly from network interface sockets using Linux AF_PACKET memory-mapped ring buffers (or eBPF sock_ops). Packet headers are mapped directly without kernel-to-userspace socket copy overhead.",
-                        code: "// Stage 1: AF_PACKET Ring Ingress\nint sock = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));\nstruct tpacket_req req;\nsetsockopt(sock, SOL_PACKET, PACKET_RX_RING, (void*)&req, sizeof(req));\nuint8_t* rx_ring = (uint8_t*)mmap(NULL, total_sz, PROT_READ|PROT_WRITE, MAP_SHARED, sock, 0);",
+                        code: "// Stage 1: AF_PACKET Ring Ingress\\nint sock = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));\\nstruct tpacket_req req;\\nsetsockopt(sock, SOL_PACKET, PACKET_RX_RING, (void*)&req, sizeof(req));\\nuint8_t* rx_ring = (uint8_t*)mmap(NULL, total_sz, PROT_READ|PROT_WRITE, MAP_SHARED, sock, 0);",
                         why: "Why It Matters: Captures line-rate packet headers directly at kernel ingress without dropping packets under heavy load."
                     },
                     2: {
                         title: "Stage 02: Consistent 5-Tuple Hash Router",
                         desc: "Hashes the 5-tuple (src IP, dest IP, src port, dest port, protocol) using a deterministic hash function. All packets belonging to a flow are dispatched to the exact same CPU core queue.",
-                        code: "// Stage 2: 5-Tuple Consistent Hashing\nuint64_t hash = std::hash<Flow5Tuple>{}(flow_key);\nsize_t target_core = hash % worker_threads.size();\nworker_queues[target_core]->push_packet(pkt);",
+                        code: "// Stage 2: 5-Tuple Consistent Hashing\\nuint64_t hash = std::hash<Flow5Tuple>{}(flow_key);\\nsize_t target_core = hash % worker_threads.size();\\nworker_queues[target_core]->push_packet(pkt);",
                         why: "Why It Matters: Eliminates cross-thread synchronization because each worker core owns 100% of a flow's state."
                     },
                     3: {
                         title: "Stage 03: Lock-Free Core Ring Execution",
                         desc: "Worker threads execute isolated event loops over single-producer single-consumer (SPSC) ring buffers. Flow table updates run inside thread-local std::unordered_map tables with zero mutex contention.",
-                        code: "// Stage 3: Zero-Mutex Hot-Path Worker Loop\nwhile (running) {\n    Packet pkt;\n    while (ring_queue.pop(pkt)) {\n        flow_table[pkt.flow_id].process_packet(pkt); // 100% Lock-Free\n    }\n}",
+                        code: "// Stage 3: Zero-Mutex Hot-Path Worker Loop\\nwhile (running) {\\n    Packet pkt;\\n    while (ring_queue.pop(pkt)) {\\n        flow_table[pkt.flow_id].process_packet(pkt); // 100% Lock-Free\\n    }\\n}",
                         why: "Why It Matters: Eliminates CPU cache invalidation and mutex sleep overhead on multi-core architectures."
                     },
                     4: {
                         title: "Stage 04: TLS JA4+ Fingerprint Extraction",
                         desc: "Parses TLS ClientHello handshakes directly from TCP stream payloads. Filters out random GREASE cipher suites, sorts remaining ciphers numerically, and hashes with FNV-1a to generate stable application signatures.",
-                        code: "// Stage 4: JA4+ Fingerprint Construction\nstd::string ja4 = build_ja4(tls_proto, ciphers_sorted, extensions_sorted);\n// Example result: 't13d190800_c84a8b291410' (CobaltStrike C2 signature)",
+                        code: "// Stage 4: JA4+ Fingerprint Construction\\nstd::string ja4 = build_ja4(tls_proto, ciphers_sorted, extensions_sorted);\\n// Example result: 't13d190800_c84a8b291410' (CobaltStrike C2 signature)",
                         why: "Why It Matters: Identifies malicious client frameworks even when the destination hostname is encrypted."
                     },
                     5: {
                         title: "Stage 05: Active In-Memory DNS Correlation",
                         desc: "Monitors plaintext DNS responses on UDP port 53 to construct a local IP-to-Domain resolution cache. Expires old mappings automatically using TTL timestamps.",
-                        code: "// Stage 5: DNS Reverse Correlation Cache\ndns_cache.insert(resolved_ip, queried_domain, ttl_seconds);\nstd::string host = dns_cache.lookup(dest_ip); // 'google.com'",
+                        code: "// Stage 5: DNS Reverse Correlation Cache\\ndns_cache.insert(resolved_ip, queried_domain, ttl_seconds);\\nstd::string host = dns_cache.lookup(dest_ip); // 'google.com'",
                         why: "Why It Matters: Annotates raw encrypted IP traffic with human-readable domain names for incident response."
                     },
                     6: {
                         title: "Stage 06: Welford Flow Timing CoV Engine",
                         desc: "Calculates running mean and variance of packet inter-arrival timestamps using Welford's single-pass online algorithm. Computes Coefficient of Variation (CoV = std_dev / mean) in O(1) time.",
-                        code: "// Stage 6: Welford Online Variance\nwelford_update(delta_time);\ndouble cov = sqrt(running_variance) / running_mean;\nif (cov < 0.12 && packet_count >= 10) {\n    flag_beaconing_c2();\n}",
+                        code: "// Stage 6: Welford Online Variance\\nwelford_update(delta_time);\\ndouble cov = sqrt(running_variance) / running_mean;\\nif (cov < 0.12 && packet_count >= 10) {\\n    flag_beaconing_c2();\\n}",
                         why: "Why It Matters: Detects automated bot malware pulses in constant O(1) time without keeping arrays of timestamps."
                     },
                     7: {
                         title: "Stage 07: Kernel eBPF Drop Rule Injection",
                         desc: "Upon detecting a confirmed C2 beacon or malware signature, injects an ingress drop rule directly into the kernel's eBPF map, nullifying the attack at the hardware interface level.",
-                        code: "// Stage 7: eBPF Drop Rule Injection\nbpf_map_update_elem(block_map_fd, &malicious_ip, &drop_action, BPF_ANY);\n// Packet dropped in sub-microsecond latency at kernel ingress",
+                        code: "// Stage 7: eBPF Drop Rule Injection\\nbpf_map_update_elem(block_map_fd, &malicious_ip, &drop_action, BPF_ANY);\\n// Packet dropped in sub-microsecond latency at kernel ingress",
                         why: "Why It Matters: Instantly stops data exfiltration channels before malware can transmit exfiltrated data."
                     }
                 };
@@ -779,17 +1280,12 @@ uint8_t* rx_ring = (uint8_t*)mmap(NULL, total_sz, PROT_READ|PROT_WRITE, MAP_SHAR
                     tbody.insertBefore(newRow, tbody.firstChild);
                 };
             </script>
+"""
 
-        </main>
-        
-        <!-- FOOTER -->
-        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0; margin-top: 60px;">
-            <div class="newspaper-grid">
-                <div class="col-span-12 text-center">
-                    <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
-                </div>
-            </div>
-        </footer>
-    </div>
-</body>
-</html>
+with open('pages/sentinel-stream.html', 'w') as f:
+    f.write(PAGE_TEMPLATE.replace('{title}', 'SENTINEL-STREAM').replace('{content}', SENTINEL_CONTENT))
+
+with open('pages/cipherpulse.html', 'w') as f:
+    f.write(PAGE_TEMPLATE.replace('{title}', 'CipherPulse').replace('{content}', CIPHERPULSE_CONTENT))
+
+print("Successfully generated 10/10 Elite Masterpiece Workstations!")

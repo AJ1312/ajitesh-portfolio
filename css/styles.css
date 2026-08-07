@@ -1465,4 +1465,44 @@ hr.section-rule--double, div.section-rule--double {
     .case-study-grid {
         grid-template-columns: 1fr;
     }
+    .nav .newspaper-grid {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .nav .col-span-6 {
+        width: 100% !important;
+        text-align: center;
+        justify-content: center !important;
+    }
+    .cockpit-btn-row {
+        flex-direction: column;
+    }
+    .cockpit-btn-action {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+    .telemetry-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .stepper-nav-row {
+        flex-wrap: wrap;
+    }
+    .stepper-tab-btn {
+        flex: 1 1 calc(50% - 10px);
+        text-align: center;
+    }
 }
+
+@media screen and (max-width: 480px) {
+    .stepper-tab-btn {
+        flex: 1 1 100%;
+    }
+    .metrics-grid-4 {
+        grid-template-columns: 1fr !important;
+    }
+}
+
