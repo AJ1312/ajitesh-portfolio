@@ -1030,7 +1030,6 @@ h6 {
 /* Base reveal classes */
 .rv {
   opacity: 0;
-  visibility: hidden;
 }
 
 /* Applied by GSAP when in view */

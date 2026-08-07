@@ -310,7 +310,7 @@ window.initAnomalyDashboard = function(containerId) {
     intervals.push(setInterval(() => {
         const score = 20 + Math.random() * 60;
         const angle = -90 + (score / 100) * 180;
-        needle.style.transform = \`rotate(\${angle}deg)\`;
+        needle.style.transform = `rotate(${angle}deg)`;
         scoreText.textContent = Math.round(score);
         scoreText.style.color = score < 40 ? '#238636' : (score < 70 ? '#D29922' : '#F85149');
     }, 2000));
@@ -331,7 +331,7 @@ window.initAnomalyDashboard = function(containerId) {
         div.style.marginBottom = '6px';
         div.style.opacity = '0';
         div.style.transition = 'opacity 0.5s';
-        div.innerHTML = \`<span style="color:#8B949E">[\${time}]</span> <span style="color:\${a.c}">[\${a.l}]</span> \${a.m}\`;
+        div.innerHTML = `<span style="color:#8B949E">[${time}]</span> <span style="color:${a.c}">[${a.l}]</span> ${a.m}`;
         feed.insertBefore(div, feed.firstChild);
         setTimeout(() => div.style.opacity = '1', 50);
         if (feed.children.length > 20) feed.removeChild(feed.lastChild);
@@ -413,18 +413,18 @@ window.initAnomalyDashboard = function(containerId) {
             const val = (Math.random() * 2 - 1).toFixed(2);
             const w = Math.abs(val) * 100;
             const c = val > 0 ? '#F85149' : '#58A6FF';
-            const left = val < 0 ? \`calc(50% - \${w}px)\` : '50%';
+            const left = val < 0 ? `calc(50% - ${w}px)` : '50%';
             
-            shapContainer.innerHTML += \`
+            shapContainer.innerHTML += `
                 <div style="display:flex; justify-content:space-between; font-size:10px; margin-bottom:2px;">
-                    <span style="color:#8B949E; width:100px; overflow:hidden; text-overflow:ellipsis;">\${f}</span>
+                    <span style="color:#8B949E; width:100px; overflow:hidden; text-overflow:ellipsis;">${f}</span>
                     <div style="flex:1; position:relative; height:8px; margin:2px 10px; background:rgba(255,255,255,0.05);">
                         <div style="position:absolute; left:50%; top:0; bottom:0; width:1px; background:#30363D;"></div>
-                        <div style="position:absolute; top:0; height:100%; left:\${left}; width:\${w}px; background:\${c}; transition:all 0.5s;"></div>
+                        <div style="position:absolute; top:0; height:100%; left:${left}; width:${w}px; background:${c}; transition:all 0.5s;"></div>
                     </div>
-                    <span style="width:30px; text-align:right;">\${val}</span>
+                    <span style="width:30px; text-align:right;">${val}</span>
                 </div>
-            \`;
+            `;
         });
     }
     updateShap();
@@ -468,27 +468,27 @@ window.initPipelineViz = function(containerId) {
         { id: 'VERIFY', icon: '✅' }
     ];
 
-    const pipelineHtml = stages.map((s, i) => \`
-        <div id="\${containerId}-stage-\${i}" style="
+    const pipelineHtml = stages.map((s, i) => `
+        <div id="${containerId}-stage-${i}" style="
             display:flex; flex-direction:column; align-items:center; opacity:0.5; transition:all 0.3s;
         ">
             <div style="
                 width:40px; height:40px; border:2px solid #555; display:flex; align-items:center; justify-content:center; 
                 font-size:20px; background:#222; position:relative; z-index:2;
             ">
-                <span class="icon">\${s.icon}</span>
+                <span class="icon">${s.icon}</span>
                 <span class="status" style="position:absolute; bottom:-5px; right:-5px; font-size:12px;"></span>
             </div>
-            <div style="font-size:10px; margin-top:8px; letter-spacing:1px;">\${s.id}</div>
+            <div style="font-size:10px; margin-top:8px; letter-spacing:1px;">${s.id}</div>
         </div>
-        \${i < stages.length - 1 ? \`<div style="flex:1; height:2px; background:#555; margin-top:20px; position:relative; z-index:1;"></div>\` : ''}
-    \`).join('');
+        ${i < stages.length - 1 ? `<div style="flex:1; height:2px; background:#555; margin-top:20px; position:relative; z-index:1;"></div>` : ''}
+    `).join('');
 
-    container.innerHTML = \`
+    container.innerHTML = `
         <div style="display:flex; justify-content:space-between; margin-bottom:30px; padding:0 10px;">
-            \${pipelineHtml}
+            ${pipelineHtml}
         </div>
-        <div id="\${containerId}-banner" style="
+        <div id="${containerId}-banner" style="
             background: #238636; color: white; text-align: center; padding: 10px; font-weight: bold; 
             letter-spacing: 2px; font-family: 'Inter', sans-serif; opacity: 0; transition: opacity 0.5s;
             margin-bottom: 20px;
@@ -496,20 +496,20 @@ window.initPipelineViz = function(containerId) {
         <div style="
             flex: 1; background: #000; border: 1px solid #333; padding: 10px; overflow-y: auto;
             font-size: 11px; line-height: 1.5; color: #aaa;
-        " id="\${containerId}-logs">
+        " id="${containerId}-logs">
             > Initializing pipeline...<br>
         </div>
-    \`;
+    `;
 
-    const logs = document.getElementById(`\${containerId}-logs`);
-    const banner = document.getElementById(`\${containerId}-banner`);
+    const logs = document.getElementById(`${containerId}-logs`);
+    const banner = document.getElementById(`${containerId}-banner`);
     let currentStage = 0;
     let timeoutId;
     let isRunning = true;
 
     function log(msg, color = '#aaa') {
         const time = new Date().toISOString().substring(11,19);
-        logs.innerHTML += \`<span style="color:#555">[\${time}]</span> <span style="color:\${color}">\${msg}</span><br>\`;
+        logs.innerHTML += `<span style="color:#555">[${time}]</span> <span style="color:${color}">${msg}</span><br>`;
         logs.scrollTop = logs.scrollHeight;
     }
 
@@ -521,7 +521,7 @@ window.initPipelineViz = function(containerId) {
             banner.style.opacity = '0';
             logs.innerHTML = '> Starting new deployment...<br>';
             stages.forEach((_, i) => {
-                const el = document.getElementById(`\${containerId}-stage-\${i}`);
+                const el = document.getElementById(`${containerId}-stage-${i}`);
                 if (el) {
                     el.style.opacity = '0.5';
                     el.querySelector('div').style.borderColor = '#555';
@@ -533,14 +533,14 @@ window.initPipelineViz = function(containerId) {
 
         if (currentStage < stages.length) {
             const stage = stages[currentStage];
-            const el = document.getElementById(`\${containerId}-stage-\${currentStage}`);
+            const el = document.getElementById(`${containerId}-stage-${currentStage}`);
             
             // Set to running
             el.style.opacity = '1';
             el.querySelector('div').style.borderColor = '#D29922';
             el.querySelector('div').style.boxShadow = '0 0 10px rgba(210,153,34,0.5)';
             el.querySelector('.status').innerHTML = '⏳';
-            log(`Running stage: \${stage.id}...`, '#D29922');
+            log(`Running stage: ${stage.id}...`, '#D29922');
 
             timeoutId = setTimeout(() => {
                 if (!isRunning) return;
@@ -548,7 +548,7 @@ window.initPipelineViz = function(containerId) {
                 el.querySelector('div').style.borderColor = '#238636';
                 el.querySelector('div').style.boxShadow = '0 0 10px rgba(35,134,54,0.5)';
                 el.querySelector('.status').innerHTML = '✅';
-                log(`Stage \${stage.id} completed successfully.`, '#238636');
+                log(`Stage ${stage.id} completed successfully.`, '#238636');
                 
                 currentStage++;
                 timeoutId = setTimeout(runPipeline, 500);
@@ -596,14 +596,14 @@ window.initQueueSimulation = function(containerId) {
     header.style.display = 'flex';
     header.style.justifyContent = 'space-between';
     header.style.alignItems = 'center';
-    header.innerHTML = \`
+    header.innerHTML = `
         <div style="font-family:'Playfair Display', serif; font-size:18px; font-weight:bold;">SERVICE RECORD</div>
         <div style="font-family:'JetBrains Mono', monospace; font-size:11px;">
-            <span id="\${containerId}-s-pending">Pending: 0</span> | 
-            <span id="\${containerId}-s-active">Active: 0</span> | 
-            <span id="\${containerId}-s-done">Completed: 0</span>
+            <span id="${containerId}-s-pending">Pending: 0</span> | 
+            <span id="${containerId}-s-active">Active: 0</span> | 
+            <span id="${containerId}-s-done">Completed: 0</span>
         </div>
-    \`;
+    `;
 
     const board = document.createElement('div');
     board.style.flex = '1';
@@ -612,17 +612,17 @@ window.initQueueSimulation = function(containerId) {
 
     const colStyle = "flex:1; border-right:1px solid #E0E0E0; display:flex; flex-direction:column; padding:10px; overflow-y:auto; position:relative;";
     
-    board.innerHTML = \`
-        <div style="\${colStyle}" id="\${containerId}-col-queue">
+    board.innerHTML = `
+        <div style="${colStyle}" id="${containerId}-col-queue">
             <div style="font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">QUEUE</div>
         </div>
-        <div style="\${colStyle}" id="\${containerId}-col-progress">
+        <div style="${colStyle}" id="${containerId}-col-progress">
             <div style="font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">IN PROGRESS</div>
         </div>
-        <div style="\${colStyle}; border-right:none;" id="\${containerId}-col-completed">
+        <div style="${colStyle}; border-right:none;" id="${containerId}-col-completed">
             <div style="font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">COMPLETED</div>
         </div>
-    \`;
+    `;
 
     container.appendChild(header);
     container.appendChild(board);
@@ -635,9 +635,9 @@ window.initQueueSimulation = function(containerId) {
     let stats = { pending: 0, active: 0, done: 0 };
     
     function updateStats() {
-        document.getElementById(`\${containerId}-s-pending`).textContent = \`Pending: \${stats.pending}\`;
-        document.getElementById(`\${containerId}-s-active`).textContent = \`Active: \${stats.active}\`;
-        document.getElementById(`\${containerId}-s-done`).textContent = \`Completed: \${stats.done}\`;
+        document.getElementById(`${containerId}-s-pending`).textContent = `Pending: ${stats.pending}`;
+        document.getElementById(`${containerId}-s-active`).textContent = `Active: ${stats.active}`;
+        document.getElementById(`${containerId}-s-done`).textContent = `Completed: ${stats.done}`;
     }
 
     function createCard() {
@@ -656,18 +656,18 @@ window.initQueueSimulation = function(containerId) {
         card.style.opacity = '0';
         card.style.transform = 'translateY(10px)';
         
-        card.innerHTML = \`
+        card.innerHTML = `
             <div style="font-weight:bold; margin-bottom:4px; display:flex; justify-content:space-between;">
-                \${name} <span style="color:\${role==='MANAGER'?'#C41E3A':'#555'};">●</span>
+                ${name} <span style="color:${role==='MANAGER'?'#C41E3A':'#555'};">●</span>
             </div>
             <div style="font-family:'JetBrains Mono', monospace; font-size:9px; color:#555;">
-                \${role} / \${dept}
+                ${role} / ${dept}
             </div>
-        \`;
+        `;
 
-        const qCol = document.getElementById(`\${containerId}-col-queue`);
-        const pCol = document.getElementById(`\${containerId}-col-progress`);
-        const cCol = document.getElementById(`\${containerId}-col-completed`);
+        const qCol = document.getElementById(`${containerId}-col-queue`);
+        const pCol = document.getElementById(`${containerId}-col-progress`);
+        const cCol = document.getElementById(`${containerId}-col-completed`);
         
         if(!qCol) return; // if destroyed
 
