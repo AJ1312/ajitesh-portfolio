@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+import os
+
+PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CipherPulse — The Sharma Dispatch</title>
+    <title>{title} — The Sharma Dispatch</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
@@ -212,7 +214,342 @@
         </header>
 
         <main class="dispatch-content">
+{content}
+        </main>
+        
+        <!-- FOOTER -->
+        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0; margin-top: 60px;">
+            <div class="newspaper-grid">
+                <div class="col-span-12 text-center">
+                    <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
+                </div>
+            </div>
+        </footer>
+    </div>
 
+    <script src="../js/main.js" defer></script>
+    <script src="../js/animations.js" defer></script>
+</body>
+</html>
+"""
+
+SENTINEL_CONTENT = """
+            <!-- 1. HERO SECTION -->
+            <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <p class="kicker-label">FIELD DISPATCH &mdash; RESEARCH &amp; SYSTEM BUILD</p>
+                        <h1 class="display-xl" style="margin-bottom: 15px; font-size: 52px;">SENTINEL-STREAM</h1>
+                        <p class="display-sm" style="max-width: 850px; font-style: italic; line-height: 1.4; margin-bottom: 20px;">O(1)-Memory Streaming Anomaly Detection Engine with TreeSHAP Explainability</p>
+                        
+                        <!-- TECH PILLS -->
+                        <div style="margin-bottom: 25px;">
+                            <span class="pill-tag">Python</span>
+                            <span class="pill-tag">Count-Min Sketch</span>
+                            <span class="pill-tag">Isolation Forest</span>
+                            <span class="pill-tag">LightGBM</span>
+                            <span class="pill-tag">TreeSHAP</span>
+                            <span class="pill-tag">FastAPI</span>
+                        </div>
+
+                        <div class="newspaper-grid" style="border-top: 1px solid var(--rule); padding-top: 20px;">
+                            <div class="col-span-6 column-bordered">
+                                <p class="meta" style="margin-bottom: 4px; font-weight: bold;">GITHUB REPOSITORY</p>
+                                <a href="https://github.com/AJ1312/sentinel-stream" target="_blank" class="body-sm" style="color: var(--stamp); font-weight: bold; text-decoration: underline;">github.com/AJ1312/sentinel-stream &nearr;</a>
+                            </div>
+                            <div class="col-span-6">
+                                <p class="meta" style="margin-bottom: 4px; font-weight: bold;">RESEARCH ARTIFACTS</p>
+                                <a href="https://github.com/AJ1312/sentinel-stream-research" target="_blank" class="body-sm" style="color: var(--stamp); font-weight: bold; text-decoration: underline;">github.com/AJ1312/sentinel-stream-research &nearr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. MOTIVATION PARAGRAPH -->
+            <section class="section" style="padding: 35px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">PROJECT MOTIVATION</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Why I Built SENTINEL-STREAM</h3>
+                        <p class="body-lg" style="line-height: 1.75;"><span class="dropcap">I</span> built SENTINEL-STREAM after noticing a pattern in how security tools actually fail in practice: it's rarely that they can't detect something unusual, it's that they detect too much, too vaguely, and analysts stop trusting the alerts. I wanted to build a behavioral anomaly engine that solved the boring, unglamorous parts of that problem properly — bounded memory that doesn't grow forever as more entities get monitored, meaningful scoring for entities with zero history, and an explanation attached to every single alert instead of a bare confidence score. This became my submission to Honeywell's own Q4 hackathon problem statement on behavioral anomaly detection.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. REAL-WORLD USE CASE SCENARIO -->
+            <section class="section" style="padding: 35px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">REAL-WORLD SCENARIO</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Detecting Compromised Credentials in Real Time</h3>
+                        <p class="body-lg" style="line-height: 1.75;"><span class="dropcap">P</span>icture a mid-sized company's security team monitoring thousands of employee accounts and IoT devices. A contractor's credentials get compromised, and the attacker logs in from an unfamiliar location at an unusual hour, then starts quietly accessing a finance database this account has never touched before. A rule-based tool would either miss this (nothing here breaks a hard rule) or bury it under hundreds of other low-quality alerts. SENTINEL-STREAM scores this event in real time using the contractor's own behavioral baseline, flags it within milliseconds even though the account has limited history, and hands the analyst a plain-language reason — unusual login velocity, first-time resource access — instead of a bare "anomaly detected."</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. RETHOUGHT INTERACTIVE ANIMATED SIMULATION -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">PIPELINE ANIMATION</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">Interactive Event Stream Flow Simulation</h3>
+
+                        <div class="anim-canvas-box" id="sentinelAnimBox">
+                            <div style="display:flex; justify-space-between; align-items:center; border-bottom:1px solid #334155; padding-bottom:15px; margin-bottom:20px;">
+                                <div>
+                                    <span style="color:#38bdf8; font-weight:bold;">EVENT INGESTION STREAM</span>
+                                    <span style="font-size:12px; color:#94a3b8; margin-left:10px;">ID: evt_contractor_8812</span>
+                                </div>
+                                <button class="replay-btn" onclick="playSentinelAnim()">▶ Replay Pipeline Stream</button>
+                            </div>
+
+                            <div class="anim-stage-track">
+                                <div class="packet-dot" id="sentinelDot" style="left: 0%;"></div>
+                                <div class="anim-stage-node" id="sn0">1. Streaming Profiler<br><small style="color:#94a3b8;" id="sn0Sub">EWMA &amp; CMS</small></div>
+                                <div class="anim-stage-node" id="sn1">2. IsoForest<br><small style="color:#94a3b8;" id="sn1Sub">Cold-Start</small></div>
+                                <div class="anim-stage-node" id="sn2">3. LightGBM<br><small style="color:#94a3b8;" id="sn2Sub">Classifier</small></div>
+                                <div class="anim-stage-node" id="sn3">4. TreeSHAP<br><small style="color:#94a3b8;" id="sn3Sub">Attribution</small></div>
+                                <div class="anim-stage-node" id="sn4">5. SSE Dashboard<br><small style="color:#94a3b8;" id="sn4Sub">Live Alert</small></div>
+                            </div>
+
+                            <div style="background:#020617; border:1px solid #1e293b; padding:15px; border-radius:4px; font-size:13px; min-height:80px;" id="sentinelConsole">
+                                [IDLE] Press "Replay Pipeline Stream" or scroll to animate an audit event through the 5-stage pipeline...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. STEP-BY-STEP PIPELINE WALKTHROUGH -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label">TECHNICAL ARCHITECTURE</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 25px 0;">6-Stage Execution Pipeline Walkthrough</h3>
+
+                        <div class="pipeline-step-box">
+                            <h4 class="heading-md"><span class="pipeline-step-num">01</span> Event Ingestion</h4>
+                            <p class="body-lg">Raw audit events (logins, database reads, file access) arrive asynchronously via REST API or Kafka topic streams. Each incoming payload contains entity identifiers, timestamp, action type, and resource targets.</p>
+                            <p class="meta" style="margin-top:8px;"><b>Tools:</b> FastAPI, Pydantic &middot; <b>Why:</b> Asynchronous non-blocking intake handles high event velocity without dropping client connections.</p>
+                        </div>
+
+                        <div class="pipeline-step-box">
+                            <h4 class="heading-md"><span class="pipeline-step-num">02</span> Streaming Feature Engineering</h4>
+                            <p class="body-lg">Constructs a 21-feature vector on the fly using Exponentially Weighted Moving Averages (EWMA) for baseline activity rates, Welford's online algorithm for running variance/z-scores, and Count-Min Sketch tables for resource frequency estimation. All statistics update in fixed memory per entity without storing raw event histories.</p>
+                            <p class="meta" style="margin-top:8px;"><b>Tools:</b> NumPy, Pandas &middot; <b>Why:</b> Vectorized array operations compute rolling statistics in sub-millisecond time while keeping memory bounded.</p>
+                        </div>
+
+                        <div class="pipeline-step-box">
+                            <h4 class="heading-md"><span class="pipeline-step-num">03</span> Stage 1: Isolation Forest Cold-Start Prior</h4>
+                            <p class="body-lg">Evaluates the event's structural distance against general feature bounds using an Isolation Forest. Because it relies on tree isolation depth rather than historical user baselines, it calculates meaningful anomaly priors ($s_{\text{iso}}$) for newly onboarded entities with zero historical logs.</p>
+                            <p class="meta" style="margin-top:8px;"><b>Tools:</b> scikit-learn (<code>IsolationForest</code>) &middot; <b>Why:</b> Solves the cold-start vulnerability where new users or IoT devices previously bypassed statistical anomaly thresholds.</p>
+                        </div>
+
+                        <div class="pipeline-step-box">
+                            <h4 class="heading-md"><span class="pipeline-step-num">04</span> Stage 2: LightGBM Multi-Class Classifier</h4>
+                            <p class="body-lg">Classifies the exact threat type (e.g., Brute Force, Impossible Travel, Data Exfiltration, or Benign) by feeding the 21 engineered features alongside the Stage 1 $s_{\text{iso}}$ anomaly score into a gradient-boosted decision tree model.</p>
+                            <p class="meta" style="margin-top:8px;"><b>Tools:</b> LightGBM &middot; <b>Why:</b> Leaf-wise tree growth and histogram binning execute several times faster than XGBoost on identical tabular features, achieving sub-3ms P99 latency.</p>
+                        </div>
+
+                        <div class="pipeline-step-box">
+                            <h4 class="heading-md"><span class="pipeline-step-num">05</span> TreeSHAP Explainability Engine</h4>
+                            <p class="body-lg">Directly traverses the trained LightGBM decision tree structures to calculate exact Shapley feature attributions per alert in microseconds. Rather than black-box scoring, it identifies the exact features pushing an event over the anomaly threshold.</p>
+                            <p class="meta" style="margin-top:8px;"><b>Tools:</b> SHAP (TreeSHAP C-extension) &middot; <b>Why:</b> TreeSHAP computes exact Shapley values analytically by walking tree paths, avoiding slow perturbation approximations like LIME.</p>
+                        </div>
+
+                        <div class="pipeline-step-box" style="border:none;">
+                            <h4 class="heading-md"><span class="pipeline-step-num">06</span> Live Server-Sent Events (SSE) Delivery</h4>
+                            <p class="body-lg">Pushes explained alert payloads with TreeSHAP feature breakdowns directly to security analyst dashboards over persistent HTTP Server-Sent Events (SSE) connections.</p>
+                            <p class="meta" style="margin-top:8px;"><b>Tools:</b> FastAPI (SSE), Chart.js &middot; <b>Why:</b> SSE provides lightweight single-directional real-time streaming without WebSocket overhead.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. TOOLS & LIBRARIES TABLE -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label">STACK JUSTIFICATION</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">Tools &amp; Libraries Selection Table</h3>
+
+                        <table class="tools-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 220px;">Tool / Library</th>
+                                    <th style="width: 260px;">Role in SENTINEL-STREAM</th>
+                                    <th>Design Justification ("Why this, not X?")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>NumPy / Pandas</b></td>
+                                    <td>Streaming Feature Vectorization</td>
+                                    <td>Chosen over pure Python loops for C-vectorized mathematical performance when calculating EWMA and Welford variance.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Count-Min Sketch</b></td>
+                                    <td>Probabilistic Frequency Estimation</td>
+                                    <td>Chosen over HashMap frequency tables to guarantee fixed memory scaling regardless of unique resource cardinality.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>scikit-learn IsolationForest</b></td>
+                                    <td>Stage 1 Structural Anomaly Prior</td>
+                                    <td>Chosen over One-Class SVM because tree isolation is computationally faster $O(N \log N)$ and requires zero distribution assumptions.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>LightGBM</b></td>
+                                    <td>Stage 2 Threat Classifier</td>
+                                    <td>Chosen over XGBoost for histogram-based binning and leaf-wise splitting, delivering 24.6× faster inference speed than Random Forest.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>SHAP (TreeSHAP)</b></td>
+                                    <td>Per-Alert Feature Attribution</td>
+                                    <td>Chosen over LIME because TreeSHAP yields exact Shapley values in $<30\ \mu\text{s}$ by traversing tree paths directly without sampling noise.</td>
+                                </tr>
+                                <tr>
+                                    <td><b>FastAPI + Uvicorn</b></td>
+                                    <td>Async API &amp; SSE Stream Delivery</td>
+                                    <td>Chosen over Flask/Django for native ASGI async support, easily holding thousands of concurrent SSE connections.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. RESULTS & METRICS GRID -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">VERIFIED BENCHMARKS</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">Empirical Performance Metrics</h3>
+
+                        <div class="metrics-card-grid">
+                            <div class="metric-card">
+                                <div class="metric-val-lg">~4.2 KB</div>
+                                <div class="metric-title">Per-Entity Memory</div>
+                                <div class="metric-caption">Audited per-entity footprint (EWMA + Count-Min Sketch). Can reach 2KB with 128-width sketch.</div>
+                            </div>
+
+                            <div class="metric-card">
+                                <div class="metric-val-lg">2.64 ms</div>
+                                <div class="metric-title">P99 Inference Latency</div>
+                                <div class="metric-caption">Single-event end-to-end model classification speed (P50 latency: 1.84 ms).</div>
+                            </div>
+
+                            <div class="metric-card">
+                                <div class="metric-val-lg">0.9403</div>
+                                <div class="metric-title">NSL-KDD Macro F1</div>
+                                <div class="metric-caption">5-fold cross-validation score (&plusmn;0.0091) across standard cybersecurity benchmark.</div>
+                            </div>
+
+                            <div class="metric-card">
+                                <div class="metric-val-lg">24.67×</div>
+                                <div class="metric-title">Speedup vs Random Forest</div>
+                                <div class="metric-caption">LightGBM inference (2.64 ms) vs baseline Random Forest (65.15 ms) on identical hardware.</div>
+                            </div>
+
+                            <div class="metric-card">
+                                <div class="metric-val-lg">0.5932</div>
+                                <div class="metric-title">Held-Out KDDTest+ F1</div>
+                                <div class="metric-caption">Macro F1 on novel, unseen attack subtypes (evaluating generalization on zero-day patterns).</div>
+                            </div>
+
+                            <div class="metric-card">
+                                <div class="metric-val-lg">0.07</div>
+                                <div class="metric-title">IsoForest Prior</div>
+                                <div class="metric-caption">Domain-informed prior contamination assumption on expected background anomaly rates.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. KEY TECHNICAL DECISION CALLOUT -->
+            <section class="section" style="padding: 20px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <div class="decision-callout">
+                            <span class="kicker-label" style="color: var(--stamp);">KEY ARCHITECTURAL DECISION</span>
+                            <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Constant $O(1)$ Per-Entity Memory Design</h3>
+                            <p class="body-lg" style="line-height: 1.7; margin: 0;"><span class="dropcap">T</span>o prevent memory exhaustion under continuous streaming, SENTINEL-STREAM enforces a strict constant memory footprint per monitored entity ($\approx 4.2\text{ KB}$). Instead of storing historical event lists $O(N)$, features are computed via Exponentially Weighted Moving Averages (EWMA) and Count-Min Sketch tables. <i>Note on scaling:</i> While memory per entity remains strictly $O(1)$ regardless of stream duration, total system memory scales linearly with the total number of active monitored entities ($O(M)$ for $M$ entities).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. GITHUB CTA & FUTURE IMPROVEMENTS -->
+            <section class="section" style="padding: 40px 0 20px 0; border-top: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12 text-center">
+                        <h3 class="heading-lg" style="margin-bottom: 15px;">Explore the Code &amp; Research</h3>
+                        <div style="margin-bottom: 25px;">
+                            <a href="https://github.com/AJ1312/sentinel-stream" target="_blank" class="btn-github" style="margin-right: 15px;">⭐ View SENTINEL-STREAM on GitHub</a>
+                            <a href="https://github.com/AJ1312/sentinel-stream-research" target="_blank" class="btn-research">🔬 View IEEE Research Artifacts</a>
+                        </div>
+                        <p class="body-md" style="font-style: italic; color: #555; max-width: 800px; margin: 0 auto;">
+                            <b>What I'd improve next:</b> If I were building this for production next, I would implement adaptive Count-Min Sketch resizing to dynamically adjust memory depth based on entity traffic density, and migrate the feature pipeline to Rust for sub-millisecond end-to-end ingestion.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <script>
+                function playSentinelAnim() {
+                    const dot = document.getElementById('sentinelDot');
+                    const consoleEl = document.getElementById('sentinelConsole');
+                    const nodes = [document.getElementById('sn0'), document.getElementById('sn1'), document.getElementById('sn2'), document.getElementById('sn3'), document.getElementById('sn4')];
+
+                    nodes.forEach(n => n.classList.remove('active'));
+                    dot.style.left = '0%';
+                    consoleEl.innerHTML = '[0.0ms] [INGESTION] Event <code>evt_contractor_8812</code> ingested. Building 21-feature vector...';
+
+                    setTimeout(() => {
+                        dot.style.left = '18%';
+                        nodes[0].classList.add('active');
+                        consoleEl.innerHTML = '[0.8ms] [PROFILER] EWMA updated. Count-Min Sketch lookup done. Memory footprint: 4.2 KB.';
+                    }, 600);
+
+                    setTimeout(() => {
+                        dot.style.left = '42%';
+                        nodes[1].classList.add('active');
+                        consoleEl.innerHTML = '[1.4ms] [ISO-FOREST] Isolation depth split completed. Structural anomaly prior: <code>s_iso = 0.782</code>.';
+                    }, 1400);
+
+                    setTimeout(() => {
+                        dot.style.left = '64%';
+                        nodes[2].classList.add('active');
+                        consoleEl.innerHTML = '[2.1ms] [LIGHTGBM] Multi-class leaf evaluation complete. Predicted Class: <b>UNUSUAL_RESOURCE_ACCESS</b>.';
+                    }, 2200);
+
+                    setTimeout(() => {
+                        dot.style.left = '84%';
+                        nodes[3].classList.add('active');
+                        consoleEl.innerHTML = '[2.64ms] [TREESHAP] Tree traversal complete. Primary attribution: <code>first_time_db_access (+0.64)</code>.';
+                    }, 3000);
+
+                    setTimeout(() => {
+                        dot.style.left = '95%';
+                        nodes[4].classList.add('active');
+                        consoleEl.innerHTML = '<span style="color:#ef4444; font-weight:bold;">[LIVE ALERT]</span> Pushed to SSE Dashboard: <i>Contractor account accessed Finance DB from unfamiliar IP</i> (Attribution: DB Access +0.64, Login Velocity +0.22).';
+                    }, 3800);
+                }
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    if (window.gsap && window.ScrollTrigger) {
+                        ScrollTrigger.create({
+                            trigger: "#sentinelAnimBox",
+                            start: "top 75%",
+                            onEnter: () => playSentinelAnim()
+                        });
+                    }
+                });
+            </script>
+"""
+
+CIPHERPULSE_CONTENT = """
             <!-- 1. HERO SECTION -->
             <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0;">
                 <div class="newspaper-grid">
@@ -347,7 +684,7 @@
 
                         <div class="pipeline-step-box">
                             <h4 class="heading-md"><span class="pipeline-step-num">06</span> Welford Flow Periodicity Analysis</h4>
-                            <p class="body-lg">Calculates running packet size and inter-arrival time statistics per flow using Welford's algorithm. It computes a Coefficient of Variation ($	ext{CoV} = rac{\sigma}{\mu}$) to flag suspiciously periodic metronome-like C2 beaconing signals ($	ext{CoV} < 0.12$).</p>
+                            <p class="body-lg">Calculates running packet size and inter-arrival time statistics per flow using Welford's algorithm. It computes a Coefficient of Variation ($\text{CoV} = \frac{\sigma}{\mu}$) to flag suspiciously periodic metronome-like C2 beaconing signals ($\text{CoV} < 0.12$).</p>
                             <p class="meta" style="margin-top:8px;"><b>Tools:</b> Welford Online Variance Engine &middot; <b>Why:</b> Computes exact numerical mean and variance in $O(1)$ constant time per packet without storing raw packet arrival timestamps.</p>
                         </div>
 
@@ -430,7 +767,7 @@
                             <div class="metric-card">
                                 <div class="metric-val-lg">&lt; 0.12</div>
                                 <div class="metric-title">C2 Beaconing Threshold</div>
-                                <div class="metric-caption">Welford Coefficient of Variation ($	ext{CoV}$) threshold flagging automated malware pulses.</div>
+                                <div class="metric-caption">Welford Coefficient of Variation ($\text{CoV}$) threshold flagging automated malware pulses.</div>
                             </div>
 
                             <div class="metric-card">
@@ -516,20 +853,12 @@
                     }
                 });
             </script>
+"""
 
-        </main>
-        
-        <!-- FOOTER -->
-        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0; margin-top: 60px;">
-            <div class="newspaper-grid">
-                <div class="col-span-12 text-center">
-                    <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
-                </div>
-            </div>
-        </footer>
-    </div>
+with open('pages/sentinel-stream.html', 'w') as f:
+    f.write(PAGE_TEMPLATE.replace('{title}', 'SENTINEL-STREAM').replace('{content}', SENTINEL_CONTENT))
 
-    <script src="../js/main.js" defer></script>
-    <script src="../js/animations.js" defer></script>
-</body>
-</html>
+with open('pages/cipherpulse.html', 'w') as f:
+    f.write(PAGE_TEMPLATE.replace('{title}', 'CipherPulse').replace('{content}', CIPHERPULSE_CONTENT))
+
+print("Successfully generated exact specification pages for SENTINEL-STREAM and CipherPulse!")
