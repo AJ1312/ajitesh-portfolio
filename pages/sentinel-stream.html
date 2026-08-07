@@ -210,24 +210,14 @@
                 </div>
             </section>
 
-            <!-- ARCHITECTURE PIPELINE -->
+                        <!-- ARCHITECTURE PIPELINE (GENERATED WELL-EXPLAINED IMAGE) -->
             <section class="section" style="padding: 30px 0; border-bottom: 1px solid var(--rule);">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
-                        <div class="arch-diagram-box">
-                            <span class="kicker-label" style="color: var(--stamp);">SYSTEM ARCHITECTURE</span>
-                            <h4 class="heading-md" style="margin: 10px 0 15px 0;">O(1) Profiler &amp; Two-Stage Machine Learning Pipeline</h4>
-                            <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center;">
-                                <div class="arch-node">Event Ingestion<br><small style="font-weight:normal;">Kafka / Audit Stream</small></div>
-                                <span class="arch-arrow">&rarr;</span>
-                                <div class="arch-node">O(1) EWMA Profiler<br><small style="font-weight:normal;">4 KB Matrix / Entity</small></div>
-                                <span class="arch-arrow">&rarr;</span>
-                                <div class="arch-node">Stage 1: IsoForest<br><small style="font-weight:normal;">Cold-Start Risk Score</small></div>
-                                <span class="arch-arrow">&rarr;</span>
-                                <div class="arch-node">Stage 2: LightGBM<br><small style="font-weight:normal;">Multi-Class Classifier</small></div>
-                                <span class="arch-arrow">&rarr;</span>
-                                <div class="arch-node">TreeSHAP Rationale<br><small style="font-weight:normal;">Sub-30&mu;s Explanation</small></div>
-                            </div>
+                        <span class="kicker-label" style="color: var(--stamp);">SYSTEM ARCHITECTURE PIPELINE</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">O(1) Streaming Profiler &amp; Machine Learning Pipeline</h3>
+                        <div class="featured-image" style="border: 2px solid var(--rule-dark); background: #fdfbf7; padding: 10px;">
+                            <img src="../images/architecture/sentinel_stream_pipeline.png" alt="Sentinel-Stream System Architecture Pipeline" style="width:100%; display:block;">
                         </div>
                     </div>
                 </div>

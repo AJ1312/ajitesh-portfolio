@@ -1,4 +1,63 @@
-<!DOCTYPE html>
+import os
+
+# 1. Update Sentinel-Stream with Image
+with open('pages/sentinel-stream.html', 'r') as f:
+    sentinel_html = f.read()
+
+sentinel_img_card = """            <!-- ARCHITECTURE PIPELINE (GENERATED WELL-EXPLAINED IMAGE) -->
+            <section class="section" style="padding: 30px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">SYSTEM ARCHITECTURE PIPELINE</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">O(1) Streaming Profiler &amp; Machine Learning Pipeline</h3>
+                        <div class="featured-image" style="border: 2px solid var(--rule-dark); background: #fdfbf7; padding: 10px;">
+                            <img src="../images/architecture/sentinel_stream_pipeline.png" alt="Sentinel-Stream System Architecture Pipeline" style="width:100%; display:block;">
+                        </div>
+                    </div>
+                </div>
+            </section>"""
+
+# Replace old arch section
+import re
+sentinel_html = re.sub(
+    r"<!-- ARCHITECTURE PIPELINE -->\s*<section class=\"section\".*?</section>",
+    sentinel_img_card,
+    sentinel_html,
+    flags=re.DOTALL
+)
+
+with open('pages/sentinel-stream.html', 'w') as f:
+    f.write(sentinel_html)
+
+# 2. Update CipherPulse with Image
+with open('pages/cipherpulse.html', 'r') as f:
+    cipher_html = f.read()
+
+cipher_img_card = """            <!-- ARCHITECTURE PIPELINE (GENERATED WELL-EXPLAINED IMAGE) -->
+            <section class="section" style="padding: 30px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">SYSTEM ARCHITECTURE PIPELINE</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">Lock-Free 5-Tuple Fast-Path Inspection Pipeline</h3>
+                        <div class="featured-image" style="border: 2px solid var(--rule-dark); background: #fdfbf7; padding: 10px;">
+                            <img src="../images/architecture/cipherpulse_pipeline.png" alt="CipherPulse Lock-Free DPI Architecture Pipeline" style="width:100%; display:block;">
+                        </div>
+                    </div>
+                </div>
+            </section>"""
+
+cipher_html = re.sub(
+    r"<!-- ARCHITECTURE PIPELINE -->\s*<section class=\"section\".*?</section>",
+    cipher_img_card,
+    cipher_html,
+    flags=re.DOTALL
+)
+
+with open('pages/cipherpulse.html', 'w') as f:
+    f.write(cipher_html)
+
+# 3. Rewrite Hospital Queue Management System Internship Page (pages/internship.html)
+hospital_content = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -329,3 +388,9 @@
     </div>
 </body>
 </html>
+"""
+
+with open('pages/internship.html', 'w') as f:
+    f.write(hospital_content)
+
+print("Successfully updated Sentinel-Stream & CipherPulse with generated architecture images, and rewritten Hospital Queue System page!")
