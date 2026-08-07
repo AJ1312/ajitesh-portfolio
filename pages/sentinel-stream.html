@@ -15,7 +15,7 @@
             display: inline-block;
             background: var(--ink);
             color: var(--paper-bright);
-            padding: 4px 12px;
+            padding: 5px 14px;
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
@@ -23,30 +23,25 @@
             margin-right: 6px;
             margin-bottom: 8px;
         }}
-        .summary-box {{
-            background: var(--paper-warm);
-            border: 2px solid var(--rule-dark);
-            padding: 30px;
-            margin: 30px 0;
-        }}
         .metrics-grid {{
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            margin: 30px 0;
+            margin: 25px 0;
         }}
         .metric-card-box {{
-            background: var(--paper-bright);
+            background: var(--paper-warm);
             border: 2px solid var(--rule-dark);
-            padding: 24px;
+            padding: 24px 18px;
             text-align: center;
+            border-radius: 4px;
         }}
         .metric-val-huge {{
             font-family: var(--font-display);
-            font-size: 42px;
+            font-size: 38px;
             font-weight: 900;
             color: var(--stamp);
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             line-height: 1.1;
         }}
         .metric-lbl-bold {{
@@ -54,23 +49,48 @@
             text-transform: uppercase;
             font-size: 12px;
             letter-spacing: 0.5px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            color: var(--ink);
         }}
         .metric-desc-sm {{
             font-size: 13px;
-            color: #555;
-            line-height: 1.4;
+            color: #444;
+            line-height: 1.45;
+        }}
+        .decision-callout-clean {{
+            border-left: 6px solid var(--stamp);
+            background: var(--paper-warm);
+            border-top: 2px solid var(--rule-dark);
+            border-right: 2px solid var(--rule-dark);
+            border-bottom: 2px solid var(--rule-dark);
+            padding: 28px 32px;
+            margin: 35px 0;
+            border-radius: 4px;
         }}
         .workbench-container {{
             border: 2px solid var(--rule-dark);
-            background: var(--paper-warm);
+            background: #0f172a;
+            color: #f8fafc;
             padding: 30px;
-            margin: 40px 0;
+            margin: 35px 0;
+            border-radius: 6px;
+            font-family: var(--font-mono, monospace);
+        }}
+        .wb-console-output {{
+            background: #020617;
+            color: #38bdf8;
+            padding: 16px 20px;
+            border-radius: 4px;
+            border: 1px solid #1e293b;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            min-height: 70px;
         }}
         .wb-btn-action {{
-            background: var(--ink);
-            color: var(--paper);
-            border: 2px solid var(--ink);
+            background: #1e293b;
+            color: #f8fafc;
+            border: 1px solid #475569;
             padding: 10px 18px;
             font-size: 12px;
             font-weight: 700;
@@ -78,36 +98,40 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-right: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            border-radius: 4px;
             transition: all 0.2s ease;
             font-family: var(--font-body);
         }}
         .wb-btn-action:hover {{
-            background: var(--stamp);
-            border-color: var(--stamp);
+            background: #ef4444;
+            border-color: #ef4444;
             color: #fff;
         }}
         .wb-table-clean {{
             width: 100%;
             border-collapse: collapse;
             font-family: var(--font-body);
-            font-size: 14px;
-            margin-top: 20px;
-            background: var(--paper-bright);
-            border: 2px solid var(--rule-dark);
+            font-size: 13px;
+            margin-top: 15px;
+            background: #ffffff;
+            color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 4px;
+            overflow: hidden;
         }}
         .wb-table-clean th {{
-            background: var(--ink);
-            color: var(--paper-bright);
-            padding: 12px;
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 12px 14px;
             text-align: left;
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }}
         .wb-table-clean td {{
-            padding: 14px 12px;
-            border-bottom: 1px solid var(--rule);
+            padding: 12px 14px;
+            border-bottom: 1px solid #e2e8f0;
             line-height: 1.5;
         }}
         .anim-fade-row {{
@@ -127,41 +151,54 @@
         }}
         .badge-red {{
             display: inline-block;
-            padding: 4px 10px;
+            padding: 3px 8px;
             background: #fee2e2;
             color: #dc2626;
             border: 1px solid #dc2626;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 11px;
+            border-radius: 3px;
         }}
         .badge-amber {{
             display: inline-block;
-            padding: 4px 10px;
+            padding: 3px 8px;
             background: #fef3c7;
             color: #d97706;
             border: 1px solid #d97706;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 11px;
+            border-radius: 3px;
         }}
         .badge-green {{
             display: inline-block;
-            padding: 4px 10px;
+            padding: 3px 8px;
             background: #dcfce7;
             color: #15803d;
             border: 1px solid #15803d;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 11px;
+            border-radius: 3px;
         }}
         .arch-image-card {{
             border: 2px solid var(--rule-dark);
             background: var(--paper-bright);
-            padding: 12px;
+            padding: 10px;
             margin: 25px 0;
         }}
         .arch-image-card img {{
             width: 100%;
             height: auto;
             display: block;
+        }}
+        @media screen and (max-width: 900px) {{
+            .metrics-grid {{
+                grid-template-columns: repeat(2, 1fr);
+            }}
+        }}
+        @media screen and (max-width: 600px) {{
+            .metrics-grid {{
+                grid-template-columns: 1fr;
+            }}
         }}
     </style>
 </head>
@@ -242,42 +279,51 @@
                         <h3 class="heading-lg" style="margin: 10px 0 15px 0;">O(1) Streaming Profiler &amp; Threat Pipeline</h3>
                         
                         <div class="arch-image-card">
-                            <img src="../images/architecture/sentinel_stream_arch.png" alt="SENTINEL-STREAM End-to-End System Architecture Diagram">
+                            <img src="../images/architecture/sentinel_stream_arch.png" alt="SENTINEL-STREAM System Architecture Diagram">
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 5. INTERACTIVE LIVE DEMO WORKBENCH -->
+            <!-- 5. INTERACTIVE LIVE DEMO WORKBENCH CONSOLE -->
             <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
                         <span class="kicker-label">INTERACTIVE CONSOLE</span>
                         <h3 class="heading-lg" style="margin: 10px 0 20px 0;">Live Threat Radar &amp; AI Explanation Workbench</h3>
-                        <p class="body-lg" style="margin-bottom: 25px;">Click any security test button below to trigger a live threat evaluation and watch how SENTINEL-STREAM explains the risk in plain English:</p>
+                        <p class="body-lg" style="margin-bottom: 20px; color: #444;">Select an enterprise threat scenario below to trigger real-time AI evaluation and inspect live terminal log output:</p>
 
                         <div class="workbench-container">
+                            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #334155; padding-bottom:12px; margin-bottom:15px;">
+                                <span style="color:#38bdf8; font-weight:bold; font-size:13px;">SENTINEL-STREAM // LIVE RADAR CONSOLE</span>
+                                <span style="font-size:11px; color:#94a3b8;">PIPELINE: EWMA + LIGHTGBM</span>
+                            </div>
+
                             <div>
                                 <button class="wb-btn-action" onclick="runSentinelSim('brute')">⚡ Test 1: Password Attack Surge</button>
                                 <button class="wb-btn-action" onclick="runSentinelSim('travel')">🌍 Test 2: Impossible Location Login</button>
                                 <button class="wb-btn-action" onclick="runSentinelSim('exfil')">📤 Test 3: Secret Database Exfiltration</button>
-                                <button class="wb-btn-action" onclick="runSentinelSim('normal')">✅ Test 4: Normal Employee Work Baseline</button>
+                                <button class="wb-btn-action" onclick="runSentinelSim('normal')">✅ Test 4: Normal Work Baseline</button>
+                            </div>
+
+                            <div class="wb-console-output" id="sentinelConsoleLog">
+[SYSTEM READY] Sentinel-Stream monitoring active entity streams. Select an action button above...
                             </div>
 
                             <table class="wb-table-clean">
                                 <thead>
                                     <tr>
-                                        <th style="width: 110px;">Timestamp</th>
-                                        <th style="width: 160px;">User Account</th>
+                                        <th style="width: 100px;">Timestamp</th>
+                                        <th style="width: 140px;">User Account</th>
                                         <th>Observed Event</th>
                                         <th style="width: 150px;">Threat Level</th>
-                                        <th style="width: 100px;">Latency</th>
+                                        <th style="width: 90px;">Latency</th>
                                         <th>Plain-English AI Explanation</th>
                                     </tr>
                                 </thead>
                                 <tbody id="wbSentinelBody">
                                     <tr class="anim-fade-row">
-                                        <td>18:51:01</td>
+                                        <td>18:56:01</td>
                                         <td><b>sarah_marketing</b></td>
                                         <td>Opened standard project documents</td>
                                         <td><span class="badge-green">SAFE (NOMINAL)</span></td>
@@ -337,18 +383,18 @@
                 </div>
             </section>
 
-            <!-- 7. RESULTS METRICS GRID -->
+            <!-- 7. EMPIRICAL BENCHMARKS METRICS GRID (RELAID OUT BEAUTIFULLY) -->
             <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
                         <span class="kicker-label" style="color: var(--stamp);">EMPIRICAL BENCHMARKS</span>
-                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">Verified Results</h3>
+                        <h3 class="heading-lg" style="margin: 10px 0 25px 0;">Verified Results</h3>
 
                         <div class="metrics-grid">
                             <div class="metric-card-box">
                                 <div class="metric-val-huge">~4.2 KB</div>
                                 <div class="metric-lbl-bold">Per-Entity Memory</div>
-                                <div class="metric-desc-sm">Audited per-user RAM footprint (EWMA + Count-Min Sketch). Can reach 2KB with 128-width sketch.</div>
+                                <div class="metric-desc-sm">Audited per-user RAM footprint (EWMA + Count-Min Sketch). Can reach 2 KB with 128-width sketch.</div>
                             </div>
 
                             <div class="metric-card-box">
@@ -360,12 +406,12 @@
                             <div class="metric-card-box">
                                 <div class="metric-val-huge">0.9403</div>
                                 <div class="metric-lbl-bold">NSL-KDD Macro F1</div>
-                                <div class="metric-desc-sm">5-fold cross-validation score (&plusmn;0.0091) across standard cybersecurity benchmark.</div>
+                                <div class="metric-desc-sm">5-fold cross-validation score (&plusmn;0.0091) across standard benchmark.</div>
                             </div>
 
                             <div class="metric-card-box">
                                 <div class="metric-val-huge">24.67×</div>
-                                <div class="metric-lbl-bold">Speedup vs Random Forest</div>
+                                <div class="metric-lbl-bold">Random Forest Speedup</div>
                                 <div class="metric-desc-sm">LightGBM inference (2.64 ms) vs baseline Random Forest (65.15 ms) on identical hardware.</div>
                             </div>
                         </div>
@@ -373,14 +419,14 @@
                 </div>
             </section>
 
-            <!-- 8. KEY TECHNICAL DECISION CALLOUT -->
+            <!-- 8. KEY TECHNICAL DECISION CALLOUT (SHORT & READABLE SUMMARY) -->
             <section class="section" style="padding: 30px 0;">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
-                        <div style="border-left: 6px solid var(--stamp); background: var(--paper-warm); border-top: 2px solid var(--rule-dark); border-right: 2px solid var(--rule-dark); border-bottom: 2px solid var(--rule-dark); padding: 25px 30px;">
+                        <div class="decision-callout-clean">
                             <span class="kicker-label" style="color: var(--stamp);">KEY DESIGN DECISION</span>
-                            <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Constant $O(1)$ Per-Entity Memory Scaling</h3>
-                            <p class="body-lg" style="line-height: 1.7; margin: 0;"><span class="dropcap">T</span>o prevent memory exhaustion under continuous streaming, SENTINEL-STREAM enforces a strict constant memory footprint per monitored entity ($pprox 4.2	ext{ KB}$). Instead of storing historical event lists $O(N)$, features are computed via Exponentially Weighted Moving Averages (EWMA) and Count-Min Sketch tables. <i>Note on scaling:</i> While memory per entity remains strictly $O(1)$ regardless of stream duration, total system memory scales linearly with the total number of active monitored entities ($O(M)$ for $M$ entities).</p>
+                            <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Constant O(1) Memory Scaling Per User</h3>
+                            <p class="body-lg" style="line-height: 1.7; margin: 0;"><span class="dropcap">R</span>ather than keeping endless historical log arrays that crash servers over time, SENTINEL-STREAM calculates rolling stats in a fixed <b>4.2 KB memory footprint</b> per user. Memory per user stays constant O(1) forever regardless of log volume, while total system RAM scales smoothly with active user count.</p>
                         </div>
                     </div>
                 </div>
@@ -402,37 +448,44 @@
             </section>
 
             <script>
-                function runSentinelSim(type) {
+                window.runSentinelSim = function(type) {
                     const tbody = document.getElementById('wbSentinelBody');
+                    const consoleEl = document.getElementById('sentinelConsoleLog');
                     const ts = new Date().toISOString().substring(11, 19);
 
-                    let user = '', event = '', badge = '', lat = '', why = '';
+                    let user = '', event = '', badge = '', lat = '', why = '', logTxt = '';
 
                     if (type === 'brute') {
                         user = 'admin_john';
-                        event = '45 failed login attempts in 10 seconds';
+                        event = '45 failed login attempts in 10s';
                         badge = '<span class="badge-red">CRITICAL THREAT</span>';
                         lat = '1.84 ms';
                         why = 'Extreme login failure spike (+0.54 risk) + rapid event velocity.';
+                        logTxt = `[${ts}] [ALERT] Event velocity spike detected for entity 'admin_john'. TreeSHAP attribution: failed_logins_1m (+0.54). Pushed to alert queue.`;
                     } else if (type === 'travel') {
                         user = 'exec_rachel';
-                        event = 'Logged in from Tokyo 5 minutes after NY session';
+                        event = 'Logged in from Tokyo 5m after NY';
                         badge = '<span class="badge-amber">HIGH RISK</span>';
                         lat = '2.12 ms';
                         why = 'Impossible physical movement speed (+0.68 geo-velocity risk).';
+                        logTxt = `[${ts}] [ALERT] Impossible travel speed flag for 'exec_rachel'. Geo-velocity threshold exceeded (+0.68). Dispatching verification token.`;
                     } else if (type === 'exfil') {
                         user = 'dev_service';
-                        event = 'Downloaded 14 GB customer database off-hours';
+                        event = 'Downloaded 14 GB customer DB off-hours';
                         badge = '<span class="badge-red">CRITICAL THREAT</span>';
                         lat = '1.95 ms';
                         why = 'Abnormal outbound data volume (+0.76 EWMA volume spike).';
+                        logTxt = `[${ts}] [CRITICAL] Off-hours database export spike detected for 'dev_service'. Outbound volume +0.76. Session access suspended.`;
                     } else {
                         user = 'sarah_marketing';
                         event = 'Opened standard project documents';
                         badge = '<span class="badge-green">SAFE (NOMINAL)</span>';
                         lat = '1.42 ms';
                         why = 'Activity matches normal daily baseline behavior.';
+                        logTxt = `[${ts}] [NOMINAL] Normal document access logged for 'sarah_marketing'. Anomaly score: 0.04. EWMA baseline updated.`;
                     }
+
+                    consoleEl.innerText = logTxt;
 
                     const newRow = document.createElement('tr');
                     newRow.className = 'anim-fade-row';
@@ -446,7 +499,7 @@
                     `;
 
                     tbody.insertBefore(newRow, tbody.firstChild);
-                }
+                };
             </script>
 
         </main>

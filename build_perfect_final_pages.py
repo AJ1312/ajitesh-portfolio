@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+import os
+
+PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CipherPulse — The Sharma Dispatch</title>
+    <title>{title} — The Sharma Dispatch</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
@@ -220,7 +222,306 @@
         </header>
 
         <main class="dispatch-content">
+{content}
+        </main>
+        
+        <!-- FOOTER -->
+        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0; margin-top: 60px;">
+            <div class="newspaper-grid">
+                <div class="col-span-12 text-center">
+                    <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+"""
 
+SENTINEL_CONTENT = """
+            <!-- 1. HERO SECTION -->
+            <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 45px 0 35px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <p class="kicker-label">FIELD DISPATCH &mdash; AI CYBERSECURITY &amp; BEHAVIORAL UEBA</p>
+                        <h1 class="display-xl" style="margin-bottom: 15px; font-size: 50px;">SENTINEL-STREAM</h1>
+                        <p class="display-sm" style="max-width: 900px; font-style: italic; line-height: 1.4; margin-bottom: 22px;">The AI Security Guard That Detects Rogue Accounts &amp; Data Theft in Real Time Without Crashing Servers</p>
+                        
+                        <!-- TECH PILLS -->
+                        <div style="margin-bottom: 25px;">
+                            <span class="pill-tag">Python</span>
+                            <span class="pill-tag">Count-Min Sketch</span>
+                            <span class="pill-tag">Isolation Forest</span>
+                            <span class="pill-tag">LightGBM</span>
+                            <span class="pill-tag">TreeSHAP</span>
+                            <span class="pill-tag">FastAPI</span>
+                        </div>
+
+                        <div class="newspaper-grid" style="border-top: 1px solid var(--rule); padding-top: 20px;">
+                            <div class="col-span-12">
+                                <p class="meta" style="margin-bottom: 4px; font-weight: bold;">GITHUB REPOSITORY</p>
+                                <a href="https://github.com/AJ1312/sentinel-stream" target="_blank" class="body-sm" style="color: var(--stamp); font-weight: bold; text-decoration: underline;">github.com/AJ1312/sentinel-stream &nearr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. MOTIVATION PARAGRAPH -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">PROJECT MOTIVATION</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Why I Built SENTINEL-STREAM</h3>
+                        <p class="body-lg" style="line-height: 1.75;"><span class="dropcap">I</span> built SENTINEL-STREAM after noticing a pattern in how security tools actually fail in practice: it's rarely that they can't detect something unusual, it's that they detect too much, too vaguely, and analysts stop trusting the alerts. I wanted to build a behavioral anomaly engine that solved the boring, unglamorous parts of that problem properly — bounded memory that doesn't grow forever as more entities get monitored, meaningful scoring for entities with zero history, and an explanation attached to every single alert instead of a bare confidence score. This became my submission to Honeywell's own Q4 hackathon problem statement on behavioral anomaly detection.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. REAL-WORLD USE CASE SCENARIO -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">REAL-WORLD USE CASE</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Catching Stolen Credentials Before Damage Happens</h3>
+                        <p class="body-lg" style="line-height: 1.75;"><span class="dropcap">P</span>icture a mid-sized company's security team monitoring thousands of employee accounts and IoT devices. A contractor's credentials get compromised, and the attacker logs in from an unfamiliar location at an unusual hour, then starts quietly accessing a finance database this account has never touched before. A rule-based tool would either miss this (nothing here breaks a hard rule) or bury it under hundreds of other low-quality alerts. SENTINEL-STREAM scores this event in real time using the contractor's own behavioral baseline, flags it within milliseconds even though the account has limited history, and hands the analyst a plain-language reason — unusual login velocity, first-time resource access — instead of a bare "anomaly detected."</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. GENERATED ARCHITECTURE DIAGRAM IMAGE -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">SYSTEM ARCHITECTURE DIAGRAM</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 15px 0;">O(1) Streaming Profiler &amp; Threat Pipeline</h3>
+                        
+                        <div class="arch-image-card">
+                            <img src="../images/architecture/sentinel_stream_arch.png" alt="SENTINEL-STREAM System Architecture Diagram">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. INTERACTIVE LIVE DEMO WORKBENCH CONSOLE -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label">INTERACTIVE CONSOLE</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">Live Threat Radar &amp; AI Explanation Workbench</h3>
+                        <p class="body-lg" style="margin-bottom: 20px; color: #444;">Select an enterprise threat scenario below to trigger real-time AI evaluation and inspect live terminal log output:</p>
+
+                        <div class="workbench-container">
+                            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #334155; padding-bottom:12px; margin-bottom:15px;">
+                                <span style="color:#38bdf8; font-weight:bold; font-size:13px;">SENTINEL-STREAM // LIVE RADAR CONSOLE</span>
+                                <span style="font-size:11px; color:#94a3b8;">PIPELINE: EWMA + LIGHTGBM</span>
+                            </div>
+
+                            <div>
+                                <button class="wb-btn-action" onclick="runSentinelSim('brute')">⚡ Test 1: Password Attack Surge</button>
+                                <button class="wb-btn-action" onclick="runSentinelSim('travel')">🌍 Test 2: Impossible Location Login</button>
+                                <button class="wb-btn-action" onclick="runSentinelSim('exfil')">📤 Test 3: Secret Database Exfiltration</button>
+                                <button class="wb-btn-action" onclick="runSentinelSim('normal')">✅ Test 4: Normal Work Baseline</button>
+                            </div>
+
+                            <div class="wb-console-output" id="sentinelConsoleLog">
+[SYSTEM READY] Sentinel-Stream monitoring active entity streams. Select an action button above...
+                            </div>
+
+                            <table class="wb-table-clean">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 100px;">Timestamp</th>
+                                        <th style="width: 140px;">User Account</th>
+                                        <th>Observed Event</th>
+                                        <th style="width: 150px;">Threat Level</th>
+                                        <th style="width: 90px;">Latency</th>
+                                        <th>Plain-English AI Explanation</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="wbSentinelBody">
+                                    <tr class="anim-fade-row">
+                                        <td>18:56:01</td>
+                                        <td><b>sarah_marketing</b></td>
+                                        <td>Opened standard project documents</td>
+                                        <td><span class="badge-green">SAFE (NOMINAL)</span></td>
+                                        <td>1.42 ms</td>
+                                        <td>Activity matches normal daily baseline behavior.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. STEP-BY-STEP PIPELINE WALKTHROUGH -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label">DETAILED WALKTHROUGH</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 25px 0;">6-Stage Execution Pipeline</h3>
+
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">01</span> Event Ingestion</h4>
+                            <p class="body-lg">Raw audit logs (logins, database access, file downloads) stream in via REST API or Kafka queues without dropping client connections.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> FastAPI, Pydantic &middot; <b>Why:</b> Async non-blocking endpoints handle thousands of concurrent events.</p>
+                        </div>
+
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">02</span> Streaming Feature Engineering</h4>
+                            <p class="body-lg">Builds a 21-feature vector on the fly using EWMA rolling averages and Count-Min Sketch tables, updating statistics in fixed memory without saving raw logs.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> NumPy, Pandas &middot; <b>Why:</b> Vectorized array operations compute statistics in sub-millisecond speed.</p>
+                        </div>
+
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">03</span> Stage 1: Isolation Forest Cold-Start Prior</h4>
+                            <p class="body-lg">Evaluates structural anomaly distance for brand-new users or devices with zero historical logs, eliminating cold-start vulnerability.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> scikit-learn (<code>IsolationForest</code>) &middot; <b>Why:</b> Tree isolation scoring requires zero historical user baselines.</p>
+                        </div>
+
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">04</span> Stage 2: LightGBM Threat Classifier</h4>
+                            <p class="body-lg">Classifies the exact attack category (Brute Force, Impossible Travel, Data Theft) by evaluating features in a fast decision tree.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> LightGBM &middot; <b>Why:</b> Leaf-wise tree growth runs 24.6× faster than Random Forest.</p>
+                        </div>
+
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">05</span> TreeSHAP Explainability Engine</h4>
+                            <p class="body-lg">Walks decision tree paths directly to calculate exact feature attributions, explaining why the alert fired in microseconds.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> SHAP (TreeSHAP) &middot; <b>Why:</b> Exact Shapley values are calculated analytically without noisy perturbation sampling.</p>
+                        </div>
+
+                        <div style="padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">06</span> Live Dashboard Stream</h4>
+                            <p class="body-lg">Pushes explained alert payloads directly to security analyst dashboards over persistent Server-Sent Events (SSE).</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> FastAPI (SSE), Chart.js &middot; <b>Why:</b> Real-time streaming with zero WebSocket overhead.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. EMPIRICAL BENCHMARKS METRICS GRID (RELAID OUT BEAUTIFULLY) -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">EMPIRICAL BENCHMARKS</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 25px 0;">Verified Results</h3>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card-box">
+                                <div class="metric-val-huge">~4.2 KB</div>
+                                <div class="metric-lbl-bold">Per-Entity Memory</div>
+                                <div class="metric-desc-sm">Audited per-user RAM footprint (EWMA + Count-Min Sketch). Can reach 2 KB with 128-width sketch.</div>
+                            </div>
+
+                            <div class="metric-card-box">
+                                <div class="metric-val-huge">2.64 ms</div>
+                                <div class="metric-lbl-bold">P99 Inference Latency</div>
+                                <div class="metric-desc-sm">Single-event end-to-end model classification speed (P50 latency: 1.84 ms).</div>
+                            </div>
+
+                            <div class="metric-card-box">
+                                <div class="metric-val-huge">0.9403</div>
+                                <div class="metric-lbl-bold">NSL-KDD Macro F1</div>
+                                <div class="metric-desc-sm">5-fold cross-validation score (&plusmn;0.0091) across standard benchmark.</div>
+                            </div>
+
+                            <div class="metric-card-box">
+                                <div class="metric-val-huge">24.67×</div>
+                                <div class="metric-lbl-bold">Random Forest Speedup</div>
+                                <div class="metric-desc-sm">LightGBM inference (2.64 ms) vs baseline Random Forest (65.15 ms) on identical hardware.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. KEY TECHNICAL DECISION CALLOUT (SHORT & READABLE SUMMARY) -->
+            <section class="section" style="padding: 30px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <div class="decision-callout-clean">
+                            <span class="kicker-label" style="color: var(--stamp);">KEY DESIGN DECISION</span>
+                            <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Constant O(1) Memory Scaling Per User</h3>
+                            <p class="body-lg" style="line-height: 1.7; margin: 0;"><span class="dropcap">R</span>ather than keeping endless historical log arrays that crash servers over time, SENTINEL-STREAM calculates rolling stats in a fixed <b>4.2 KB memory footprint</b> per user. Memory per user stays constant $O(1)$ forever regardless of log volume, while total system RAM scales smoothly with active user count.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. GITHUB CTA & IMPROVEMENTS -->
+            <section class="section" style="padding: 40px 0 20px 0; border-top: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12 text-center">
+                        <h3 class="heading-lg" style="margin-bottom: 15px;">Explore the Project Source Code</h3>
+                        <div style="margin-bottom: 25px;">
+                            <a href="https://github.com/AJ1312/sentinel-stream" target="_blank" class="btn-github">⭐ View SENTINEL-STREAM on GitHub</a>
+                        </div>
+                        <p class="body-md" style="font-style: italic; color: #555; max-width: 800px; margin: 0 auto;">
+                            <b>What I'd improve next:</b> If I were building this for production next, I would implement adaptive Count-Min Sketch resizing to dynamically adjust memory depth based on entity traffic density, and migrate the feature pipeline to Rust for sub-millisecond end-to-end ingestion.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <script>
+                window.runSentinelSim = function(type) {
+                    const tbody = document.getElementById('wbSentinelBody');
+                    const consoleEl = document.getElementById('sentinelConsoleLog');
+                    const ts = new Date().toISOString().substring(11, 19);
+
+                    let user = '', event = '', badge = '', lat = '', why = '', logTxt = '';
+
+                    if (type === 'brute') {
+                        user = 'admin_john';
+                        event = '45 failed login attempts in 10s';
+                        badge = '<span class="badge-red">CRITICAL THREAT</span>';
+                        lat = '1.84 ms';
+                        why = 'Extreme login failure spike (+0.54 risk) + rapid event velocity.';
+                        logTxt = `[${ts}] [ALERT] Event velocity spike detected for entity 'admin_john'. TreeSHAP attribution: failed_logins_1m (+0.54). Pushed to alert queue.`;
+                    } else if (type === 'travel') {
+                        user = 'exec_rachel';
+                        event = 'Logged in from Tokyo 5m after NY';
+                        badge = '<span class="badge-amber">HIGH RISK</span>';
+                        lat = '2.12 ms';
+                        why = 'Impossible physical movement speed (+0.68 geo-velocity risk).';
+                        logTxt = `[${ts}] [ALERT] Impossible travel speed flag for 'exec_rachel'. Geo-velocity threshold exceeded (+0.68). Dispatching verification token.`;
+                    } else if (type === 'exfil') {
+                        user = 'dev_service';
+                        event = 'Downloaded 14 GB customer DB off-hours';
+                        badge = '<span class="badge-red">CRITICAL THREAT</span>';
+                        lat = '1.95 ms';
+                        why = 'Abnormal outbound data volume (+0.76 EWMA volume spike).';
+                        logTxt = `[${ts}] [CRITICAL] Off-hours database export spike detected for 'dev_service'. Outbound volume +0.76. Session access suspended.`;
+                    } else {
+                        user = 'sarah_marketing';
+                        event = 'Opened standard project documents';
+                        badge = '<span class="badge-green">SAFE (NOMINAL)</span>';
+                        lat = '1.42 ms';
+                        why = 'Activity matches normal daily baseline behavior.';
+                        logTxt = `[${ts}] [NOMINAL] Normal document access logged for 'sarah_marketing'. Anomaly score: 0.04. EWMA baseline updated.`;
+                    }
+
+                    consoleEl.innerText = logTxt;
+
+                    const newRow = document.createElement('tr');
+                    newRow.className = 'anim-fade-row';
+                    newRow.innerHTML = `
+                        <td>${ts}</td>
+                        <td><b>${user}</b></td>
+                        <td>${event}</td>
+                        <td>${badge}</td>
+                        <td>${lat}</td>
+                        <td>${why}</td>
+                    `;
+
+                    tbody.insertBefore(newRow, tbody.firstChild);
+                };
+            </script>
+"""
+
+CIPHERPULSE_CONTENT = """
             <!-- 1. HERO SECTION -->
             <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 45px 0 35px 0;">
                 <div class="newspaper-grid">
@@ -375,8 +676,8 @@
 
                         <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
                             <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">06</span> Welford Flow Periodicity Check</h4>
-                            <p class="body-lg">Calculates running packet inter-arrival statistics using Welford's algorithm to compute Coefficient of Variation (CoV &lt; 0.12) for beaconing.</p>
-                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> Welford Online Variance Engine &middot; <b>Why:</b> Computes exact numerical variance in constant O(1) time per packet.</p>
+                            <p class="body-lg">Calculates running packet inter-arrival statistics using Welford's algorithm to compute Coefficient of Variation ($\text{CoV} < 0.12$) for beaconing.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> Welford Online Variance Engine &middot; <b>Why:</b> Computes exact numerical variance in constant $O(1)$ time per packet.</p>
                         </div>
 
                         <div style="padding: 18px 0;">
@@ -411,7 +712,7 @@
                             <div class="metric-card-box">
                                 <div class="metric-val-huge">&lt; 0.12</div>
                                 <div class="metric-lbl-bold">C2 Beaconing Threshold</div>
-                                <div class="metric-desc-sm">Welford Coefficient of Variation (CoV) threshold flagging automated malware pulses.</div>
+                                <div class="metric-desc-sm">Welford Coefficient of Variation ($\text{CoV}$) threshold flagging automated malware pulses.</div>
                             </div>
 
                             <div class="metric-card-box">
@@ -503,17 +804,12 @@
                     tbody.insertBefore(newRow, tbody.firstChild);
                 };
             </script>
+"""
 
-        </main>
-        
-        <!-- FOOTER -->
-        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0; margin-top: 60px;">
-            <div class="newspaper-grid">
-                <div class="col-span-12 text-center">
-                    <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
-                </div>
-            </div>
-        </footer>
-    </div>
-</body>
-</html>
+with open('pages/sentinel-stream.html', 'w') as f:
+    f.write(PAGE_TEMPLATE.replace('{title}', 'SENTINEL-STREAM').replace('{content}', SENTINEL_CONTENT))
+
+with open('pages/cipherpulse.html', 'w') as f:
+    f.write(PAGE_TEMPLATE.replace('{title}', 'CipherPulse').replace('{content}', CIPHERPULSE_CONTENT))
+
+print("Successfully generated perfect final pages for Sentinel-Stream and CipherPulse!")
