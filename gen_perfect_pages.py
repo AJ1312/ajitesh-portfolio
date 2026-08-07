@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+import os
+
+PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CipherPulse — The Sharma Dispatch</title>
+    <title>{title} — The Sharma Dispatch</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
@@ -144,7 +146,204 @@
         </header>
 
         <main class="dispatch-content">
+{content}
+        </main>
+        
+        <!-- FOOTER -->
+        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0; margin-top: 60px;">
+            <div class="newspaper-grid">
+                <div class="col-span-12 text-center">
+                    <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+"""
 
+SENTINEL_CONTENT = """
+            <!-- HERO -->
+            <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <p class="kicker-label">DISPATCH A &mdash; RESEARCH &amp; SYSTEM BUILD</p>
+                        <h1 class="display-xl" style="margin-bottom: 20px; font-size: 52px;">Sentinel-Stream</h1>
+                        <p class="display-sm" style="max-width: 850px; font-style: italic; line-height: 1.4;">O(1)-Memory Streaming Anomaly Detection Engine for Real-Time Enterprise UEBA</p>
+                        
+                        <div class="newspaper-grid" style="margin-top: 35px; border-top: 1px solid var(--rule); padding-top: 25px;">
+                            <div class="col-span-4 column-bordered">
+                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">GITHUB REPOSITORY</p>
+                                <a href="https://github.com/AJ1312/sentinel-stream" target="_blank" class="body-sm" style="color: var(--stamp); font-weight: bold; text-decoration: underline;">AJ1312/sentinel-stream &nearr;</a>
+                            </div>
+                            <div class="col-span-4 column-bordered">
+                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">IEEE ARTIFACTS</p>
+                                <a href="https://github.com/AJ1312/sentinel-stream-research" target="_blank" class="body-sm" style="color: var(--stamp); font-weight: bold; text-decoration: underline;">IEEE Research Paper &nearr;</a>
+                            </div>
+                            <div class="col-span-4 column-bordered">
+                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">CORE TECH STACK</p>
+                                <p class="body-sm">Python, Count-Min Sketch, LightGBM, TreeSHAP</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- THE PROBLEM & THE SOLUTION -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-6 column-bordered">
+                        <span class="kicker-label" style="color: var(--stamp);">THE SYSTEM CHALLENGE</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0; font-size: 28px;">Memory Bottlenecks Under High Volume</h3>
+                        <p class="body-lg" style="line-height: 1.7;"><span class="dropcap">E</span>nterprise Security Operations Centers (SOCs) process tens of millions of audit events daily. Conventional User and Entity Behavior Analytics (UEBA) tools store raw historical log arrays per user, causing memory consumption to grow linearly $O(N)$ and triggering server out-of-memory (OOM) crashes during traffic spikes.</p>
+                    </div>
+                    
+                    <div class="col-span-6">
+                        <span class="kicker-label" style="color: var(--stamp);">THE ARCHITECTURAL SOLUTION</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0; font-size: 28px;">Fixed $O(1)$ Memory Profiling</h3>
+                        <p class="body-lg" style="line-height: 1.7;"><span class="dropcap">S</span>entinel-Stream replaces raw event arrays with Exponentially Weighted Moving Averages (EWMA) and Count-Min Sketch tables ($4\text{ KB}$ fixed matrix), bounding memory per user to just <b>2 KB of RAM</b>. It detects anomalous behavior in under <b>2.64 milliseconds</b> while providing immediate TreeSHAP feature explanations.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KEY RESULTS METRICS -->
+            <section class="section" style="padding: 30px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-3 text-center column-bordered">
+                        <p class="display-lg" style="margin:0; color: var(--stamp); font-size: 44px;">2.64 ms</p>
+                        <p class="meta bold uppercase" style="margin-top: 5px;">P99 Inference Speed</p>
+                    </div>
+                    <div class="col-span-3 text-center column-bordered">
+                        <p class="display-lg" style="margin:0; color: var(--stamp); font-size: 44px;">~2 KB</p>
+                        <p class="meta bold uppercase" style="margin-top: 5px;">Fixed RAM / Entity</p>
+                    </div>
+                    <div class="col-span-3 text-center column-bordered">
+                        <p class="display-lg" style="margin:0; color: var(--stamp); font-size: 44px;">0.9403</p>
+                        <p class="meta bold uppercase" style="margin-top: 5px;">NSL-KDD Macro F1</p>
+                    </div>
+                    <div class="col-span-3 text-center">
+                        <p class="display-lg" style="margin:0; color: var(--stamp); font-size: 44px;">24.6×</p>
+                        <p class="meta bold uppercase" style="margin-top: 5px;">Faster Than Random Forest</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ARCHITECTURE PIPELINE -->
+            <section class="section" style="padding: 30px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <div class="arch-diagram-box">
+                            <span class="kicker-label" style="color: var(--stamp);">SYSTEM ARCHITECTURE</span>
+                            <h4 class="heading-md" style="margin: 10px 0 15px 0;">O(1) Profiler &amp; Two-Stage Machine Learning Pipeline</h4>
+                            <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center;">
+                                <div class="arch-node">Event Ingestion<br><small style="font-weight:normal;">Kafka / Audit Stream</small></div>
+                                <span class="arch-arrow">&rarr;</span>
+                                <div class="arch-node">O(1) EWMA Profiler<br><small style="font-weight:normal;">4 KB Matrix / Entity</small></div>
+                                <span class="arch-arrow">&rarr;</span>
+                                <div class="arch-node">Stage 1: IsoForest<br><small style="font-weight:normal;">Cold-Start Risk Score</small></div>
+                                <span class="arch-arrow">&rarr;</span>
+                                <div class="arch-node">Stage 2: LightGBM<br><small style="font-weight:normal;">Multi-Class Classifier</small></div>
+                                <span class="arch-arrow">&rarr;</span>
+                                <div class="arch-node">TreeSHAP Rationale<br><small style="font-weight:normal;">Sub-30&mu;s Explanation</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INTERACTIVE DEMO WORKBENCH -->
+            <section class="section" style="padding: 40px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label">INTERACTIVE DEMONSTRATION</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0; font-size: 32px;">Live UEBA Threat Inspection Workbench</h3>
+                        <p class="body-lg" style="margin-bottom: 25px;">Select an enterprise threat scenario to observe real-time anomaly classification, latency metrics, and feature attributions:</p>
+
+                        <div class="workbench-box">
+                            <div>
+                                <button class="wb-btn" onclick="runScenario('brute')">⚡ Test 1: Password Brute-Force</button>
+                                <button class="wb-btn" onclick="runScenario('travel')">🌍 Test 2: Impossible Geo-Travel</button>
+                                <button class="wb-btn" onclick="runScenario('exfil')">📤 Test 3: Data Exfiltration</button>
+                                <button class="wb-btn" onclick="runScenario('normal')">✅ Test 4: Normal Employee Baseline</button>
+                            </div>
+
+                            <table class="wb-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 120px;">Timestamp</th>
+                                        <th style="width: 160px;">User Account</th>
+                                        <th>Observed Event</th>
+                                        <th style="width: 140px;">Threat Level</th>
+                                        <th style="width: 100px;">Latency</th>
+                                        <th>Detection Rationale</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="wbTableBody">
+                                    <tr class="anim-row">
+                                        <td>18:36:01</td>
+                                        <td><b>sarah_marketing</b></td>
+                                        <td>Opened standard project documents</td>
+                                        <td><span class="badge-safe">SAFE (NOMINAL)</span></td>
+                                        <td>1.42 ms</td>
+                                        <td>Activity matches normal daily baseline behavior.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <script>
+                function runScenario(type) {
+                    const tbody = document.getElementById('wbTableBody');
+                    const ts = new Date().toISOString().substring(11, 19);
+
+                    let user = '', event = '', badge = '', lat = '', why = '';
+
+                    if (type === 'brute') {
+                        user = 'admin_john';
+                        event = '45 failed login attempts in 10 seconds';
+                        badge = '<span class="badge-critical">CRITICAL THREAT</span>';
+                        lat = '1.84 ms';
+                        why = 'High login failure frequency (+0.54 risk attribution) + sudden rate spike.';
+                    } else if (type === 'travel') {
+                        user = 'exec_rachel';
+                        event = 'Login from Tokyo 5m after New York session';
+                        badge = '<span class="badge-high">HIGH RISK</span>';
+                        lat = '2.12 ms';
+                        why = 'Physical speed threshold exceeded (+0.68 geo-velocity risk attribution).';
+                    } else if (type === 'exfil') {
+                        user = 'dev_service';
+                        event = '14.2 GB database download outside work hours';
+                        badge = '<span class="badge-critical">CRITICAL THREAT</span>';
+                        lat = '1.95 ms';
+                        why = 'Abnormal outbound data volume (+0.76 EWMA volume risk attribution).';
+                    } else {
+                        user = 'sarah_marketing';
+                        event = 'Opened standard project documents';
+                        badge = '<span class="badge-safe">SAFE (NOMINAL)</span>';
+                        lat = '1.42 ms';
+                        why = 'Activity matches normal daily baseline behavior.';
+                    }
+
+                    const newRow = document.createElement('tr');
+                    newRow.className = 'anim-row';
+                    newRow.innerHTML = `
+                        <td>${ts}</td>
+                        <td><b>${user}</b></td>
+                        <td>${event}</td>
+                        <td>${badge}</td>
+                        <td>${lat}</td>
+                        <td>${why}</td>
+                    `;
+
+                    tbody.insertBefore(newRow, tbody.firstChild);
+                }
+            </script>
+"""
+
+CIPHERPULSE_CONTENT = """
             <!-- HERO -->
             <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0;">
                 <div class="newspaper-grid">
@@ -312,17 +511,12 @@
                     tbody.insertBefore(newRow, tbody.firstChild);
                 }
             </script>
+"""
 
-        </main>
-        
-        <!-- FOOTER -->
-        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0; margin-top: 60px;">
-            <div class="newspaper-grid">
-                <div class="col-span-12 text-center">
-                    <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
-                </div>
-            </div>
-        </footer>
-    </div>
-</body>
-</html>
+with open('pages/sentinel-stream.html', 'w') as f:
+    f.write(PAGE_TEMPLATE.replace('{title}', 'Sentinel-Stream').replace('{content}', SENTINEL_CONTENT))
+
+with open('pages/cipherpulse.html', 'w') as f:
+    f.write(PAGE_TEMPLATE.replace('{title}', 'CipherPulse').replace('{content}', CIPHERPULSE_CONTENT))
+
+print("Successfully generated clean, perfectly structured, ultra-readable broadsheet pages!")
