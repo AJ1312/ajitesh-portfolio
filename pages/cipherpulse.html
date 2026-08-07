@@ -11,7 +11,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <link rel="stylesheet" href="../css/styles.css">
     <style>
-        /* DISPATCH BROADCAST STYLES */
         .pill-tag {{
             display: inline-block;
             background: var(--ink);
@@ -24,178 +23,150 @@
             margin-right: 6px;
             margin-bottom: 8px;
         }}
-        .tech-box {{
+        .summary-box {{
             background: var(--paper-warm);
             border: 2px solid var(--rule-dark);
             padding: 30px;
-            margin: 35px 0;
+            margin: 30px 0;
         }}
-        .tech-box-header {{
-            background: var(--ink);
-            color: var(--paper-bright);
-            padding: 10px 18px;
-            margin: -30px -30px 25px -30px;
-            font-weight: bold;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }}
-        .decision-callout {{
-            border-left: 6px solid var(--stamp);
-            background: var(--paper-bright);
-            border-top: 2px solid var(--rule-dark);
-            border-right: 2px solid var(--rule-dark);
-            border-bottom: 2px solid var(--rule-dark);
-            padding: 25px 30px;
-            margin: 35px 0;
-        }}
-        .metrics-card-grid {{
+        .metrics-grid {{
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
-            margin: 25px 0;
+            margin: 30px 0;
         }}
-        .metric-card {{
+        .metric-card-box {{
             background: var(--paper-bright);
             border: 2px solid var(--rule-dark);
-            padding: 22px;
+            padding: 24px;
             text-align: center;
         }}
-        .metric-val-lg {{
+        .metric-val-huge {{
             font-family: var(--font-display);
-            font-size: 40px;
+            font-size: 42px;
             font-weight: 900;
             color: var(--stamp);
-            margin-bottom: 4px;
+            margin-bottom: 5px;
             line-height: 1.1;
         }}
-        .metric-title {{
+        .metric-lbl-bold {{
             font-weight: 700;
             text-transform: uppercase;
             font-size: 12px;
             letter-spacing: 0.5px;
             margin-bottom: 6px;
         }}
-        .metric-caption {{
+        .metric-desc-sm {{
             font-size: 13px;
             color: #555;
             line-height: 1.4;
         }}
-        .pipeline-step-box {{
-            border-bottom: 1px solid var(--rule);
-            padding: 20px 0;
+        .workbench-container {{
+            border: 2px solid var(--rule-dark);
+            background: var(--paper-warm);
+            padding: 30px;
+            margin: 40px 0;
         }}
-        .pipeline-step-num {{
-            font-family: var(--font-display);
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--stamp);
-            margin-right: 12px;
+        .wb-btn-action {{
+            background: var(--ink);
+            color: var(--paper);
+            border: 2px solid var(--ink);
+            padding: 10px 18px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+            font-family: var(--font-body);
         }}
-        .tools-table {{
+        .wb-btn-action:hover {{
+            background: var(--stamp);
+            border-color: var(--stamp);
+            color: #fff;
+        }}
+        .wb-table-clean {{
             width: 100%;
             border-collapse: collapse;
+            font-family: var(--font-body);
             font-size: 14px;
-            margin: 25px 0;
+            margin-top: 20px;
             background: var(--paper-bright);
             border: 2px solid var(--rule-dark);
         }}
-        .tools-table th {{
+        .wb-table-clean th {{
             background: var(--ink);
             color: var(--paper-bright);
-            padding: 12px 16px;
+            padding: 12px;
             text-align: left;
             font-size: 12px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }}
-        .tools-table td {{
-            padding: 14px 16px;
+        .wb-table-clean td {{
+            padding: 14px 12px;
             border-bottom: 1px solid var(--rule);
             line-height: 1.5;
         }}
-
-        /* ANIMATED SIMULATION STYLES */
-        .anim-canvas-box {{
-            background: #0f172a;
-            color: #f8fafc;
+        .anim-fade-row {{
+            animation: fadeInRow 0.4s ease-out forwards;
+        }}
+        @keyframes fadeInRow {{
+            from {{
+                opacity: 0;
+                transform: translateY(-8px);
+                background-color: #fef08a;
+            }}
+            to {{
+                opacity: 1;
+                transform: translateY(0);
+                background-color: transparent;
+            }}
+        }}
+        .badge-red {{
+            display: inline-block;
+            padding: 4px 10px;
+            background: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #dc2626;
+            font-weight: 700;
+            font-size: 12px;
+        }}
+        .badge-amber {{
+            display: inline-block;
+            padding: 4px 10px;
+            background: #fef3c7;
+            color: #d97706;
+            border: 1px solid #d97706;
+            font-weight: 700;
+            font-size: 12px;
+        }}
+        .badge-green {{
+            display: inline-block;
+            padding: 4px 10px;
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #15803d;
+            font-weight: 700;
+            font-size: 12px;
+        }}
+        .arch-image-card {{
             border: 2px solid var(--rule-dark);
-            border-radius: 4px;
-            padding: 25px;
-            margin: 35px 0;
-            font-family: var(--font-mono, monospace);
+            background: var(--paper-bright);
+            padding: 12px;
+            margin: 25px 0;
         }}
-        .anim-stage-track {{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            margin: 40px 0 30px 0;
-        }}
-        .anim-stage-track::before {{
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: #334155;
-            z-index: 1;
-        }}
-        .anim-stage-node {{
-            position: relative;
-            z-index: 2;
-            background: #1e293b;
-            border: 2px solid #475569;
-            padding: 10px 14px;
-            border-radius: 6px;
-            text-align: center;
-            font-size: 12px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            min-width: 140px;
-        }}
-        .anim-stage-node.active {{
-            border-color: #ef4444;
-            background: #7f1d1d;
-            color: #fff;
-            box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
-        }}
-        .packet-dot {{
-            position: absolute;
-            width: 14px;
-            height: 14px;
-            background: #38bdf8;
-            border-radius: 50%;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 3;
-            box-shadow: 0 0 12px #38bdf8;
-            transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }}
-        .replay-btn {{
-            background: #38bdf8;
-            color: #0f172a;
-            border: none;
-            padding: 8px 16px;
-            font-weight: bold;
-            font-size: 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            text-transform: uppercase;
-        }}
-        .replay-btn:hover {{
-            background: #7dd3fc;
-        }}
-
-        @media (prefers-reduced-motion: reduce) {{
-            .packet-dot {{ transition: none !important; }}
-            .anim-stage-node {{ transition: none !important; }}
-            .anim-row {{ animation: none !important; }}
+        .arch-image-card img {{
+            width: 100%;
+            height: auto;
+            display: block;
         }}
     </style>
 </head>
 <body class="newspaper-theme">
-    <div class="container">
+    <div class="container" style="max-width: 1100px;">
         
         <!-- SUBPAGE HEADER -->
         <header class="masthead" style="margin-top: 20px;">
@@ -214,12 +185,12 @@
         <main class="dispatch-content">
 
             <!-- 1. HERO SECTION -->
-            <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0;">
+            <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 45px 0 35px 0;">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
-                        <p class="kicker-label">FIELD DISPATCH &mdash; SYSTEMS ENGINEERING REPORT</p>
-                        <h1 class="display-xl" style="margin-bottom: 15px; font-size: 52px;">CipherPulse</h1>
-                        <p class="display-sm" style="max-width: 850px; font-style: italic; line-height: 1.4; margin-bottom: 20px;">Multi-Threaded C++ Engine for Encrypted Traffic Intelligence &amp; Line-Rate Inspection</p>
+                        <p class="kicker-label">FIELD DISPATCH &mdash; HIGH-SPEED NETWORKING &amp; SECURITY</p>
+                        <h1 class="display-xl" style="margin-bottom: 15px; font-size: 50px;">CipherPulse</h1>
+                        <p class="display-sm" style="max-width: 900px; font-style: italic; line-height: 1.4; margin-bottom: 22px;">The X-Ray Security Scanner for Encrypted Traffic That Catches Hidden Malware Without Invading Privacy</p>
                         
                         <!-- TECH PILLS -->
                         <div style="margin-bottom: 25px;">
@@ -242,7 +213,7 @@
             </section>
 
             <!-- 2. MOTIVATION PARAGRAPH -->
-            <section class="section" style="padding: 35px 0; border-bottom: 1px solid var(--rule);">
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
                         <span class="kicker-label" style="color: var(--stamp);">PROJECT MOTIVATION</span>
@@ -253,190 +224,154 @@
             </section>
 
             <!-- 3. REAL-WORLD USE CASE SCENARIO -->
-            <section class="section" style="padding: 35px 0; border-bottom: 1px solid var(--rule);">
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
-                        <span class="kicker-label" style="color: var(--stamp);">REAL-WORLD SCENARIO</span>
-                        <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Detecting Encrypted C2 Channels at Line-Rate</h3>
+                        <span class="kicker-label" style="color: var(--stamp);">REAL-WORLD USE CASE</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Catching Encrypted Hacker Signals at Line-Rate Speed</h3>
                         <p class="body-lg" style="line-height: 1.75;"><span class="dropcap">P</span>icture a network security appliance sitting at a company's edge, watching gigabit traffic in real time. Malware on an internal machine tries to phone home to its command-and-control server over a fully encrypted connection with no recognizable hostname. CipherPulse can't decrypt the traffic — it doesn't need to. It fingerprints the way the malware's TLS client negotiates its handshake and matches it against known C2 signatures, notices that the packets checked in at suspiciously regular intervals, and flags the flow as likely C2 beaconing — all while processing packets from thousands of other simultaneous connections without a single thread ever waiting on another.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- 4. RETHOUGHT INTERACTIVE ANIMATED SIMULATION -->
+            <!-- 4. GENERATED ARCHITECTURE DIAGRAM IMAGE -->
             <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
-                        <span class="kicker-label" style="color: var(--stamp);">PIPELINE ANIMATION</span>
-                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">Interactive 5-Tuple Packet Router &amp; JA4+ Fingerprint Simulator</h3>
-
-                        <div class="anim-canvas-box" id="cipherAnimBox">
-                            <div style="display:flex; justify-space-between; align-items:center; border-bottom:1px solid #334155; padding-bottom:15px; margin-bottom:20px;">
-                                <div>
-                                    <span style="color:#38bdf8; font-weight:bold;">LOCK-FREE PACKET INGESTION</span>
-                                    <span style="font-size:12px; color:#94a3b8; margin-left:10px;">eBPF / AF_PACKET Ingress</span>
-                                </div>
-                                <button class="replay-btn" onclick="playCipherAnim()">▶ Replay Packet Routing</button>
-                            </div>
-
-                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px; margin-bottom:20px;">
-                                <!-- Packet Hash Router -->
-                                <div style="background:#020617; border:1px solid #1e293b; padding:15px; border-radius:4px;">
-                                    <div style="font-size:12px; color:#94a3b8; font-weight:bold; margin-bottom:10px;">5-TUPLE CONSISTENT HASH ROUTER</div>
-                                    <div id="pktStream" style="font-size:13px; line-height:1.6;">
-                                        [INGRESS] 10.0.4.12:49152 &rarr; 185.220.101.5:443 (TCP)<br>
-                                        &rarr; Hash: <code>0x8f2c41a0</code> &rarr; <span style="color:#38bdf8; font-weight:bold;">Worker Thread #2</span>
-                                    </div>
-                                </div>
-
-                                <!-- JA4+ Fingerprint Matcher -->
-                                <div style="background:#020617; border:1px solid #1e293b; padding:15px; border-radius:4px;">
-                                    <div style="font-size:12px; color:#94a3b8; font-weight:bold; margin-bottom:10px;">JA4+ TLS CLIENTHELLO FINGERPRINT</div>
-                                    <div id="ja4Match" style="font-size:13px; line-height:1.6;">
-                                        Cipher Suites Sorted &amp; Hashed:<br>
-                                        <code>t13d190800_c84a8b291410</code><br>
-                                        <span style="color:#ef4444; font-weight:bold;">[MATCH: CobaltStrike C2 Signature]</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div style="background:#020617; border:1px solid #1e293b; padding:15px; border-radius:4px; font-size:13px;" id="cipherConsole">
-                                [IDLE] Press "Replay Packet Routing" or scroll to simulate 5-tuple consistent hashing and JA4+ fingerprint extraction...
-                            </div>
+                        <span class="kicker-label" style="color: var(--stamp);">SYSTEM ARCHITECTURE DIAGRAM</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Lock-Free Fast-Path Traffic Inspection Pipeline</h3>
+                        
+                        <div class="arch-image-card">
+                            <img src="../images/architecture/cipherpulse_arch.png" alt="CipherPulse System Architecture Diagram">
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 5. STEP-BY-STEP PIPELINE WALKTHROUGH -->
+            <!-- 5. INTERACTIVE LIVE DEMO WORKBENCH -->
             <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
-                        <span class="kicker-label">TECHNICAL ARCHITECTURE</span>
+                        <span class="kicker-label">INTERACTIVE CONSOLE</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">Live Encrypted Traffic X-Ray Inspection Workbench</h3>
+                        <p class="body-lg" style="margin-bottom: 25px;">Select a network stream to observe real-time JA4+ fingerprint extraction and threat classification:</p>
+
+                        <div class="workbench-container">
+                            <div>
+                                <button class="wb-btn-action" onclick="runCipherSim('normal')">▶ Stream 1: Standard HTTPS Browsing</button>
+                                <button class="wb-btn-action" onclick="runCipherSim('c2')">🚨 Stream 2: Encrypted C2 Hacker Beacon</button>
+                                <button class="wb-btn-action" onclick="runCipherSim('bench')">⚡ Stream 3: High-Speed Multi-Thread Test</button>
+                            </div>
+
+                            <table class="wb-table-clean">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 110px;">Timestamp</th>
+                                        <th>Network Connection</th>
+                                        <th style="width: 220px;">JA4+ Fingerprint Hash</th>
+                                        <th>Traffic Rhythm</th>
+                                        <th style="width: 160px;">Security Verdict</th>
+                                        <th style="width: 140px;">Action Taken</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="wbCipherBody">
+                                    <tr class="anim-fade-row">
+                                        <td>18:51:01</td>
+                                        <td><b>192.168.1.45 &rarr; Google:443</b></td>
+                                        <td><code>t13d151600_8daaf6152702</code></td>
+                                        <td>Random human interaction timing</td>
+                                        <td><span class="badge-green">SAFE (BENIGN)</span></td>
+                                        <td>Allowed</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. STEP-BY-STEP PIPELINE WALKTHROUGH -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label">DETAILED WALKTHROUGH</span>
                         <h3 class="heading-lg" style="margin: 10px 0 25px 0;">7-Stage Packet Inspection Pipeline</h3>
 
-                        <div class="pipeline-step-box">
-                            <h4 class="heading-md"><span class="pipeline-step-num">01</span> RAW Packet Ingestion</h4>
-                            <p class="body-lg">Captures raw ethernet frames directly from network interfaces or PCAP dumps using eBPF or high-speed AF_PACKET sockets. Reader threads perform zero-copy packet header extraction.</p>
-                            <p class="meta" style="margin-top:8px;"><b>Tools:</b> eBPF / AF_PACKET, POSIX threads &middot; <b>Why:</b> Avoids standard socket buffer copy overhead, capturing line-rate headers directly at kernel ingress.</p>
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">01</span> RAW Packet Ingestion</h4>
+                            <p class="body-lg">Captures raw ethernet frames directly from network sockets using eBPF or high-speed AF_PACKET for zero-copy memory speed.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> eBPF / AF_PACKET, POSIX threads &middot; <b>Why:</b> Captures line-rate headers directly at kernel ingress without socket buffer copy overhead.</p>
                         </div>
 
-                        <div class="pipeline-step-box">
-                            <h4 class="heading-md"><span class="pipeline-step-num">02</span> Consistent 5-Tuple Hashing</h4>
-                            <p class="body-lg">Extracts the packet's 5-tuple (source IP, destination IP, source port, destination port, transport protocol) and hashes it deterministically. All packets belonging to the exact same flow always land on the same worker thread queue.</p>
-                            <p class="meta" style="margin-top:8px;"><b>Tools:</b> <code>std::hash</code>, custom <code>ThreadSafeQueue</code> &middot; <b>Why:</b> Eliminates cross-thread state synchronization because a single worker thread owns 100% of a flow's lifecycle.</p>
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">02</span> Consistent 5-Tuple Hashing</h4>
+                            <p class="body-lg">Hashes the 5-tuple (source/dest IP, ports, protocol) so all packets of a single flow land on the exact same worker thread queue.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> <code>std::hash</code>, custom <code>ThreadSafeQueue</code> &middot; <b>Why:</b> Eliminates cross-thread locks because one thread owns a flow's lifecycle.</p>
                         </div>
 
-                        <div class="pipeline-step-box">
-                            <h4 class="heading-md"><span class="pipeline-step-num">03</span> Lock-Free Fast Path Processing</h4>
-                            <p class="body-lg">Worker threads execute inside dedicated processing loops. Each thread maintains an isolated flow table (<code>std::unordered_map&lt;FiveTuple, FlowTracker&gt;</code>), enabling 100% lock-free lookups and state updates on the hot path.</p>
-                            <p class="meta" style="margin-top:8px;"><b>Tools:</b> C++17 STL, <code>std::thread</code> &middot; <b>Why:</b> Eliminates mutex lock contention on core packet processing loops, preventing thread stalling during traffic bursts.</p>
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">03</span> Lock-Free Fast Path Processing</h4>
+                            <p class="body-lg">Worker threads execute inside dedicated loops with isolated flow tables, enabling 100% lock-free lookups on the hot path.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> C++17 STL, <code>std::thread</code> &middot; <b>Why:</b> Eliminates mutex contention on core packet loops during high traffic bursts.</p>
                         </div>
 
-                        <div class="pipeline-step-box">
-                            <h4 class="heading-md"><span class="pipeline-step-num">04</span> JA4+ Fingerprint Extraction</h4>
-                            <p class="body-lg">Parses TLS ClientHello handshakes, extracts cipher suites and extension lists, filters out GREASE noise extensions, and hashes the sorted strings into a stable 12-character JA4 fingerprint using FNV-1a.</p>
-                            <p class="meta" style="margin-top:8px;"><b>Tools:</b> Pure C++17, FNV-1a Hash &middot; <b>Why:</b> Identifies client application types (e.g., Cobalt Strike, Sliver, Python requests) even when SNI hostname is encrypted via ECH.</p>
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">04</span> JA4+ Fingerprint Extraction</h4>
+                            <p class="body-lg">Parses TLS ClientHello handshakes, sorts ciphers, filters GREASE noise extensions, and hashes into a stable JA4 signature using FNV-1a.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> Pure C++17, FNV-1a Hash &middot; <b>Why:</b> Identifies client applications (Cobalt Strike, Sliver) even when hostname is encrypted.</p>
                         </div>
 
-                        <div class="pipeline-step-box">
-                            <h4 class="heading-md"><span class="pipeline-step-num">05</span> Active DNS Correlation Cache</h4>
-                            <p class="body-lg">Maintains an in-memory cache of IP-to-domain mappings parsed from plaintext DNS response packets, automatically expiring entries using TTL timestamps to label encrypted TLS IP connections with human-readable domains.</p>
-                            <p class="meta" style="margin-top:8px;"><b>Tools:</b> Custom DNS Correlator &middot; <b>Why:</b> Provides context for destination IP addresses when ClientHello Encrypted Server Name Indication (ESNI/ECH) conceals hostnames.</p>
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">05</span> Active DNS Correlation Cache</h4>
+                            <p class="body-lg">Maintains an in-memory cache of IP-to-domain mappings from plaintext DNS responses, automatically expiring entries via TTL timestamps.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> Custom DNS Correlator &middot; <b>Why:</b> Labels encrypted IP connections with human-readable domain names.</p>
                         </div>
 
-                        <div class="pipeline-step-box">
-                            <h4 class="heading-md"><span class="pipeline-step-num">06</span> Welford Flow Periodicity Analysis</h4>
-                            <p class="body-lg">Calculates running packet size and inter-arrival time statistics per flow using Welford's algorithm. It computes a Coefficient of Variation ($	ext{CoV} = rac{\sigma}{\mu}$) to flag suspiciously periodic metronome-like C2 beaconing signals ($	ext{CoV} < 0.12$).</p>
-                            <p class="meta" style="margin-top:8px;"><b>Tools:</b> Welford Online Variance Engine &middot; <b>Why:</b> Computes exact numerical mean and variance in $O(1)$ constant time per packet without storing raw packet arrival timestamps.</p>
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">06</span> Welford Flow Periodicity Check</h4>
+                            <p class="body-lg">Calculates running packet inter-arrival statistics using Welford's algorithm to compute Coefficient of Variation ($	ext{CoV} < 0.12$) for beaconing.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> Welford Online Variance Engine &middot; <b>Why:</b> Computes exact numerical variance in constant $O(1)$ time per packet.</p>
                         </div>
 
-                        <div class="pipeline-step-box" style="border:none;">
-                            <h4 class="heading-md"><span class="pipeline-step-num">07</span> Structured Audit Log &amp; PCAP Output</h4>
-                            <p class="body-lg">Outputs filtered threat pcap files and streams structured JSON threat alerts detailing matched JA4 signatures, flow periodicity metrics, and recommended eBPF firewall drop rules.</p>
-                            <p class="meta" style="margin-top:8px;"><b>Tools:</b> C++ File I/O, nlohmann::json &middot; <b>Why:</b> Provides structured audit logs easily consumed by enterprise SIEM and eBPF kernel enforcement modules.</p>
+                        <div style="padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">07</span> Structured Audit Log Output</h4>
+                            <p class="body-lg">Outputs filtered PCAPs and streams structured JSON threat alerts detailing matched JA4 signatures and recommended eBPF drop rules.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> C++ File I/O, nlohmann::json &middot; <b>Why:</b> Structured audit logs easily consumed by enterprise SIEM modules.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 6. TOOLS & LIBRARIES TABLE -->
+            <!-- 7. RESULTS METRICS GRID -->
             <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
-                        <span class="kicker-label">STACK JUSTIFICATION</span>
-                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">Tools &amp; Libraries Selection Table</h3>
+                        <span class="kicker-label" style="color: var(--stamp);">EMPIRICAL BENCHMARKS</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">System Performance</h3>
 
-                        <table class="tools-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 220px;">Tool / Library</th>
-                                    <th style="width: 260px;">Role in CipherPulse</th>
-                                    <th>Design Justification ("Why this, not X?")</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><b>Pure C++17 STL</b></td>
-                                    <td>Core Engine &amp; Data Structures</td>
-                                    <td>Chosen over external frameworks for zero third-party dependencies, strict memory alignment, and predictable assembly generation.</td>
-                                </tr>
-                                <tr>
-                                    <td><b>POSIX Threads (pthreads)</b></td>
-                                    <td>Parallel Worker Threading</td>
-                                    <td>Chosen over Boost.Asio for direct low-level control over CPU core pinning and thread affinity.</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Consistent 5-Tuple Hashing</b></td>
-                                    <td>Thread Dispatch Router</td>
-                                    <td>Chosen over round-robin load balancing to ensure all packets of one connection remain local to a single thread's flow table.</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Welford's Algorithm</b></td>
-                                    <td>Flow Periodicity Statistics</td>
-                                    <td>Chosen over sliding window timestamp arrays to calculate variance online in $O(1)$ constant time per packet.</td>
-                                </tr>
-                                <tr>
-                                    <td><b>CMake</b></td>
-                                    <td>Build System &amp; Test Suite</td>
-                                    <td>Chosen for cross-platform C++ compilation and seamless integration with native GoogleTest unit test suites.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 7. RESULTS & METRICS GRID -->
-            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
-                <div class="newspaper-grid">
-                    <div class="col-span-12">
-                        <span class="kicker-label" style="color: var(--stamp);">SYSTEM BENCHMARKS</span>
-                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">Empirical Performance Metrics</h3>
-
-                        <div class="metrics-card-grid">
-                            <div class="metric-card">
-                                <div class="metric-val-lg">ZERO</div>
-                                <div class="metric-title">Hot-Path Lock Contention</div>
-                                <div class="metric-caption">100% thread-isolated flow tables via deterministic 5-tuple consistent hashing.</div>
+                        <div class="metrics-grid">
+                            <div class="metric-card-box">
+                                <div class="metric-val-huge">ZERO</div>
+                                <div class="metric-lbl-bold">Hot-Path Lock Contention</div>
+                                <div class="metric-desc-sm">100% thread-isolated flow tables via deterministic 5-tuple consistent hashing.</div>
                             </div>
 
-                            <div class="metric-card">
-                                <div class="metric-val-lg">JA4+</div>
-                                <div class="metric-title">TLS Fingerprinting</div>
-                                <div class="metric-caption">Extracts ClientHello ciphers &amp; extensions while filtering GREASE noise.</div>
+                            <div class="metric-card-box">
+                                <div class="metric-val-huge">JA4+</div>
+                                <div class="metric-lbl-bold">TLS Fingerprinting</div>
+                                <div class="metric-desc-sm">Extracts ClientHello ciphers &amp; extensions while filtering GREASE noise.</div>
                             </div>
 
-                            <div class="metric-card">
-                                <div class="metric-val-lg">&lt; 0.12</div>
-                                <div class="metric-title">C2 Beaconing Threshold</div>
-                                <div class="metric-caption">Welford Coefficient of Variation ($	ext{CoV}$) threshold flagging automated malware pulses.</div>
+                            <div class="metric-card-box">
+                                <div class="metric-val-huge">&lt; 0.12</div>
+                                <div class="metric-lbl-bold">C2 Beaconing Threshold</div>
+                                <div class="metric-desc-sm">Welford Coefficient of Variation ($	ext{CoV}$) threshold flagging automated malware pulses.</div>
                             </div>
 
-                            <div class="metric-card">
-                                <div class="metric-val-lg">ZERO</div>
-                                <div class="metric-title">External Dependencies</div>
-                                <div class="metric-caption">Built in pure C++17 STL for maximum portability and zero third-party library bloat.</div>
+                            <div class="metric-card-box">
+                                <div class="metric-val-huge">ZERO</div>
+                                <div class="metric-lbl-bold">External Dependencies</div>
+                                <div class="metric-desc-sm">Built in pure C++17 STL for maximum portability and zero third-party library bloat.</div>
                             </div>
                         </div>
 
@@ -448,23 +383,23 @@
             </section>
 
             <!-- 8. KEY TECHNICAL DECISION CALLOUT -->
-            <section class="section" style="padding: 20px 0;">
+            <section class="section" style="padding: 30px 0;">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
-                        <div class="decision-callout">
-                            <span class="kicker-label" style="color: var(--stamp);">KEY ARCHITECTURAL DECISION</span>
-                            <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Lock-Free Threading via Deterministic 5-Tuple Hashing</h3>
+                        <div style="border-left: 6px solid var(--stamp); background: var(--paper-warm); border-top: 2px solid var(--rule-dark); border-right: 2px solid var(--rule-dark); border-bottom: 2px solid var(--rule-dark); padding: 25px 30px;">
+                            <span class="kicker-label" style="color: var(--stamp);">KEY DESIGN DECISION</span>
+                            <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Lock-Free Threading via 5-Tuple Consistent Hashing</h3>
                             <p class="body-lg" style="line-height: 1.7; margin: 0;"><span class="dropcap">R</span>ather than using a shared global connection table protected by mutex locks, CipherPulse routes every incoming packet through a 5-tuple consistent hashing function. Because all packets belonging to a specific TCP/UDP flow hash to the exact same worker thread, that worker thread owns 100% of the flow's lifecycle inside an isolated <code>std::unordered_map</code>. This eliminates cross-thread mutex contention on the packet processing hot path, allowing worker threads to scale linearly across CPU cores without locking overhead.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 9. GITHUB CTA & FUTURE IMPROVEMENTS -->
+            <!-- 9. GITHUB CTA & IMPROVEMENTS -->
             <section class="section" style="padding: 40px 0 20px 0; border-top: 1px solid var(--rule);">
                 <div class="newspaper-grid">
                     <div class="col-span-12 text-center">
-                        <h3 class="heading-lg" style="margin-bottom: 15px;">Explore the Source Code</h3>
+                        <h3 class="heading-lg" style="margin-bottom: 15px;">Explore the Project Source Code</h3>
                         <div style="margin-bottom: 25px;">
                             <a href="https://github.com/AJ1312/CipherPulse" target="_blank" class="btn-github">⭐ View CipherPulse on GitHub</a>
                         </div>
@@ -476,45 +411,45 @@
             </section>
 
             <script>
-                function playCipherAnim() {
-                    const consoleEl = document.getElementById('cipherConsole');
-                    const pktStream = document.getElementById('pktStream');
-                    const ja4Match = document.getElementById('ja4Match');
+                function runCipherSim(type) {
+                    const tbody = document.getElementById('wbCipherBody');
+                    const ts = new Date().toISOString().substring(11, 19);
 
-                    consoleEl.innerHTML = '[0.0ms] [INGRESS] eBPF socket capturing raw packets at interface ingress...';
+                    let conn = '', ja4 = '', rhythm = '', badge = '', action = '';
 
-                    setTimeout(() => {
-                        pktStream.innerHTML = `
-                            [INGRESS] 10.0.4.12:49152 &rarr; 185.220.101.5:443 (TCP)<br>
-                            &rarr; 5-Tuple Hash: <code style="color:#fef08a;">0x8f2c41a0</code> &rarr; <span style="color:#38bdf8; font-weight:bold;">Worker Thread #2 (Lock-Free)</span>
-                        `;
-                        consoleEl.innerHTML = '[0.2ms] [HASH ROUTER] Deterministically routed Flow <code>10.0.4.12:49152->185.220.101.5:443</code> to Thread #2. Mutex Contention: 0.';
-                    }, 800);
-
-                    setTimeout(() => {
-                        ja4Match.innerHTML = `
-                            Parsing ClientHello Handshake...<br>
-                            Ciphers Sorted: <code>003c,002f,009c,009d</code><br>
-                            JA4 Fingerprint: <code style="color:#f87171;">t13d190800_c84a8b291410</code>
-                        `;
-                        consoleEl.innerHTML = '[0.6ms] [JA4+ FINGERPRINT] Extracted ClientHello fingerprint. Filtering GREASE extensions...';
-                    }, 1800);
-
-                    setTimeout(() => {
-                        ja4Match.innerHTML += `<br><span style="color:#ef4444; font-weight:bold;">[ALERT: CobaltStrike C2 Signature Matched]</span>`;
-                        consoleEl.innerHTML = '[1.1ms] [WELFORD PERIODICITY] Flow Inter-Arrival CoV = <code>0.0024 (< 0.12)</code>. <b>MALICIOUS C2 BEACON DETECTED & KERNEL FILTERED</b>.';
-                    }, 2800);
-                }
-
-                document.addEventListener('DOMContentLoaded', () => {
-                    if (window.gsap && window.ScrollTrigger) {
-                        ScrollTrigger.create({
-                            trigger: "#cipherAnimBox",
-                            start: "top 75%",
-                            onEnter: () => playCipherAnim()
-                        });
+                    if (type === 'c2') {
+                        conn = '10.0.4.12 &rarr; 185.220.101.5 (Hidden IP)';
+                        ja4 = 't13d190800_c84a8b291410';
+                        rhythm = 'Strict 5.0s metronome pulse (CoV < 0.12)';
+                        badge = '<span class="badge-red">ALERT: C2 BEACON</span>';
+                        action = 'Blocked via eBPF';
+                    } else if (type === 'bench') {
+                        conn = '100,000 Pkts/sec Stream';
+                        ja4 = 'Multi-Flow Hash Ring';
+                        rhythm = '4 CPU Cores Active (0 Mutex Locks)';
+                        badge = '<span class="badge-amber">LOCK-FREE OK</span>';
+                        action = '0 Mutex Drops';
+                    } else {
+                        conn = '192.168.1.45 &rarr; Google:443';
+                        ja4 = 't13d151600_8daaf6152702';
+                        rhythm = 'Random human interaction timing';
+                        badge = '<span class="badge-green">SAFE (BENIGN)</span>';
+                        action = 'Allowed';
                     }
-                });
+
+                    const newRow = document.createElement('tr');
+                    newRow.className = 'anim-fade-row';
+                    newRow.innerHTML = `
+                        <td>${ts}</td>
+                        <td><b>${conn}</b></td>
+                        <td><code>${ja4}</code></td>
+                        <td>${rhythm}</td>
+                        <td>${badge}</td>
+                        <td><b>${action}</b></td>
+                    `;
+
+                    tbody.insertBefore(newRow, tbody.firstChild);
+                }
             </script>
 
         </main>
@@ -528,8 +463,5 @@
             </div>
         </footer>
     </div>
-
-    <script src="../js/main.js" defer></script>
-    <script src="../js/animations.js" defer></script>
 </body>
 </html>

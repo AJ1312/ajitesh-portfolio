@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+import os
+
+PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SENTINEL-STREAM — The Sharma Dispatch</title>
+    <title>{title} — The Sharma Dispatch</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
@@ -183,7 +185,23 @@
         </header>
 
         <main class="dispatch-content">
+{content}
+        </main>
+        
+        <!-- FOOTER -->
+        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0; margin-top: 60px;">
+            <div class="newspaper-grid">
+                <div class="col-span-12 text-center">
+                    <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+"""
 
+SENTINEL_CONTENT = """
             <!-- 1. HERO SECTION -->
             <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 45px 0 35px 0;">
                 <div class="newspaper-grid">
@@ -380,7 +398,7 @@
                         <div style="border-left: 6px solid var(--stamp); background: var(--paper-warm); border-top: 2px solid var(--rule-dark); border-right: 2px solid var(--rule-dark); border-bottom: 2px solid var(--rule-dark); padding: 25px 30px;">
                             <span class="kicker-label" style="color: var(--stamp);">KEY DESIGN DECISION</span>
                             <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Constant $O(1)$ Per-Entity Memory Scaling</h3>
-                            <p class="body-lg" style="line-height: 1.7; margin: 0;"><span class="dropcap">T</span>o prevent memory exhaustion under continuous streaming, SENTINEL-STREAM enforces a strict constant memory footprint per monitored entity ($pprox 4.2	ext{ KB}$). Instead of storing historical event lists $O(N)$, features are computed via Exponentially Weighted Moving Averages (EWMA) and Count-Min Sketch tables. <i>Note on scaling:</i> While memory per entity remains strictly $O(1)$ regardless of stream duration, total system memory scales linearly with the total number of active monitored entities ($O(M)$ for $M$ entities).</p>
+                            <p class="body-lg" style="line-height: 1.7; margin: 0;"><span class="dropcap">T</span>o prevent memory exhaustion under continuous streaming, SENTINEL-STREAM enforces a strict constant memory footprint per monitored entity ($\approx 4.2\text{ KB}$). Instead of storing historical event lists $O(N)$, features are computed via Exponentially Weighted Moving Averages (EWMA) and Count-Min Sketch tables. <i>Note on scaling:</i> While memory per entity remains strictly $O(1)$ regardless of stream duration, total system memory scales linearly with the total number of active monitored entities ($O(M)$ for $M$ entities).</p>
                         </div>
                     </div>
                 </div>
@@ -448,17 +466,282 @@
                     tbody.insertBefore(newRow, tbody.firstChild);
                 }
             </script>
+"""
 
-        </main>
-        
-        <!-- FOOTER -->
-        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0; margin-top: 60px;">
-            <div class="newspaper-grid">
-                <div class="col-span-12 text-center">
-                    <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
+CIPHERPULSE_CONTENT = """
+            <!-- 1. HERO SECTION -->
+            <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 45px 0 35px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <p class="kicker-label">FIELD DISPATCH &mdash; HIGH-SPEED NETWORKING &amp; SECURITY</p>
+                        <h1 class="display-xl" style="margin-bottom: 15px; font-size: 50px;">CipherPulse</h1>
+                        <p class="display-sm" style="max-width: 900px; font-style: italic; line-height: 1.4; margin-bottom: 22px;">The X-Ray Security Scanner for Encrypted Traffic That Catches Hidden Malware Without Invading Privacy</p>
+                        
+                        <!-- TECH PILLS -->
+                        <div style="margin-bottom: 25px;">
+                            <span class="pill-tag">C++17</span>
+                            <span class="pill-tag">POSIX Threads</span>
+                            <span class="pill-tag">Lock-Free Queue</span>
+                            <span class="pill-tag">eBPF / AF_PACKET</span>
+                            <span class="pill-tag">JA4+ Fingerprinting</span>
+                            <span class="pill-tag">Welford CoV</span>
+                        </div>
+
+                        <div class="newspaper-grid" style="border-top: 1px solid var(--rule); padding-top: 20px;">
+                            <div class="col-span-12">
+                                <p class="meta" style="margin-bottom: 4px; font-weight: bold;">GITHUB REPOSITORY</p>
+                                <a href="https://github.com/AJ1312/CipherPulse" target="_blank" class="body-sm" style="color: var(--stamp); font-weight: bold; text-decoration: underline;">github.com/AJ1312/CipherPulse &nearr;</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </footer>
-    </div>
-</body>
-</html>
+            </section>
+
+            <!-- 2. MOTIVATION PARAGRAPH -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">PROJECT MOTIVATION</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Why I Built CipherPulse</h3>
+                        <p class="body-lg" style="line-height: 1.75;"><span class="dropcap">M</span>ost of the internet's traffic is encrypted now, and newer TLS features like Encrypted Client Hello are starting to hide even the destination hostname that used to be visible during the handshake. I wanted to explore how much you can still infer about a connection — what kind of application it is, whether it's malicious — using only signals that remain visible even under full encryption: how a client negotiates its handshake, DNS lookups that precede a connection, and the shape and timing of the encrypted traffic itself. CipherPulse is a multi-threaded C++ engine built around that constraint.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. REAL-WORLD USE CASE SCENARIO -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">REAL-WORLD USE CASE</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Catching Encrypted Hacker Signals at Line-Rate Speed</h3>
+                        <p class="body-lg" style="line-height: 1.75;"><span class="dropcap">P</span>icture a network security appliance sitting at a company's edge, watching gigabit traffic in real time. Malware on an internal machine tries to phone home to its command-and-control server over a fully encrypted connection with no recognizable hostname. CipherPulse can't decrypt the traffic — it doesn't need to. It fingerprints the way the malware's TLS client negotiates its handshake and matches it against known C2 signatures, notices that the packets checked in at suspiciously regular intervals, and flags the flow as likely C2 beaconing — all while processing packets from thousands of other simultaneous connections without a single thread ever waiting on another.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. GENERATED ARCHITECTURE DIAGRAM IMAGE -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">SYSTEM ARCHITECTURE DIAGRAM</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Lock-Free Fast-Path Traffic Inspection Pipeline</h3>
+                        
+                        <div class="arch-image-card">
+                            <img src="../images/architecture/cipherpulse_arch.png" alt="CipherPulse System Architecture Diagram">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. INTERACTIVE LIVE DEMO WORKBENCH -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label">INTERACTIVE CONSOLE</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">Live Encrypted Traffic X-Ray Inspection Workbench</h3>
+                        <p class="body-lg" style="margin-bottom: 25px;">Select a network stream to observe real-time JA4+ fingerprint extraction and threat classification:</p>
+
+                        <div class="workbench-container">
+                            <div>
+                                <button class="wb-btn-action" onclick="runCipherSim('normal')">▶ Stream 1: Standard HTTPS Browsing</button>
+                                <button class="wb-btn-action" onclick="runCipherSim('c2')">🚨 Stream 2: Encrypted C2 Hacker Beacon</button>
+                                <button class="wb-btn-action" onclick="runCipherSim('bench')">⚡ Stream 3: High-Speed Multi-Thread Test</button>
+                            </div>
+
+                            <table class="wb-table-clean">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 110px;">Timestamp</th>
+                                        <th>Network Connection</th>
+                                        <th style="width: 220px;">JA4+ Fingerprint Hash</th>
+                                        <th>Traffic Rhythm</th>
+                                        <th style="width: 160px;">Security Verdict</th>
+                                        <th style="width: 140px;">Action Taken</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="wbCipherBody">
+                                    <tr class="anim-fade-row">
+                                        <td>18:51:01</td>
+                                        <td><b>192.168.1.45 &rarr; Google:443</b></td>
+                                        <td><code>t13d151600_8daaf6152702</code></td>
+                                        <td>Random human interaction timing</td>
+                                        <td><span class="badge-green">SAFE (BENIGN)</span></td>
+                                        <td>Allowed</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. STEP-BY-STEP PIPELINE WALKTHROUGH -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label">DETAILED WALKTHROUGH</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 25px 0;">7-Stage Packet Inspection Pipeline</h3>
+
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">01</span> RAW Packet Ingestion</h4>
+                            <p class="body-lg">Captures raw ethernet frames directly from network sockets using eBPF or high-speed AF_PACKET for zero-copy memory speed.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> eBPF / AF_PACKET, POSIX threads &middot; <b>Why:</b> Captures line-rate headers directly at kernel ingress without socket buffer copy overhead.</p>
+                        </div>
+
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">02</span> Consistent 5-Tuple Hashing</h4>
+                            <p class="body-lg">Hashes the 5-tuple (source/dest IP, ports, protocol) so all packets of a single flow land on the exact same worker thread queue.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> <code>std::hash</code>, custom <code>ThreadSafeQueue</code> &middot; <b>Why:</b> Eliminates cross-thread locks because one thread owns a flow's lifecycle.</p>
+                        </div>
+
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">03</span> Lock-Free Fast Path Processing</h4>
+                            <p class="body-lg">Worker threads execute inside dedicated loops with isolated flow tables, enabling 100% lock-free lookups on the hot path.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> C++17 STL, <code>std::thread</code> &middot; <b>Why:</b> Eliminates mutex contention on core packet loops during high traffic bursts.</p>
+                        </div>
+
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">04</span> JA4+ Fingerprint Extraction</h4>
+                            <p class="body-lg">Parses TLS ClientHello handshakes, sorts ciphers, filters GREASE noise extensions, and hashes into a stable JA4 signature using FNV-1a.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> Pure C++17, FNV-1a Hash &middot; <b>Why:</b> Identifies client applications (Cobalt Strike, Sliver) even when hostname is encrypted.</p>
+                        </div>
+
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">05</span> Active DNS Correlation Cache</h4>
+                            <p class="body-lg">Maintains an in-memory cache of IP-to-domain mappings from plaintext DNS responses, automatically expiring entries via TTL timestamps.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> Custom DNS Correlator &middot; <b>Why:</b> Labels encrypted IP connections with human-readable domain names.</p>
+                        </div>
+
+                        <div style="border-bottom: 1px solid var(--rule); padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">06</span> Welford Flow Periodicity Check</h4>
+                            <p class="body-lg">Calculates running packet inter-arrival statistics using Welford's algorithm to compute Coefficient of Variation ($\text{CoV} < 0.12$) for beaconing.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> Welford Online Variance Engine &middot; <b>Why:</b> Computes exact numerical variance in constant $O(1)$ time per packet.</p>
+                        </div>
+
+                        <div style="padding: 18px 0;">
+                            <h4 class="heading-md"><span style="color:var(--stamp); font-weight:900;">07</span> Structured Audit Log Output</h4>
+                            <p class="body-lg">Outputs filtered PCAPs and streams structured JSON threat alerts detailing matched JA4 signatures and recommended eBPF drop rules.</p>
+                            <p class="meta" style="margin-top:6px;"><b>Tools:</b> C++ File I/O, nlohmann::json &middot; <b>Why:</b> Structured audit logs easily consumed by enterprise SIEM modules.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. RESULTS METRICS GRID -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label" style="color: var(--stamp);">EMPIRICAL BENCHMARKS</span>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">System Performance</h3>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card-box">
+                                <div class="metric-val-huge">ZERO</div>
+                                <div class="metric-lbl-bold">Hot-Path Lock Contention</div>
+                                <div class="metric-desc-sm">100% thread-isolated flow tables via deterministic 5-tuple consistent hashing.</div>
+                            </div>
+
+                            <div class="metric-card-box">
+                                <div class="metric-val-huge">JA4+</div>
+                                <div class="metric-lbl-bold">TLS Fingerprinting</div>
+                                <div class="metric-desc-sm">Extracts ClientHello ciphers &amp; extensions while filtering GREASE noise.</div>
+                            </div>
+
+                            <div class="metric-card-box">
+                                <div class="metric-val-huge">&lt; 0.12</div>
+                                <div class="metric-lbl-bold">C2 Beaconing Threshold</div>
+                                <div class="metric-desc-sm">Welford Coefficient of Variation ($\text{CoV}$) threshold flagging automated malware pulses.</div>
+                            </div>
+
+                            <div class="metric-card-box">
+                                <div class="metric-val-huge">ZERO</div>
+                                <div class="metric-lbl-bold">External Dependencies</div>
+                                <div class="metric-desc-sm">Built in pure C++17 STL for maximum portability and zero third-party library bloat.</div>
+                            </div>
+                        </div>
+
+                        <p class="meta text-center" style="margin-top: 15px; color: #666; font-style: italic;">
+                            *Note on throughput: CipherPulse targets fast-path lock-free design limits. Throughput figures reflect PCAP offline benchmarks and multi-thread ring queue tests, pending full hardware-in-the-loop 10GbE NIC validation.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. KEY TECHNICAL DECISION CALLOUT -->
+            <section class="section" style="padding: 30px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <div style="border-left: 6px solid var(--stamp); background: var(--paper-warm); border-top: 2px solid var(--rule-dark); border-right: 2px solid var(--rule-dark); border-bottom: 2px solid var(--rule-dark); padding: 25px 30px;">
+                            <span class="kicker-label" style="color: var(--stamp);">KEY DESIGN DECISION</span>
+                            <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Lock-Free Threading via 5-Tuple Consistent Hashing</h3>
+                            <p class="body-lg" style="line-height: 1.7; margin: 0;"><span class="dropcap">R</span>ather than using a shared global connection table protected by mutex locks, CipherPulse routes every incoming packet through a 5-tuple consistent hashing function. Because all packets belonging to a specific TCP/UDP flow hash to the exact same worker thread, that worker thread owns 100% of the flow's lifecycle inside an isolated <code>std::unordered_map</code>. This eliminates cross-thread mutex contention on the packet processing hot path, allowing worker threads to scale linearly across CPU cores without locking overhead.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. GITHUB CTA & IMPROVEMENTS -->
+            <section class="section" style="padding: 40px 0 20px 0; border-top: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12 text-center">
+                        <h3 class="heading-lg" style="margin-bottom: 15px;">Explore the Project Source Code</h3>
+                        <div style="margin-bottom: 25px;">
+                            <a href="https://github.com/AJ1312/CipherPulse" target="_blank" class="btn-github">⭐ View CipherPulse on GitHub</a>
+                        </div>
+                        <p class="body-md" style="font-style: italic; color: #555; max-width: 800px; margin: 0 auto;">
+                            <b>What I'd improve next:</b> If I were building this for production next, I would implement AF_XDP (XDP socket) zero-copy kernel driver bindings and hardware NIC offloading to achieve line-rate 10GbE packet processing without CPU ring buffer drops.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <script>
+                function runCipherSim(type) {
+                    const tbody = document.getElementById('wbCipherBody');
+                    const ts = new Date().toISOString().substring(11, 19);
+
+                    let conn = '', ja4 = '', rhythm = '', badge = '', action = '';
+
+                    if (type === 'c2') {
+                        conn = '10.0.4.12 &rarr; 185.220.101.5 (Hidden IP)';
+                        ja4 = 't13d190800_c84a8b291410';
+                        rhythm = 'Strict 5.0s metronome pulse (CoV < 0.12)';
+                        badge = '<span class="badge-red">ALERT: C2 BEACON</span>';
+                        action = 'Blocked via eBPF';
+                    } else if (type === 'bench') {
+                        conn = '100,000 Pkts/sec Stream';
+                        ja4 = 'Multi-Flow Hash Ring';
+                        rhythm = '4 CPU Cores Active (0 Mutex Locks)';
+                        badge = '<span class="badge-amber">LOCK-FREE OK</span>';
+                        action = '0 Mutex Drops';
+                    } else {
+                        conn = '192.168.1.45 &rarr; Google:443';
+                        ja4 = 't13d151600_8daaf6152702';
+                        rhythm = 'Random human interaction timing';
+                        badge = '<span class="badge-green">SAFE (BENIGN)</span>';
+                        action = 'Allowed';
+                    }
+
+                    const newRow = document.createElement('tr');
+                    newRow.className = 'anim-fade-row';
+                    newRow.innerHTML = `
+                        <td>${ts}</td>
+                        <td><b>${conn}</b></td>
+                        <td><code>${ja4}</code></td>
+                        <td>${rhythm}</td>
+                        <td>${badge}</td>
+                        <td><b>${action}</b></td>
+                    `;
+
+                    tbody.insertBefore(newRow, tbody.firstChild);
+                }
+            </script>
+"""
+
+with open('pages/sentinel-stream.html', 'w') as f:
+    f.write(PAGE_TEMPLATE.replace('{title}', 'SENTINEL-STREAM').replace('{content}', SENTINEL_CONTENT))
+
+with open('pages/cipherpulse.html', 'w') as f:
+    f.write(PAGE_TEMPLATE.replace('{title}', 'CipherPulse').replace('{content}', CIPHERPULSE_CONTENT))
+
+print("Successfully generated cool, clean, non-overlapping pages without IEEE mentions!")
