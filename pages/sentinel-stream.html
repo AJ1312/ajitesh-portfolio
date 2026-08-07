@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel-Stream | The Sharma Dispatch</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body class="editorial-theme page-transition">
+
+    <!-- Navigation -->
+    <nav class="site-nav top-nav border-bottom-double">
+        <div class="nav-container grid-layout">
+            <div class="nav-brand">
+                <a href="../index.html" class="nav-link font-serif uppercase tracking-wide">Ajitesh Sharma</a>
+                <span class="nav-separator font-mono muted">&larr; Back to Dispatch</span>
+            </div>
+            <div class="nav-links font-sans text-sm font-semibold uppercase tracking-wider">
+                <a href="../index.html#dispatches" class="nav-link">Dispatches</a>
+                <a href="../index.html#contact" class="nav-link">Contact</a>
+                <a href="mailto:ajitesh@example.com" class="btn btn-solid ml-4">Hire Him</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="project-detail-container">
+        
+        <!-- Hero Section -->
+        <header class="project-hero border-bottom-triple section-padding bg-paper">
+            <div class="container wrapper-lg">
+                <div class="hero-kicker font-mono text-sm uppercase tracking-widest muted mb-4">
+                    DISPATCH B &mdash; FIELD REPORT
+                </div>
+                <h1 class="hero-title font-serif text-6xl md:text-8xl font-black mb-6 leading-tight">
+                    Sentinel-Stream
+                </h1>
+                <h2 class="hero-subtitle font-sans text-xl md:text-3xl font-medium text-ink mb-8 leading-snug max-w-4xl">
+                    O(1)-Memory Real-Time Behavioral Anomaly Detection &amp; XAI Framework
+                </h2>
+                
+                <div class="hero-meta flex flex-wrap items-center gap-6 font-mono text-sm uppercase">
+                    <div class="status-badge flex items-center gap-2 text-accent border border-accent px-3 py-1 font-bold tracking-widest">
+                        <span class="status-indicator w-2 h-2 bg-accent inline-block"></span>
+                        STATUS: DEPLOYED
+                    </div>
+                    <div class="meta-item text-ink font-semibold">
+                        DATE: June 2026
+                    </div>
+                    <div class="meta-item">
+                        <a href="https://github.com/AJ1312/sentinel-stream" target="_blank" rel="noopener noreferrer" class="link-underline font-semibold text-ink hover:text-accent transition-colors">
+                            github.com/AJ1312/sentinel-stream &nearr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Metadata Grid -->
+        <section class="project-metadata border-bottom-double bg-paper">
+            <div class="container wrapper-lg">
+                <div class="metadata-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 border-left border-right border-ink">
+                    <div class="meta-card p-6 border-right border-ink border-bottom border-ink lg:border-bottom-0">
+                        <div class="meta-label font-mono text-xs uppercase tracking-widest muted mb-2">Classification</div>
+                        <div class="meta-value font-sans font-semibold text-sm leading-tight">Network Security /<br>Anomaly Detection</div>
+                    </div>
+                    <div class="meta-card p-6 border-right border-ink border-bottom border-ink lg:border-bottom-0">
+                        <div class="meta-label font-mono text-xs uppercase tracking-widest muted mb-2">Memory</div>
+                        <div class="meta-value font-sans font-semibold text-sm">O(1) &mdash; Strictly bounded &lt; 50MB RAM</div>
+                    </div>
+                    <div class="meta-card p-6 border-right border-ink border-bottom border-ink lg:border-bottom-0">
+                        <div class="meta-label font-mono text-xs uppercase tracking-widest muted mb-2">ML Pipeline</div>
+                        <div class="meta-value font-sans font-semibold text-sm leading-tight">Two-Stage<br>LightGBM</div>
+                    </div>
+                    <div class="meta-card p-6 border-right border-ink border-bottom border-ink lg:border-bottom-0">
+                        <div class="meta-label font-mono text-xs uppercase tracking-widest muted mb-2">Benchmark</div>
+                        <div class="meta-value font-sans font-semibold text-sm leading-tight">CIC-IDS2017<br>(0.992 ROC-AUC)</div>
+                    </div>
+                    <div class="meta-card p-6 border-right border-ink border-bottom border-ink lg:border-bottom-0 md:border-bottom-0">
+                        <div class="meta-label font-mono text-xs uppercase tracking-widest muted mb-2">XAI</div>
+                        <div class="meta-value font-sans font-semibold text-sm leading-tight">TreeSHAP<br>Explainability</div>
+                    </div>
+                    <div class="meta-card p-6">
+                        <div class="meta-label font-mono text-xs uppercase tracking-widest muted mb-2">API</div>
+                        <div class="meta-value font-sans font-semibold text-sm leading-tight">Async FastAPI<br>+ WebSocket</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Simulation -->
+        <section class="project-simulation section-padding border-bottom-double bg-ink text-paper">
+            <div class="container wrapper-xl">
+                <div class="section-header mb-8 text-center">
+                    <h3 class="font-mono text-sm uppercase tracking-widest text-muted-dark">Tactical Operations</h3>
+                    <h2 class="font-serif text-3xl mt-2">SOC Anomaly Dashboard</h2>
+                </div>
+                
+                <div class="simulation-wrapper border border-muted-dark p-2 relative">
+                    <!-- The Simulation Container -->
+                    <div id="anomaly-dashboard" class="w-full h-[600px] bg-[#0a0a0a] relative overflow-hidden font-mono text-xs" style="height: 600px;">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-50 text-accent">
+                            [ ESTABLISHING WEBSOCKET CONNECTION... ]
+                        </div>
+                    </div>
+                    
+                    <!-- Decorative elements -->
+                    <div class="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent"></div>
+                    <div class="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent"></div>
+                    <div class="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-accent"></div>
+                    <div class="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-accent"></div>
+                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => { 
+                        if(typeof initAnomalyDashboard === 'function') {
+                            initAnomalyDashboard('anomaly-dashboard'); 
+                        } else {
+                            console.warn('initAnomalyDashboard function not found.');
+                        }
+                    });
+                </script>
+            </div>
+        </section>
+
+        <!-- The Incident (Problem Statement) -->
+        <section class="project-incident section-padding border-bottom-double bg-paper">
+            <div class="container wrapper-md">
+                <h3 class="section-kicker font-mono text-sm uppercase tracking-widest muted mb-6 border-bottom inline-block pb-2">The Incident</h3>
+                
+                <div class="editorial-text font-serif text-xl leading-relaxed text-ink drop-cap-wrapper">
+                    <p class="drop-cap">Security Operations Centers drown in alerts. Analysts face alert fatigue from systems that generate thousands of notifications per hour with no context on why an event was flagged. Meanwhile, high-frequency network telemetry demands processing pipelines that can keep pace without ballooning memory consumption. Sentinel-Stream was built to solve both problems simultaneously.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Engineering (Technical Deep-Dive) -->
+        <section class="project-engineering section-padding border-bottom-double bg-paper">
+            <div class="container wrapper-lg">
+                <h3 class="section-kicker font-mono text-sm uppercase tracking-widest muted mb-12 border-bottom inline-block pb-2">The Engineering</h3>
+                
+                <div class="engineering-grid grid grid-cols-1 md:grid-cols-2 gap-12">
+                    
+                    <!-- Subsection 1 -->
+                    <div class="border-top border-ink pt-6">
+                        <div class="subsection-number font-mono text-3xl font-bold text-accent mb-4">01</div>
+                        <h4 class="font-sans text-xl font-bold uppercase tracking-wide mb-4">O(1)-Memory Streaming Architecture</h4>
+                        <ul class="editorial-list font-sans text-base text-ink-muted leading-relaxed space-y-3 list-disc pl-5">
+                            <li>Strictly bounded to &lt; 50MB RAM during continuous high-frequency ingestion</li>
+                            <li>Sliding window feature computation without storing raw data</li>
+                            <li>Online statistics (running mean, variance) replace batch computation</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Subsection 2 -->
+                    <div class="border-top border-ink pt-6">
+                        <div class="subsection-number font-mono text-3xl font-bold text-accent mb-4">02</div>
+                        <h4 class="font-sans text-xl font-bold uppercase tracking-wide mb-4">Two-Stage LightGBM Pipeline</h4>
+                        <ul class="editorial-list font-sans text-base text-ink-muted leading-relaxed space-y-3 list-disc pl-5">
+                            <li><strong>Stage 1:</strong> Coarse filter eliminates 65% of benign traffic</li>
+                            <li><strong>Stage 2:</strong> Fine-grained classification on remaining flows</li>
+                            <li>Combined: 0.992 ROC-AUC on CIC-IDS2017 benchmark</li>
+                            <li>Gradient boosting optimized for streaming inference</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Subsection 3 -->
+                    <div class="border-top border-ink pt-6">
+                        <div class="subsection-number font-mono text-3xl font-bold text-accent mb-4">03</div>
+                        <h4 class="font-sans text-xl font-bold uppercase tracking-wide mb-4">TreeSHAP Explainability</h4>
+                        <ul class="editorial-list font-sans text-base text-ink-muted leading-relaxed space-y-3 list-disc pl-5">
+                            <li>Real-time attribution vectors for every flagged anomaly</li>
+                            <li>Analysts see which features drove each alert (e.g., payload entropy, IAT variance)</li>
+                            <li>Feature importance ranking per-alert, not just global</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Subsection 4 -->
+                    <div class="border-top border-ink pt-6">
+                        <div class="subsection-number font-mono text-3xl font-bold text-accent mb-4">04</div>
+                        <h4 class="font-sans text-xl font-bold uppercase tracking-wide mb-4">Async FastAPI + WebSocket Microservice</h4>
+                        <ul class="editorial-list font-sans text-base text-ink-muted leading-relaxed space-y-3 list-disc pl-5">
+                            <li>Live anomaly alerts streamed to SOC-facing dashboard</li>
+                            <li>Risk scores updated in real-time</li>
+                            <li>WebSocket connections for zero-latency alert delivery</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Results -->
+        <section class="project-results section-padding bg-paper">
+            <div class="container wrapper-lg">
+                <h3 class="section-kicker font-mono text-sm uppercase tracking-widest muted mb-8 border-bottom inline-block pb-2">Service Record</h3>
+                
+                <div class="results-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="stat-box border border-ink p-8 bg-white flex flex-col justify-center items-center text-center transition-transform hover:-translate-y-1 duration-300">
+                        <div class="stat-value font-serif text-5xl font-black text-ink mb-3">0.992</div>
+                        <div class="stat-label font-sans font-bold uppercase tracking-wider text-sm text-ink-muted">ROC-AUC on CIC-IDS2017</div>
+                    </div>
+                    
+                    <div class="stat-box border border-ink p-8 bg-white flex flex-col justify-center items-center text-center transition-transform hover:-translate-y-1 duration-300">
+                        <div class="stat-value font-serif text-4xl font-black text-ink mb-3">&lt; 50MB</div>
+                        <div class="stat-label font-sans font-bold uppercase tracking-wider text-sm text-ink-muted">RAM during continuous ingestion</div>
+                    </div>
+                    
+                    <div class="stat-box border border-ink p-8 bg-white flex flex-col justify-center items-center text-center transition-transform hover:-translate-y-1 duration-300">
+                        <div class="stat-value font-serif text-5xl font-black text-ink mb-3">65%</div>
+                        <div class="stat-label font-sans font-bold uppercase tracking-wider text-sm text-ink-muted">Benign traffic filtered (Stage 1)</div>
+                    </div>
+                    
+                    <div class="stat-box border border-ink p-8 bg-white flex flex-col justify-center items-center text-center transition-transform hover:-translate-y-1 duration-300">
+                        <div class="stat-value font-serif text-4xl font-black text-accent mb-3">SHAP</div>
+                        <div class="stat-label font-sans font-bold uppercase tracking-wider text-sm text-ink-muted">Real-time attribution per alert</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer border-top-double section-padding bg-ink text-paper">
+        <div class="container wrapper-lg grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="footer-brand">
+                <h2 class="font-serif text-3xl font-bold mb-4">The Sharma Dispatch</h2>
+                <p class="font-sans text-sm text-gray-400 max-w-md">Chronicles of software engineering, network security, and robust systems architecture.</p>
+            </div>
+            <div class="footer-links flex flex-col md:items-end justify-center space-y-4 font-mono text-sm uppercase tracking-widest">
+                <a href="#" class="hover:text-accent transition-colors">Back to Top &uarr;</a>
+                <a href="../index.html" class="hover:text-accent transition-colors">Return to Index &larr;</a>
+            </div>
+        </div>
+        <div class="container wrapper-lg mt-12 pt-6 border-t border-gray-800 text-center font-mono text-xs text-gray-500">
+            &copy; 2026 Ajitesh Sharma. All systems operational.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/simulations.js"></script>
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriVision Pro — The Sharma Dispatch</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <style>
+        :root {
+            --paper: #F9F8F4;
+            --ink: #1A1A1A;
+            --accent: #C41E3A;
+            --muted: #555555;
+            --rule: #E0E0E0;
+        }
+        
+        body {
+            background-color: var(--paper);
+            color: var(--ink);
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .drop-cap::first-letter {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            line-height: 0.8;
+            float: left;
+            margin-right: 0.75rem;
+            margin-top: 0.1rem;
+            color: var(--ink);
+            text-transform: uppercase;
+        }
+        
+        .dispatch-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1px;
+            background-color: var(--rule);
+            border-top: 2px solid var(--ink);
+            border-bottom: 2px solid var(--ink);
+            margin: 2rem 0;
+        }
+        
+        .dispatch-grid > * {
+            background-color: var(--paper);
+            padding: 2rem;
+        }
+        
+        .col-span-full { grid-column: span 12; }
+        .col-span-3 { grid-column: span 3; }
+        .col-span-4 { grid-column: span 4; }
+        .col-span-6 { grid-column: span 6; }
+        .col-span-8 { grid-column: span 8; }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid currentColor;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .badge.live {
+            color: #2E7D32;
+            border-color: #2E7D32;
+        }
+        
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--rule);
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            text-decoration: none;
+            color: var(--ink);
+        }
+        
+        .nav-subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-left: 1rem;
+            text-transform: none;
+        }
+        
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+            font-size: 0.85rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--ink);
+            font-weight: 500;
+        }
+        
+        .nav-cta {
+            background-color: var(--ink);
+            color: var(--paper) !important;
+            padding: 0.35rem 0.85rem;
+        }
+        
+        .kicker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--muted);
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+        
+        .meta-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+            letter-spacing: 0.05em;
+        }
+        
+        .meta-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .section-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-bottom: 3px double var(--ink);
+            padding-bottom: 0.5rem;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+        }
+        
+        .article-body {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--ink);
+            max-width: 800px;
+        }
+        
+        .step-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .step-list li {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--rule);
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .step-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .step-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-right: 1.5rem;
+            color: var(--accent);
+            min-width: 2rem;
+        }
+        
+        .step-content strong {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--ink);
+        }
+        
+        .figure-caption {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            text-align: center;
+            color: var(--muted);
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .link-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+        
+        .link-group a {
+            color: var(--ink);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        
+        .link-group a:hover {
+            color: var(--accent);
+        }
+
+        .feature-list {
+            list-style-type: square;
+            padding-left: 1.5rem;
+        }
+        
+        .feature-list li {
+            margin-bottom: 0.75rem;
+        }
+        
+        @media (max-width: 768px) {
+            .dispatch-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 1px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <a href="../index.html" class="nav-logo">Ajitesh Sharma <span class="nav-subtitle">← Back to Dispatch</span></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html#dispatches">DISPATCHES</a></li>
+            <li><a href="../index.html#contact">CONTACT</a></li>
+            <li><a href="mailto:ajitesh@example.com" class="nav-cta">HIRE HIM</a></li>
+        </ul>
+    </nav>
+
+    <main class="gsap-reveal">
+        <header style="margin-top: 4rem;">
+            <span class="kicker">DISPATCH D — FIELD REPORT</span>
+            <h1 class="hero-title">NutriVision Pro</h1>
+            <p class="hero-subtitle">AI-Powered Dietary Intelligence & Nutrition Tracking</p>
+            
+            <div>
+                <span class="badge live">● LIVE</span>
+            </div>
+            
+            <div class="link-group">
+                <a href="https://nutrivison-pro.vercel.app/" target="_blank" rel="noopener noreferrer">Live Deployment ↗</a>
+                <a href="https://github.com/AJ1312/nutrivison-pro" target="_blank" rel="noopener noreferrer">GitHub Repository ↗</a>
+            </div>
+        </header>
+
+        <div class="dispatch-grid">
+            <div class="col-span-3">
+                <span class="meta-label">CLASSIFICATION</span>
+                <span class="meta-value">AI / Computer Vision / Health Tech</span>
+            </div>
+            <div class="col-span-3">
+                <span class="meta-label">FRAMEWORK</span>
+                <span class="meta-value">Next.js (App Router)</span>
+            </div>
+            <div class="col-span-3">
+                <span class="meta-label">AI ENGINE</span>
+                <span class="meta-value">Google Gemini Pro Vision / Gemini 1.5 Flash</span>
+            </div>
+            <div class="col-span-3">
+                <span class="meta-label">DEPLOYMENT</span>
+                <span class="meta-value">Vercel (Serverless Edge)</span>
+            </div>
+            <div class="col-span-full" style="border-top: 1px solid var(--rule);">
+                <span class="meta-label">STYLING</span>
+                <span class="meta-value">Tailwind CSS, Framer Motion</span>
+            </div>
+        </div>
+
+        <section style="margin: 4rem 0;">
+            <div class="simulation-container" style="position:relative;width:100%;height:600px;border:2px solid var(--ink);">
+                <iframe src="https://nutrivison-pro.vercel.app/" style="width:100%;height:100%;border:none;" title="NutriVision Pro Live Demo" loading="lazy"></iframe>
+            </div>
+            <p class="figure-caption">LIVE DEPLOYMENT — nutrivison-pro.vercel.app</p>
+        </section>
+
+        <div class="dispatch-grid" style="border: none; background: transparent; display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem;">
+            <div class="col-span-8" style="padding: 0; background: transparent;">
+                <h2 class="section-header">The Concept</h2>
+                <div class="article-body">
+                    <p class="drop-cap">Tracking nutrition shouldn't require manually looking up every food item in a database. NutriVision Pro transforms food photography into instant, actionable nutritional intelligence. Point your camera at a plate, and multimodal AI identifies every item, estimates portion sizes, and delivers a complete macro and micronutrient breakdown in seconds.</p>
+                </div>
+
+                <h2 class="section-header">Key Features</h2>
+                <div class="article-body">
+                    <ul class="feature-list">
+                        <li><strong>Instant Meal Photo Scanning:</strong> Real-time processing of food images.</li>
+                        <li><strong>Comprehensive Macro & Micronutrient Breakdown:</strong> Exact metrics derived from visual data.</li>
+                        <li><strong>Nutrition Label & Ingredient Inspector:</strong> OCR and structural extraction for packaged goods.</li>
+                        <li><strong>AI Nutritionist Insights:</strong> Contextual and personalized dietary recommendations based on scanned history.</li>
+                        <li><strong>Daily Meal History & Progress Tracking:</strong> Visual dashboard with progress rings and tracking bars.</li>
+                    </ul>
+                </div>
+                
+                <h2 class="section-header">Tech Details</h2>
+                <div class="article-body">
+                    <ul class="feature-list">
+                        <li>Next.js App Router utilized for optimized serverless API routing.</li>
+                        <li>Gemini Pro Vision multimodal prompting implemented with strict JSON schema enforcement to ensure deterministic output.</li>
+                        <li>Vercel Edge functions deployed for low-latency global response times.</li>
+                        <li>Framer Motion integrated for fluid micro-interactions across the UI.</li>
+                        <li>LocalStorage leveraged for robust, client-side meal history persistence without mandatory backend auth overhead.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-span-4" style="padding: 0; background: transparent;">
+                <h2 class="section-header" style="margin-top: 0;">How It Works</h2>
+                <ul class="step-list">
+                    <li>
+                        <span class="step-number">01</span>
+                        <div class="step-content">
+                            <strong>Image Capture</strong>
+                            Upload or capture photo of meal or nutrition label directly from the interface.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-number">02</span>
+                        <div class="step-content">
+                            <strong>Preprocessing</strong>
+                            Image is validated for quality, optimally resized, and securely encoded (Base64) for API transit.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-number">03</span>
+                        <div class="step-content">
+                            <strong>Multimodal Vision Analysis</strong>
+                            Gemini Pro Vision processes the image alongside a highly structured engineering prompt.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-number">04</span>
+                        <div class="step-content">
+                            <strong>Structured Extraction</strong>
+                            JSON schema enforced for precise extraction of items, portions, calories, and macros.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-number">05</span>
+                        <div class="step-content">
+                            <strong>Validation</strong>
+                            Extracted data is cross-referenced against standardized nutritional heuristics to prevent hallucinations.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-number">06</span>
+                        <div class="step-content">
+                            <strong>Results</strong>
+                            Data rendered to an interactive dashboard featuring animated progress rings, macro bars, and health scores.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer style="margin-top: 6rem; padding: 2rem 0; border-top: 1px solid var(--rule); text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">
+        <p>&copy; 2026 Ajitesh Sharma. All rights reserved.</p>
+    </footer>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/animations.js"></script>
+
+<script>
+    // Local GSAP initialization for specific elements on this page
+    document.addEventListener("DOMContentLoaded", (event) => {
+        gsap.registerPlugin(ScrollTrigger);
+        
+        gsap.from(".hero-title, .hero-subtitle", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out"
+        });
+        
+        gsap.from(".dispatch-grid > div", {
+            scrollTrigger: {
+                trigger: ".dispatch-grid",
+                start: "top 80%"
+            },
+            y: 20,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out"
+        });
+    });
+</script>
+
+</body>
+</html>

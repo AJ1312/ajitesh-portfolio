@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajitesh Sharma — Software Engineer · Systems Security · Applied AI/ML</title>
+    
+    <!-- Meta Descriptions and SEO -->
+    <meta name="description" content="The Sharma Dispatch: Editorial portfolio of Ajitesh Sharma. Software Engineer specializing in Systems, Security, and Applied AI/ML based in Vellore, India.">
+    <meta name="keywords" content="Ajitesh Sharma, Software Engineer, Systems Builder, C++, Deep Packet Inspection, Machine Learning, Applied AI/ML, VIT Vellore">
+    <meta name="author" content="Ajitesh Sharma">
+    
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="Ajitesh Sharma — The Engineering Record of a Systems Builder">
+    <meta property="og:description" content="Portfolio of Ajitesh Sharma: Systems Security, C++17 DPI engines, and AI safety research.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ajiteshsharma.com"> <!-- Placeholder -->
+    <meta property="og:image" content="images/portrait.jpg">
+    
+    <!-- Favicon (Placeholder) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>A</text></svg>">
+    
+    <!-- Google Fonts: Playfair Display, Inter, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
+    
+    <!-- External GSAP Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="newspaper-theme">
+    
+    <!-- SECTION 1: MASTHEAD HEADER -->
+    <header class="masthead">
+        <!-- Tier 1: Utility Bar -->
+        <div class="tier-1 utility-bar">
+            <span>VELLORE, INDIA | THE DISPATCH EDITION | EST. 2024</span>
+        </div>
+        
+        <!-- Tier 2: Title -->
+        <div class="tier-2 headline-title">
+            <h1 class="rv">Ajitesh Sharma</h1>
+            <p class="masthead-subtitle rv">THE ENGINEERING RECORD OF A SYSTEMS BUILDER</p>
+        </div>
+        
+        <!-- Tier 3: Dateline -->
+        <div class="tier-3 dateline">
+            <span>Thursday 7 August 2026 &middot; Vol. I &middot; Dispatches &amp; Field Notes &middot; Price: One SSH Session</span>
+        </div>
+        
+        <!-- Tier 4: Sticky Nav -->
+        <nav class="tier-4 sticky-nav" id="main-nav">
+            <div class="nav-container">
+                <a href="#front-page" class="nav-brand">[Ajitesh Sharma]</a>
+                <div class="nav-links">
+                    <a href="#projects">DISPATCHES</a>
+                    <a href="#stack">STACK</a>
+                    <a href="#experience">SERVICE</a>
+                    <a href="#publications">PUBLICATIONS</a>
+                    <a href="#contact">CONTACT</a>
+                    <a href="#contact" class="nav-cta">[HIRE HIM]</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dispatch-content">
+        
+        <!-- SECTION 2: HERO / FRONT PAGE -->
+        <section id="front-page" class="hero section-padding border-bottom-heavy">
+            <div class="grid-hero">
+                <!-- Left Column (60%) -->
+                <div class="hero-left">
+                    <span class="kicker rv">DISPATCH NO. 1 &mdash; FINDINGS PUBLISHED</span>
+                    <h2 class="hero-headline rv">A systems engineer who builds things &mdash; from kernel to cloud.</h2>
+                    <blockquote class="pull-quote rv">
+                        Three years in: Ajitesh Sharma architects high-throughput DPI engines, deploys streaming anomaly detectors, and publishes on AI safety &mdash; while pursuing his B.Tech at VIT Vellore.
+                    </blockquote>
+                    <p class="byline rv">BY THE ENGINEERING DESK &middot; Reporting from Vellore, between labs and terminals</p>
+                    
+                    <div class="hero-ctas rv">
+                        <a href="#projects" class="btn-primary">Read the Dispatches &rarr;</a>
+                        <a href="#contact" class="btn-secondary">Get in Touch</a>
+                    </div>
+                    
+                    <!-- Stat bar -->
+                    <div class="stat-bar rv">
+                        <div class="stat-cell">
+                            <span class="stat-value">No. 01</span>
+                            <span class="stat-label">Edition &middot; first printing</span>
+                        </div>
+                        <div class="stat-cell">
+                            <span class="stat-value">3</span>
+                            <span class="stat-label">Patents Filed</span>
+                        </div>
+                        <div class="stat-cell">
+                            <span class="stat-value">1</span>
+                            <span class="stat-label">IEEE Publication</span>
+                        </div>
+                        <div class="stat-cell">
+                            <span class="stat-value">Available</span>
+                            <span class="stat-label">Open to opportunities</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column (40%) -->
+                <div class="hero-right">
+                    <figure class="portrait-frame rv">
+                        <img src="images/portrait.jpg" alt="Ajitesh Sharma Portrait">
+                        <figcaption>PICTURED: the subject, in his natural habitat.</figcaption>
+                    </figure>
+                    <div class="hero-bio">
+                        <p class="drop-cap rv">
+                            He builds things that inspect, detect, and protect. His work spans C++17 deep packet inspection engines, O(1)-memory streaming anomaly detectors, and containerized microservices platforms. When he's not writing lock-free code, he's publishing on AI safety at IEEE or filing Indian patent applications for systems that don't exist yet.
+                        </p>
+                        <p class="rv mt-4">
+                            Currently completing his B.Tech in Computer Science (Information Security) at VIT Vellore, he interned at Hindalco Industries (Aditya Birla Group), digitizing workforce scheduling for 1,200+ site personnel.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: FIELD DISPATCHES (Projects) -->
+        <section id="projects" class="field-dispatches section-padding border-bottom-heavy">
+            <header class="section-header rv">
+                <div class="header-left">
+                    <span class="kicker">THE EVIDENCE</span>
+                    <h3 class="section-title">Selected Works</h3>
+                </div>
+                <div class="header-right">
+                    <span class="dateline-alt">Dispatches A &ndash; F &middot; Filed 2025 &ndash; 2026</span>
+                </div>
+            </header>
+            
+            <!-- Featured Project: DISPATCH A -->
+            <article class="dispatch-featured rv">
+                <div class="dispatch-card-inner">
+                    <span class="dispatch-letter">DISPATCH A</span>
+                    <h4 class="project-title">CipherPulse</h4>
+                    <p class="project-desc">A high-performance C++17 Deep Packet Inspection (DPI) engine utilizing JA4+ fingerprints and Shannon Entropy for real-time encrypted malware traffic detection. Engineered for multi-threaded packet capture and low-latency feature extraction.</p>
+                    <div class="tech-tags">
+                        <span class="tag">C++17</span>
+                        <span class="tag">DPI</span>
+                        <span class="tag">JA4+</span>
+                        <span class="tag">Multi-threading</span>
+                        <span class="tag">Shannon Entropy</span>
+                    </div>
+                    <a href="pages/cipherpulse.html" class="dispatch-link">Open Dispatch &rarr;</a>
+                </div>
+            </article>
+
+            <!-- 3-column grid of remaining projects -->
+            <div class="dispatch-grid">
+                
+                <!-- DISPATCH B -->
+                <article class="dispatch-card rv">
+                    <span class="dispatch-letter">DISPATCH B</span>
+                    <h4 class="project-title">Sentinel-Stream</h4>
+                    <p class="project-desc">O(1)-Memory anomaly detection pipeline using LightGBM and Fast-Hoeffding Trees, deployed via FastAPI for real-time inference with TreeSHAP explanations.</p>
+                    <div class="tech-tags">
+                        <span class="tag">LightGBM</span>
+                        <span class="tag">TreeSHAP</span>
+                        <span class="tag">FastAPI</span>
+                    </div>
+                    <a href="pages/sentinel-stream.html" class="dispatch-link">Open Dispatch &rarr;</a>
+                </article>
+
+                <!-- DISPATCH C -->
+                <article class="dispatch-card rv">
+                    <span class="dispatch-letter">DISPATCH C</span>
+                    <h4 class="project-title">SeatSnap</h4>
+                    <p class="project-desc">Containerized seat reservation microservices with high-availability scheduling. Built with robust CI/CD and system observability.</p>
+                    <div class="tech-tags">
+                        <span class="tag">Docker</span>
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">Jenkins CI/CD</span>
+                        <span class="tag">Prometheus</span>
+                        <span class="tag">Grafana</span>
+                    </div>
+                    <a href="pages/snapseat.html" class="dispatch-link">Open Dispatch &rarr;</a>
+                </article>
+
+                <!-- DISPATCH D -->
+                <article class="dispatch-card rv">
+                    <span class="dispatch-letter">DISPATCH D</span>
+                    <h4 class="project-title">NutriVision Pro</h4>
+                    <p class="project-desc">AI-powered dietary analysis tool leveraging Gemini Vision API for food recognition and nutritional breakdown.</p>
+                    <div class="tech-tags">
+                        <span class="tag">Next.js</span>
+                        <span class="tag">Gemini Vision</span>
+                        <span class="tag">Vercel</span>
+                    </div>
+                    <a href="https://nutrivison-pro.vercel.app" target="_blank" class="dispatch-link">Open Dispatch &rarr;</a>
+                </article>
+
+                <!-- DISPATCH E -->
+                <article class="dispatch-card rv">
+                    <span class="dispatch-letter">DISPATCH E</span>
+                    <h4 class="project-client">Hindalco Industries</h4>
+                    <h4 class="project-title">Workforce Queue System</h4>
+                    <p class="project-desc">Enterprise system for digitizing workforce scheduling, reducing manual allocation overhead for 1,200+ site personnel daily.</p>
+                    <div class="tech-tags">
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag">PL/SQL</span>
+                        <span class="tag">RBAC</span>
+                        <span class="tag">Oracle APEX</span>
+                    </div>
+                    <a href="pages/internship.html" class="dispatch-link">Open Dispatch &rarr;</a>
+                </article>
+                
+            </div>
+        </section>
+
+        <!-- SECTION 4: THE LAB REPORT (Tech Stack) -->
+        <section id="stack" class="lab-report section-padding border-bottom-heavy">
+            <header class="section-header rv">
+                <span class="kicker">THE LAB REPORT</span>
+                <h3 class="section-title">Technical Competencies</h3>
+            </header>
+            
+            <div class="stack-grid">
+                <!-- Group 1 -->
+                <div class="stack-group rv">
+                    <h4 class="stack-heading">Core CS</h4>
+                    <div class="stack-tags">
+                        <span class="tag">Data Structures &amp; Algorithms</span>
+                        <span class="tag">OOP</span>
+                        <span class="tag">OS</span>
+                        <span class="tag">Computer Networks</span>
+                    </div>
+                </div>
+                
+                <!-- Group 2 -->
+                <div class="stack-group rv">
+                    <h4 class="stack-heading">Languages</h4>
+                    <div class="stack-tags">
+                        <span class="tag">C++17</span>
+                        <span class="tag">Java</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">C</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">PL/SQL</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                </div>
+
+                <!-- Group 3 -->
+                <div class="stack-group rv">
+                    <h4 class="stack-heading">Systems &amp; Security</h4>
+                    <div class="stack-tags">
+                        <span class="tag">DPI</span>
+                        <span class="tag">JA4+</span>
+                        <span class="tag">YARA</span>
+                        <span class="tag">Wireshark</span>
+                        <span class="tag">eBPF</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">Autopsy</span>
+                        <span class="tag">Metasploit</span>
+                    </div>
+                </div>
+
+                <!-- Group 4 -->
+                <div class="stack-group rv">
+                    <h4 class="stack-heading">AI/ML</h4>
+                    <div class="stack-tags">
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">LightGBM</span>
+                        <span class="tag">Scikit-Learn</span>
+                        <span class="tag">TreeSHAP</span>
+                        <span class="tag">Model Alignment</span>
+                    </div>
+                </div>
+
+                <!-- Group 5 -->
+                <div class="stack-group rv">
+                    <h4 class="stack-heading">Backend &amp; Cloud</h4>
+                    <div class="stack-tags">
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">Jenkins</span>
+                        <span class="tag">CI/CD</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">AWS</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">REST</span>
+                        <span class="tag">WebSockets</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: THE SERVICE RECORD (Experience) -->
+        <section id="experience" class="service-record section-padding border-bottom-heavy">
+            <header class="section-header rv">
+                <span class="kicker">THE SERVICE RECORD</span>
+                <h3 class="section-title">Professional Experience &amp; Education</h3>
+            </header>
+
+            <div class="ledger-container">
+                <!-- Employment -->
+                <div class="ledger-entry rv">
+                    <div class="ledger-meta">
+                        <h4 class="ledger-org">Hindalco Industries Ltd. (Aditya Birla Group)</h4>
+                        <p class="ledger-role">Software Engineering Intern</p>
+                        <p class="ledger-date">May 2026 &ndash; Jul 2026 | Renukoot, India</p>
+                    </div>
+                    <div class="ledger-details">
+                        <ul class="ledger-bullets">
+                            <li>Architected and developed a digitized workforce scheduling system, migrating from manual legacy processes.</li>
+                            <li>Implemented robust Role-Based Access Control (RBAC) ensuring strict data segregation across administrative tiers.</li>
+                            <li>Streamlined the daily shift allocation and attendance monitoring for over 1,200 site personnel.</li>
+                            <li>Developed backend services utilizing Spring Boot and integrated deeply with Oracle APEX and PL/SQL procedures.</li>
+                        </ul>
+                        <a href="pages/internship.html" class="ledger-link">Read Full Dispatch &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="ledger-entry rv">
+                    <div class="ledger-meta">
+                        <h4 class="ledger-org">VIT Vellore</h4>
+                        <p class="ledger-role">B.Tech CSE (Information Security)</p>
+                        <p class="ledger-date">Expected Jul 2027 | Vellore, India</p>
+                    </div>
+                    <div class="ledger-details">
+                        <p>Pursuing rigorous coursework in Operating Systems, Network Security, Cryptography, and Advanced Data Structures. Core member of ACM-VIT.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: PUBLISHED FINDINGS -->
+        <section id="publications" class="published-findings section-padding border-bottom-heavy">
+            <div class="grid-2-col">
+                
+                <!-- IEEE Paper -->
+                <div class="publications-left rv">
+                    <span class="kicker">DISPATCH &mdash; PUBLISHED FINDINGS</span>
+                    <article class="paper-card">
+                        <h4 class="paper-title">The Alignment Paradox: Emotional Flattening and Social Safety Risks in Proactive AI Agents</h4>
+                        <p class="paper-venue">IEEE COMPSAC 2026 Student Symposium</p>
+                        <p class="paper-status">Status: <strong>Accepted</strong></p>
+                        <div class="paper-abstract">
+                            <p>This paper investigates the unforeseen consequences of over-aligning proactive AI agents to maximize safety at the expense of social utility. By simulating adversarial and cooperative environments, we demonstrate how strict constraint satisfaction leads to emotional flattening and failure to resolve nuanced social dilemmas.</p>
+                        </div>
+                        <a href="pages/paper-compsac.html" class="paper-link">Read Full Analysis &rarr;</a>
+                    </article>
+                </div>
+
+                <!-- Patents -->
+                <div class="publications-right rv">
+                    <span class="kicker">FILED REPORTS &mdash; INDIAN PATENT APPLICATIONS</span>
+                    <div class="patent-list">
+                        <!-- Patent 1 -->
+                        <div class="patent-item">
+                            <span class="patent-stamp">PENDING</span>
+                            <div class="patent-info">
+                                <h5>System and Method for O(1) Memory Streaming Anomaly Detection</h5>
+                                <p class="patent-meta">App. No: 2026XXXXXXXX</p>
+                            </div>
+                        </div>
+                        <!-- Patent 2 -->
+                        <div class="patent-item">
+                            <span class="patent-stamp">PENDING</span>
+                            <div class="patent-info">
+                                <h5>Distributed Deep Packet Inspection Framework with Zero-Copy Architecture</h5>
+                                <p class="patent-meta">App. No: 2026XXXXXXXX</p>
+                            </div>
+                        </div>
+                        <!-- Patent 3 -->
+                        <div class="patent-item">
+                            <span class="patent-stamp">PENDING</span>
+                            <div class="patent-info">
+                                <h5>Heuristic Alignment Protocol for Multi-Agent Reinforcement Learning</h5>
+                                <p class="patent-meta">App. No: 2026XXXXXXXX</p>
+                            </div>
+                        </div>
+                        <a href="pages/patents.html" class="paper-link mt-4 inline-block">View Patent Records &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 7: CERTIFICATIONS -->
+        <section id="certifications" class="certifications section-padding border-bottom-heavy">
+            <header class="section-header rv">
+                <span class="kicker">VERIFIED CREDENTIALS</span>
+                <h3 class="section-title">Certifications</h3>
+            </header>
+            
+            <div class="cert-row rv">
+                <div class="cert-badge">
+                    <span class="cert-issuer">Cisco</span>
+                    <span class="cert-name">Cybersecurity</span>
+                </div>
+                <div class="cert-badge">
+                    <span class="cert-issuer">Oracle</span>
+                    <span class="cert-name">OCI Generative AI Professional</span>
+                </div>
+                <div class="cert-badge">
+                    <span class="cert-issuer">IBM</span>
+                    <span class="cert-name">DevOps</span>
+                </div>
+            </div>
+            <div class="cert-footer rv">
+                <a href="pages/certifications.html" class="cert-link">View Full Credentials Gallery &rarr;</a>
+            </div>
+        </section>
+
+        <!-- SECTION 8: CLASSIFIEDS / CONTACT -->
+        <section id="contact" class="classifieds section-padding">
+            <header class="classifieds-header rv">
+                <h3 class="classifieds-title">THE CLASSIFIEDS &mdash; INQUIRIES &amp; PROPOSALS</h3>
+            </header>
+            
+            <div class="classifieds-grid rv">
+                <div class="classified-ad">
+                    <h4>CONTACT DIRECT</h4>
+                    <p>Correspondence accepted via electronic mail at:<br>
+                    <a href="mailto:13ajitesh@gmail.com" class="ad-link">13ajitesh@gmail.com</a></p>
+                    <p>Or via telephonic relay:<br>
+                    <strong>+91 9794576602</strong></p>
+                </div>
+                
+                <div class="classified-ad">
+                    <h4>DIGITAL PRESENCE</h4>
+                    <p>Professional network ledger:<br>
+                    <a href="https://linkedin.com/in/ajitesh-sharma" target="_blank" class="ad-link">linkedin.com/in/ajitesh-sharma</a></p>
+                    <p>Code repository &amp; open source contributions:<br>
+                    <a href="https://github.com/AJ1312" target="_blank" class="ad-link">github.com/AJ1312</a></p>
+                </div>
+
+                <div class="classified-ad">
+                    <h4>LEADERSHIP &amp; AFFILIATIONS</h4>
+                    <p>Core Member at <strong>ACM-VIT</strong>. Organizing technical symposiums and leading software workshops for emerging engineers.</p>
+                </div>
+                
+                <div class="classified-ad ad-cta">
+                    <h4>OPPORTUNITIES SOUGHT</h4>
+                    <p>Available for internships, collaborative research, and engineering roles.</p>
+                    <a href="mailto:13ajitesh@gmail.com" class="btn-hire">HIRE HIM</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="dispatch-footer">
+        <div class="footer-content">
+            <p>Hand-set in Playfair and Inter. &copy; 2026 Ajitesh Sharma. All rights reserved.</p>
+            <p>The Sharma Dispatch &mdash; Vol. I</p>
+        </div>
+    </footer>
+
+    <!-- SVG FILTER (For rough stamp effect) -->
+    <svg class="sr-only" aria-hidden="true" style="display: none;">
+        <defs>
+            <filter id="fm-rough">
+                <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Local JS -->
+    <script src="js/main.js" defer></script>
+    <script src="js/animations.js" defer></script>
+</body>
+</html>
