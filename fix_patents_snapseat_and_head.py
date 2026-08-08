@@ -1,4 +1,194 @@
-<!DOCTYPE html>
+import os, glob, re
+
+# 1. Clean all stray / malformed tags in <head> across all HTML files
+all_html_files = ['index.html'] + glob.glob('pages/*.html')
+
+for filepath in all_html_files:
+    with open(filepath, 'r') as f:
+        content = f.read()
+    
+    # Remove any dangling text tags, svg tags, or malformed data-uri leftovers
+    content = re.sub(r'\s*<text y=.*?A</text></svg>">\s*', '\n', content)
+    content = re.sub(r'\s*href="data:image/svg\+xml.*?A</text></svg>">\s*', '\n', content)
+    content = re.sub(r'\s*<link rel="icon" href="data:image/svg\+xml.*?>\s*', '\n', content)
+    
+    # Ensure clean standard favicons
+    if filepath == 'index.html':
+        fav_block = '    <link rel="icon" type="image/svg+xml" href="favicon.svg">\n    <link rel="alternate icon" type="image/png" href="favicon.png">'
+    else:
+        fav_block = '    <link rel="icon" type="image/svg+xml" href="../favicon.svg">\n    <link rel="alternate icon" type="image/png" href="../favicon.png">'
+    
+    # Clean duplicate favicon links if any
+    content = re.sub(r'(\s*<link rel="(icon|alternate icon)"[^>]+>)+', '', content)
+    content = content.replace('</head>', f'{fav_block}\n</head>')
+    
+    with open(filepath, 'w') as f:
+        f.write(content)
+    print(f"Cleaned head tags in {filepath}")
+
+# 2. Update index.html
+with open('index.html', 'r') as f:
+    idx = f.read()
+
+# Update SeatSnap -> SnapSeat in index.html
+idx = idx.replace('SeatSnap', 'SnapSeat')
+
+# Update Patents list in index.html with exact titles and App numbers
+old_patents_list = """              <ul style="list-style: none; padding: 0">
+                <li
+                  style="
+                    margin-bottom: 20px;
+                    border-bottom: 1px solid var(--rule);
+                    padding-bottom: 15px;
+                  "
+                >
+                  <span
+                    class="meta"
+                    style="
+                      color: var(--stamp);
+                      border: 1px solid var(--stamp);
+                      padding: 2px 6px;
+                      font-size: 11px;
+                    "
+                    >PUBLISHED</span
+                  >
+                  <p class="body-lg bold" style="margin-top: 8px">
+                    System and Method for O(1) Memory Streaming Anomaly
+                    Detection
+                  </p>
+                </li>
+                <li
+                  style="
+                    margin-bottom: 20px;
+                    border-bottom: 1px solid var(--rule);
+                    padding-bottom: 15px;
+                  "
+                >
+                  <span
+                    class="meta"
+                    style="
+                      color: var(--stamp);
+                      border: 1px solid var(--stamp);
+                      padding: 2px 6px;
+                      font-size: 11px;
+                    "
+                    >PUBLISHED</span
+                  >
+                  <p class="body-lg bold" style="margin-top: 8px">
+                    Audio Deepfake Detection via Shannon Entropy
+                  </p>
+                </li>
+                <li style="margin-bottom: 20px">
+                  <span
+                    class="meta"
+                    style="
+                      color: var(--stamp);
+                      border: 1px solid var(--stamp);
+                      padding: 2px 6px;
+                      font-size: 11px;
+                    "
+                    >PUBLISHED</span
+                  >
+                  <p class="body-lg bold" style="margin-top: 8px">
+                    Real-time Lip-Sync Detection using Visual CNNs
+                  </p>
+                </li>
+              </ul>"""
+
+new_patents_list = """              <ul style="list-style: none; padding: 0">
+                <li
+                  style="
+                    margin-bottom: 20px;
+                    border-bottom: 1px solid var(--rule);
+                    padding-bottom: 15px;
+                  "
+                >
+                  <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
+                    <span
+                      class="meta"
+                      style="
+                        color: var(--stamp);
+                        border: 1px solid var(--stamp);
+                        padding: 2px 6px;
+                        font-size: 11px;
+                        font-weight: bold;
+                      "
+                      >PUBLISHED</span
+                    >
+                    <span class="meta" style="font-weight: bold; color: var(--ink-soft);">App No: 202641072750 &middot; 2026</span>
+                  </div>
+                  <p class="body-lg bold" style="margin-top: 4px; line-height: 1.4;">
+                    Cognitive-State-Aware Adaptive Information Security Enforcement System
+                  </p>
+                </li>
+                <li
+                  style="
+                    margin-bottom: 20px;
+                    border-bottom: 1px solid var(--rule);
+                    padding-bottom: 15px;
+                  "
+                >
+                  <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
+                    <span
+                      class="meta"
+                      style="
+                        color: var(--stamp);
+                        border: 1px solid var(--stamp);
+                        padding: 2px 6px;
+                        font-size: 11px;
+                        font-weight: bold;
+                      "
+                      >PUBLISHED</span
+                    >
+                    <span class="meta" style="font-weight: bold; color: var(--ink-soft);">App No: 202541027783 &middot; 2026</span>
+                  </div>
+                  <p class="body-lg bold" style="margin-top: 4px; line-height: 1.4;">
+                    Multi-Domain Feature Fusion Based Deep Learning System for Audio Deepfake Detection
+                  </p>
+                </li>
+                <li style="margin-bottom: 20px">
+                  <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
+                    <span
+                      class="meta"
+                      style="
+                        color: var(--stamp);
+                        border: 1px solid var(--stamp);
+                        padding: 2px 6px;
+                        font-size: 11px;
+                        font-weight: bold;
+                      "
+                      >PUBLISHED</span
+                    >
+                    <span class="meta" style="font-weight: bold; color: var(--ink-soft);">App No: 2025411318 &middot; 2025</span>
+                  </div>
+                  <p class="body-lg bold" style="margin-top: 4px; line-height: 1.4;">
+                    System for Lip-Sync Authenticity Detection Using Spatial, Spectral, and Feature Fusion
+                  </p>
+                </li>
+              </ul>"""
+
+if old_patents_list in idx:
+    idx = idx.replace(old_patents_list, new_patents_list)
+else:
+    # Use regex or partial replace
+    print("Replacing patents section in index.html...")
+    idx = re.sub(r'<ul style="list-style: none; padding: 0">.*?</ul>', new_patents_list.strip(), idx, flags=re.DOTALL)
+
+with open('index.html', 'w') as f:
+    f.write(idx)
+print("Updated index.html with SnapSeat and exact patent names!")
+
+# 3. Update pages/snapseat.html
+with open('pages/snapseat.html', 'r') as f:
+    ss_content = f.read()
+
+ss_content = ss_content.replace('SeatSnap', 'SnapSeat')
+with open('pages/snapseat.html', 'w') as f:
+    f.write(ss_content)
+print("Updated pages/snapseat.html to SnapSeat!")
+
+# 4. Update pages/patents.html with full rich details, exact titles, application numbers, and years
+patents_html_full = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -160,3 +350,8 @@
     <script src="../js/animations.js" defer></script>
 </body>
 </html>
+"""
+
+with open('pages/patents.html', 'w') as f:
+    f.write(patents_html_full)
+print("Updated pages/patents.html with exact patent titles, application numbers, and years!")
