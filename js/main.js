@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initDynamicDate();
+    initReadingProgressBar();
     initStickyNav();
     initMobileMenu();
     initThemeSwitcher();
@@ -20,12 +21,32 @@ function initDynamicDate() {
     if (dateElements.length === 0) return;
 
     const now = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = now.toLocaleDateString('en-US', options).toUpperCase();
+    const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+    const months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
+    
+    const dayName = days[now.getDay()];
+    const dayNum = now.getDate();
+    const monthName = months[now.getMonth()];
+    const year = now.getFullYear();
+
+    const formattedDate = `${dayName} ${dayNum} ${monthName} ${year} · VOL. I`;
 
     dateElements.forEach(el => {
         el.textContent = formattedDate;
     });
+}
+
+// 1.5 Reading Progress Bar
+function initReadingProgressBar() {
+    const progressBar = document.getElementById('reading-progress-bar');
+    if (!progressBar) return;
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        progressBar.style.width = `${progress}%`;
+    }, { passive: true });
 }
 
 // 2. Sticky Navigation

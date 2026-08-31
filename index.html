@@ -26,8 +26,9 @@
       content="Portfolio of Ajitesh Sharma: Systems Security, C++17 DPI engines, and AI safety research."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://ajiteshsharma.com" />
+    <meta property="og:url" content="https://ajiteshsharma.dev" />
     <meta property="og:image" content="images/portrait.jpg" />
+    <link rel="canonical" href="https://ajiteshsharma.dev/" />
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="alternate icon" type="image/png" href="favicon.png" />
@@ -35,7 +36,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"
       rel="stylesheet"
     />
 
@@ -49,10 +50,9 @@
     ></script>
 
     <link rel="stylesheet" href="css/styles.css" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="alternate icon" type="image/png" href="favicon.png">
 </head>
   <body class="newspaper-theme">
+    <div id="reading-progress-bar" class="reading-progress-bar"></div>
     <div class="container">
       <!-- SECTION 1: MASTHEAD HEADER -->
       <header class="masthead" style="margin-top: 20px; border-top: 4px double var(--rule-dark);">
@@ -63,14 +63,14 @@
         >
           <div
             class="col-span-12 meta uppercase"
-            style="display: flex; justify-content: space-between"
+            style="display: flex; justify-content: space-between; align-items: center;"
           >
             <span
               >BY THE ENGINEERING DESK &middot; REPORTING FROM VELLORE, BETWEEN
               LABS AND TERMINALS</span
             >
             <span
-              ><a href="#projects">Read the Dispatches &rarr;</a> &nbsp;&nbsp;
+              ><a href="#projects">Read Dispatches &rarr;</a> &nbsp;&middot;&nbsp;
               <a href="#contact">Get in Touch</a></span
             >
           </div>
@@ -79,12 +79,12 @@
         <!-- Title -->
         <div
           class="text-center"
-          style="padding: 40px 0 20px 0; border-bottom: 1px solid var(--rule)"
+          style="padding: 35px 0 20px 0; border-bottom: 1px solid var(--rule)"
         >
           <h1 class="display-xl rv" style="margin-bottom: 5px">
             Ajitesh Sharma
           </h1>
-          <p class="meta rv">THE ENGINEERING RECORD OF A SYSTEMS BUILDER</p>
+          <p class="meta rv" style="letter-spacing: 0.18em;">THE ENGINEERING RECORD OF A SYSTEMS BUILDER</p>
         </div>
 
         <!-- Dateline -->
@@ -92,11 +92,11 @@
           class="newspaper-grid"
           style="border-bottom: 1px solid var(--rule); padding: 10px 0"
         >
-          <div class="col-span-4 meta text-left">
-            THURSDAY 7 AUGUST 2026 &middot; VOL. I
+          <div class="col-span-4 meta text-left masthead__date" data-dynamic-date>
+            MONDAY 31 AUGUST 2026 &middot; VOL. I
           </div>
           <div class="col-span-4 meta text-center">
-            SELECTED WORKS &amp; NOTES
+            SELECTED WORKS &amp; ARCHITECTURES
           </div>
           <div class="col-span-4 meta text-right">PRICE: ONE SSH SESSION</div>
         </div>
@@ -105,32 +105,31 @@
         <nav
           class="nav"
           id="main-nav"
-          style="border-bottom: 4px solid var(--rule-dark); padding: 15px 0"
+          style="border-bottom: 4px solid var(--rule-dark); padding: 12px 0"
         >
           <div class="newspaper-grid" style="align-items: center">
-            <div class="col-span-6 heading-md" style="margin: 0">
-              Ajitesh Sharma
+            <div class="col-span-4 heading-md" style="margin: 0">
+              <a href="#" style="text-decoration: none; color: inherit; font-size: 20px; letter-spacing: -0.5px;">Ajitesh Sharma</a>
             </div>
             <div
-              class="col-span-6"
+              class="col-span-8"
               style="
                 display: flex;
                 justify-content: flex-end;
-                gap: 25px;
+                gap: 20px;
                 align-items: center;
+                flex-wrap: wrap;
               "
             >
               <a href="#projects" class="meta bold">WORK</a>
+              <a href="#publications" class="meta bold">RESEARCH</a>
               <a href="#stack" class="meta bold">STACK</a>
+              <a href="#experience" class="meta bold">SERVICE</a>
               <a href="#contact" class="meta bold">CONTACT</a>
               <a
                 href="#contact"
-                style="
-                  background: var(--ink);
-                  color: var(--paper);
-                  padding: 6px 16px;
-                "
-                class="meta bold"
+                class="meta bold editorial-btn editorial-btn-solid"
+                style="padding: 6px 14px; font-size: 11px;"
                 >HIRE HIM</a
               >
             </div>
@@ -139,26 +138,22 @@
       </header>
 
       <main class="dispatch-content">
-        <!-- INDIAN EXPRESS STYLE HEADLINE BAR -->
-        <div
-          style="
-            background-color: var(--ink);
-            color: var(--paper-bright);
-            padding: 15px 0;
-            border-bottom: 5px solid var(--rule-dark);
-            margin-bottom: 40px;
-          "
-          class="rv"
-        >
-          <div class="newspaper-grid">
-            <div class="col-span-12 text-center">
-              <h2
-                class="heading-lg uppercase"
-                style="letter-spacing: 2px; margin: 0; font-size: 24px"
-              >
-                Exposing Vulnerabilities &middot; Engineering Resilient Systems
-                &middot; Applied AI
-              </h2>
+        <!-- EDITORIAL BREAKING NEWS WIRE TICKER -->
+        <div class="marquee-strip rv" style="margin-bottom: 35px;">
+          <div class="marquee-badge">BREAKING WIRE</div>
+          <div class="marquee-track">
+            <div class="marquee-content">
+              <span class="marquee-item">C++17 DPI ENGINE BENCHMARKED AT SUB-MILLISECOND LATENCY <span class="sep">&#9670;</span></span>
+              <span class="marquee-item">IEEE COMPSAC 2026 PAPER ACCEPTED (AI AGENT SAFETY) <span class="sep">&#9670;</span></span>
+              <span class="marquee-item">3 INDIAN PATENTS FILED (202641072750 &middot; 202541027783 &middot; 202541011318) <span class="sep">&#9670;</span></span>
+              <span class="marquee-item">STREAMING ANOMALY DETECTION WITH TREESHAP &amp; FAST-HOEFFDING TREES <span class="sep">&#9670;</span></span>
+              <span class="marquee-item">ENTERPRISE WORKFORCE SCHEDULING ORCHESTRATOR FOR 1,200+ PERSONNEL <span class="sep">&#9670;</span></span>
+              <!-- Repeat for seamless marquee -->
+              <span class="marquee-item">C++17 DPI ENGINE BENCHMARKED AT SUB-MILLISECOND LATENCY <span class="sep">&#9670;</span></span>
+              <span class="marquee-item">IEEE COMPSAC 2026 PAPER ACCEPTED (AI AGENT SAFETY) <span class="sep">&#9670;</span></span>
+              <span class="marquee-item">3 INDIAN PATENTS FILED (202641072750 &middot; 202541027783 &middot; 202541011318) <span class="sep">&#9670;</span></span>
+              <span class="marquee-item">STREAMING ANOMALY DETECTION WITH TREESHAP &amp; FAST-HOEFFDING TREES <span class="sep">&#9670;</span></span>
+              <span class="marquee-item">ENTERPRISE WORKFORCE SCHEDULING ORCHESTRATOR FOR 1,200+ PERSONNEL <span class="sep">&#9670;</span></span>
             </div>
           </div>
         </div>
@@ -227,28 +222,16 @@
                   >
                     BY THE ENGINEERING DESK &middot; REPORTING FROM VELLORE
                   </p>
-                  <div class="rv" style="display: flex; gap: 10px">
+                  <div class="rv" style="display: flex; gap: 10px; flex-wrap: wrap;">
                     <a
                       href="#projects"
-                      class="meta bold"
-                      style="
-                        background: var(--ink);
-                        color: var(--paper);
-                        padding: 12px 16px;
-                        border: 1px solid var(--ink);
-                      "
-                      >READ THE WORK &rarr;</a
+                      class="editorial-btn editorial-btn-solid"
+                      >EXPLORE DISPATCHES &rarr;</a
                     >
                     <a
                       href="#contact"
-                      class="meta bold"
-                      style="
-                        background: transparent;
-                        color: var(--ink);
-                        padding: 12px 16px;
-                        border: 1px solid var(--ink);
-                      "
-                      >GET IN TOUCH</a
+                      class="editorial-btn editorial-btn-outline"
+                      >SEND A BRIEF</a
                     >
                   </div>
                 </div>
@@ -259,7 +242,7 @@
                   </p>
                   <p class="body" style="margin-top: 15px">
                     He interned at Hindalco Industries (Aditya Birla Group),
-                    digitizing workforce scheduling for 1,200+ site personnel.
+                    architecting enterprise shift orchestration systems.
                   </p>
                 </div>
               </div>
@@ -268,25 +251,16 @@
             <!-- Right side (image and text) - 6 columns -->
             <div class="col-span-6">
               <figure
-                class="rv"
-                style="
-                  border: 1px solid var(--rule-dark);
-                  padding: 5px;
-                  background: var(--paper-bright);
-                "
+                class="editorial-portrait-frame rv"
               >
                 <img
                   src="images/portrait.jpg"
-                  alt="Ajitesh Sharma Portrait"
-                  style="
-                    width: 100%;
-                    height: auto;
-                    border: 1px solid var(--rule-dark);
-                  "
+                  alt="Ajitesh Sharma Editorial Portrait"
+                  class="editorial-portrait"
                 />
               </figure>
               <p class="meta rv" style="margin-top: 8px">
-                PICTURED: the subject, in his natural habitat.
+                FIG 01. &mdash; THE SUBJECT (SYSTEMS &amp; SECURITY LABS, VELLORE)
               </p>
 
               <div style="margin-top: 30px" class="newspaper-grid">
@@ -300,7 +274,8 @@
                   <p class="body rv" style="margin-top: 15px">
                     When he's not writing lock-free code, he's researching or
                     filing Indian patent applications for systems that don't
-                    exist yet, restless lad.
+                    exist yet, continually filing new investigations across
+                    defensive security and applied machine learning.
                   </p>
                 </div>
               </div>
@@ -400,85 +375,64 @@
             <article
               class="col-span-12 rv"
               style="
-                border: 1px solid var(--rule-dark);
+                border: 2px solid var(--rule-dark);
                 padding: 30px;
                 background: var(--paper-warm);
                 margin-bottom: 30px;
               "
             >
-              <span
-                class="kicker-label"
-                style="color: var(--stamp); font-size: 14px"
-                >DISPATCH A</span
-              >
-              <h4 class="display-md" style="margin: 10px 0">CipherPulse</h4>
-              <div class="newspaper-grid">
-                <div class="col-span-8">
-                  <p class="body-lg">
-                    A high-performance C++17 Deep Packet Inspection (DPI) engine
-                    utilizing JA4+ fingerprints and Shannon Entropy for
-                    real-time encrypted malware traffic detection. Engineered
-                    for multi-threaded packet capture and low-latency feature
-                    extraction.
-                  </p>
-                </div>
-                <div
-                  class="col-span-4"
-                  style="
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    align-items: flex-end;
-                  "
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                <span
+                  class="kicker-label"
+                  style="color: var(--stamp); font-size: 13px; font-weight: 700; margin: 0;"
+                  >DISPATCH A &mdash; LEAD INVESTIGATION</span
                 >
-                  <div
-                    style="
-                      display: flex;
-                      gap: 8px;
-                      flex-wrap: wrap;
-                      justify-content: flex-end;
-                    "
-                  >
-                    <span
-                      class="meta"
-                      style="border: 1px solid var(--rule); padding: 4px 8px"
-                      >C++17</span
-                    >
-                    <span
-                      class="meta"
-                      style="border: 1px solid var(--rule); padding: 4px 8px"
-                      >DPI</span
-                    >
-                    <span
-                      class="meta"
-                      style="border: 1px solid var(--rule); padding: 4px 8px"
-                      >JA4+</span
-                    >
-                  </div>
-                  <a
-                    href="pages/cipherpulse.html"
-                    class="meta bold"
-                    style="
-                      background: var(--ink);
-                      color: var(--paper);
-                      padding: 10px 20px;
-                      margin-top: 20px;
-                    "
-                    >OPEN DISPATCH &rarr;</a
-                  >
+                <span class="meta bold" style="color: var(--ink-soft);">CASE NO. 43</span>
+              </div>
+              <h4 class="display-md" style="margin: 8px 0 16px 0">CipherPulse</h4>
+              <p class="body-lg" style="line-height: 1.7; margin-bottom: 20px;">
+                A high-performance C++17 Deep Packet Inspection (DPI) engine
+                utilizing JA4+ fingerprints and Shannon Entropy for
+                real-time encrypted malware traffic detection. Engineered
+                for multi-threaded packet capture and low-latency feature
+                extraction.
+              </p>
+
+              <!-- Tags pulled directly under copy with button inline -->
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  flex-wrap: wrap;
+                  gap: 15px;
+                  border-top: 1px solid var(--rule);
+                  padding-top: 18px;
+                "
+              >
+                <div class="tag-group">
+                  <span class="tag-chip">C++17</span>
+                  <span class="tag-chip">DPI</span>
+                  <span class="tag-chip">JA4+</span>
+                  <span class="tag-chip">Shannon Entropy</span>
                 </div>
+                <a
+                  href="pages/cipherpulse.html"
+                  class="editorial-btn editorial-btn-solid"
+                  >OPEN DISPATCH &rarr;</a
+                >
               </div>
             </article>
 
             <!-- Grid for remaining projects -->
             <div class="col-span-12 newspaper-grid">
               <!-- DISPATCH B -->
-              <article class="col-span-6 rv column-bordered">
+              <article class="col-span-6 rv column-bordered" style="display: flex; flex-direction: column;">
                 <span class="kicker-label">DISPATCH B</span>
                 <h4 class="heading-lg" style="margin: 10px 0">
                   Sentinel-Stream
                 </h4>
-                <p class="body" style="margin-bottom: 20px">
+                <p class="body" style="margin-bottom: 20px; flex-grow: 1;">
                   O(1)-Memory anomaly detection pipeline using LightGBM and
                   Fast-Hoeffding Trees, deployed via FastAPI for real-time
                   inference with TreeSHAP explanations.
@@ -488,10 +442,16 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    border-top: 1px solid var(--rule);
+                    padding-top: 14px;
                     margin-top: auto;
                   "
                 >
-                  <span class="meta">LightGBM &middot; FastAPI</span>
+                  <div class="tag-group">
+                    <span class="tag-chip">LightGBM</span>
+                    <span class="tag-chip">FastAPI</span>
+                    <span class="tag-chip">TreeSHAP</span>
+                  </div>
                   <a
                     href="pages/sentinel-stream.html"
                     class="meta bold"
@@ -502,10 +462,10 @@
               </article>
 
               <!-- DISPATCH C -->
-              <article class="col-span-6 rv">
+              <article class="col-span-6 rv" style="display: flex; flex-direction: column;">
                 <span class="kicker-label">DISPATCH C</span>
                 <h4 class="heading-lg" style="margin: 10px 0">SnapSeat</h4>
-                <p class="body" style="margin-bottom: 20px">
+                <p class="body" style="margin-bottom: 20px; flex-grow: 1;">
                   Containerized seat reservation microservices with
                   high-availability scheduling. Built with robust CI/CD and
                   system observability.
@@ -515,10 +475,16 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    border-top: 1px solid var(--rule);
+                    padding-top: 14px;
                     margin-top: auto;
                   "
                 >
-                  <span class="meta">Docker &middot; K8s</span>
+                  <div class="tag-group">
+                    <span class="tag-chip">Docker</span>
+                    <span class="tag-chip">K8s</span>
+                    <span class="tag-chip">Microservices</span>
+                  </div>
                   <a
                     href="pages/snapseat.html"
                     class="meta bold"
@@ -534,12 +500,12 @@
               ></div>
 
               <!-- DISPATCH D -->
-              <article class="col-span-6 rv column-bordered">
+              <article class="col-span-6 rv column-bordered" style="display: flex; flex-direction: column;">
                 <span class="kicker-label">DISPATCH D</span>
                 <h4 class="heading-lg" style="margin: 10px 0">
                   NutriVision Pro
                 </h4>
-                <p class="body" style="margin-bottom: 20px">
+                <p class="body" style="margin-bottom: 20px; flex-grow: 1;">
                   AI-powered dietary analysis tool leveraging Gemini Vision API
                   for food recognition and nutritional breakdown.
                 </p>
@@ -548,40 +514,53 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    border-top: 1px solid var(--rule);
+                    padding-top: 14px;
                     margin-top: auto;
                   "
                 >
-                  <span class="meta">Next.js &middot; Gemini</span>
+                  <div class="tag-group">
+                    <span class="tag-chip">Next.js</span>
+                    <span class="tag-chip">Gemini</span>
+                    <span class="tag-chip">FastAPI</span>
+                  </div>
                   <a
                     href="https://nutrivision-pro.vercel.app"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="meta bold"
                     style="color: var(--stamp)"
-                    >OPEN DISPATCH &rarr;</a
+                    >LAUNCH APP <span class="external-icon">&#8599;</span></a
                   >
                 </div>
               </article>
 
               <!-- DISPATCH E -->
-              <article class="col-span-6 rv">
-                <span class="kicker-label">DISPATCH E &mdash; HINDALCO</span>
+              <article class="col-span-6 rv" style="display: flex; flex-direction: column;">
+                <span class="kicker-label">DISPATCH E &mdash; INDUSTRIAL CASE RECORD</span>
                 <h4 class="heading-lg" style="margin: 10px 0">
                   Workforce Queue System
                 </h4>
-                <p class="body" style="margin-bottom: 20px">
-                  Enterprise system for digitizing workforce scheduling,
-                  reducing manual allocation overhead for 1,200+ site personnel
-                  daily.
+                <p class="body" style="margin-bottom: 20px; flex-grow: 1;">
+                  Workforce orchestration platform streamlining shift
+                  scheduling, multi-tier RBAC access, and attendance auditing
+                  for 1,200+ facility personnel.
                 </p>
                 <div
                   style="
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    border-top: 1px solid var(--rule);
+                    padding-top: 14px;
                     margin-top: auto;
                   "
                 >
-                  <span class="meta">Spring Boot &middot; Oracle</span>
+                  <div class="tag-group">
+                    <span class="tag-chip">Spring Boot</span>
+                    <span class="tag-chip">Oracle DB</span>
+                    <span class="tag-chip">RBAC</span>
+                  </div>
                   <a
                     href="pages/internship.html"
                     class="meta bold"
@@ -806,13 +785,8 @@
                 </p>
                 <a
                   href="pages/paper-compsac.html"
-                  class="meta bold"
-                  style="
-                    display: inline-block;
-                    margin-top: 20px;
-                    color: var(--stamp);
-                    border-bottom: 2px solid var(--stamp);
-                  "
+                  class="editorial-btn editorial-btn-solid"
+                  style="margin-top: 20px;"
                   >READ FULL ANALYSIS &rarr;</a
                 >
               </div>
@@ -875,7 +849,7 @@
                       "
                       >FILED</span
                     >
-                    <span class="meta" style="font-weight: bold; color: var(--ink-soft);">App No: 202541027783 &middot; 2026</span>
+                    <span class="meta" style="font-weight: bold; color: var(--ink-soft);">App No: 202541027783 &middot; 2025</span>
                   </div>
                   <p class="body-lg bold" style="margin-top: 4px; line-height: 1.4;">
                     Multi-Domain Feature Fusion Based Deep Learning System for Audio Deepfake Detection
@@ -894,7 +868,7 @@
                       "
                       >FILED</span
                     >
-                    <span class="meta" style="font-weight: bold; color: var(--ink-soft);">App No: 2025411318 &middot; 2025</span>
+                    <span class="meta" style="font-weight: bold; color: var(--ink-soft);">App No: 202541011318 &middot; 2025</span>
                   </div>
                   <p class="body-lg bold" style="margin-top: 4px; line-height: 1.4;">
                     System for Lip-Sync Authenticity Detection Using Spatial, Spectral, and Feature Fusion
@@ -903,14 +877,8 @@
               </ul>
               <a
                 href="pages/patents.html"
-                class="meta bold"
-                style="
-                  display: inline-block;
-                  margin-top: 15px;
-                  background: var(--ink);
-                  color: var(--paper);
-                  padding: 10px 15px;
-                "
+                class="editorial-btn editorial-btn-solid"
+                style="margin-top: 15px;"
                 >VIEW PATENT ARCHITECTURES &rarr;</a
               >
             </div>
@@ -940,20 +908,22 @@
             <div class="action-btn-group">
               <a
                 href="mailto:13ajitesh@gmail.com"
-                class="meta bold action-btn-link action-btn-primary"
+                class="meta bold action-btn-link"
                 >13AJITESH@GMAIL.COM</a
               >
               <a
                 href="https://linkedin.com/in/ajitesh-sharma"
                 target="_blank"
-                class="meta bold action-btn-link action-btn-secondary"
-                >LINKEDIN</a
+                rel="noopener noreferrer"
+                class="meta bold action-btn-link"
+                >LINKEDIN <span class="external-icon">&#8599;</span></a
               >
               <a
                 href="https://github.com/AJ1312"
                 target="_blank"
-                class="meta bold action-btn-link action-btn-outline"
-                >GITHUB</a
+                rel="noopener noreferrer"
+                class="meta bold action-btn-link"
+                >GITHUB <span class="external-icon">&#8599;</span></a
               >
             </div>
 
