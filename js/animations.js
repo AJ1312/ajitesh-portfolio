@@ -236,10 +236,10 @@ function initEditionToggle() {
     const currentTheme = localStorage.getItem('sharma_dispatch_theme') || 'light';
     if (currentTheme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
-        toggleBtn.textContent = 'MORNING EDITION ☀️';
+        toggleBtn.textContent = 'MORNING EDITION';
     } else {
         document.documentElement.setAttribute('data-theme', 'light');
-        toggleBtn.textContent = 'NIGHT EDITION 🌙';
+        toggleBtn.textContent = 'NIGHT EDITION';
     }
 
     toggleBtn.addEventListener('click', () => {
@@ -247,11 +247,11 @@ function initEditionToggle() {
         if (isDark) {
             document.documentElement.setAttribute('data-theme', 'light');
             localStorage.setItem('sharma_dispatch_theme', 'light');
-            toggleBtn.textContent = 'NIGHT EDITION 🌙';
+            toggleBtn.textContent = 'NIGHT EDITION';
         } else {
             document.documentElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('sharma_dispatch_theme', 'dark');
-            toggleBtn.textContent = 'MORNING EDITION ☀️';
+            toggleBtn.textContent = 'MORNING EDITION';
         }
     });
 }

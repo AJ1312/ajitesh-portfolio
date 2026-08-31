@@ -4,7 +4,7 @@
 
 A newspaper-inspired editorial portfolio website for **Ajitesh Sharma**, styled after The Indian Express broadsheet aesthetic with interactive fluid-scroll animations.
 
-## 🗞️ Live Preview
+## Live Preview
 
 Open `index.html` in your browser, or serve locally:
 
@@ -12,25 +12,25 @@ Open `index.html` in your browser, or serve locally:
 npx serve .
 ```
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ajitesh-portfolio/
 ├── index.html              # Main broadsheet homepage
-├── css/styles.css          # Complete design system (1200+ lines)
+├── css/styles.css          # Complete design system
 ├── js/
 │   ├── main.js             # Core interactions, nav, theme switcher
-│   ├── animations.js       # GSAP ScrollTrigger scroll animations
-│   └── simulations.js      # 4 interactive simulations
+│   ├── animations.js       # Editorial animations & custom cursor
+│   └── simulations.js      # Interactive simulations
 ├── pages/
-│   ├── cipherpulse.html    # DPI Engine deep-dive + particle sim
+│   ├── cipherpulse.html    # DPI Engine deep-dive + telemetry
 │   ├── sentinel-stream.html # Anomaly detection + SOC dashboard
 │   ├── snapseat.html       # DevOps platform + CI/CD pipeline viz
 │   ├── nutrivision.html    # AI dietary intel + live demo
 │   ├── internship.html     # Hindalco internship + queue sim
 │   ├── paper-compsac.html  # IEEE COMPSAC paper presentation
 │   ├── patents.html        # 3 Indian patent architectures
-│   └── certifications.html # Certification gallery
+│   └── certifications.html # Verified credentials registry
 └── images/
     ├── portrait.jpg
     └── patents/
@@ -39,24 +39,24 @@ ajitesh-portfolio/
         └── lipsync-detection.jpg
 ```
 
-## ✨ Features
+## Features
 
-- **Newspaper-style editorial design** inspired by The Indian Express & Robert Tran
-- **GSAP ScrollTrigger** fluid scroll animations
-- **4 Interactive Simulations**: DPI particle network, anomaly dashboard, CI/CD pipeline, queue manager
-- **Dark mode** ("Night Edition" toggle)
-- **Responsive** mobile-first design
-- **Hand-drawn patent architecture diagrams**
+- **Newspaper-style editorial design** inspired by broadsheet editorial craftsmanship
+- **Fluid scroll interactions** & custom editorial cursor
+- **Interactive Simulations**: DPI traffic analysis, anomaly detector, CI/CD pipeline, queue manager
+- **Dark mode** (Morning / Night Edition toggle)
+- **Responsive** mobile-optimized architecture
+- **Patent architecture diagrams**
 - **MathJax equations** for IEEE paper presentation
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - HTML5, CSS3, Vanilla JavaScript
 - GSAP + ScrollTrigger (CDN)
 - Google Fonts: Playfair Display, Inter, JetBrains Mono
 - MathJax (for paper equations)
 
-## 👤 Contact
+## Contact
 
 - **Email**: 13ajitesh@gmail.com
 - **LinkedIn**: [linkedin.com/in/ajitesh-sharma](https://linkedin.com/in/ajitesh-sharma)

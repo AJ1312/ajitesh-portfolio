@@ -458,14 +458,14 @@ window.initPipelineViz = function(containerId) {
     container.style.boxSizing = 'border-box';
 
     const stages = [
-        { id: 'CODE', icon: '📝' },
-        { id: 'LINT', icon: '🔍' },
-        { id: 'TEST', icon: '🧪' },
-        { id: 'SCAN', icon: '🛡️' },
-        { id: 'BUILD', icon: '📦' },
-        { id: 'PUSH', icon: '☁️' },
-        { id: 'DEPLOY', icon: '🚀' },
-        { id: 'VERIFY', icon: '✅' }
+        { id: 'CODE', icon: '01' },
+        { id: 'LINT', icon: '02' },
+        { id: 'TEST', icon: '03' },
+        { id: 'SCAN', icon: '04' },
+        { id: 'BUILD', icon: '05' },
+        { id: 'PUSH', icon: '06' },
+        { id: 'DEPLOY', icon: '07' },
+        { id: 'VERIFY', icon: '08' }
     ];
 
     const pipelineHtml = stages.map((s, i) => `
@@ -539,7 +539,7 @@ window.initPipelineViz = function(containerId) {
             el.style.opacity = '1';
             el.querySelector('div').style.borderColor = '#D29922';
             el.querySelector('div').style.boxShadow = '0 0 10px rgba(210,153,34,0.5)';
-            el.querySelector('.status').innerHTML = '⏳';
+            el.querySelector('.status').innerHTML = '[RUN]';
             log(`Running stage: ${stage.id}...`, '#D29922');
 
             timeoutId = setTimeout(() => {
@@ -547,7 +547,7 @@ window.initPipelineViz = function(containerId) {
                 // Set to success
                 el.querySelector('div').style.borderColor = '#238636';
                 el.querySelector('div').style.boxShadow = '0 0 10px rgba(35,134,54,0.5)';
-                el.querySelector('.status').innerHTML = '✅';
+                el.querySelector('.status').innerHTML = '[PASS]';
                 log(`Stage ${stage.id} completed successfully.`, '#238636');
                 
                 currentStage++;
