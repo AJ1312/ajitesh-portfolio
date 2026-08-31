@@ -328,6 +328,118 @@ h6 {
   margin-bottom: 8px;
 }
 
+/* Paper Press Edition Loader */
+.paper-press-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--paper);
+  background-image: 
+    radial-gradient(var(--ink-soft) 0.6px, transparent 0.6px),
+    linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 24px 24px, 40px 40px;
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  transform: translateY(0);
+  transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+  pointer-events: all;
+}
+
+.paper-press-loader.is-loaded {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.paper-press-card {
+  border: 3px double var(--rule-dark);
+  padding: 32px 36px;
+  background: var(--paper-bright);
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.08);
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.paper-press-stamp {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--stamp);
+  margin-bottom: 8px;
+}
+
+.paper-press-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--ink);
+  margin: 0 0 8px 0;
+  line-height: 1.15;
+}
+
+.paper-press-progress-track {
+  width: 100%;
+  height: 4px;
+  background: var(--paper-warm);
+  border: 1px solid var(--rule-dark);
+  margin-top: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.paper-press-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--ink);
+  transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Editorial Broadsheet Artwork Container */
+.editorial-art-frame {
+  border: 1px solid var(--rule-dark);
+  background: var(--paper-bright);
+  padding: 6px;
+  margin-bottom: 16px;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.editorial-art-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dispatch-card:hover .editorial-art-frame img {
+  transform: scale(1.02);
+}
+
+.editorial-art-caption {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--rule);
+  padding-top: 4px;
+}
+
 /* Credibility Stat Strip */
 .stat-strip {
   display: flex;

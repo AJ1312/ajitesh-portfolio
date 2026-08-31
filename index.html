@@ -52,6 +52,18 @@
     <link rel="stylesheet" href="css/styles.css" />
 </head>
   <body class="newspaper-theme">
+    <!-- Paper Press Broadsheet Unfold Preloader -->
+    <div class="paper-press-loader" aria-hidden="true">
+      <div class="paper-press-card">
+        <div class="paper-press-stamp">FIRST EDITION &middot; SPECIAL PRINT</div>
+        <div class="paper-press-title">The Sharma Dispatch</div>
+        <div class="meta" style="letter-spacing: 0.14em; color: var(--ink-soft);">PRESSING BROADSHEET &middot; VELLORE SYSTEMS DESK</div>
+        <div class="paper-press-progress-track">
+          <div class="paper-press-progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
     <div id="reading-progress-bar" class="reading-progress-bar"></div>
     <div class="container">
       <!-- SECTION 1: MASTHEAD HEADER -->
@@ -415,6 +427,15 @@
               </div>
               <h4 class="display-md" style="margin: 8px 0 16px 0">CipherPulse</h4>
               
+              <!-- Editorial Artwork for Lead Investigation -->
+              <div class="editorial-art-frame">
+                <img src="images/dispatches/cipherpulse_art.jpg" alt="CipherPulse Deep Packet Inspection Engine Linocut Art" loading="lazy" />
+                <div class="editorial-art-caption">
+                  <span>FIG 01. &mdash; Real-Time Payload &amp; Entropy Analytical Prism</span>
+                  <span>TEL: 10,000+ PKT/SEC</span>
+                </div>
+              </div>
+
               <div class="newspaper-grid" style="margin-bottom: 20px; align-items: stretch;">
                 <div class="col-span-7" style="display: flex; flex-direction: column; justify-content: space-between;">
                   <p class="body-lg" style="line-height: 1.7; margin-bottom: 16px;">
@@ -457,7 +478,7 @@
       [SOC_ALERT_DISPATCH]
                     </pre>
                     <div style="margin-top: 8px; border-top: 1px solid var(--rule); padding-top: 4px; font-size: 9px; color: var(--ink-soft); text-transform: uppercase;">
-                      FIG 02. &mdash; Real-Time Detection Architecture
+                      FIG 02. &mdash; Zero-Copy Pipeline Topology
                     </div>
                   </div>
                 </div>
@@ -489,17 +510,24 @@
             <div class="col-span-12 newspaper-grid">
               <!-- DISPATCH B -->
               <article class="col-span-6 rv column-bordered dispatch-card" data-cursor="DISPATCH" style="display: flex; flex-direction: column;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <span class="kicker-label">DISPATCH B</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span class="kicker-label">DISPATCH B &mdash; STREAMING TELEMETRY</span>
                   <span class="dispatch-index-pill">[02 / 05]</span>
                 </div>
-                <h4 class="heading-lg" style="margin: 10px 0">
+                
+                <div class="editorial-art-frame">
+                  <img src="images/dispatches/sentinel_art.jpg" alt="Sentinel-Stream Anomaly Radar Illustration" loading="lazy" />
+                  <div class="editorial-art-caption">
+                    <span>FIG 03. &mdash; Behavioral Anomaly Radar &amp; SHAP Explainer</span>
+                    <span>MEM: O(1)</span>
+                  </div>
+                </div>
+
+                <h4 class="heading-lg" style="margin: 6px 0 10px 0">
                   Sentinel-Stream
                 </h4>
-                <p class="body" style="margin-bottom: 20px; flex-grow: 1;">
-                  O(1)-Memory anomaly detection pipeline using LightGBM and
-                  Fast-Hoeffding Trees, deployed via FastAPI for real-time
-                  inference with TreeSHAP explanations.
+                <p class="body" style="margin-bottom: 20px; flex-grow: 1; line-height: 1.6;">
+                  Memory-bounded streaming anomaly detection engine fusing LightGBM and Fast-Hoeffding trees to isolate rogue credentials, credential stuffing, and impossible travel patterns in sub-second inference cycles with explainable TreeSHAP feature attributions.
                 </p>
                 <div
                   style="
@@ -515,6 +543,7 @@
                     <span class="tag-chip">LightGBM</span>
                     <span class="tag-chip">FastAPI</span>
                     <span class="tag-chip">TreeSHAP</span>
+                    <span class="tag-chip">O(1) Memory</span>
                   </div>
                   <a
                     href="pages/sentinel-stream.html"
@@ -528,15 +557,22 @@
 
               <!-- DISPATCH C -->
               <article class="col-span-6 rv dispatch-card" data-cursor="DISPATCH" style="display: flex; flex-direction: column;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <span class="kicker-label">DISPATCH C</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span class="kicker-label">DISPATCH C &mdash; DISTRIBUTED PLATFORMS</span>
                   <span class="dispatch-index-pill">[03 / 05]</span>
                 </div>
-                <h4 class="heading-lg" style="margin: 10px 0">SnapSeat</h4>
-                <p class="body" style="margin-bottom: 20px; flex-grow: 1;">
-                  Containerized seat reservation microservices with
-                  high-availability scheduling. Built with robust CI/CD and
-                  system observability.
+
+                <div class="editorial-art-frame">
+                  <img src="images/dispatches/snapseat_art.jpg" alt="SnapSeat Cloud Microservices Architecture Art" loading="lazy" />
+                  <div class="editorial-art-caption">
+                    <span>FIG 04. &mdash; Containerized Seat Allocation &amp; CI/CD Mesh</span>
+                    <span>RES: 99.9%</span>
+                  </div>
+                </div>
+
+                <h4 class="heading-lg" style="margin: 6px 0 10px 0">SnapSeat</h4>
+                <p class="body" style="margin-bottom: 20px; flex-grow: 1; line-height: 1.6;">
+                  Resilient, containerized seat reservation platform built on Docker, Kubernetes, and automated Jenkins CI/CD pipelines. Features Redis distributed locking to eliminate race conditions under peak traffic concurrent surges.
                 </p>
                 <div
                   style="
@@ -551,7 +587,8 @@
                   <div class="tag-group">
                     <span class="tag-chip">Docker</span>
                     <span class="tag-chip">K8s</span>
-                    <span class="tag-chip">Microservices</span>
+                    <span class="tag-chip">Redis Locks</span>
+                    <span class="tag-chip">Jenkins</span>
                   </div>
                   <a
                     href="pages/snapseat.html"
@@ -571,15 +608,14 @@
               <!-- DISPATCH D -->
               <article class="col-span-6 rv column-bordered dispatch-card" data-cursor="DISPATCH" style="display: flex; flex-direction: column;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <span class="kicker-label">DISPATCH D</span>
+                  <span class="kicker-label">DISPATCH D &mdash; APPLIED VISION AI</span>
                   <span class="dispatch-index-pill">[04 / 05]</span>
                 </div>
                 <h4 class="heading-lg" style="margin: 10px 0">
                   NutriVision Pro
                 </h4>
-                <p class="body" style="margin-bottom: 20px; flex-grow: 1;">
-                  AI-powered dietary analysis tool leveraging Gemini Vision API
-                  for food recognition and nutritional breakdown.
+                <p class="body" style="margin-bottom: 20px; flex-grow: 1; line-height: 1.6;">
+                  AI multimodal visual dietary intelligence platform leveraging Gemini Vision APIs for real-time macronutrient breakdown, portion volume estimations, and structured clinical nutrition reporting via Next.js and FastAPI.
                 </p>
                 <div
                   style="
@@ -593,8 +629,9 @@
                 >
                   <div class="tag-group">
                     <span class="tag-chip">Next.js</span>
-                    <span class="tag-chip">Gemini</span>
+                    <span class="tag-chip">Gemini Vision</span>
                     <span class="tag-chip">FastAPI</span>
+                    <span class="tag-chip">PostgreSQL</span>
                   </div>
                   <a
                     href="https://nutrivision-pro.vercel.app"
@@ -610,17 +647,24 @@
 
               <!-- DISPATCH E -->
               <article class="col-span-6 rv dispatch-card" data-cursor="DISPATCH" style="display: flex; flex-direction: column;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <span class="kicker-label">DISPATCH E &mdash; INDUSTRIAL CASE RECORD</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span class="kicker-label">DISPATCH E &mdash; INDUSTRIAL PRACTICUM RECORD</span>
                   <span class="dispatch-index-pill">[05 / 05]</span>
                 </div>
-                <h4 class="heading-lg" style="margin: 10px 0">
-                  Workforce Queue System
+
+                <div class="editorial-art-frame">
+                  <img src="images/dispatches/workforce_art.jpg" alt="Workforce & Healthcare Logistics Broadhseet Art" loading="lazy" />
+                  <div class="editorial-art-caption">
+                    <span>FIG 05. &mdash; Clinical Triage &amp; Shift Logistics Pipeline</span>
+                    <span>1,200+ USERS</span>
+                  </div>
+                </div>
+
+                <h4 class="heading-lg" style="margin: 6px 0 10px 0">
+                  Workforce &amp; Healthcare Logistics System
                 </h4>
-                <p class="body" style="margin-bottom: 20px; flex-grow: 1;">
-                  Workforce orchestration platform streamlining shift
-                  scheduling, multi-tier RBAC access, and attendance auditing
-                  for 1,200+ facility personnel.
+                <p class="body" style="margin-bottom: 20px; flex-grow: 1; line-height: 1.6;">
+                  Production workforce and clinical queue orchestration platform deployed at Hindalco Industries (Aditya Birla Group). Replaced manual rosters with role-based access control (RBAC) and real-time attendance auditing for 1,200+ personnel and patients.
                 </p>
                 <div
                   style="
@@ -636,6 +680,7 @@
                     <span class="tag-chip">Spring Boot</span>
                     <span class="tag-chip">Oracle DB</span>
                     <span class="tag-chip">RBAC</span>
+                    <span class="tag-chip">1,200+ Users</span>
                   </div>
                   <a
                     href="pages/internship.html"

@@ -6,6 +6,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initPaperPressLoader();
     initCustomCursor();
     init3DPortraitTilt();
     initScrollReveals();
@@ -14,6 +15,23 @@ document.addEventListener('DOMContentLoaded', () => {
     initLivePressClock();
     initEditionToggle();
 });
+
+// 0. Paper Press Broadsheet Unfold Preloader
+function initPaperPressLoader() {
+    const loader = document.querySelector('.paper-press-loader');
+    const progress = document.querySelector('.paper-press-progress-fill');
+    if (!loader) return;
+
+    // Fill progress bar smoothly
+    setTimeout(() => {
+        if (progress) progress.style.width = '100%';
+    }, 40);
+
+    // Unfold and slide away loader
+    setTimeout(() => {
+        loader.classList.add('is-loaded');
+    }, 480);
+}
 
 // 1. Niccolò Miranda-Style Custom Editorial Cursor
 function initCustomCursor() {
