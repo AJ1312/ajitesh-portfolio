@@ -255,3 +255,70 @@ function initEditionToggle() {
         }
     });
 }
+
+// 8. Stat Strip Count-Up Animation
+function initStatStripCountUp() {
+    const statNums = document.querySelectorAll('.stat-strip__num');
+    if (!statNums.length) return;
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const targetCount = parseInt(el.getAttribute('data-count'), 10);
+                if (!isNaN(targetCount)) {
+                    animateValue(el, 0, targetCount, 1200);
+                }
+                obs.unobserve(el);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    statNums.forEach(num => observer.observe(num));
+
+    function animateValue(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const current = Math.floor(progress * (end - start) + start);
+            
+            if (end >= 10000) {
+                obj.innerHTML = (current >= 10000 ? '10K+' : current.toLocaleString() + '+');
+            } else if (end >= 1000) {
+                obj.innerHTML = current.toLocaleString() + '+';
+            } else {
+                obj.innerHTML = current;
+            }
+
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+}
+
+// 9. Stamp Thud Entrance on Scroll
+function initStampThudOnScroll() {
+    const stamps = document.querySelectorAll('.rubber-stamp, .dispatch-card__stamp');
+    if (!stamps.length) return;
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('stamp-thud');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    stamps.forEach(stamp => observer.observe(stamp));
+}
+
+// Initialize additional helpers
+document.addEventListener('DOMContentLoaded', () => {
+    initStatStripCountUp();
+    initStampThudOnScroll();
+});
+

@@ -287,7 +287,30 @@
           </div>
         </section>
 
-                <!-- SECTION 2.5: AUTHOR'S NOTE -->
+        <!-- SECTION 2.2: CREDIBILITY STAT STRIP -->
+        <section class="stat-strip rv" aria-label="Engineering Credentials & Metrics">
+          <div class="stat-strip__item">
+            <span class="stat-strip__num" data-count="3">3</span>
+            <span class="stat-strip__label">Patents Filed</span>
+          </div>
+          <span class="stat-strip__divider">&middot;</span>
+          <div class="stat-strip__item">
+            <span class="stat-strip__num" data-count="1">1</span>
+            <span class="stat-strip__label">IEEE COMPSAC Paper</span>
+          </div>
+          <span class="stat-strip__divider">&middot;</span>
+          <div class="stat-strip__item">
+            <span class="stat-strip__num" data-count="1200">1,200+</span>
+            <span class="stat-strip__label">Hospital Users Served</span>
+          </div>
+          <span class="stat-strip__divider">&middot;</span>
+          <div class="stat-strip__item">
+            <span class="stat-strip__num" data-count="10000">10K+</span>
+            <span class="stat-strip__label">Pkt/Sec Analyzed</span>
+          </div>
+        </section>
+
+        <!-- SECTION 2.5: AUTHOR'S NOTE -->
         <section
           id="authors-note"
           class="section"
@@ -399,15 +422,56 @@
                 </div>
               </div>
               <h4 class="display-md" style="margin: 8px 0 16px 0">CipherPulse</h4>
-              <p class="body-lg" style="line-height: 1.7; margin-bottom: 20px;">
-                A high-performance C++17 Deep Packet Inspection (DPI) engine
-                utilizing JA4+ fingerprints and Shannon Entropy for
-                real-time encrypted malware traffic detection. Engineered
-                for multi-threaded packet capture and low-latency feature
-                extraction.
-              </p>
+              
+              <div class="newspaper-grid" style="margin-bottom: 20px; align-items: stretch;">
+                <div class="col-span-7" style="display: flex; flex-direction: column; justify-content: space-between;">
+                  <p class="body-lg" style="line-height: 1.7; margin-bottom: 16px;">
+                    A high-performance C++17 Deep Packet Inspection (DPI) engine
+                    utilizing JA4+ fingerprints and Shannon Entropy for
+                    real-time encrypted malware traffic detection. Engineered
+                    for multi-threaded packet capture and low-latency feature
+                    extraction across high-throughput network interfaces.
+                  </p>
+                  <p class="body" style="font-size: 14px; margin-bottom: 18px;">
+                    Eliminates TLS payload inspection overhead by evaluating behavioral flow rhythmics, client hello entropy variances, and anomalous handshake tokens in user space.
+                  </p>
+                  
+                  <div class="tag-group" style="margin-top: auto;">
+                    <span class="tag-chip">C++17</span>
+                    <span class="tag-chip">DPI</span>
+                    <span class="tag-chip">JA4+</span>
+                    <span class="tag-chip">Shannon Entropy</span>
+                    <span class="tag-chip">Zero-Copy</span>
+                  </div>
+                </div>
+                
+                <div class="col-span-5" style="border-left: 1px solid var(--rule); padding-left: 20px;">
+                  <div style="border: 1px solid var(--rule-dark); background: var(--paper-bright); padding: 14px; font-family: var(--font-mono); font-size: 11px;">
+                    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--rule); padding-bottom: 6px; margin-bottom: 8px;">
+                      <span style="font-weight: 700;">DPI_PIPELINE :: C++17</span>
+                      <span style="color: var(--stamp); font-weight: 700;">LIVE</span>
+                    </div>
+                    <pre style="margin: 0; line-height: 1.35; font-size: 10px; color: var(--ink);">
+[RAW_ETHERNET]
+      │
+      ▼ (Lock-free Ring)
+[JA4+_FINGERPRINTER] ──► [ENTROPY_ANALYSIS]
+      │                        │
+      └─────────┬──────────────┘
+                ▼
+      [MALWARE_CLASSIFIER]
+                │
+                ▼ (0.42ms Latency)
+      [SOC_ALERT_DISPATCH]
+                    </pre>
+                    <div style="margin-top: 8px; border-top: 1px solid var(--rule); padding-top: 4px; font-size: 9px; color: var(--ink-soft); text-transform: uppercase;">
+                      FIG 02. &mdash; Real-Time Detection Architecture
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <!-- Tags pulled directly under copy with button inline -->
+              <!-- Action Bar -->
               <div
                 style="
                   display: flex;
@@ -416,20 +480,15 @@
                   flex-wrap: wrap;
                   gap: 15px;
                   border-top: 1px solid var(--rule);
-                  padding-top: 18px;
+                  padding-top: 16px;
                 "
               >
-                <div class="tag-group">
-                  <span class="tag-chip">C++17</span>
-                  <span class="tag-chip">DPI</span>
-                  <span class="tag-chip">JA4+</span>
-                  <span class="tag-chip">Shannon Entropy</span>
-                </div>
+                <span class="meta bold" style="color: var(--ink-soft);">INSPECTION THROUGHPUT: 10,000+ PKT/SEC</span>
                 <a
                   href="pages/cipherpulse.html"
                   class="editorial-btn editorial-btn-solid"
                   data-cursor="READ"
-                  >OPEN DISPATCH &rarr;</a
+                  >OPEN FULL DISPATCH &rarr;</a
                 >
               </div>
             </article>
@@ -708,13 +767,31 @@
                   SOFTWARE ENGINEERING INTERN &middot; MAY 2026 - JUL 2026
                 </p>
                 <p class="body-lg" style="margin-bottom: 15px">
-                  Architected and developed a digitized workforce scheduling
-                  system, migrating from manual legacy processes. Implemented
-                  robust Role-Based Access Control (RBAC) ensuring strict data
-                  segregation across administrative tiers. Streamlined the daily
-                  shift allocation and attendance monitoring for over 1,200 site
-                  personnel.
+                  Architected and deployed a digitized workforce and healthcare queue logistics
+                  system, migrating plant operations from legacy manual rosters. Implemented
+                  multi-tier Role-Based Access Control (RBAC) ensuring strict data
+                  segregation across administrative hierarchies while streamlining daily
+                  shift allocation and clinical throughput for over 1,200 site personnel.
                 </p>
+
+                <!-- Practicum Endorsement Quote -->
+                <blockquote
+                  class="rv"
+                  style="background: var(--paper-warm); padding: 18px 22px; margin: 24px 0 10px 0; border: 1px solid var(--rule); border-left: 4px solid var(--stamp);"
+                >
+                  <p
+                    class="body-lg italic"
+                    style="margin-bottom: 8px; color: var(--ink); line-height: 1.6;"
+                  >
+                    &ldquo;Ajitesh demonstrated rare technical maturity—designing and deploying a resilient, production-ready queue management architecture that streamlined clinical throughput for hundreds of daily patients.&rdquo;
+                  </p>
+                  <cite
+                    class="meta bold"
+                    style="font-style: normal; color: var(--ink-soft); display: block;"
+                  >
+                    &mdash; INDUSTRIAL PRACTICUM EVALUATION &middot; HINDALCO INDUSTRIES (ADITYA BIRLA GROUP)
+                  </cite>
+                </blockquote>
               </div>
             </div>
           </div>
