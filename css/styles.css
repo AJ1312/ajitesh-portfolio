@@ -772,15 +772,20 @@ hr.section-rule--double, div.section-rule--double {
   transition: width 0.1s ease-out;
 }
 
-/* Editorial Newspaper Portrait Treatment - Colorful & Tactile */
+/* Editorial Newspaper Portrait Treatment - Colorful & Tactile 3D Tilt */
+.portrait-tilt-container {
+  perspective: 1200px;
+}
+
 .editorial-portrait-frame {
   border: 2px solid var(--rule-dark);
   padding: 8px;
   background: var(--paper-bright);
   position: relative;
   box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+  transform-style: preserve-3d;
 }
 
 .editorial-portrait-frame::before {
@@ -808,8 +813,7 @@ hr.section-rule--double, div.section-rule--double {
 }
 
 .editorial-portrait-frame:hover {
-  transform: translateY(-4px);
-  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.14);
+  box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.16);
 }
 
 .editorial-portrait {
@@ -818,12 +822,79 @@ hr.section-rule--double, div.section-rule--double {
   display: block;
   border: 1px solid var(--rule-dark);
   filter: saturate(1.05) contrast(1.02);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
 }
 
 .editorial-portrait-frame:hover .editorial-portrait {
-  transform: scale(1.02);
   filter: saturate(1.12) contrast(1.06);
+}
+
+/* Custom Editorial Cursor (Niccolò Miranda style) */
+@media (hover: hover) and (pointer: fine) {
+  .custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999999;
+    transform: translate(-50%, -50%);
+    transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                height 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                background-color 0.25s ease,
+                border-color 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    background-color: var(--stamp);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1000000;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.2s ease;
+  }
+
+  .custom-cursor.is-hovering {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(26, 26, 26, 0.08);
+    border-color: var(--stamp);
+  }
+
+  .custom-cursor.has-label {
+    width: 68px;
+    height: 68px;
+    background-color: var(--stamp);
+    border-color: var(--stamp);
+    box-shadow: 0 4px 16px rgba(196, 30, 58, 0.4);
+  }
+
+  .cursor-label {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #ffffff;
+    pointer-events: none;
+    text-align: center;
+  }
+
+  .custom-cursor.has-label .cursor-label {
+    display: block;
+  }
 }
 
 /* Tactile Interactive Rubber Stamp */
@@ -839,13 +910,47 @@ hr.section-rule--double, div.section-rule--double {
   padding: 3px 8px;
   transform: rotate(-4deg);
   transform-origin: center center;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease;
   user-select: none;
 }
 
 .rubber-stamp:hover {
   transform: rotate(-10deg) scale(1.12);
-  background: rgba(196, 30, 58, 0.08);
+  background: rgba(196, 30, 58, 0.1);
+}
+
+/* Dispatch Article Index & Interactive Lift */
+.dispatch-index-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease;
+}
+
+article:hover .dispatch-index-pill {
+  color: var(--stamp);
+}
+
+/* Edition Mode Button */
+.edition-toggle-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border: 1px solid var(--rule-dark);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edition-toggle-btn:hover {
+  background: var(--ink);
+  color: var(--paper-bright);
 }
 
 /* Magnetic Button Utility */

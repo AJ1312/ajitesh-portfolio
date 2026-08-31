@@ -63,15 +63,16 @@
         >
           <div
             class="col-span-12 meta uppercase"
-            style="display: flex; justify-content: space-between; align-items: center;"
+            style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;"
           >
             <span
               >BY THE ENGINEERING DESK &middot; REPORTING FROM VELLORE, BETWEEN
               LABS AND TERMINALS</span
             >
-            <span
-              ><a href="#projects">Read Dispatches &rarr;</a> &nbsp;&middot;&nbsp;
-              <a href="#contact">Get in Touch</a></span
+            <span style="display: flex; align-items: center; gap: 12px;"
+              ><button type="button" class="edition-toggle-btn" data-edition-toggle data-cursor="THEME">NIGHT EDITION 🌙</button>
+              <a href="#projects" data-cursor="VIEW">Read Dispatches &rarr;</a> &nbsp;&middot;&nbsp;
+              <a href="#contact" data-cursor="CONTACT">Get in Touch</a></span
             >
           </div>
         </div>
@@ -250,15 +251,18 @@
 
             <!-- Right side (image and text) - 6 columns -->
             <div class="col-span-6">
-              <figure
-                class="editorial-portrait-frame rv"
-              >
-                <img
-                  src="images/portrait.jpg"
-                  alt="Ajitesh Sharma Editorial Portrait"
-                  class="editorial-portrait"
-                />
-              </figure>
+              <div class="portrait-tilt-container">
+                <figure
+                  class="editorial-portrait-frame rv"
+                  data-cursor="PORTRAIT"
+                >
+                  <img
+                    src="images/portrait.jpg"
+                    alt="Ajitesh Sharma Editorial Portrait"
+                    class="editorial-portrait"
+                  />
+                </figure>
+              </div>
               <p class="meta rv" style="margin-top: 8px">
                 FIG 01. &mdash; THE SUBJECT (SYSTEMS &amp; SECURITY LABS, VELLORE)
               </p>
@@ -373,12 +377,14 @@
           <div class="newspaper-grid">
             <!-- Featured Project: DISPATCH A -->
             <article
-              class="col-span-12 rv"
+              class="col-span-12 rv dispatch-card"
+              data-cursor="DISPATCH"
               style="
                 border: 2px solid var(--rule-dark);
                 padding: 30px;
                 background: var(--paper-warm);
                 margin-bottom: 30px;
+                box-shadow: 4px 4px 0px rgba(0,0,0,0.06);
               "
             >
               <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
@@ -387,7 +393,10 @@
                   style="color: var(--stamp); font-size: 13px; font-weight: 700; margin: 0;"
                   >DISPATCH A &mdash; LEAD INVESTIGATION</span
                 >
-                <span class="meta bold" style="color: var(--ink-soft);">CASE NO. 43</span>
+                <div style="display: flex; gap: 12px; align-items: center;">
+                  <span class="dispatch-index-pill">[01 / 05]</span>
+                  <span class="meta bold" style="color: var(--ink-soft);">CASE NO. 43</span>
+                </div>
               </div>
               <h4 class="display-md" style="margin: 8px 0 16px 0">CipherPulse</h4>
               <p class="body-lg" style="line-height: 1.7; margin-bottom: 20px;">
@@ -419,6 +428,7 @@
                 <a
                   href="pages/cipherpulse.html"
                   class="editorial-btn editorial-btn-solid"
+                  data-cursor="READ"
                   >OPEN DISPATCH &rarr;</a
                 >
               </div>
@@ -427,8 +437,11 @@
             <!-- Grid for remaining projects -->
             <div class="col-span-12 newspaper-grid">
               <!-- DISPATCH B -->
-              <article class="col-span-6 rv column-bordered" style="display: flex; flex-direction: column;">
-                <span class="kicker-label">DISPATCH B</span>
+              <article class="col-span-6 rv column-bordered dispatch-card" data-cursor="DISPATCH" style="display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span class="kicker-label">DISPATCH B</span>
+                  <span class="dispatch-index-pill">[02 / 05]</span>
+                </div>
                 <h4 class="heading-lg" style="margin: 10px 0">
                   Sentinel-Stream
                 </h4>
@@ -455,6 +468,7 @@
                   <a
                     href="pages/sentinel-stream.html"
                     class="meta bold"
+                    data-cursor="READ"
                     style="color: var(--stamp)"
                     >OPEN DISPATCH &rarr;</a
                   >
@@ -462,8 +476,11 @@
               </article>
 
               <!-- DISPATCH C -->
-              <article class="col-span-6 rv" style="display: flex; flex-direction: column;">
-                <span class="kicker-label">DISPATCH C</span>
+              <article class="col-span-6 rv dispatch-card" data-cursor="DISPATCH" style="display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span class="kicker-label">DISPATCH C</span>
+                  <span class="dispatch-index-pill">[03 / 05]</span>
+                </div>
                 <h4 class="heading-lg" style="margin: 10px 0">SnapSeat</h4>
                 <p class="body" style="margin-bottom: 20px; flex-grow: 1;">
                   Containerized seat reservation microservices with
@@ -488,6 +505,7 @@
                   <a
                     href="pages/snapseat.html"
                     class="meta bold"
+                    data-cursor="READ"
                     style="color: var(--stamp)"
                     >OPEN DISPATCH &rarr;</a
                   >
@@ -500,8 +518,11 @@
               ></div>
 
               <!-- DISPATCH D -->
-              <article class="col-span-6 rv column-bordered" style="display: flex; flex-direction: column;">
-                <span class="kicker-label">DISPATCH D</span>
+              <article class="col-span-6 rv column-bordered dispatch-card" data-cursor="DISPATCH" style="display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span class="kicker-label">DISPATCH D</span>
+                  <span class="dispatch-index-pill">[04 / 05]</span>
+                </div>
                 <h4 class="heading-lg" style="margin: 10px 0">
                   NutriVision Pro
                 </h4>
@@ -529,6 +550,7 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     class="meta bold"
+                    data-cursor="LAUNCH"
                     style="color: var(--stamp)"
                     >LAUNCH APP <span class="external-icon">&#8599;</span></a
                   >
@@ -536,8 +558,11 @@
               </article>
 
               <!-- DISPATCH E -->
-              <article class="col-span-6 rv" style="display: flex; flex-direction: column;">
-                <span class="kicker-label">DISPATCH E &mdash; INDUSTRIAL CASE RECORD</span>
+              <article class="col-span-6 rv dispatch-card" data-cursor="DISPATCH" style="display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span class="kicker-label">DISPATCH E &mdash; INDUSTRIAL CASE RECORD</span>
+                  <span class="dispatch-index-pill">[05 / 05]</span>
+                </div>
                 <h4 class="heading-lg" style="margin: 10px 0">
                   Workforce Queue System
                 </h4>
@@ -564,6 +589,7 @@
                   <a
                     href="pages/internship.html"
                     class="meta bold"
+                    data-cursor="READ"
                     style="color: var(--stamp)"
                     >OPEN DISPATCH &rarr;</a
                   >

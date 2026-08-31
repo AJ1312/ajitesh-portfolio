@@ -1,21 +1,129 @@
 /**
- * The Sharma Dispatch - Editorial & Broadside Interactive Animations
- * Inspired by Niccolò Miranda's craft: tactile physical interactions, magnetic elements,
- * rubber-stamp dynamics, and smooth scroll reveals.
+ * The Sharma Dispatch - High-Craft Interactive Animations
+ * Highly inspired by Niccolò Miranda (https://www.niccolomiranda.com/):
+ * Custom interactive editorial cursor, 3D card tilt physics, tactile rubber-stamp dynamics,
+ * magnetic elements, and GSAP scroll reveals.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initCustomCursor();
+    init3DPortraitTilt();
     initScrollReveals();
     initMagneticElements();
     initRubberStampInteractions();
     initLivePressClock();
-    initCardHoverPhysics();
+    initEditionToggle();
 });
 
-// 1. Smooth GSAP Scroll Reveals
+// 1. Niccolò Miranda-Style Custom Editorial Cursor
+function initCustomCursor() {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    // Create cursor elements if not present
+    let cursor = document.querySelector('.custom-cursor');
+    let dot = document.querySelector('.cursor-dot');
+    
+    if (!cursor) {
+        cursor = document.createElement('div');
+        cursor.className = 'custom-cursor';
+        cursor.innerHTML = '<span class="cursor-label"></span>';
+        document.body.appendChild(cursor);
+    }
+    
+    if (!dot) {
+        dot = document.createElement('div');
+        dot.className = 'cursor-dot';
+        document.body.appendChild(dot);
+    }
+
+    const label = cursor.querySelector('.cursor-label');
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let cursorX = mouseX;
+    let cursorY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        // Position dot immediately
+        dot.style.left = `${mouseX}px`;
+        dot.style.top = `${mouseY}px`;
+    });
+
+    // Smooth Lerp loop for the outer cursor ring
+    function renderCursor() {
+        cursorX += (mouseX - cursorX) * 0.18;
+        cursorY += (mouseY - cursorY) * 0.18;
+
+        cursor.style.left = `${cursorX}px`;
+        cursor.style.top = `${cursorY}px`;
+
+        requestAnimationFrame(renderCursor);
+    }
+    requestAnimationFrame(renderCursor);
+
+    // Hover interactions for links, buttons, and data-cursor targets
+    const interactiveElements = document.querySelectorAll('a, button, .editorial-btn, .action-btn-link, .tag-chip, .rubber-stamp, [data-cursor]');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            const customText = el.getAttribute('data-cursor');
+            if (customText) {
+                label.textContent = customText;
+                cursor.classList.add('has-label');
+            } else {
+                cursor.classList.add('is-hovering');
+            }
+        });
+
+        el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('is-hovering', 'has-label');
+            label.textContent = '';
+        });
+    });
+
+    // Dispatch card specific cursor
+    const dispatchCards = document.querySelectorAll('.dispatch-card, article[class*="col-span"]');
+    dispatchCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            if (!card.hasAttribute('data-cursor')) {
+                label.textContent = 'OPEN';
+                cursor.classList.add('has-label');
+            }
+        });
+        card.addEventListener('mouseleave', () => {
+            cursor.classList.remove('has-label');
+            label.textContent = '';
+        });
+    });
+}
+
+// 2. 3D Card Tilt on Colorful Hero Portrait
+function init3DPortraitTilt() {
+    const frame = document.querySelector('.editorial-portrait-frame');
+    if (!frame || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    frame.addEventListener('mousemove', (e) => {
+        const rect = frame.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        const rotateX = (y / (rect.height / 2)) * -10; // max 10 deg tilt
+        const rotateY = (x / (rect.width / 2)) * 10;
+
+        frame.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    });
+
+    frame.addEventListener('mouseleave', () => {
+        frame.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        frame.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease';
+    });
+}
+
+// 3. Smooth GSAP Scroll Reveals
 function initScrollReveals() {
     if (typeof gsap === 'undefined') {
-        // Fallback if GSAP is unavailable
         document.querySelectorAll('.rv').forEach(el => {
             el.style.opacity = '1';
             el.style.transform = 'none';
@@ -26,15 +134,14 @@ function initScrollReveals() {
     if (typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Animate editorial sections
-        const sections = document.querySelectorAll('section, .marquee-strip, .dispatch-card, .editorial-portrait-frame');
-        sections.forEach((sec, idx) => {
+        const sections = document.querySelectorAll('section, .marquee-strip, .dispatch-card');
+        sections.forEach(sec => {
             gsap.fromTo(sec, 
-                { opacity: 0, y: 24 },
+                { opacity: 0, y: 22 },
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 0.8,
+                    duration: 0.7,
                     ease: "power2.out",
                     scrollTrigger: {
                         trigger: sec,
@@ -45,65 +152,57 @@ function initScrollReveals() {
             );
         });
 
-        // Stagger list items in patents and dispatches
         const staggerGroups = document.querySelectorAll('.newspaper-grid, .tag-group, .action-btn-group');
         staggerGroups.forEach(group => {
             const items = group.children;
             if (items.length > 1) {
                 gsap.fromTo(items,
-                    { opacity: 0, y: 16 },
+                    { opacity: 0, y: 14 },
                     {
                         opacity: 1,
                         y: 0,
-                        duration: 0.6,
-                        stagger: 0.08,
+                        duration: 0.5,
+                        stagger: 0.06,
                         ease: "power2.out",
                         scrollTrigger: {
                             trigger: group,
-                            start: "top 90%",
+                            start: "top 92%",
                             toggleActions: "play none none none"
                         }
                     }
                 );
             }
         });
-    } else {
-        document.querySelectorAll('.rv').forEach(el => {
-            el.style.opacity = '1';
-            el.style.transform = 'none';
-        });
     }
 }
 
-// 2. Magnetic Pull on Buttons & Interactive Badges
+// 4. Magnetic Element Tracking
 function initMagneticElements() {
     const magneticTargets = document.querySelectorAll('.editorial-btn, .action-btn-link, .tag-chip, .rubber-stamp');
-    
-    // Only apply on non-touch devices
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        magneticTargets.forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
-            });
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = '';
-            });
+    magneticTargets.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            btn.style.transform = `translate(${x * 0.22}px, ${y * 0.22}px)`;
         });
-    }
+
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = '';
+        });
+    });
 }
 
-// 3. Dynamic Rubber Stamp Interactions
+// 5. Dynamic Rubber Stamp Interactions
 function initRubberStampInteractions() {
     const stamps = document.querySelectorAll('.rubber-stamp, .patent-tag-pill, .kicker-label');
     stamps.forEach(stamp => {
         stamp.addEventListener('mouseenter', () => {
-            const randomAngle = (Math.random() * 8 - 4) - 6; // random tilt between -10 and -2
-            stamp.style.transform = `rotate(${randomAngle}deg) scale(1.08)`;
+            const randomAngle = (Math.random() * 8 - 4) - 6;
+            stamp.style.transform = `rotate(${randomAngle}deg) scale(1.1)`;
         });
 
         stamp.addEventListener('mouseleave', () => {
@@ -112,7 +211,7 @@ function initRubberStampInteractions() {
     });
 }
 
-// 4. Live Printing Press Clock in Dateline
+// 6. Live Printing Press Clock
 function initLivePressClock() {
     const clockEl = document.querySelector('[data-live-clock]');
     if (!clockEl) return;
@@ -129,12 +228,30 @@ function initLivePressClock() {
     setInterval(updateClock, 1000);
 }
 
-// 5. Card Hover Physics
-function initCardHoverPhysics() {
-    const cards = document.querySelectorAll('.dispatch-card, article[class*="col-span"], .metric-card-styled');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
-        });
+// 7. Morning / Night Edition Broadsheet Switcher
+function initEditionToggle() {
+    const toggleBtn = document.querySelector('[data-edition-toggle]');
+    if (!toggleBtn) return;
+
+    const currentTheme = localStorage.getItem('sharma_dispatch_theme') || 'light';
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        toggleBtn.textContent = 'MORNING EDITION ☀️';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        toggleBtn.textContent = 'NIGHT EDITION 🌙';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('sharma_dispatch_theme', 'light');
+            toggleBtn.textContent = 'NIGHT EDITION 🌙';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('sharma_dispatch_theme', 'dark');
+            toggleBtn.textContent = 'MORNING EDITION ☀️';
+        }
     });
 }
