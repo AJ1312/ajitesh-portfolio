@@ -87,7 +87,7 @@
     } catch (e) {}
   };
 
-  // --- Authentic Recorded & Synthesized Paper Tearing Audio Engine ---
+  // --- Authentic Acoustic Paper Tearing Audio Engine ---
   const isSubpage = window.location.pathname.includes('/pages/');
   const audioTearPath = isSubpage ? '../audio/paper_tear.wav' : 'audio/paper_tear.wav';
   const paperTearAudio = new Audio(audioTearPath);
@@ -107,6 +107,9 @@
         .catch(() => {});
     } catch (e) {}
   };
+
+  // Attempt initial load immediately
+  loadTearBuffer();
 
   // Unlock AudioContext and Audio elements on first user interaction
   const unlockAudio = () => {
@@ -130,23 +133,23 @@
       ctx.resume();
     }
 
+    let played = false;
     // 1. Primary: High-fidelity zero-latency decoded AudioBuffer
-    let playedBuffer = false;
     if (ctx && tearAudioBuffer) {
       try {
         const source = ctx.createBufferSource();
         source.buffer = tearAudioBuffer;
         const gain = ctx.createGain();
-        gain.gain.setValueAtTime(1.0, ctx.currentTime);
+        gain.gain.setValueAtTime(0.95, ctx.currentTime);
         source.connect(gain);
         gain.connect(ctx.destination);
         source.start(0);
-        playedBuffer = true;
+        played = true;
       } catch (e) {}
     }
 
-    // Direct HTML5 Audio fallback
-    if (!playedBuffer) {
+    // 2. Direct HTML5 Audio fallback
+    if (!played) {
       try {
         paperTearAudio.currentTime = 0;
         paperTearAudio.volume = 0.95;
@@ -154,90 +157,37 @@
         if (playPromise !== undefined) {
           playPromise.catch(() => {});
         }
+        played = true;
       } catch (e) {}
     }
 
-    // 2. Secondary: Granular procedural paper fiber snap & tearing rasp synthesis
-    if (ctx) {
+    // 3. Ultra-clean procedural fallback (ONLY if both file playbacks fail)
+    if (!played && ctx) {
       try {
         const now = ctx.currentTime;
-        const totalDuration = 0.44;
-
-        // LAYER 1: Sharp Granular Cellulose Fiber Snaps
-        const crackleLength = Math.floor(ctx.sampleRate * totalDuration);
-        const crackleBuffer = ctx.createBuffer(1, crackleLength, ctx.sampleRate);
-        const crackleData = crackleBuffer.getChannelData(0);
-
-        for (let i = 0; i < crackleLength; i++) {
+        const totalDuration = 0.75;
+        const bufferLength = Math.floor(ctx.sampleRate * totalDuration);
+        const buffer = ctx.createBuffer(1, bufferLength, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferLength; i++) {
           const t = i / ctx.sampleRate;
-          const env = t < 0.04 ? t / 0.04 : Math.exp(-(t - 0.04) / 0.22);
-          const fiberSnap = Math.random() > 0.82 ? (Math.random() * 2 - 1) * 2.8 : 0;
-          const friction = (Math.random() * 2 - 1) * 0.7;
-          crackleData[i] = (fiberSnap + friction) * env;
+          const env = t < 0.05 ? t / 0.05 : Math.pow(1 - (t - 0.05) / 0.70, 1.2);
+          const snap = Math.random() > 0.88 ? (Math.random() * 2 - 1) * 1.8 : 0;
+          data[i] = ((Math.random() * 2 - 1) * 0.5 + snap) * env;
         }
-
-        const crackleNode = ctx.createBufferSource();
-        crackleNode.buffer = crackleBuffer;
-
-        const crackleFilter = ctx.createBiquadFilter();
-        crackleFilter.type = 'highpass';
-        crackleFilter.frequency.setValueAtTime(1600, now);
-        crackleFilter.frequency.exponentialRampToValueAtTime(3800, now + 0.12);
-        crackleFilter.frequency.exponentialRampToValueAtTime(1800, now + totalDuration);
-
-        const crackleGain = ctx.createGain();
-        crackleGain.gain.setValueAtTime(0.35, now);
-        crackleGain.gain.exponentialRampToValueAtTime(0.001, now + totalDuration);
-
-        crackleNode.connect(crackleFilter);
-        crackleFilter.connect(crackleGain);
-        crackleGain.connect(ctx.destination);
-        crackleNode.start(now);
-        crackleNode.stop(now + totalDuration);
-
-        // LAYER 2: Resonant Ripping Rasp
-        const raspLength = Math.floor(ctx.sampleRate * 0.38);
-        const raspBuffer = ctx.createBuffer(1, raspLength, ctx.sampleRate);
-        const raspData = raspBuffer.getChannelData(0);
-        for (let i = 0; i < raspLength; i++) {
-          const t = i / ctx.sampleRate;
-          const flutter = Math.sin(2 * Math.PI * 55 * t);
-          raspData[i] = (Math.random() * 2 - 1) * (0.85 + 0.35 * flutter);
-        }
-
-        const raspNode = ctx.createBufferSource();
-        raspNode.buffer = raspBuffer;
-
-        const raspFilter = ctx.createBiquadFilter();
-        raspFilter.type = 'bandpass';
-        raspFilter.frequency.setValueAtTime(3400, now);
-        raspFilter.frequency.exponentialRampToValueAtTime(1100, now + 0.35);
-        raspFilter.Q.value = 2.4;
-
-        const raspGain = ctx.createGain();
-        raspGain.gain.setValueAtTime(0.28, now);
-        raspGain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
-
-        raspNode.connect(raspFilter);
-        raspFilter.connect(raspGain);
-        raspGain.connect(ctx.destination);
-        raspNode.start(now);
-        raspNode.stop(now + 0.38);
-
-        // LAYER 3: Low-mid Paper Body Flutter
-        const bodyOsc = ctx.createOscillator();
-        const bodyGain = ctx.createGain();
-        bodyOsc.type = 'triangle';
-        bodyOsc.frequency.setValueAtTime(135, now);
-        bodyOsc.frequency.exponentialRampToValueAtTime(36, now + 0.28);
-
-        bodyGain.gain.setValueAtTime(0.18, now);
-        bodyGain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
-
-        bodyOsc.connect(bodyGain);
-        bodyGain.connect(ctx.destination);
-        bodyOsc.start(now);
-        bodyOsc.stop(now + 0.28);
+        const node = ctx.createBufferSource();
+        node.buffer = buffer;
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(1800, now);
+        filter.Q.value = 1.6;
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(0.35, now);
+        node.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+        node.start(now);
+        node.stop(now + totalDuration);
       } catch (e) {}
     }
   };
@@ -347,9 +297,9 @@
     const urlParams = new URLSearchParams(window.location.search);
     const forceReplay = urlParams.has('replay');
 
-    // Function to perform the snappy, fluid tearing animation
+    // Function to perform the graceful, weighted broadsheet tearing animation
     let isTearingActive = false;
-    const triggerTear = (autoCloseDelay = 450) => {
+    const triggerTear = (autoCloseDelay = 850) => {
       if (isTearingActive) return;
       isTearingActive = true;
 
@@ -374,7 +324,7 @@
     // User can tap/click anywhere to rip immediately
     tearOverlay.addEventListener('click', () => {
       unlockAudio();
-      triggerTear(450);
+      triggerTear(850);
     });
 
     // 1. ARRIVAL TRANSITION ACROSS ANY PAGE NAVIGATION (Index <-> Subpage, Subpage <-> Subpage)
@@ -383,11 +333,11 @@
       tearOverlay.style.display = 'flex';
       tearOverlay.classList.remove('is-tearing');
 
-      // Immediate 25ms trigger for ultra-snappy tear-open into the newly loaded page
+      // Graceful 90ms breathing pause for eye to register folio & seal before smooth parting
       setTimeout(() => {
         unlockAudio();
-        triggerTear(380);
-      }, 25);
+        triggerTear(850);
+      }, 90);
       return;
     }
 
@@ -396,22 +346,24 @@
       tearOverlay.style.display = 'flex';
       tearOverlay.classList.remove('is-tearing');
 
-      // Snappy 60ms frame delay so initial paint completes smoothly
       const autoTimer = setTimeout(() => {
-        triggerTear(520);
-      }, 60);
+        triggerTear(850);
+      }, 120);
 
       // Dismiss immediately on any user action
       const quickDismiss = () => {
         clearTimeout(autoTimer);
         tearOverlay.style.display = 'none';
+        tearOverlay.classList.remove('is-tearing');
         sessionStorage.setItem('broadsheet_tear_seen', 'true');
+        document.documentElement.classList.remove('paper-tear-pending');
       };
       window.addEventListener('keydown', quickDismiss, { once: true, passive: true });
       window.addEventListener('wheel', quickDismiss, { once: true, passive: true });
       window.addEventListener('touchstart', quickDismiss, { once: true, passive: true });
     } else {
       tearOverlay.style.display = 'none';
+      tearOverlay.classList.remove('is-tearing');
       document.documentElement.classList.remove('paper-tear-pending');
     }
 
@@ -425,7 +377,7 @@
         const menuOverlay = document.getElementById('menuOverlay');
         if (menuOverlay) menuOverlay.classList.remove('is-active');
         setTimeout(() => {
-          triggerTear(520);
+          triggerTear(850);
         }, 120);
       });
     }
@@ -452,23 +404,17 @@
       // 1. Arm destination page to execute opening tear on arrival
       sessionStorage.setItem('broadsheet_nav_arriving', 'true');
 
-      // 2. Play tactile audio rip immediately
+      // 2. Unlock audio and play tactile paper rip sound immediately
+      unlockAudio();
       playPaperTearSound();
 
       // 3. Smooth tactile departure on current page
       document.body.classList.add('page-is-leaving');
 
-      // 4. Close paper halves over current document
-      const tearOverlay = document.getElementById('paperTransitionOverlay');
-      if (tearOverlay) {
-        tearOverlay.style.display = 'flex';
-        tearOverlay.classList.remove('is-tearing');
-      }
-
-      // 5. Navigate at 160ms (allows tactile rip sound to articulate cleanly before page swap)
+      // 4. Navigate at 220ms (allows gentle fade-out and audio start without abrupt visual cuts)
       setTimeout(() => {
         window.location.href = href;
-      }, 160);
+      }, 220);
     };
 
     internalLinks.forEach((link) => {
