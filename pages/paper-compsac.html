@@ -15,42 +15,164 @@
     <!-- Mermaid.js for architecture diagrams -->
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({{ startOnLoad: true, theme: 'neutral', fontFamily: 'JetBrains Mono', fontSize: 14 }});
+      mermaid.initialize({ startOnLoad: true, theme: 'neutral', fontFamily: 'JetBrains Mono', fontSize: 14 });
     </script>
     
+    <script>
+      if (sessionStorage.getItem('broadsheet_nav_arriving') === 'true') {
+        document.documentElement.classList.add('paper-tear-pending');
+      }
+    </script>
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/paper-craft.css?v=fluid_20260907_v3">
+    <script src="../js/paper-engine.js?v=fluid_20260907_v3" defer></script>
     
     <style>
         /* Diagram specific overrides for newspaper theme */
-        .mermaid {{
+        .mermaid {
             background: var(--paper-bright);
             border: 2px solid var(--rule-dark);
             padding: 20px;
             margin: 30px 0;
             overflow-x: auto;
-        }}
+        }
     </style>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="alternate icon" type="image/png" href="../favicon.png">
 </head>
 <body class="newspaper-theme">
+    <!-- TWO PAPER TEARING AWAY TRANSITION & ENTRANCE -->
+    <div id="paperTransitionOverlay" class="paper-tear-overlay" aria-hidden="true">
+      <div class="paper-tear-half paper-tear-left" id="paperTearLeft">
+        <div class="paper-fiber-texture"></div>
+        <div class="paper-laid-lines"></div>
+        <div class="tear-sheet-content tear-content-left">
+          <div class="tear-top-folio font-mono">
+            <span>VOL. 2026 &bull; ISSUE NO. 43</span>
+            <span class="tear-sec-tag">BROADSHEET FOLIO &bull; SEC. A</span>
+          </div>
+          <div class="tear-masthead-wrap">
+            <h1 class="tear-masthead-title font-serif">THE SHARMA</h1>
+            <div class="tear-masthead-sub font-mono">CHRONICLE OF SYSTEMS &bull; DEFENSIVE ARCHITECTURE</div>
+          </div>
+          <div class="tear-ornamental-rule"></div>
+          <div class="tear-columns-grid">
+            <div class="tear-col">
+              <span class="tear-kicker font-mono">SPECIAL REPORT</span>
+              <h2 class="tear-headline font-serif">A Systems Engineer Who Builds Things &mdash; <span style="color: var(--accent-red);">Kernel to Cloud</span></h2>
+              <p class="tear-p font-serif"><span class="tear-dropcap">A</span>s a systems engineer and security researcher at VIT Vellore, I investigate and build software engineered to hold under intense adversarial load.</p>
+              <div class="tear-col-divider"></div>
+              <div class="tear-wire-notice font-mono">VELLORE WIRE &bull; DISPATCH RECEIVED</div>
+            </div>
+            <div class="tear-col tear-col-secondary">
+              <span class="tear-kicker font-mono">CURRICULUM</span>
+              <h3 class="tear-subhead font-serif">Vellore Institute of Technology</h3>
+              <p class="tear-p-sm font-sans">B.Tech Computer Science &amp; Engineering (Spec. Information Security), 2023&ndash;2027.</p>
+              <div class="tear-badge-pill font-mono">VERIFIED ARCHIVAL COPY</div>
+            </div>
+          </div>
+          <div class="tear-bottom-folio font-mono">
+            <span>LEFT SHEET &bull; CONTINUED ON SEC. B</span>
+            <span>EST. 2023 &bull; HAND-SET MONO</span>
+          </div>
+        </div>
+        <svg class="deckle-edge deckle-right" viewBox="0 0 60 1000" preserveAspectRatio="none" aria-hidden="true">
+          <path class="deckle-white-fringe" d="M0,0 L32,0 L24,18 L36,35 L22,58 L38,82 L20,115 L35,138 L24,165 L42,198 L26,225 L38,255 L20,285 L44,325 L24,360 L38,395 L18,430 L45,475 L22,510 L40,545 L20,585 L46,630 L24,665 L41,705 L18,745 L47,790 L23,830 L41,875 L19,915 L48,965 L25,995 L30,1000 L0,1000 Z" fill="#fffdf9"></path>
+          <path class="deckle-face" d="M0,0 L26,0 L18,16 L30,33 L16,55 L32,79 L14,112 L29,135 L18,162 L36,195 L20,222 L32,252 L14,282 L38,322 L18,357 L32,392 L12,427 L39,472 L16,507 L34,542 L14,582 L40,627 L18,662 L35,702 L12,742 L41,787 L17,827 L35,872 L13,912 L42,962 L19,992 L24,1000 L0,1000 Z" fill="#f6f0e2"></path>
+        </svg>
+      </div>
+      <div class="paper-tear-seam" id="tearSeamSeal">
+        <div class="seam-badge" id="tearBadgeBtn" role="button" tabindex="0" aria-label="Tear Broadsheet to Open">
+          <div class="seam-badge-inner">
+            <img src="../images/dispatch_crest.svg" alt="Seal" class="seam-crest" />
+            <span class="seam-title font-serif">THE SHARMA DISPATCH</span>
+            <span class="seam-instruction font-mono">✂ TAP / CLICK TO TEAR OPEN ✂</span>
+          </div>
+        </div>
+      </div>
+      <div class="paper-tear-half paper-tear-right" id="paperTearRight">
+        <div class="paper-fiber-texture"></div>
+        <div class="paper-laid-lines"></div>
+        <div class="tear-sheet-content tear-content-right">
+          <div class="tear-top-folio font-mono">
+            <span class="tear-sec-tag">BROADSHEET FOLIO &bull; SEC. B</span>
+            <span>PRICE: ONE SSH SESSION</span>
+          </div>
+          <div class="tear-masthead-wrap">
+            <h1 class="tear-masthead-title font-serif">DISPATCH</h1>
+            <div class="tear-masthead-sub font-mono">ENGINEERED UNDER ADVERSARIAL RESILIENCE &bull; 2026</div>
+          </div>
+          <div class="tear-ornamental-rule"></div>
+          <div class="tear-columns-grid">
+            <div class="tear-col">
+              <span class="tear-kicker font-mono">RESEARCH DISPATCH</span>
+              <h2 class="tear-headline font-serif">Lock-Free Backends &amp; Applied AI.</h2>
+              <p class="tear-p font-serif"><span class="tear-dropcap">T</span>he boundary between infrastructure and threat landscape has collapsed. Building zero-trust authentication pipelines.</p>
+              <div class="tear-col-divider"></div>
+              <div class="tear-wire-notice font-mono">PATENTS PENDING &bull; 3 FILED INVENTIONS</div>
+            </div>
+            <div class="tear-col tear-col-secondary">
+              <span class="tear-kicker font-mono">CORRESPONDENCE</span>
+              <h3 class="tear-subhead font-serif">Open for Collaboration</h3>
+              <p class="tear-p-sm font-sans">Available for systems engineering and defensive security engagements.</p>
+              <div class="tear-badge-pill font-mono">SEC. B FOLIO VERIFIED</div>
+            </div>
+          </div>
+          <div class="tear-bottom-folio font-mono">
+            <span>RIGHT SHEET &bull; COMPLETE DISPATCH</span>
+            <span>PRESS RUN: 1ST PRINT</span>
+          </div>
+        </div>
+        <svg class="deckle-edge deckle-left" viewBox="0 0 60 1000" preserveAspectRatio="none" aria-hidden="true">
+          <path class="deckle-white-fringe" d="M60,0 L28,0 L36,18 L24,35 L38,58 L22,82 L40,115 L25,138 L36,165 L18,198 L34,225 L22,255 L40,285 L16,325 L36,360 L22,395 L42,430 L15,475 L38,510 L20,545 L40,585 L14,630 L36,665 L19,705 L42,745 L13,790 L37,830 L19,875 L41,915 L12,965 L35,995 L30,1000 L60,1000 Z" fill="#fffdf9"></path>
+          <path class="deckle-face" d="M60,0 L34,0 L42,16 L30,33 L44,55 L28,79 L46,112 L31,135 L42,162 L24,195 L40,222 L28,252 L46,282 L22,322 L42,357 L28,392 L48,427 L21,472 L44,507 L26,542 L46,582 L20,627 L42,662 L25,702 L48,742 L19,787 L43,827 L25,872 L47,912 L18,962 L41,992 L36,1000 L60,1000 Z" fill="#f6f0e2"></path>
+        </svg>
+      </div>
+    </div>
     <div id="reading-progress-bar" class="reading-progress-bar"></div>
     <div class="container">
         
-        <!-- SUBPAGE HEADER -->
-        <header class="masthead" style="margin-top: 20px;">
-            <nav class="nav" id="main-nav" style="border-bottom: 4px solid var(--rule-dark); padding: 15px 0;">
-                <div class="newspaper-grid" style="align-items: center;">
-                    <div class="col-span-6 heading-md" style="margin:0;"><a href="../index.html" style="text-decoration: none; color: inherit;">&larr; THE SHARMA DISPATCH</a></div>
-                    <div class="col-span-6" style="display: flex; justify-content: flex-end; gap: 20px; align-items: center;">
-                        <a href="../index.html#projects" class="meta bold">WORK</a>
-                        <a href="../index.html#publications" class="meta bold">RESEARCH</a>
-                        <a href="../index.html#contact" class="meta bold">CONTACT</a>
-                        <a href="mailto:13ajitesh@gmail.com" class="meta bold editorial-btn editorial-btn-solid" style="padding: 6px 14px; font-size: 11px;">CONTACT</a>
-                    </div>
-                </div>
-            </nav>
-        </header>
+        <!-- STICKY BROADSHEET TOPBAR -->
+        <div class="paper-topbar" id="top" style="margin-bottom: 20px;">
+          <div class="site-wrapper" style="padding: 0;">
+            <div class="topbar-grid">
+              <div class="topbar-left">
+                <a href="../index.html" class="topbar-brand" data-cursor="BACK" aria-label="Return to Ajitesh Sharma Front Page">
+                  <img src="../images/dispatch_crest.svg" alt="The Sharma Dispatch Crest" class="topbar-brand-crest" />
+                  <span class="topbar-brand-title">&larr;&nbsp; AJITESH SHARMA</span>
+                </a>
+              </div>
+
+              <div class="topbar-right">
+                <a href="../index.html#patents" class="pill-btn topbar-desktop-only" data-cursor="RESEARCH">
+                  RESEARCH RECORD
+                </a>
+                <button type="button" class="pill-btn sound-btn" data-sound-toggle data-cursor="SOUND" aria-label="Toggle Sound" aria-pressed="true">
+                  <svg class="nav-svg sound-icon-on" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                  </svg>
+                  <span class="btn-text">AUDIO</span>
+                </button>
+                <button type="button" class="pill-btn" data-edition-toggle data-cursor="THEME" aria-label="Toggle Night Edition">
+                  <svg class="nav-svg moon-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  </svg>
+                  <span class="btn-text theme-text">NIGHT</span>
+                </button>
+                <button type="button" class="pill-btn menu-pill-btn" data-menu-open data-cursor="MENU" aria-label="Open Directory">
+                  <svg class="nav-svg menu-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                  </svg>
+                  <span class="btn-text">MENU</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <main class="dispatch-content">
             
@@ -59,13 +181,23 @@
                 <div class="newspaper-grid">
                     <div class="col-span-12">
                         <p class="kicker-label rv">PEER-REVIEWED RESEARCH &mdash; IEEE COMPSAC 2026</p>
-                        <h1 class="display-xl rv" style="margin-bottom: 20px;">The Alignment Paradox</h1>
-                        <p class="display-sm rv" style="max-width: 800px; font-style: italic;">Emotional Flattening & Social Safety Risks in Proactive AI Agents</p>
+                        <h1 class="display-xl rv" style="margin-bottom: 16px;">Alignment Paradox: Emotional Flattening and Social Safety Risks in Proactive AI Agents</h1>
+                        <p class="display-sm rv" style="max-width: 860px; font-style: italic; margin-bottom: 24px;">IEEE COMPSAC 2026 Student Symposium &bull; Published; added to IEEE Xplore 20 Aug 2026</p>
                         
-                        <div class="newspaper-grid" style="margin-top: 30px; border-top: 1px solid var(--rule); padding-top: 20px;">
-                            <div class="col-span-12 rv column-bordered">
-                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">PUBLICATION</p>
-                                <p class="body-sm">Accepted / Published &mdash; IEEE COMPSAC 2026 Student Symposium</p>
+                        <div class="newspaper-grid" style="border-top: 1px solid var(--rule); padding-top: 20px;">
+                            <div class="col-span-12 rv column-bordered" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+                                <div>
+                                    <p class="meta" style="margin-bottom: 5px; font-weight: bold; color: var(--accent-red);">PUBLICATION RECORD &bull; IEEE XPLORE</p>
+                                    <p class="body-sm" style="font-weight: 600;">IEEE COMPSAC 2026 Student Symposium &mdash; Published; added to IEEE Xplore 20 Aug 2026</p>
+                                    <p class="body-sm" style="font-family: var(--font-mono, monospace); margin-top: 6px;">
+                                        DOI: <a href="https://doi.org/10.1109/COMPSAC69091.2026.00478" target="_blank" rel="noopener noreferrer" style="color: var(--accent-red); text-decoration: underline; font-weight: 700;">10.1109/COMPSAC69091.2026.00478</a>
+                                    </p>
+                                </div>
+                                <div>
+                                    <a href="https://doi.org/10.1109/COMPSAC69091.2026.00478" target="_blank" rel="noopener noreferrer" class="pill-btn menu-pill-btn" data-cursor="EXTERNAL" style="padding: 10px 22px; font-size: 0.78rem; text-decoration: none; display: inline-flex;">
+                                        VIEW PAPER ON IEEE XPLORE &nearr;
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -100,19 +232,42 @@
                     </div>
                     
                                         <div class="col-span-12 rv">
-                        <div class="arch-diagram-box" style="background: var(--paper-warm); border: 2px solid var(--rule-dark); padding: 25px; text-align: center;">
-                            <span class="kicker-label" style="color: var(--stamp);">EXPERIMENTAL PIPELINE ARCHITECTURE</span>
-                            <h4 class="heading-md" style="margin: 10px 0 15px 0;">GoEmotions Activation Extraction & Steering Flow</h4>
-                            <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; font-family: var(--font-mono, monospace);">
-                                <div class="arch-node">GoEmotions Dataset<br><small style="font-weight:normal;">27 Categories + Neutral (1,000 samples)</small></div>
-                                <span class="arch-arrow">&rarr;</span>
-                                <div class="arch-node">Contrastive Prompts<br><small style="font-weight:normal;">16 Pairs across 8 Categories</small></div>
-                                <span class="arch-arrow">&rarr;</span>
-                                <div class="arch-node">Activation Extraction<br><small style="font-weight:normal;">Neutralisation Vector ($v_{neutral}$)</small></div>
-                                <span class="arch-arrow">&rarr;</span>
-                                <div class="arch-node">Activation Steering<br><small style="font-weight:normal;">Gemma-2B (L6,9,12,16) | Llama-3-8B (L10,16,21,30)</small></div>
-                                <span class="arch-arrow">&rarr;</span>
-                                <div class="arch-node">Degradation Analysis<br><small style="font-weight:normal;">Brittleness vs Affective Erasure</small></div>
+                        <div class="broadsheet-pipeline" style="margin: 0;">
+                            <div class="pipeline-header">
+                                <span class="kicker-label">EXPERIMENTAL PIPELINE ARCHITECTURE</span>
+                                <h4 class="pipeline-title">GoEmotions Activation Extraction &amp; Steering Flow</h4>
+                                <p class="pipeline-desc">Representation engineering pipeline evaluating representation drift across open-weight LLMs.</p>
+                            </div>
+                            <div class="pipeline-steps-flow">
+                                <div class="pipeline-step-card">
+                                    <span class="pipeline-step-num">[01] CORPUS</span>
+                                    <h5 class="pipeline-step-title">GoEmotions Data</h5>
+                                    <p class="pipeline-step-sub">27 Emotional Categories &bull; 1,000 Validated Samples</p>
+                                </div>
+                                <div class="pipeline-arrow-divider">&rarr;</div>
+                                <div class="pipeline-step-card">
+                                    <span class="pipeline-step-num">[02] HARNESS</span>
+                                    <h5 class="pipeline-step-title">Contrastive Prompts</h5>
+                                    <p class="pipeline-step-sub">16 Pairs across 8 Affective Categories</p>
+                                </div>
+                                <div class="pipeline-arrow-divider">&rarr;</div>
+                                <div class="pipeline-step-card">
+                                    <span class="pipeline-step-num">[03] EXTRACTION</span>
+                                    <h5 class="pipeline-step-title">Residual Vectors</h5>
+                                    <p class="pipeline-step-sub">Neutralisation Direction Vector ($v_{neutral}$)</p>
+                                </div>
+                                <div class="pipeline-arrow-divider">&rarr;</div>
+                                <div class="pipeline-step-card">
+                                    <span class="pipeline-step-num">[04] INTERVENTION</span>
+                                    <h5 class="pipeline-step-title">Layer Steering</h5>
+                                    <p class="pipeline-step-sub">Gemma-2B (L6,9,12,16) &bull; Llama-3-8B (L10,16,21,30)</p>
+                                </div>
+                                <div class="pipeline-arrow-divider">&rarr;</div>
+                                <div class="pipeline-step-card">
+                                    <span class="pipeline-step-num">[05] EVALUATION</span>
+                                    <h5 class="pipeline-step-title">Degradation Audit</h5>
+                                    <p class="pipeline-step-sub">Reasoning Brittleness vs Affective Erasure</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -264,8 +419,33 @@
             </div>
         </footer>
     </div>
-    
-    <script src="../js/main.js" defer></script>
-    <script src="../js/animations.js" defer></script>
+
+    <!-- FULLSCREEN OVERLAY MENU -->
+    <div class="menu-overlay" id="menuOverlay" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="menu-overlay-header">
+        <span class="meta-text" style="color: rgba(238, 233, 224, 0.6);">THE SHARMA DISPATCH &bull; DIRECTORY</span>
+        <button type="button" class="menu-close-btn" data-menu-close data-cursor="CLOSE">
+          CLOSE &times;
+        </button>
+      </div>
+
+      <nav class="menu-nav-links">
+        <a href="../index.html" class="menu-nav-item" data-cursor="HOME">INDEX</a>
+        <a href="../index.html#manifesto" class="menu-nav-item" data-cursor="ABOUT">THE MANIFESTO</a>
+        <a href="../index.html#dispatches" class="menu-nav-item" data-cursor="WORKS">SELECTED DISPATCHES</a>
+        <a href="../index.html#service" class="menu-nav-item" data-cursor="SERVICE">SERVICE RECORD</a>
+        <a href="../index.html#patents" class="menu-nav-item" data-cursor="PATENTS">PATENTS &amp; RESEARCH</a>
+        <a href="../index.html#contact" class="menu-nav-item" data-cursor="CONTACT">CORRESPONDENCE</a>
+      </nav>
+
+      <div class="menu-overlay-footer">
+        <span>VELLORE, IN &bull; 12.9165&deg; N, 79.1325&deg; E</span>
+        <div style="display: flex; gap: 16px;">
+          <a href="https://linkedin.com/in/ajitesh-sharma" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+          <a href="https://github.com/AJ1312" target="_blank" rel="noopener noreferrer">GITHUB</a>
+          <a href="mailto:13ajitesh@gmail.com">EMAIL</a>
+        </div>
+      </div>
+    </div>
 </body>
 </html>

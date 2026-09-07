@@ -3,159 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SnapSeat | The Sharma Dispatch</title>
-    <link rel="canonical" href="https://ajiteshsharma.dev/pages/snapseat.html" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-    
-    <!-- Mermaid.js for architecture diagrams -->
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({{ startOnLoad: true, theme: 'neutral', fontFamily: 'JetBrains Mono', fontSize: 14 }});
+    <title>Encore (formerly SnapSeat) | The Sharma Dispatch</title>
+    <link rel="canonical" href="https://ajiteshsharma.dev/pages/encore.html" />
+    <meta http-equiv="refresh" content="0; url=encore.html" />
+    <script>
+      window.location.replace("encore.html");
     </script>
-    
-    <link rel="stylesheet" href="../css/styles.css">
-    
-    <style>
-        /* Diagram specific overrides for newspaper theme */
-        .mermaid {{
-            background: var(--paper-bright);
-            border: 2px solid var(--rule-dark);
-            padding: 20px;
-            margin: 30px 0;
-            overflow-x: auto;
-        }}
-    </style>
-    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="alternate icon" type="image/png" href="../favicon.png">
+    <link rel="stylesheet" href="../css/paper-craft.css?v=fluid_20260907_v3">
 </head>
-<body class="newspaper-theme">
-    <div id="reading-progress-bar" class="reading-progress-bar"></div>
-    <div class="container">
-        
-        <!-- SUBPAGE HEADER -->
-        <header class="masthead" style="margin-top: 20px;">
-            <nav class="nav" id="main-nav" style="border-bottom: 4px solid var(--rule-dark); padding: 15px 0;">
-                <div class="newspaper-grid" style="align-items: center;">
-                    <div class="col-span-6 heading-md" style="margin:0;"><a href="../index.html" style="text-decoration: none; color: inherit;">&larr; THE SHARMA DISPATCH</a></div>
-                    <div class="col-span-6" style="display: flex; justify-content: flex-end; gap: 20px; align-items: center;">
-                        <a href="../index.html#projects" class="meta bold">WORK</a>
-                        <a href="../index.html#publications" class="meta bold">RESEARCH</a>
-                        <a href="../index.html#contact" class="meta bold">CONTACT</a>
-                        <a href="mailto:13ajitesh@gmail.com" class="meta bold editorial-btn editorial-btn-solid" style="padding: 6px 14px; font-size: 11px;">CONTACT</a>
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-        <main class="dispatch-content">
-            
-            <!-- HERO -->
-            <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0;">
-                <div class="newspaper-grid">
-                    <div class="col-span-12">
-                        <p class="kicker-label rv">DISPATCH C &mdash; FIELD REPORT</p>
-                        <h1 class="display-xl rv" style="margin-bottom: 20px;">SnapSeat</h1>
-                        <p class="display-sm rv" style="max-width: 800px; font-style: italic;">Containerized Microservices Ticketing Platform with Zero-Downtime CI/CD</p>
-                        
-                        <div class="newspaper-grid" style="margin-top: 30px; border-top: 1px solid var(--rule); padding-top: 20px;">
-                            <div class="col-span-4 rv column-bordered">
-                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">GITHUB REPOSITORY</p>
-                                <a href="https://github.com/AJ1312/SnapSeat-devops" target="_blank" class="body-sm" style="color: var(--stamp); font-weight: bold; text-decoration: underline;">AJ1312/SnapSeat-devops &nearr;</a>
-                            </div>
-                            <div class="col-span-4 rv column-bordered">
-                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">ORCHESTRATION</p>
-                                <p class="body-sm">Docker + Kubernetes (AWS EKS)</p>
-                            </div>
-                            <div class="col-span-4 rv column-bordered">
-                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">SECURITY & PIPELINE</p>
-                                <p class="body-sm">Jenkins Declarative Pipelines, Trivy, JWT/OAuth2</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- THE INCIDENT (Problem & Scenario) -->
-            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
-                <div class="newspaper-grid">
-                    <div class="col-span-12">
-                        <span class="kicker-label">THE REAL-WORLD SCENARIO</span>
-                        <h3 class="heading-lg" style="margin: 10px 0 20px 0; font-size: 32px;">The Double-Booking Crisis</h3>
-                        <p class="body-lg rv"><span class="dropcap">I</span>n high-demand event ticketing, legacy monolithic systems crash under sudden traffic spikes ("ticket drops"), leading to race conditions and double-booked seats. SnapSeat solves this by decoupling the reservation engine from the user gateway, utilizing a highly available, containerized microservices architecture built from the ground up with cloud-native DevOps principles.</p>
-                    </div>
-                </div>
-            </section>
-
-                        <!-- THE ARCHITECTURE FLOW -->
-            <section class="section" style="padding: 30px 0; border-bottom: 1px solid var(--rule);">
-                <div class="newspaper-grid">
-                    <div class="col-span-12">
-                        <div class="arch-diagram-box" style="background: var(--paper-warm); border: 2px solid var(--rule-dark); padding: 25px; text-align: center;">
-                            <span class="kicker-label" style="color: var(--stamp);">SYSTEM ARCHITECTURE PIPELINE</span>
-                            <h4 class="heading-md" style="margin: 10px 0 15px 0;">Containerized Microservices &amp; Distributed Locking</h4>
-                            <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; font-family: var(--font-mono, monospace);">
-                                <div class="arch-node">Client Gateway<br><small style="font-weight:normal;">Web / Mobile App</small></div>
-                                <span class="arch-arrow">&rarr;</span>
-                                <div class="arch-node">NGINX Ingress<br><small style="font-weight:normal;">TLS &amp; Rate Limiting</small></div>
-                                <span class="arch-arrow">&rarr;</span>
-                                <div class="arch-node">AWS EKS Cluster<br><small style="font-weight:normal;">User, Booking &amp; Payment Pods</small></div>
-                                <span class="arch-arrow">&rarr;</span>
-                                <div class="arch-node">Redis Redlock<br><small style="font-weight:normal;">Zero Double-Booking Lock</small></div>
-                                <span class="arch-arrow">&rarr;</span>
-                                <div class="arch-node">PostgreSQL Cluster<br><small style="font-weight:normal;">ACID Seat Transactions</small></div>
-                                <span class="arch-arrow">&rarr;</span>
-                                <div class="arch-node">Prometheus &amp; Grafana<br><small style="font-weight:normal;">Pod Metrics &amp; Tracing</small></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ENGINEERING / STEP BY STEP -->
-            <section class="section" style="padding: 40px 0;">
-                <div class="newspaper-grid">
-                    <div class="col-span-12">
-                        <span class="kicker-label">THE ARCHITECTURE</span>
-                        <h3 class="heading-lg" style="margin: 10px 0 20px 0; font-size: 32px;">Step-by-Step Construction</h3>
-                    </div>
-                    
-                    <div class="col-span-6 rv column-bordered">
-                        <h4 class="heading-md" style="margin-bottom: 15px; border-bottom: 2px solid var(--rule-dark); padding-bottom: 5px;">1. Microservices Containerization</h4>
-                        <p class="body" style="margin-bottom: 15px;">Each domain (Users, Ticketing, Payment) was built as an independent Docker container. Multi-stage Dockerfiles were utilized to minimize the attack surface and image size, ensuring rapid spin-ups.</p>
-                        
-                        <h4 class="heading-md" style="margin-bottom: 15px; border-bottom: 2px solid var(--rule-dark); padding-bottom: 5px; margin-top: 30px;">2. Continuous Integration (CI)</h4>
-                        <p class="body" style="margin-bottom: 15px;">A robust Jenkins declarative pipeline runs automatically on every Git commit. It executes unit tests, performs static code analysis, and scans container images using Trivy to prevent vulnerable dependencies from reaching production.</p>
-                    </div>
-                    
-                    <div class="col-span-6 rv">
-                        <h4 class="heading-md" style="margin-bottom: 15px; border-bottom: 2px solid var(--rule-dark); padding-bottom: 5px;">3. Kubernetes Orchestration</h4>
-                        <p class="body" style="margin-bottom: 15px;">The containers are orchestrated using Kubernetes (AWS EKS). The cluster features auto-scaling policies to handle ticket-drop traffic spikes without manual intervention, routing traffic through an NGINX Ingress controller.</p>
-                        
-                        <h4 class="heading-md" style="margin-bottom: 15px; border-bottom: 2px solid var(--rule-dark); padding-bottom: 5px; margin-top: 30px;">4. Observability & Monitoring</h4>
-                        <p class="body" style="margin-bottom: 15px;">Prometheus actively scrapes metrics from the Kubernetes pods, feeding into Grafana dashboards. This provides real-time visibility into booking latencies, API error rates, and node resource utilization.</p>
-                    </div>
-                </div>
-            </section>
-
-        </main>
-        
-        <!-- FOOTER -->
-        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0;">
-            <div class="newspaper-grid">
-                <div class="col-span-12 text-center rv">
-                    <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
-                    <p class="body-sm" style="margin-top: 10px;">High-level architectures; implementation-specific patent details omitted for compliance.</p>
-                </div>
-            </div>
-        </footer>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: var(--font-sans); text-align: center; padding: 20px;">
+    <div>
+      <h2 style="font-family: var(--font-serif); margin-bottom: 12px;">Redirecting to Encore...</h2>
+      <p style="color: var(--ink-soft); margin-bottom: 16px;">This project has evolved from its initial AWS DevOps foundation (SnapSeat) into <strong>Encore</strong>: a full-stack real-time reservation platform.</p>
+      <a href="encore.html" class="pill-btn" style="border: 1px solid var(--rule); padding: 8px 16px; border-radius: 999px;">Click here if not redirected &rarr;</a>
     </div>
-    
-    <script src="../js/main.js" defer></script>
-    <script src="../js/animations.js" defer></script>
 </body>
 </html>

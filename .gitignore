@@ -26,3 +26,17 @@ qa_screenshots/
 Thumbs.db
 .vscode/
 .idea/
+
+# Scratch & QA Screenshots & Audited Pages
+scratch/
+scratch_*
+paper_rip.wav
+qa_screenshots/
+audit_screenshots/
+qa_ss/
+*.png
+*.jpg.tmp
+*.webp.tmp
+!images/**
+
+

@@ -1,1103 +1,864 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      Ajitesh Sharma — Software Engineer · Systems Security · Applied AI/ML
-    </title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Sharma Dispatch — Ajitesh Sharma</title>
 
-    <meta
-      name="description"
-      content="The Sharma Dispatch: Editorial portfolio of Ajitesh Sharma. Software Engineer specializing in Systems, Security, and Applied AI/ML based in Vellore, India."
-    />
-    <meta
-      name="keywords"
-      content="Ajitesh Sharma, Software Engineer, Systems Builder, C++, Deep Packet Inspection, Machine Learning, Applied AI/ML, VIT Vellore"
-    />
-    <meta name="author" content="Ajitesh Sharma" />
+  <!-- SEO & Open Graph Metadata -->
+  <meta name="description" content="The Sharma Dispatch: Traditional editorial broadsheet portfolio of Ajitesh Sharma. Systems engineer and security researcher specializing in C++17 DPI engines, streaming anomaly detection, and distributed platforms." />
+  <meta name="keywords" content="The Sharma Dispatch, Ajitesh Sharma, Systems Engineer, Deep Packet Inspection, C++17, Cybersecurity, Machine Learning, VIT Vellore, Broadsheet Portfolio" />
+  <meta name="author" content="Ajitesh Sharma" />
+  <link rel="canonical" href="https://ajiteshsharma.dev/" />
 
-    <meta
-      property="og:title"
-      content="Ajitesh Sharma — The Engineering Record of a Systems Builder"
-    />
-    <meta
-      property="og:description"
-      content="Portfolio of Ajitesh Sharma: Systems Security, C++17 DPI engines, and AI safety research."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://ajiteshsharma.dev" />
-    <meta property="og:image" content="images/portrait.jpg" />
-    <link rel="canonical" href="https://ajiteshsharma.dev/" />
+  <meta property="og:title" content="The Sharma Dispatch — Ajitesh Sharma" />
+  <meta property="og:description" content="The Engineering Record of a Systems Craftsman &middot; Reporting from Vellore Labs." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ajiteshsharma.dev" />
+  <meta property="og:image" content="images/craftsman_portrait.jpg" />
 
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <link rel="alternate icon" type="image/png" href="favicon.png" />
+  <!-- Icons -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="alternate icon" type="image/png" href="favicon.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"
-      rel="stylesheet"
-    />
+  <!-- No-Cache Directives -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-      defer
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-      defer
-    ></script>
+  <!-- Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="css/styles.css" />
+  <!-- Stylesheet (Clean Versioned) -->
+  <link rel="stylesheet" href="css/paper-craft.css?v=fluid_20260907_v3" />
+
+  <!-- Engine Script (Clean Versioned) -->
+  <script>
+    if (sessionStorage.getItem('broadsheet_nav_arriving') === 'true') {
+      document.documentElement.classList.add('paper-tear-pending');
+    }
+  </script>
+  <script src="js/paper-engine.js?v=fluid_20260907_v3" defer></script>
 </head>
-  <body class="newspaper-theme">
-    <!-- Paper Press Broadsheet Unfold Preloader -->
-    <div class="paper-press-loader" aria-hidden="true">
-      <div class="paper-press-card">
-        <div class="paper-press-stamp">FIRST EDITION &middot; SPECIAL PRINT</div>
-        <div class="paper-press-title">The Sharma Dispatch</div>
-        <div class="meta" style="letter-spacing: 0.14em; color: var(--ink-soft);">PRESSING BROADSHEET &middot; VELLORE SYSTEMS DESK</div>
-        <div class="paper-press-progress-track">
-          <div class="paper-press-progress-fill"></div>
+<body>
+
+  <!-- ========================================================================
+       TWO PAPER TEARING AWAY TRANSITION & ENTRANCE (AUTHENTIC PHYSICAL TEAR)
+       ======================================================================== -->
+  <div id="paperTransitionOverlay" class="paper-tear-overlay" aria-hidden="true">
+    <!-- Left Paper Half (Folds/Curls Left) -->
+    <div class="paper-tear-half paper-tear-left" id="paperTearLeft">
+      <!-- Tactile Paper Fiber & Grain Texture -->
+      <div class="paper-fiber-texture"></div>
+      <div class="paper-laid-lines"></div>
+
+      <!-- Printed Broadsheet Content (Left Page) -->
+      <div class="tear-sheet-content tear-content-left">
+        <div class="tear-top-folio font-mono">
+          <span>VOL. 2026 &bull; ISSUE NO. 43</span>
+          <span class="tear-sec-tag">BROADSHEET FOLIO &bull; SEC. A</span>
+        </div>
+        <div class="tear-masthead-wrap">
+          <h1 class="tear-masthead-title font-serif">THE SHARMA</h1>
+          <div class="tear-masthead-sub font-mono">CHRONICLE OF SYSTEMS &bull; DEFENSIVE ARCHITECTURE</div>
+        </div>
+        <div class="tear-ornamental-rule"></div>
+
+        <div class="tear-columns-grid">
+          <div class="tear-col">
+            <span class="tear-kicker font-mono">SPECIAL REPORT</span>
+            <h2 class="tear-headline font-serif">A Systems Engineer Who Builds Things &mdash; <span style="color: var(--accent-red);">Kernel to Cloud</span></h2>
+            <p class="tear-p font-serif"><span class="tear-dropcap">A</span>s a systems engineer and security researcher at VIT Vellore, I investigate and build software engineered to hold under intense adversarial load. Focus centers on low-level performance, cryptography, and verifiable runtime correctness.</p>
+            <div class="tear-col-divider"></div>
+            <div class="tear-wire-notice font-mono">VELLORE WIRE &bull; DISPATCH RECEIVED 12.9165&deg; N</div>
+          </div>
+          <div class="tear-col tear-col-secondary">
+            <span class="tear-kicker font-mono">CURRICULUM</span>
+            <h3 class="tear-subhead font-serif">Vellore Institute of Technology</h3>
+            <p class="tear-p-sm font-sans">B.Tech Computer Science &amp; Engineering (Spec. Information Security), 2023&ndash;2027. Foundations in kernel architecture, cryptography, and zero-trust.</p>
+            <div class="tear-badge-pill font-mono">VERIFIED ARCHIVAL COPY</div>
+          </div>
+        </div>
+
+        <div class="tear-bottom-folio font-mono">
+          <span>LEFT SHEET &bull; CONTINUED ON SEC. B</span>
+          <span>EST. 2023 &bull; HAND-SET MONO</span>
+        </div>
+      </div>
+
+      <!-- Authentic Jagged Deckle Torn Edge with Exposed Pulp Under-Tear -->
+      <svg class="deckle-edge deckle-right" viewBox="0 0 60 1000" preserveAspectRatio="none" aria-hidden="true">
+        <!-- Layer 1: Exposed white cellulose pulp fringe -->
+        <path class="deckle-white-fringe" d="M0,0 L32,0 L24,18 L36,35 L22,58 L38,82 L20,115 L35,138 L24,165 L42,198 L26,225 L38,255 L20,285 L44,325 L24,360 L38,395 L18,430 L45,475 L22,510 L40,545 L20,585 L46,630 L24,665 L41,705 L18,745 L47,790 L23,830 L41,875 L19,915 L48,965 L25,995 L30,1000 L0,1000 Z" fill="#fffdf9"></path>
+        <!-- Layer 2: Main deckle tear face -->
+        <path class="deckle-face" d="M0,0 L26,0 L18,16 L30,33 L16,55 L32,79 L14,112 L29,135 L18,162 L36,195 L20,222 L32,252 L14,282 L38,322 L18,357 L32,392 L12,427 L39,472 L16,507 L34,542 L14,582 L40,627 L18,662 L35,702 L12,742 L41,787 L17,827 L35,872 L13,912 L42,962 L19,992 L24,1000 L0,1000 Z" fill="#f6f0e2"></path>
+      </svg>
+    </div>
+
+    <!-- Center Seam Tactile Embossed Wax Seal -->
+    <div class="paper-tear-seam" id="tearSeamSeal">
+      <div class="seam-badge" id="tearBadgeBtn" role="button" tabindex="0" aria-label="Tear Broadsheet to Open">
+        <div class="seam-badge-inner">
+          <img src="images/dispatch_crest.svg" alt="Seal" class="seam-crest" />
+          <span class="seam-title font-serif">THE SHARMA DISPATCH</span>
+          <span class="seam-instruction font-mono">✂ TAP / CLICK TO TEAR OPEN ✂</span>
         </div>
       </div>
     </div>
 
-    <div id="reading-progress-bar" class="reading-progress-bar"></div>
-    <div class="container">
-      <!-- SECTION 1: MASTHEAD HEADER -->
-      <header class="masthead" style="margin-top: 20px; border-top: 4px double var(--rule-dark);">
-        <!-- Top Utility -->
-        <div
-          class="newspaper-grid"
-          style="border-bottom: 1px solid var(--rule); padding: 5px 0"
-        >
-          <div
-            class="col-span-12 meta uppercase"
-            style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;"
-          >
-            <span
-              >BY THE ENGINEERING DESK &middot; REPORTING FROM VELLORE, BETWEEN
-              LABS AND TERMINALS</span
-            >
-            <span style="display: flex; align-items: center; gap: 12px;"
-              ><button type="button" class="edition-toggle-btn" data-edition-toggle data-cursor="THEME">NIGHT EDITION</button>
-              <a href="#projects" data-cursor="VIEW">Read Dispatches &rarr;</a> &nbsp;&middot;&nbsp;
-              <a href="#contact" data-cursor="CONTACT">Get in Touch</a></span
-            >
+    <!-- Right Paper Half (Folds/Curls Right) -->
+    <div class="paper-tear-half paper-tear-right" id="paperTearRight">
+      <!-- Tactile Paper Fiber & Grain Texture -->
+      <div class="paper-fiber-texture"></div>
+      <div class="paper-laid-lines"></div>
+
+      <!-- Printed Broadsheet Content (Right Page) -->
+      <div class="tear-sheet-content tear-content-right">
+        <div class="tear-top-folio font-mono">
+          <span class="tear-sec-tag">BROADSHEET FOLIO &bull; SEC. B</span>
+          <span>PRICE: ONE SSH SESSION</span>
+        </div>
+        <div class="tear-masthead-wrap">
+          <h1 class="tear-masthead-title font-serif">DISPATCH</h1>
+          <div class="tear-masthead-sub font-mono">ENGINEERED UNDER ADVERSARIAL RESILIENCE &bull; 2026</div>
+        </div>
+        <div class="tear-ornamental-rule"></div>
+
+        <div class="tear-columns-grid">
+          <div class="tear-col">
+            <span class="tear-kicker font-mono">RESEARCH DISPATCH</span>
+            <h2 class="tear-headline font-serif">Lock-Free Backends &amp; Applied AI.</h2>
+            <p class="tear-p font-serif"><span class="tear-dropcap">T</span>he boundary between infrastructure and threat landscape has collapsed. Building zero-trust authentication pipelines, synthetic deepfake forensics, and deterministic kernel tooling.</p>
+            <div class="tear-col-divider"></div>
+            <div class="tear-wire-notice font-mono">PATENTS PENDING &bull; 3 FILED INVENTIONS</div>
+          </div>
+          <div class="tear-col tear-col-secondary">
+            <span class="tear-kicker font-mono">CORRESPONDENCE</span>
+            <h3 class="tear-subhead font-serif">Open for Collaboration</h3>
+            <p class="tear-p-sm font-sans">Available for systems engineering, distributed infrastructure, and defensive security engagements. Contact: 13ajitesh@gmail.com.</p>
+            <div class="tear-badge-pill font-mono">SEC. B FOLIO VERIFIED</div>
           </div>
         </div>
 
-        <!-- Title -->
-        <div
-          class="text-center"
-          style="padding: 35px 0 20px 0; border-bottom: 1px solid var(--rule)"
-        >
-          <h1 class="display-xl rv" style="margin-bottom: 5px">
-            Ajitesh Sharma
-          </h1>
-          <p class="meta rv" style="letter-spacing: 0.18em;">THE ENGINEERING RECORD OF A SYSTEMS BUILDER</p>
+        <div class="tear-bottom-folio font-mono">
+          <span>RIGHT SHEET &bull; COMPLETE DISPATCH</span>
+          <span>PRESS RUN: 1ST PRINT</span>
+        </div>
+      </div>
+
+      <!-- Complementary Jagged Deckle Torn Edge with Exposed Pulp -->
+      <svg class="deckle-edge deckle-left" viewBox="0 0 60 1000" preserveAspectRatio="none" aria-hidden="true">
+        <!-- Layer 1: Exposed white cellulose pulp fringe -->
+        <path class="deckle-white-fringe" d="M60,0 L28,0 L36,18 L24,35 L38,58 L22,82 L40,115 L25,138 L36,165 L18,198 L34,225 L22,255 L40,285 L16,325 L36,360 L22,395 L42,430 L15,475 L38,510 L20,545 L40,585 L14,630 L36,665 L19,705 L42,745 L13,790 L37,830 L19,875 L41,915 L12,965 L35,995 L30,1000 L60,1000 Z" fill="#fffdf9"></path>
+        <!-- Layer 2: Main deckle tear face -->
+        <path class="deckle-face" d="M60,0 L34,0 L42,16 L30,33 L44,55 L28,79 L46,112 L31,135 L42,162 L24,195 L40,222 L28,252 L46,282 L22,322 L42,357 L28,392 L48,427 L21,472 L44,507 L26,542 L46,582 L20,627 L42,662 L25,702 L48,742 L19,787 L43,827 L25,872 L47,912 L18,962 L41,992 L36,1000 L60,1000 Z" fill="#f6f0e2"></path>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       TOP UTILITY BAR (STICKY, TACTILE & RESPONSIVE FOR MOBILE & DESKTOP)
+       ======================================================================== -->
+  <div class="paper-topbar" id="top">
+    <div class="site-wrapper">
+      <div class="topbar-grid">
+        <div class="topbar-left">
+          <a href="#top" class="topbar-brand" data-cursor="HOME" aria-label="Ajitesh Sharma Portfolio">
+            <img src="images/dispatch_crest.svg" alt="Red Seal Crest" class="topbar-brand-crest" />
+            <span class="topbar-brand-title">AJITESH SHARMA</span>
+          </a>
+          <span class="topbar-desktop-meta">
+            <span class="location-badge">
+              <span class="pulse-dot"></span>
+              VELLORE, IN
+            </span>
+            <span class="clock-meta">&middot; 12.9165&deg; N &middot;</span>
+            <span class="clock-meta" data-live-clock>IST 00:00:00</span>
+          </span>
         </div>
 
-        <!-- Dateline -->
-        <div
-          class="newspaper-grid"
-          style="border-bottom: 1px solid var(--rule); padding: 10px 0"
-        >
-          <div class="col-span-4 meta text-left masthead__date" data-dynamic-date>
-            MONDAY 31 AUGUST 2026 &middot; VOL. I
-          </div>
-          <div class="col-span-4 meta text-center" data-live-clock>
-            TIME: 19:10:00 IST
-          </div>
-          <div class="col-span-4 meta text-right">PRICE: ONE SSH SESSION</div>
+        <div class="topbar-right">
+          <button type="button" class="pill-btn sound-btn" data-sound-toggle data-cursor="SOUND" aria-label="Toggle Sound" aria-pressed="true">
+            <svg class="nav-svg sound-icon-on" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+            <span class="btn-text">AUDIO</span>
+          </button>
+          <button type="button" class="pill-btn theme-btn" data-edition-toggle data-cursor="THEME" aria-label="Toggle Night Edition">
+            <svg class="nav-svg moon-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <span class="btn-text theme-text">NIGHT</span>
+          </button>
+          <button type="button" class="pill-btn menu-pill-btn" data-menu-open data-cursor="MENU" aria-label="Open Menu Directory">
+            <svg class="nav-svg menu-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <span class="btn-text">MENU</span>
+          </button>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <!-- Nav -->
-        <nav
-          class="nav"
-          id="main-nav"
-          style="border-bottom: 4px solid var(--rule-dark); padding: 12px 0"
-        >
-          <div class="newspaper-grid" style="align-items: center">
-            <div class="col-span-4 heading-md" style="margin: 0">
-              <a href="#" style="text-decoration: none; color: inherit; font-size: 20px; letter-spacing: -0.5px;">Ajitesh Sharma</a>
+  <!-- ========================================================================
+       TRADITIONAL BROADSHEET MASTHEAD (INSPIRED BY TRADITIONAL NEWSPAPERS)
+       ======================================================================== -->
+  <header class="broadsheet-masthead">
+    <div class="site-wrapper">
+      <div class="masthead-centerpiece">
+        <!-- Circular Red Seal Crest Logo -->
+        <a href="#top" class="masthead-crest-link" data-cursor="HOME" aria-label="The Sharma Dispatch Crest">
+          <img src="images/dispatch_crest.svg" alt="The Sharma Dispatch Red Seal Crest" />
+        </a>
+
+        <!-- Master Title Block -->
+        <div class="masthead-title-block">
+          <h1 class="masthead-main-title font-serif">The Sharma Dispatch</h1>
+          <div class="masthead-subtitle">The Engineering Record of a Systems Craftsman</div>
+          <div class="masthead-author-line">By Ajitesh Sharma &mdash; Systems &bull; Defensive Security &bull; Applied AI</div>
+        </div>
+      </div>
+
+      <!-- Broadsheet Dateline Bar (Double Border) -->
+      <div class="broadsheet-dateline">
+        <span>VOL. I &bull; ISSUE 43</span>
+        <span>&bull;</span>
+        <span class="dateline-hide-xs">SPECIAL BROADSHEET PRINT</span>
+        <span class="dateline-hide-xs">&bull;</span>
+        <span class="dateline-hide-mobile">PRICE: ONE SSH SESSION</span>
+        <span class="dateline-hide-mobile">&bull;</span>
+        <span>REPORTING FROM VELLORE LABS</span>
+      </div>
+
+      <!-- Traditional Editorial Section Nav Row (Scrollable Pills on Mobile) -->
+      <nav class="broadsheet-nav" aria-label="Primary Broadsheet Sections">
+        <ul class="nav-links-row">
+          <li><a href="#manifesto" class="nav-item-link" data-cursor="READ">THE MANIFESTO</a></li>
+          <li><a href="#dispatches" class="nav-item-link" data-cursor="VIEW">SELECTED DISPATCHES</a></li>
+          <li><a href="#service" class="nav-item-link" data-cursor="RECORD">ACADEMIA &amp; SERVICE</a></li>
+          <li><a href="#patents" class="nav-item-link" data-cursor="PATENTS">PATENTS &amp; RESEARCH</a></li>
+          <li><a href="#contact" class="nav-item-link" data-cursor="CONTACT">CORRESPONDENCE</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========================================================================
+         THE CRAFTSMAN FRONTISPIECE & MANIFESTO
+         ======================================================================== -->
+    <section class="section-editorial" id="manifesto" aria-label="The Craftsman Manifesto">
+      <div class="site-wrapper">
+        <div class="about-grid">
+
+          <!-- Left: Genuine Portrait Photo in Archival Frame -->
+          <div class="portrait-container" data-cursor="PORTRAIT">
+            <div class="portrait-frame">
+              <img src="images/craftsman_portrait.jpg" alt="Photograph of Ajitesh Sharma, Systems Engineer" loading="eager" />
+              <div class="portrait-sheen"></div>
             </div>
-            <div
-              class="col-span-8"
-              style="
-                display: flex;
-                justify-content: flex-end;
-                gap: 20px;
-                align-items: center;
-                flex-wrap: wrap;
-              "
-            >
-              <a href="#projects" class="meta bold">WORK</a>
-              <a href="#publications" class="meta bold">RESEARCH</a>
-              <a href="#stack" class="meta bold">STACK</a>
-              <a href="#experience" class="meta bold">SERVICE</a>
-              <a href="#contact" class="meta bold">CONTACT</a>
-              <a
-                href="#contact"
-                class="meta bold editorial-btn editorial-btn-solid"
-                style="padding: 6px 14px; font-size: 11px;"
-                >CONTACT</a
-              >
+            <div class="portrait-caption">
+              <span>FIG 01. &mdash; THE SUBJECT</span>
+              <span>VELLORE, INDIA</span>
             </div>
           </div>
-        </nav>
-      </header>
 
-      <main class="dispatch-content">
-        <!-- EDITORIAL BREAKING NEWS WIRE TICKER -->
-        <div class="marquee-strip rv" style="margin-bottom: 35px;">
-          <div class="marquee-badge">BREAKING WIRE</div>
-          <div class="marquee-track">
-            <div class="marquee-content">
-              <span class="marquee-item">C++17 DPI ENGINE BENCHMARKED AT SUB-MILLISECOND LATENCY <span class="sep">&#9670;</span></span>
-              <span class="marquee-item">IEEE COMPSAC 2026 PAPER ACCEPTED (AI AGENT SAFETY) <span class="sep">&#9670;</span></span>
-              <span class="marquee-item">3 INDIAN PATENTS FILED (202641072750 &middot; 202541027783 &middot; 202541011318) <span class="sep">&#9670;</span></span>
-              <span class="marquee-item">STREAMING ANOMALY DETECTION WITH TREESHAP &amp; FAST-HOEFFDING TREES <span class="sep">&#9670;</span></span>
-              <span class="marquee-item">ENTERPRISE WORKFORCE SCHEDULING ORCHESTRATOR FOR 1,200+ PERSONNEL <span class="sep">&#9670;</span></span>
-              <!-- Repeat for seamless marquee -->
-              <span class="marquee-item">C++17 DPI ENGINE BENCHMARKED AT SUB-MILLISECOND LATENCY <span class="sep">&#9670;</span></span>
-              <span class="marquee-item">IEEE COMPSAC 2026 PAPER ACCEPTED (AI AGENT SAFETY) <span class="sep">&#9670;</span></span>
-              <span class="marquee-item">3 INDIAN PATENTS FILED (202641072750 &middot; 202541027783 &middot; 202541011318) <span class="sep">&#9670;</span></span>
-              <span class="marquee-item">STREAMING ANOMALY DETECTION WITH TREESHAP &amp; FAST-HOEFFDING TREES <span class="sep">&#9670;</span></span>
-              <span class="marquee-item">ENTERPRISE WORKFORCE SCHEDULING ORCHESTRATOR FOR 1,200+ PERSONNEL <span class="sep">&#9670;</span></span>
-            </div>
-          </div>
-        </div>
-
-        <!-- SECTION 2: HERO / FRONT PAGE -->
-        <section
-          id="front-page"
-          class="section"
-          style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0"
-        >
-          <div class="newspaper-grid">
-            <!-- Left side (headline) - 6 columns -->
-            <div class="col-span-6 column-bordered">
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  border-bottom: 1px solid var(--rule);
-                  padding-bottom: 10px;
-                  margin-bottom: 30px;
-                "
-              >
-                <span class="meta uppercase">FRONT PAGE</span>
-                <span class="meta uppercase"
-                  >FILED UNDER: OPEN INVESTIGATIONS</span
-                >
-              </div>
-
-              <p class="kicker-label rv">
-                CASE NO. 43 &mdash; FINDINGS PUBLISHED
-              </p>
-              <h2
-                class="display-lg rv"
-                style="
-                  margin-bottom: 30px;
-                  letter-spacing: -1.5px;
-                  line-height: 1.05;
-                "
-              >
-                A systems engineer<br />who builds things &mdash;<br /><i
-                  class="italic"
-                  >kernel to cloud.</i
-                >
+          <!-- Right: Manifesto Narrative & Vintage Postal Stamp -->
+          <div class="about-narrative" data-reveal>
+            <div>
+              <span class="kicker">PHILOSOPHY &amp; PEDIGREE</span>
+              <h2 class="headline-xl font-serif" style="margin: 8px 0 16px 0;">
+                A systems engineer who builds things &mdash;<br />
+                <span style="color: var(--accent-red);">kernel to cloud</span>
               </h2>
+            </div>
 
-              <div class="newspaper-grid" style="margin-top: 40px">
-                <div class="col-span-6">
-                  <p
-                    class="body-lg italic rv"
-                    style="
-                      border-left: 2px solid var(--ink);
-                      padding-left: 15px;
-                      margin-bottom: 20px;
-                    "
-                  >
-                    Three years in: Ajitesh Sharma builds high-throughput DPI
-                    engines, and deploys streaming anomaly detectors.
-                  </p>
-                  <p
-                    class="meta rv"
-                    style="
-                      border-bottom: 1px solid var(--rule);
-                      padding-bottom: 15px;
-                      margin-bottom: 15px;
-                    "
-                  >
-                    BY THE ENGINEERING DESK &middot; REPORTING FROM VELLORE
-                  </p>
-                  <div class="rv" style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <a
-                      href="#projects"
-                      class="editorial-btn editorial-btn-solid"
-                      >EXPLORE DISPATCHES &rarr;</a
-                    >
-                    <a
-                      href="#contact"
-                      class="editorial-btn editorial-btn-outline"
-                      >SEND A BRIEF</a
-                    >
-                  </div>
+            <p class="body-lead dropcap">
+              As a systems engineer and security researcher completing my B.Tech in Computer Science (Information Security) at VIT Vellore, I investigate and build software engineered to hold under intense adversarial load. My focus centers on engineering projects with measurable real-world impact, conducting deep dives into systems security, and innovating where resilient architecture and machine learning intersect.
+            </p>
+
+            <p class="body-text">
+              Real software craftsmanship isn't about layering ephemeral abstractions, but dissecting packet streams at the byte level, optimizing zero-copy ring buffers, and producing architectures that remain provably resilient in production environments.
+            </p>
+
+            <p class="body-text">
+              This discipline has guided my work architecting <strong>three Indian patent applications</strong> in cognitive security and deepfake detection, publishing peer-reviewed research on proactive AI agent safety at <strong>IEEE COMPSAC</strong>, and deploying enterprise shift orchestration at <strong>Hindalco Industries (Aditya Birla Group)</strong>.
+            </p>
+
+            <!-- Action row & Quick Links -->
+            <div class="about-stamp-wrapper">
+              <div class="postal-stamp-card" data-cursor="STAMP">
+                <div class="stamp-thumbnail">
+                  <img src="images/postal_stamp.jpg" alt="Vellore Systems Desk Official Postal Stamp" />
                 </div>
-                <div class="col-span-6 rv">
-                  <p class="body">
-                    Currently completing his B.Tech in Computer Science
-                    (Information Security) at VIT Vellore.
-                  </p>
-                  <p class="body" style="margin-top: 15px">
-                    He interned at Hindalco Industries (Aditya Birla Group),
-                    architecting enterprise shift orchestration systems.
-                  </p>
+                <div class="stamp-details">
+                  <strong>OFFICIAL RECORD &bull; VERIFIED</strong>
+                  <span>APP NO: 202641072750 &bull; VELLORE DESK</span>
+                  <span>EST. 2026 &bull; INDIA POST STAMP</span>
                 </div>
+              </div>
+
+              <div>
+                <a href="#dispatches" class="pill-btn menu-pill-btn" data-cursor="VIEW">
+                  READ DISPATCHES &rarr;
+                </a>
               </div>
             </div>
 
-            <!-- Right side (image and text) - 6 columns -->
-            <div class="col-span-6">
-              <div class="portrait-tilt-container">
-                <figure
-                  class="editorial-portrait-frame rv"
-                  data-cursor="PORTRAIT"
-                >
-                  <img
-                    src="images/portrait.jpg"
-                    alt="Ajitesh Sharma Editorial Portrait"
-                    class="editorial-portrait"
-                  />
-                </figure>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         FULL-BLEED INVERTED MARQUEE BANNER
+         ======================================================================== -->
+    <div class="marquee-band" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <span class="marquee-text-giant">
+            THE SHARMA DISPATCH <span class="marquee-glyph">&#9670;</span>
+            C++17 PACKET ENGINES <span class="marquee-glyph">&#9670;</span>
+            STREAMING ANOMALY RADAR <span class="marquee-glyph">&#9670;</span>
+            DEFENSIVE CYBERSECURITY <span class="marquee-glyph">&#9670;</span>
+            VELLORE LABS <span class="marquee-glyph">&#9670;</span>
+          </span>
+          <span class="marquee-text-giant">
+            THE SHARMA DISPATCH <span class="marquee-glyph">&#9670;</span>
+            C++17 PACKET ENGINES <span class="marquee-glyph">&#9670;</span>
+            STREAMING ANOMALY RADAR <span class="marquee-glyph">&#9670;</span>
+            DEFENSIVE CYBERSECURITY <span class="marquee-glyph">&#9670;</span>
+            VELLORE LABS <span class="marquee-glyph">&#9670;</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         SELECTED WORKS HORIZONTAL REEL (FIELD DISPATCHES)
+         ======================================================================== -->
+    <section class="works-section" id="dispatches" aria-label="Selected Engineering Dispatches">
+      <div class="site-wrapper">
+        <div class="works-header">
+          <div>
+            <span class="kicker">FIELD DISPATCHES</span>
+            <h2 class="headline-xl font-serif">Selected Works</h2>
+          </div>
+          <div class="reel-progress-wrap">
+            <span class="reel-counter-text" id="reelCounterText">DISPATCH 01 / 05</span>
+            <div class="reel-progress-track" aria-hidden="true">
+              <div class="reel-progress-fill" id="reelProgressFill"></div>
+            </div>
+            <span style="color: var(--accent-red); font-weight: 700;" class="meta-text topbar-desktop-only">DRAG OR SWIPE &rarr;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Horizontal Drag Reel -->
+      <div class="works-reel-container" data-works-reel data-cursor="DRAG">
+        <div class="works-reel-track">
+
+          <!-- DISPATCH 01: CIPHERPULSE -->
+          <article class="work-card" data-cursor="DISPATCH">
+            <div>
+              <div class="work-card-header">
+                <span class="kicker">PACKET TELEMETRY</span>
+                <span class="badge-tag">NEW</span>
               </div>
-              <p class="meta rv" style="margin-top: 8px">
-                FIG 01. &mdash; THE SUBJECT (SYSTEMS &amp; SECURITY LABS, VELLORE)
+              <div class="work-media-frame">
+                <img src="images/dispatches/cipherpulse_art.jpg" alt="CipherPulse DPI Engine Telemetry Prism" loading="lazy" />
+              </div>
+              <h3 class="headline-md font-serif" style="margin-bottom: 8px;">CipherPulse</h3>
+              <p class="body-text" style="font-size: 0.92rem; margin-bottom: 12px;">
+                C++17 Deep Packet Inspection (DPI) engine extracting JA4+ client hello fingerprints and Shannon entropy from live network interfaces at 10,000+ pkt/sec.
               </p>
-
-              <div style="margin-top: 30px" class="newspaper-grid">
-                <div class="col-span-12">
-                  <p class="body rv">
-                    <span class="dropcap">H</span>e builds things that inspect,
-                    detect, and protect. His work spans C++17 deep packet
-                    inspection engines, O(1)-memory streaming anomaly detectors,
-                    and containerized microservices platforms.
-                  </p>
-                  <p class="body rv" style="margin-top: 15px">
-                    When he's not writing lock-free code, he's researching or
-                    filing Indian patent applications for systems that don't
-                    exist yet, continually filing new investigations across
-                    defensive security and applied machine learning.
-                  </p>
-                </div>
+              <div class="work-tags">
+                <span class="tag-chip">C++17</span>
+                <span class="tag-chip">JA4+</span>
+                <span class="tag-chip">Zero-Copy</span>
+                <span class="tag-chip">Shannon Entropy</span>
+                <span class="tag-chip">10K+ Pkt/s</span>
               </div>
             </div>
-          </div>
-        </section>
-
-        <!-- SECTION 2.2: CREDIBILITY STAT STRIP -->
-        <section class="stat-strip rv" aria-label="Engineering Credentials & Metrics">
-          <div class="stat-strip__item">
-            <span class="stat-strip__num" data-count="3">3</span>
-            <span class="stat-strip__label">Patents Filed</span>
-          </div>
-          <span class="stat-strip__divider">&middot;</span>
-          <div class="stat-strip__item">
-            <span class="stat-strip__num" data-count="1">1</span>
-            <span class="stat-strip__label">IEEE COMPSAC Paper</span>
-          </div>
-          <span class="stat-strip__divider">&middot;</span>
-          <div class="stat-strip__item">
-            <span class="stat-strip__num" data-count="1200">1,200+</span>
-            <span class="stat-strip__label">Hospital Users Served</span>
-          </div>
-          <span class="stat-strip__divider">&middot;</span>
-          <div class="stat-strip__item">
-            <span class="stat-strip__num" data-count="10000">10K+</span>
-            <span class="stat-strip__label">Pkt/Sec Analyzed</span>
-          </div>
-        </section>
-
-        <!-- SECTION 2.5: AUTHOR'S NOTE -->
-        <section
-          id="authors-note"
-          class="section"
-          style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0; background: var(--paper-warm);"
-        >
-          <div class="newspaper-grid">
-            <div class="col-span-12">
-              <div
-                style="
-                  border: 2px solid var(--rule-dark);
-                  background: var(--paper-bright);
-                  padding: 35px 40px;
-                  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.06);
-                "
-              >
-                <div style="border-bottom: 2px solid var(--rule-dark); padding-bottom: 12px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
-                  <span class="kicker-label" style="color: var(--stamp); font-size: 13px; letter-spacing: 1.5px; margin: 0;">EDITORIAL DISPATCH</span>
-                  <span class="meta uppercase" style="font-weight: bold;">AUTHOR’S NOTE</span>
-                </div>
-                
-                <h3 class="heading-lg" style="margin-bottom: 18px; font-size: 26px;">Engineering at the Edges: From Packet Engines to Defensive AI</h3>
-                
-                <p class="body-lg" style="line-height: 1.8; margin-bottom: 16px;">
-                  I investigate and build at the intersection of <b>high-throughput systems, defensive cybersecurity, and streaming machine learning</b>. I am drawn to problems where software must hold under pressure—whether that means dissecting JA4+ signatures from multi-gigabit packet streams without dropping frames, or training memory-bounded classifiers to catch rogue credentials in real time.
-                </p>
-                
-                <p class="body-lg" style="line-height: 1.8; margin-bottom: 16px;">
-                  My approach is simple: <b>diagnose from first principles, write lock-free resilient backends, and verify in production</b>. This discipline has shaped three Indian patent applications in adaptive security and deepfake forensics, alongside peer-reviewed research accepted at IEEE COMPSAC.
-                </p>
-                
-                <p class="body-lg" style="line-height: 1.8; margin-bottom: 24px;">
-                  The dispatches below document this work—the architectures engineered, the telemetry verified, and the defensive systems deployed.
-                </p>
-                
-                <div style="border-top: 1px solid var(--rule); padding-top: 18px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 10px;">
-                  <div>
-                    <p class="bold" style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin: 0 0 4px 0;">— Ajitesh Sharma</p>
-                    <p class="meta" style="font-style: italic; color: #555; margin: 0;">Computer Science &middot; Builder &middot; Researcher &middot; Curious by default</p>
-                  </div>
-                  <span class="meta uppercase" style="background: var(--ink); color: var(--paper-bright); padding: 4px 10px; font-size: 10px; font-weight: bold; border-radius: 2px;">DISPATCH CERTIFIED</span>
-                </div>
-              </div>
+            <div class="work-action-row">
+              <span class="meta-text">LATENCY: &lt; 0.42ms</span>
+              <a href="pages/cipherpulse.html" class="work-action-link" data-cursor="READ">
+                READ DISPATCH &rarr;
+              </a>
             </div>
-          </div>
-        </section>
+          </article>
 
-        <!-- SECTION 3: FIELD DISPATCHES (Projects) -->
-        <section
-          id="projects"
-          class="section"
-          style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0"
-        >
-          <div
-            class="newspaper-grid"
-            style="
-              border-bottom: 1px solid var(--rule);
-              padding-bottom: 15px;
-              margin-bottom: 30px;
-            "
-          >
-            <div class="col-span-6">
-              <span class="kicker-label">THE EVIDENCE</span>
-              <h3 class="display-md">Selected Works</h3>
-            </div>
-            <div
-              class="col-span-6 text-right"
-              style="
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-              "
-            >
-              <span class="meta uppercase"
-                >Dispatches A &ndash; E &middot; Filed 2025 &ndash; 2026</span
-              >
-            </div>
-          </div>
-
-          <div class="newspaper-grid">
-            <!-- Featured Project: DISPATCH A -->
-            <article
-              class="col-span-12 rv dispatch-card"
-              data-cursor="DISPATCH"
-              style="
-                border: 2px solid var(--rule-dark);
-                padding: 30px;
-                background: var(--paper-warm);
-                margin-bottom: 30px;
-                box-shadow: 4px 4px 0px rgba(0,0,0,0.06);
-              "
-            >
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                <span
-                  class="kicker-label"
-                  style="color: var(--stamp); font-size: 13px; font-weight: 700; margin: 0;"
-                  >DISPATCH A &mdash; LEAD INVESTIGATION</span
-                >
-                <div style="display: flex; gap: 12px; align-items: center;">
-                  <span class="dispatch-index-pill">[01 / 05]</span>
-                  <span class="meta bold" style="color: var(--ink-soft);">CASE NO. 43</span>
-                </div>
+          <!-- DISPATCH 02: SENTINEL-STREAM -->
+          <article class="work-card" data-cursor="DISPATCH">
+            <div>
+              <div class="work-card-header">
+                <span class="kicker">DEFENSIVE AI</span>
+                <span class="badge-tag">NEW</span>
               </div>
-              <h4 class="display-md" style="margin: 8px 0 16px 0">CipherPulse</h4>
-              
-              <!-- Editorial Artwork for Lead Investigation -->
-              <div class="editorial-art-frame">
-                <img src="images/dispatches/cipherpulse_art.jpg" alt="CipherPulse Deep Packet Inspection Engine Linocut Art" loading="lazy" />
-                <div class="editorial-art-caption">
-                  <span>FIG 01. &mdash; Real-Time Payload &amp; Entropy Analytical Prism</span>
-                  <span>TEL: 10,000+ PKT/SEC</span>
-                </div>
+              <div class="work-media-frame">
+                <img src="images/dispatches/sentinel_art.jpg" alt="Sentinel-Stream Anomaly Radar Artwork" loading="lazy" />
               </div>
-
-              <div class="newspaper-grid" style="margin-bottom: 20px; align-items: stretch;">
-                <div class="col-span-7" style="display: flex; flex-direction: column; justify-content: space-between;">
-                  <p class="body-lg" style="line-height: 1.7; margin-bottom: 16px;">
-                    A high-performance C++17 Deep Packet Inspection (DPI) engine
-                    utilizing JA4+ fingerprints and Shannon Entropy for
-                    real-time encrypted malware traffic detection. Engineered
-                    for multi-threaded packet capture and low-latency feature
-                    extraction across high-throughput network interfaces.
-                  </p>
-                  <p class="body" style="font-size: 14px; margin-bottom: 18px;">
-                    Eliminates TLS payload inspection overhead by evaluating behavioral flow rhythmics, client hello entropy variances, and anomalous handshake tokens in user space.
-                  </p>
-                  
-                  <div class="tag-group" style="margin-top: auto;">
-                    <span class="tag-chip">C++17</span>
-                    <span class="tag-chip">DPI</span>
-                    <span class="tag-chip">JA4+</span>
-                    <span class="tag-chip">Shannon Entropy</span>
-                    <span class="tag-chip">Zero-Copy</span>
-                  </div>
-                </div>
-                
-                <div class="col-span-5" style="border-left: 1px solid var(--rule); padding-left: 20px;">
-                  <div style="border: 1px solid var(--rule-dark); background: var(--paper-bright); padding: 14px; font-family: var(--font-mono); font-size: 11px;">
-                    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--rule); padding-bottom: 6px; margin-bottom: 8px;">
-                      <span style="font-weight: 700;">DPI_PIPELINE :: C++17</span>
-                      <span style="color: var(--stamp); font-weight: 700;">LIVE</span>
-                    </div>
-                    <pre style="margin: 0; line-height: 1.35; font-size: 10px; color: var(--ink);">
-[RAW_ETHERNET]
-      │
-      ▼ (Lock-free Ring)
-[JA4+_FINGERPRINTER] ──► [ENTROPY_ANALYSIS]
-      │                        │
-      └─────────┬──────────────┘
-                ▼
-      [MALWARE_CLASSIFIER]
-                │
-                ▼ (0.42ms Latency)
-      [SOC_ALERT_DISPATCH]
-                    </pre>
-                    <div style="margin-top: 8px; border-top: 1px solid var(--rule); padding-top: 4px; font-size: 9px; color: var(--ink-soft); text-transform: uppercase;">
-                      FIG 02. &mdash; Zero-Copy Pipeline Topology
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Action Bar -->
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  flex-wrap: wrap;
-                  gap: 15px;
-                  border-top: 1px solid var(--rule);
-                  padding-top: 16px;
-                "
-              >
-                <span class="meta bold" style="color: var(--ink-soft);">INSPECTION THROUGHPUT: 10,000+ PKT/SEC</span>
-                <a
-                  href="pages/cipherpulse.html"
-                  class="editorial-btn editorial-btn-solid"
-                  data-cursor="READ"
-                  >OPEN FULL DISPATCH &rarr;</a
-                >
-              </div>
-            </article>
-
-            <!-- Grid for remaining projects -->
-            <div class="col-span-12 newspaper-grid">
-              <!-- DISPATCH B -->
-              <article class="col-span-6 rv column-bordered dispatch-card" data-cursor="DISPATCH" style="display: flex; flex-direction: column;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span class="kicker-label">DISPATCH B &mdash; STREAMING TELEMETRY</span>
-                  <span class="dispatch-index-pill">[02 / 05]</span>
-                </div>
-                
-                <div class="editorial-art-frame">
-                  <img src="images/dispatches/sentinel_art.jpg" alt="Sentinel-Stream Anomaly Radar Illustration" loading="lazy" />
-                  <div class="editorial-art-caption">
-                    <span>FIG 03. &mdash; Behavioral Anomaly Radar &amp; SHAP Explainer</span>
-                    <span>MEM: O(1)</span>
-                  </div>
-                </div>
-
-                <h4 class="heading-lg" style="margin: 6px 0 10px 0">
-                  Sentinel-Stream
-                </h4>
-                <p class="body" style="margin-bottom: 20px; flex-grow: 1; line-height: 1.6;">
-                  Memory-bounded streaming anomaly detection engine fusing LightGBM and Fast-Hoeffding trees to isolate rogue credentials, credential stuffing, and impossible travel patterns in sub-second inference cycles with explainable TreeSHAP feature attributions.
-                </p>
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    border-top: 1px solid var(--rule);
-                    padding-top: 14px;
-                    margin-top: auto;
-                  "
-                >
-                  <div class="tag-group">
-                    <span class="tag-chip">LightGBM</span>
-                    <span class="tag-chip">FastAPI</span>
-                    <span class="tag-chip">TreeSHAP</span>
-                    <span class="tag-chip">O(1) Memory</span>
-                  </div>
-                  <a
-                    href="pages/sentinel-stream.html"
-                    class="meta bold"
-                    data-cursor="READ"
-                    style="color: var(--stamp)"
-                    >OPEN DISPATCH &rarr;</a
-                  >
-                </div>
-              </article>
-
-              <!-- DISPATCH C -->
-              <article class="col-span-6 rv dispatch-card" data-cursor="DISPATCH" style="display: flex; flex-direction: column;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span class="kicker-label">DISPATCH C &mdash; DISTRIBUTED PLATFORMS</span>
-                  <span class="dispatch-index-pill">[03 / 05]</span>
-                </div>
-
-                <div class="editorial-art-frame">
-                  <img src="images/dispatches/snapseat_art.jpg" alt="SnapSeat Cloud Microservices Architecture Art" loading="lazy" />
-                  <div class="editorial-art-caption">
-                    <span>FIG 04. &mdash; Containerized Seat Allocation &amp; CI/CD Mesh</span>
-                    <span>RES: 99.9%</span>
-                  </div>
-                </div>
-
-                <h4 class="heading-lg" style="margin: 6px 0 10px 0">SnapSeat</h4>
-                <p class="body" style="margin-bottom: 20px; flex-grow: 1; line-height: 1.6;">
-                  Resilient, containerized seat reservation platform built on Docker, Kubernetes, and automated Jenkins CI/CD pipelines. Features Redis distributed locking to eliminate race conditions under peak traffic concurrent surges.
-                </p>
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    border-top: 1px solid var(--rule);
-                    padding-top: 14px;
-                    margin-top: auto;
-                  "
-                >
-                  <div class="tag-group">
-                    <span class="tag-chip">Docker</span>
-                    <span class="tag-chip">K8s</span>
-                    <span class="tag-chip">Redis Locks</span>
-                    <span class="tag-chip">Jenkins</span>
-                  </div>
-                  <a
-                    href="pages/snapseat.html"
-                    class="meta bold"
-                    data-cursor="READ"
-                    style="color: var(--stamp)"
-                    >OPEN DISPATCH &rarr;</a
-                  >
-                </div>
-              </article>
-
-              <div
-                class="col-span-12"
-                style="height: 1px; background: var(--rule); margin: 30px 0"
-              ></div>
-
-              <!-- DISPATCH D -->
-              <article class="col-span-6 rv column-bordered dispatch-card" data-cursor="DISPATCH" style="display: flex; flex-direction: column;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <span class="kicker-label">DISPATCH D &mdash; APPLIED VISION AI</span>
-                  <span class="dispatch-index-pill">[04 / 05]</span>
-                </div>
-                <h4 class="heading-lg" style="margin: 10px 0">
-                  NutriVision Pro
-                </h4>
-                <p class="body" style="margin-bottom: 20px; flex-grow: 1; line-height: 1.6;">
-                  AI multimodal visual dietary intelligence platform leveraging Gemini Vision APIs for real-time macronutrient breakdown, portion volume estimations, and structured clinical nutrition reporting via Next.js and FastAPI.
-                </p>
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    border-top: 1px solid var(--rule);
-                    padding-top: 14px;
-                    margin-top: auto;
-                  "
-                >
-                  <div class="tag-group">
-                    <span class="tag-chip">Next.js</span>
-                    <span class="tag-chip">Gemini Vision</span>
-                    <span class="tag-chip">FastAPI</span>
-                    <span class="tag-chip">PostgreSQL</span>
-                  </div>
-                  <a
-                    href="https://nutrivision-pro.vercel.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="meta bold"
-                    data-cursor="LAUNCH"
-                    style="color: var(--stamp)"
-                    >LAUNCH APP <span class="external-icon">&#8599;</span></a
-                  >
-                </div>
-              </article>
-
-              <!-- DISPATCH E -->
-              <article class="col-span-6 rv dispatch-card" data-cursor="DISPATCH" style="display: flex; flex-direction: column;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span class="kicker-label">DISPATCH E &mdash; INDUSTRIAL PRACTICUM RECORD</span>
-                  <span class="dispatch-index-pill">[05 / 05]</span>
-                </div>
-
-                <div class="editorial-art-frame">
-                  <img src="images/dispatches/workforce_art.jpg" alt="Workforce & Healthcare Logistics Broadhseet Art" loading="lazy" />
-                  <div class="editorial-art-caption">
-                    <span>FIG 05. &mdash; Clinical Triage &amp; Shift Logistics Pipeline</span>
-                    <span>1,200+ USERS</span>
-                  </div>
-                </div>
-
-                <h4 class="heading-lg" style="margin: 6px 0 10px 0">
-                  Workforce &amp; Healthcare Logistics System
-                </h4>
-                <p class="body" style="margin-bottom: 20px; flex-grow: 1; line-height: 1.6;">
-                  Production workforce and clinical queue orchestration platform deployed at Hindalco Industries (Aditya Birla Group). Replaced manual rosters with role-based access control (RBAC) and real-time attendance auditing for 1,200+ personnel and patients.
-                </p>
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    border-top: 1px solid var(--rule);
-                    padding-top: 14px;
-                    margin-top: auto;
-                  "
-                >
-                  <div class="tag-group">
-                    <span class="tag-chip">Spring Boot</span>
-                    <span class="tag-chip">Oracle DB</span>
-                    <span class="tag-chip">RBAC</span>
-                    <span class="tag-chip">1,200+ Users</span>
-                  </div>
-                  <a
-                    href="pages/internship.html"
-                    class="meta bold"
-                    data-cursor="READ"
-                    style="color: var(--stamp)"
-                    >OPEN DISPATCH &rarr;</a
-                  >
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <!-- SECTION 4: THE LAB REPORT (Tech Stack) -->
-        <section
-          id="stack"
-          class="section"
-          style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0"
-        >
-          <div
-            class="newspaper-grid"
-            style="
-              border-bottom: 1px solid var(--rule);
-              padding-bottom: 15px;
-              margin-bottom: 30px;
-            "
-          >
-            <div class="col-span-12">
-              <span class="kicker-label">THE LAB REPORT</span>
-              <h3 class="display-md">Technical Competencies</h3>
-            </div>
-          </div>
-
-          <div class="newspaper-grid">
-            <div class="col-span-4 rv column-bordered">
-              <h4
-                class="heading-md"
-                style="
-                  margin-bottom: 15px;
-                  border-bottom: 1px solid var(--rule);
-                  padding-bottom: 10px;
-                "
-              >
-                Core CS &amp; Languages
-              </h4>
-              <p class="body">
-                C++17, Java, Python, C, SQL, PL/SQL, JavaScript.
+              <h3 class="headline-md font-serif" style="margin-bottom: 8px;">Sentinel-Stream</h3>
+              <p class="body-text" style="font-size: 0.92rem; margin-bottom: 12px;">
+                Memory-bounded streaming anomaly detection engine fusing LightGBM and Fast-Hoeffding trees in <em>O</em>(1) memory with explainable TreeSHAP feature attributions.
               </p>
-              <p class="body" style="margin-top: 10px">
-                Data Structures &amp; Algorithms, OOP, OS, Computer Networks.
+              <div class="work-tags">
+                <span class="tag-chip">LightGBM</span>
+                <span class="tag-chip">FastAPI</span>
+                <span class="tag-chip">TreeSHAP</span>
+                <span class="tag-chip">O(1) Memory</span>
+                <span class="tag-chip">Hoeffding Trees</span>
+              </div>
+            </div>
+            <div class="work-action-row">
+              <span class="meta-text">INFERENCE: SUB-SECOND</span>
+              <a href="pages/sentinel-stream.html" class="work-action-link" data-cursor="READ">
+                READ DISPATCH &rarr;
+              </a>
+            </div>
+          </article>
+
+          <!-- DISPATCH 03: ENCORE -->
+          <article class="work-card" data-cursor="DISPATCH">
+            <div>
+              <div class="work-card-header">
+                <span class="kicker">REAL-TIME PLATFORMS</span>
+                <span class="badge-tag">FULL-STACK &bull; CI/CD</span>
+              </div>
+              <div class="work-media-frame">
+                <img src="images/dispatches/snapseat_art.jpg" alt="Encore Real-Time Seat Reservation Architecture" loading="lazy" />
+              </div>
+              <h3 class="headline-md font-serif" style="margin-bottom: 8px;">Encore</h3>
+              <p class="body-text" style="font-size: 0.92rem; margin-bottom: 12px;">
+                High-concurrency ticket reservation platform featuring OCC double-booking prevention, FairHold™ 15-min TTL holds, live Socket.io seat matrix, BullMQ FIFO waitlists, and dual-phase AWS CI/CD to full-stack monorepo deployment.
+              </p>
+              <div class="work-tags">
+                <span class="tag-chip">Next.js 19</span>
+                <span class="tag-chip">NestJS</span>
+                <span class="tag-chip">PostgreSQL (Neon)</span>
+                <span class="tag-chip">Redis &bull; BullMQ</span>
+                <span class="tag-chip">Socket.io</span>
+                <span class="tag-chip">AWS CI/CD</span>
+              </div>
+            </div>
+            <div class="work-action-row">
+              <a href="https://tickets.ajiteshsharma.dev" target="_blank" rel="noopener noreferrer" class="pill-btn menu-pill-btn" style="font-size: 0.65rem; padding: 4px 10px;" data-cursor="LIVE">
+                LIVE DEMO &nearr;
+              </a>
+              <a href="pages/encore.html" class="work-action-link" data-cursor="READ">
+                READ DISPATCH &rarr;
+              </a>
+            </div>
+          </article>
+
+          <!-- DISPATCH 04: HINDALCO LOGISTICS -->
+          <article class="work-card" data-cursor="DISPATCH">
+            <div>
+              <div class="work-card-header">
+                <span class="kicker">ENTERPRISE PRACTICUM</span>
+                <span class="badge-tag">1,200+ USERS</span>
+              </div>
+              <div class="work-media-frame">
+                <img src="images/dispatches/workforce_art.jpg" alt="Workforce & Healthcare Logistics Broadhseet Art" loading="lazy" />
+              </div>
+              <h3 class="headline-md font-serif" style="margin-bottom: 8px;">Workforce &amp; Healthcare Logistics</h3>
+              <p class="body-text" style="font-size: 0.92rem; margin-bottom: 12px;">
+                Production clinical queue and workforce scheduling platform deployed at Hindalco Industries (Aditya Birla Group), orchestrating shifts for 1,200+ site personnel.
+              </p>
+              <div class="work-tags">
+                <span class="tag-chip">Spring Boot</span>
+                <span class="tag-chip">Oracle DB</span>
+                <span class="tag-chip">RBAC Security</span>
+                <span class="tag-chip">1,200+ Personnel</span>
+                <span class="tag-chip">Clinical Queue</span>
+              </div>
+            </div>
+            <div class="work-action-row">
+              <span class="meta-text">DEPLOYED: PRODUCTION</span>
+              <a href="pages/internship.html" class="work-action-link" data-cursor="READ">
+                READ DISPATCH &rarr;
+              </a>
+            </div>
+          </article>
+
+          <!-- DISPATCH 05: NUTRIVISION PRO -->
+          <article class="work-card" data-cursor="DISPATCH">
+            <div>
+              <div class="work-card-header">
+                <span class="kicker">APPLIED VISION</span>
+                <span class="badge-tag">LIVE APP</span>
+              </div>
+              <div class="work-media-frame" style="display: flex; align-items: center; justify-content: center; background: #1C1B19; color: #EDE8DF;">
+                <div style="text-align: center; padding: 20px;">
+                  <span class="meta-text" style="color: var(--accent-red); font-size: 0.72rem; display: block; margin-bottom: 6px;">GEMINI VISION &bull; LIVE DEPLOYMENT</span>
+                  <span class="font-serif" style="font-size: 1.6rem; font-weight: 800; display: block;">NUTRIVISION PRO</span>
+                  <span class="meta-text" style="font-size: 0.68rem; color: #888;">AI DIETARY INTELLIGENCE</span>
+                </div>
+              </div>
+              <h3 class="headline-md font-serif" style="margin-bottom: 8px;">NutriVision Pro</h3>
+              <p class="body-text" style="font-size: 0.92rem; margin-bottom: 12px;">
+                Multimodal visual nutrition intelligence platform leveraging Gemini Vision APIs for real-time macronutrient breakdown and volume estimations via Next.js and FastAPI.
+              </p>
+              <div class="work-tags">
+                <span class="tag-chip">Next.js</span>
+                <span class="tag-chip">Gemini Vision</span>
+                <span class="tag-chip">FastAPI</span>
+                <span class="tag-chip">PostgreSQL</span>
+              </div>
+            </div>
+            <div class="work-action-row">
+              <span class="meta-text">STATUS: LIVE PRODUCTION</span>
+              <a href="pages/nutrivision.html" class="work-action-link" data-cursor="READ">
+                READ DISPATCH &rarr;
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         CREDIBILITY & METRICS LEDGER
+         ======================================================================== -->
+    <section class="ledger-strip" aria-label="Verified Credentials & Metrics">
+      <div class="site-wrapper">
+        <div class="ledger-grid">
+          <div class="ledger-cell">
+            <div class="ledger-num" data-count="3">3</div>
+            <div class="ledger-label">Indian Patents Filed</div>
+          </div>
+          <div class="ledger-cell">
+            <div class="ledger-num" data-count="1">1</div>
+            <div class="ledger-label">IEEE COMPSAC Paper</div>
+          </div>
+          <div class="ledger-cell">
+            <div class="ledger-num" data-count="1200" data-suffix="+">1,200+</div>
+            <div class="ledger-label">Personnel Served</div>
+          </div>
+          <div class="ledger-cell">
+            <div class="ledger-num" data-count="100" data-suffix="+">100+</div>
+            <div class="ledger-label">LeetCode &amp; DSA Challenges</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         ACADEMIC FOUNDATION & INDUSTRIAL SERVICE RECORD
+         ======================================================================== -->
+    <section class="records-section" id="service" aria-label="Academic Foundation and Industrial Practicum Record">
+      <div class="site-wrapper">
+        <div class="section-heading-row" style="margin-bottom: 24px; border-bottom: 1px solid var(--rule); padding-bottom: 14px;">
+          <div>
+            <span class="kicker">SCHOLASTIC COMMISSION &bull; INDUSTRIAL PRACTICUM</span>
+            <h2 class="headline-xl font-serif">Academic Foundation &amp; Service</h2>
+          </div>
+          <div class="meta-text" style="display: flex; align-items: center; gap: 8px;">
+            <span class="pulse-dot"></span>
+            <span>VERIFIED RECORD &bull; BATCH 2023 &ndash; 2027</span>
+          </div>
+        </div>
+
+        <div class="service-records-grid">
+
+          <!-- Left Card: Academic Matriculation Letter with 3D Vellore Stamp -->
+          <article class="academic-letter-card" data-cursor="ACADEMIA" aria-label="Academic Matriculation Record - Vellore Institute of Technology">
+            
+            <!-- 3D Effect Vellore Rubber Stamp Overlay -->
+            <div class="stamp-3d-vellore" data-stamp-vellore data-cursor="STAMP" aria-label="Official 3D Vellore Rubber Stamp">
+              <div class="stamp-vellore-disc">
+                <svg viewBox="0 0 160 160" class="stamp-svg" aria-hidden="true">
+                  <defs>
+                    <path id="velloreArcTop" d="M 22,80 A 58,58 0 1,1 138,80" />
+                    <path id="velloreArcBottom" d="M 138,80 A 58,58 0 0,1 22,80" />
+                  </defs>
+                  <circle cx="80" cy="80" r="74" class="stamp-ring stamp-ring-outer" />
+                  <circle cx="80" cy="80" r="67" class="stamp-ring stamp-ring-teeth" />
+                  <circle cx="80" cy="80" r="54" class="stamp-ring stamp-ring-inner" />
+                  <circle cx="80" cy="80" r="35" class="stamp-ring stamp-ring-core" />
+                  <text class="stamp-arc-text">
+                    <textPath href="#velloreArcTop" startOffset="50%" text-anchor="middle">
+                      VELLORE INST OF TECH
+                    </textPath>
+                  </text>
+                  <text class="stamp-arc-text stamp-arc-sub">
+                    <textPath href="#velloreArcBottom" startOffset="50%" text-anchor="middle">
+                      ★ VELLORE CAMPUS ★
+                    </textPath>
+                  </text>
+                  <text x="80" y="73" class="stamp-center-title" text-anchor="middle">OFFICIAL</text>
+                  <text x="80" y="86" class="stamp-center-batch" text-anchor="middle">2023–2027</text>
+                  <text x="80" y="98" class="stamp-center-spec" text-anchor="middle">INFOSEC</text>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Letterhead -->
+            <div class="academic-letterhead">
+              <div class="letterhead-crest-meta">
+                <div class="letterhead-crest-box">VIT</div>
+                <div>
+                  <h3 class="letterhead-uni font-serif">Vellore Institute of Technology</h3>
+                  <div class="letterhead-sub meta-text">VELLORE CAMPUS &bull; TAMIL NADU, INDIA</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Letter Body -->
+            <div class="academic-letter-content">
+              <div class="academic-cohort-strip">
+                <span class="meta-text">COHORT BATCH:</span>
+                <span class="academic-batch-pill font-mono">2023 &ndash; 2027</span>
+                <span class="meta-text">&bull; UNDERGRADUATE</span>
+              </div>
+
+              <div class="academic-degree-highlight">
+                <div class="degree-prefix">DEGREE OF STUDY:</div>
+                <h4 class="degree-main font-serif">Bachelor of Technology (B.Tech)</h4>
+                <div class="degree-discipline font-mono">
+                  Computer Science and Engineering<br />
+                  <span class="spec-accent">(Spec. Information Security)</span>
+                </div>
+              </div>
+
+              <div class="academic-spec-grid">
+                <div class="spec-cell">
+                  <span class="spec-label meta-text">INSTITUTION</span>
+                  <span class="spec-val">Vellore Institute of Technology, Vellore</span>
+                </div>
+                <div class="spec-cell">
+                  <span class="spec-label meta-text">DEPARTMENT</span>
+                  <span class="spec-val">School of Computer Science &amp; Engg.</span>
+                </div>
+                <div class="spec-cell">
+                  <span class="spec-label meta-text">SPECIALIZATION</span>
+                  <span class="spec-val">Information Security (InfoSec)</span>
+                </div>
+                <div class="spec-cell">
+                  <span class="spec-label meta-text">STATUS</span>
+                  <span class="spec-val" style="color: var(--accent-red); font-weight: 700;">Active Scholar (Batch 2023–27)</span>
+                </div>
+              </div>
+
+              <p class="academic-manifesto-brief body-text">
+                Rigorous 4-year undergraduate curriculum specializing in low-level systems architectures, cryptographic protocol implementations, network security telemetry, and adversarial AI safety models.
               </p>
             </div>
-            <div class="col-span-4 rv column-bordered">
-              <h4
-                class="heading-md"
-                style="
-                  margin-bottom: 15px;
-                  border-bottom: 1px solid var(--rule);
-                  padding-bottom: 10px;
-                "
-              >
-                Systems &amp; Security
-              </h4>
-              <p class="body">
-                DPI, JA4+, YARA, Wireshark, eBPF, Linux, Autopsy, Metasploit.
+
+            <div class="academic-letter-footer">
+              <span class="meta-text">RECORD REF: VIT-2023-27-BTECH-CSE-IS</span>
+              <span class="stamp-hint meta-text"><span style="color:var(--accent-red); font-weight: 700;">CLICK CARD ANYWHERE</span> TO STAMP</span>
+            </div>
+          </article>
+
+          <!-- Right Card: Perforated Industrial Practicum Ticket (Hindalco) -->
+          <article class="ticket-container" data-cursor="TICKET" aria-label="Industrial Practicum Record - Hindalco Industries">
+            <div class="ticket-header">
+              <div>
+                <span class="kicker">SERVICE RECORD &bull; INDUSTRIAL PRACTICUM</span>
+                <h3 class="headline-md font-serif" style="margin-top: 4px;">Hindalco Industries Ltd. (Aditya Birla Group)</h3>
+              </div>
+              <span class="badge-tag">ENGINEERING RECORD</span>
+            </div>
+
+            <p class="ticket-synopsis">
+              Engineered and deployed a digitized clinical triage and workforce scheduling platform at Hindalco Industries. Implemented multi-tier Role-Based Access Control (RBAC) ensuring strict data segregation across administrative hierarchies, supporting shift orchestration and automated attendance audits for over 1,200 site personnel.
+            </p>
+
+            <div class="ticket-footer">
+              <div>
+                <span class="meta-text" style="font-weight: 700; color: var(--ink-solid);">SOFTWARE ENGINEERING INTERN &bull; MAY &ndash; JUL 2026</span>
+                <span class="meta-text" style="display: block; margin-top: 2px;">ROLE-BASED ACCESS CONTROL &bull; ORACLE RDBMS &bull; SPRING BOOT</span>
+              </div>
+              <a href="pages/internship.html" class="pill-btn menu-pill-btn" data-cursor="VIEW">
+                VIEW FULL EVALUATION &rarr;
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         PATENTS & RESEARCH REGISTRY
+         ======================================================================== -->
+    <section class="research-section" id="patents" aria-label="Patents and Published Research">
+      <div class="site-wrapper">
+        <div style="margin-bottom: 28px; border-bottom: 1px solid var(--rule); padding-bottom: 14px;">
+          <span class="kicker">INTELLECTUAL PROPERTY &amp; PROCEEDINGS</span>
+          <h2 class="headline-xl font-serif">Patents &amp; Research</h2>
+        </div>
+
+        <div class="research-grid">
+
+          <!-- Left: IEEE COMPSAC Publication -->
+          <div class="research-card">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span class="kicker">CONFERENCE</span>
+                <span class="badge-tag" style="background: var(--accent-red); color: #fff; border-color: var(--accent-red);">PUBLISHED &bull; IEEE XPLORE</span>
+              </div>
+              <h3 class="headline-md font-serif" style="margin-bottom: 12px;">
+                Alignment Paradox: Emotional Flattening and Social Safety Risks in Proactive AI Agents
+              </h3>
+              <p class="meta-text" style="font-weight: 700; margin-bottom: 10px; color: var(--accent-red); letter-spacing: 0.04em;">
+                IEEE COMPSAC 2026 STUDENT SYMPOSIUM
+              </p>
+              <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-soft); margin-bottom: 14px; padding: 10px 14px; background: var(--bg-paper); border: 1px dashed var(--rule); border-radius: var(--radius-sm); line-height: 1.6;">
+                <div><strong style="color: var(--ink-solid);">Publication Status:</strong> Published; added to IEEE Xplore 20 Aug 2026</div>
+                <div><strong style="color: var(--ink-solid);">DOI:</strong> <a href="https://doi.org/10.1109/COMPSAC69091.2026.00478" target="_blank" rel="noopener noreferrer" style="color: var(--accent-red); text-decoration: underline; word-break: break-all; font-weight: 600;">10.1109/COMPSAC69091.2026.00478</a></div>
+              </div>
+              <p class="body-text" style="line-height: 1.7; margin-bottom: 18px;">
+                Investigates the counter-intuitive sociotechnical vulnerabilities created when proactive agentic models are over-constrained, causing communicative degradation under mission-critical human oversight.
               </p>
             </div>
-            <div class="col-span-4 rv">
-              <h4
-                class="heading-md"
-                style="
-                  margin-bottom: 15px;
-                  border-bottom: 1px solid var(--rule);
-                  padding-bottom: 10px;
-                "
-              >
-                Backend, Cloud &amp; AI
-              </h4>
-              <p class="body">
-                Spring Boot, FastAPI, Docker, Kubernetes, Jenkins, AWS,
-                PostgreSQL, REST, WebSockets.
-              </p>
-              <p class="body" style="margin-top: 10px">
-                PyTorch, LightGBM, Scikit-Learn, TreeSHAP.
-              </p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <a href="https://doi.org/10.1109/COMPSAC69091.2026.00478" target="_blank" rel="noopener noreferrer" class="pill-btn menu-pill-btn" data-cursor="EXTERNAL" aria-label="View IEEE Xplore Paper">
+                IEEE XPLORE PAPER &nearr;
+              </a>
+              <a href="pages/paper-compsac.html" class="pill-btn" data-cursor="READ" aria-label="Read Research Dossier">
+                RESEARCH DOSSIER &rarr;
+              </a>
             </div>
           </div>
-        </section>
 
-        <!-- SECTION 5: THE SERVICE RECORD (Experience) -->
-        <section
-          id="experience"
-          class="section"
-          style="padding: 40px 0; border-bottom: 2px solid var(--rule-dark)"
-        >
-          <div class="newspaper-grid">
-            <!-- Left Column (Service Record) -->
-            <div class="col-span-12 column-bordered">
-              <div
-                style="
-                  border-bottom: 4px solid var(--rule-dark);
-                  padding-bottom: 10px;
-                  margin-bottom: 30px;
-                "
-              >
-                <span class="kicker-label">THE SERVICE RECORD</span>
-                <h3 class="heading-lg uppercase" style="font-size: 28px">
-                  Professional Experience
-                </h3>
+          <!-- Right: 3 Indian Patent Applications -->
+          <div class="research-card">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                <span class="kicker">INDIAN PATENT OFFICE FILINGS</span>
+                <span class="badge-tag">3 APPLICATIONS</span>
               </div>
 
-              <div class="rv" style="margin-bottom: 30px">
-                <h4
-                  class="heading-md"
-                  style="margin-bottom: 5px; font-size: 22px"
-                >
-                  Hindalco Industries Ltd.
-                </h4>
-                <p class="meta" style="margin-bottom: 15px; font-weight: bold">
-                  SOFTWARE ENGINEERING INTERN &middot; MAY 2026 - JUL 2026
-                </p>
-                <p class="body-lg" style="margin-bottom: 15px">
-                  Architected and deployed a digitized workforce and healthcare queue logistics
-                  system, migrating plant operations from legacy manual rosters. Implemented
-                  multi-tier Role-Based Access Control (RBAC) ensuring strict data
-                  segregation across administrative hierarchies while streamlining daily
-                  shift allocation and clinical throughput for over 1,200 site personnel.
-                </p>
-
-                <!-- Practicum Endorsement Quote -->
-                <blockquote
-                  class="rv"
-                  style="background: var(--paper-warm); padding: 18px 22px; margin: 24px 0 10px 0; border: 1px solid var(--rule); border-left: 4px solid var(--stamp);"
-                >
-                  <p
-                    class="body-lg italic"
-                    style="margin-bottom: 8px; color: var(--ink); line-height: 1.6;"
-                  >
-                    &ldquo;Ajitesh demonstrated rare technical maturity—designing and deploying a resilient, production-ready queue management architecture that streamlined clinical throughput for hundreds of daily patients.&rdquo;
-                  </p>
-                  <cite
-                    class="meta bold"
-                    style="font-style: normal; color: var(--ink-soft); display: block;"
-                  >
-                    &mdash; INDUSTRIAL PRACTICUM EVALUATION &middot; HINDALCO INDUSTRIES (ADITYA BIRLA GROUP)
-                  </cite>
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- SECTION 6: ACADEMIA & EDUCATION -->
-        <section
-          id="education"
-          class="section"
-          style="padding: 40px 0; border-bottom: 2px solid var(--rule-dark)"
-        >
-          <div class="newspaper-grid">
-            <div class="col-span-12 column-bordered">
-              <div
-                style="
-                  border-bottom: 4px solid var(--rule-dark);
-                  padding-bottom: 10px;
-                  margin-bottom: 30px;
-                "
-              >
-                <span class="kicker-label">ACADEMIA</span>
-                <h3 class="heading-lg uppercase" style="font-size: 28px">
-                  Education
-                </h3>
-              </div>
-
-              <div class="rv">
-                <h4
-                  class="heading-md"
-                  style="margin-bottom: 5px; font-size: 22px"
-                >
-                  Vellore Institute of Technology (VIT), Vellore
-                </h4>
-                <p class="meta" style="margin-bottom: 15px; font-weight: bold">
-                  B.TECH CSE (INFORMATION SECURITY) &middot; EXPECTED JUL 2027
-                </p>
-                <p class="body-lg">
-                  Pursuing rigorous coursework in Operating Systems, Network
-                  Security, Cryptography, and Advanced Data Structures. Core
-                  member of ACM-VIT.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- SECTION 7: PUBLISHED FINDINGS (Patents & Papers) -->
-        <section id="publications" class="section" style="padding: 40px 0">
-          <div class="newspaper-grid">
-            <div class="col-span-12">
-              <div
-                style="
-                  border-bottom: 4px solid var(--rule-dark);
-                  padding-bottom: 10px;
-                  margin-bottom: 30px;
-                "
-              >
-                <span class="kicker-label">PUBLISHED FINDINGS</span>
-                <h3 class="heading-lg uppercase" style="font-size: 28px">
-                  Research &amp; Patents
-                </h3>
-              </div>
-            </div>
-
-            <div class="col-span-6 column-bordered rv">
-              <div
-                style="
-                  border: 2px solid var(--rule-dark);
-                  padding: 25px;
-                  background: var(--paper-warm);
-                "
-              >
-                <span
-                  class="meta"
-                  style="
-                    color: var(--paper-bright);
-                    background: var(--stamp);
-                    padding: 4px 8px;
-                    font-weight: bold;
-                  "
-                  >ACCEPTED</span
-                >
-                <h4 class="heading-md" style="margin: 15px 0; font-size: 22px">
-                  The Alignment Paradox: Emotional Flattening and Social Safety
-                  Risks in Proactive AI Agents
-                </h4>
-                <p class="meta" style="margin-bottom: 15px; font-weight: bold">
-                  IEEE COMPSAC 2026 STUDENT SYMPOSIUM
-                </p>
-                <p class="body-lg">
-                  This paper investigates the unforeseen consequences of
-                  over-aligning proactive AI agents to maximize safety at the
-                  expense of social utility.
-                </p>
-                <a
-                  href="pages/paper-compsac.html"
-                  class="editorial-btn editorial-btn-solid"
-                  style="margin-top: 20px;"
-                  >READ FULL ANALYSIS &rarr;</a
-                >
-              </div>
-            </div>
-
-            <div class="col-span-6 rv">
-              <h4
-                class="heading-md"
-                style="
-                  margin-bottom: 15px;
-                  border-bottom: 2px solid var(--rule-dark);
-                  padding-bottom: 10px;
-                  font-size: 22px;
-                "
-              >
-                Filed Indian Patents
-              </h4>
-              <ul style="list-style: none; padding: 0">
-                <li
-                  style="
-                    margin-bottom: 20px;
-                    border-bottom: 1px solid var(--rule);
-                    padding-bottom: 15px;
-                  "
-                >
-                  <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
-                    <span
-                      class="meta"
-                      style="
-                        color: var(--stamp);
-                        border: 1px solid var(--stamp);
-                        padding: 2px 6px;
-                        font-size: 11px;
-                        font-weight: bold;
-                      "
-                      >FILED</span
-                    >
-                    <span class="meta" style="font-weight: bold; color: var(--ink-soft);">App No: 202641072750 &middot; 2026</span>
+              <ul class="patent-list">
+                <li class="patent-item">
+                  <div class="patent-meta-row">
+                    <span class="meta-text" style="font-weight: 700; color: var(--accent-red);">PATENT &bull; 2026</span>
+                    <span class="meta-text">&bull; APP NO: 202641072750</span>
                   </div>
-                  <p class="body-lg bold" style="margin-top: 4px; line-height: 1.4;">
+                  <h4 class="patent-title">
                     Cognitive-State-Aware Adaptive Information Security Enforcement System
-                  </p>
+                  </h4>
                 </li>
-                <li
-                  style="
-                    margin-bottom: 20px;
-                    border-bottom: 1px solid var(--rule);
-                    padding-bottom: 15px;
-                  "
-                >
-                  <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
-                    <span
-                      class="meta"
-                      style="
-                        color: var(--stamp);
-                        border: 1px solid var(--stamp);
-                        padding: 2px 6px;
-                        font-size: 11px;
-                        font-weight: bold;
-                      "
-                      >FILED</span
-                    >
-                    <span class="meta" style="font-weight: bold; color: var(--ink-soft);">App No: 202541027783 &middot; 2025</span>
+
+                <li class="patent-item">
+                  <div class="patent-meta-row">
+                    <span class="meta-text" style="font-weight: 700; color: var(--accent-red);">PATENT &bull; 2025</span>
+                    <span class="meta-text">&bull; APP NO: 202541027783</span>
                   </div>
-                  <p class="body-lg bold" style="margin-top: 4px; line-height: 1.4;">
+                  <h4 class="patent-title">
                     Multi-Domain Feature Fusion Based Deep Learning System for Audio Deepfake Detection
-                  </p>
+                  </h4>
                 </li>
-                <li style="margin-bottom: 20px">
-                  <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
-                    <span
-                      class="meta"
-                      style="
-                        color: var(--stamp);
-                        border: 1px solid var(--stamp);
-                        padding: 2px 6px;
-                        font-size: 11px;
-                        font-weight: bold;
-                      "
-                      >FILED</span
-                    >
-                    <span class="meta" style="font-weight: bold; color: var(--ink-soft);">App No: 202541011318 &middot; 2025</span>
+
+                <li class="patent-item">
+                  <div class="patent-meta-row">
+                    <span class="meta-text" style="font-weight: 700; color: var(--accent-red);">PATENT &bull; 2025</span>
+                    <span class="meta-text">&bull; APP NO: 202541011318</span>
                   </div>
-                  <p class="body-lg bold" style="margin-top: 4px; line-height: 1.4;">
+                  <h4 class="patent-title">
                     System for Lip-Sync Authenticity Detection Using Spatial, Spectral, and Feature Fusion
-                  </p>
+                  </h4>
                 </li>
               </ul>
-              <a
-                href="pages/patents.html"
-                class="editorial-btn editorial-btn-solid"
-                style="margin-top: 15px;"
-                >VIEW PATENT ARCHITECTURES &rarr;</a
-              >
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <!-- FOOTER / CONTACT -->
-      <footer
-        id="contact"
-        class="section"
-        style="border-top: 4px solid var(--rule-dark); padding: 40px 0"
-      >
-        <div class="newspaper-grid">
-          <div class="col-span-12 text-center rv">
-            <h2 class="display-lg" style="margin-bottom: 20px">
-              Available for Action.
-            </h2>
-            <p
-              class="body-lg"
-              style="max-width: 600px; margin: 0 auto 30px auto"
-            >
-              Correspondence accepted via electronic mail, or physical courier
-              to Vellore, India.
-            </p>
-
-            <div class="action-btn-group">
-              <a
-                href="mailto:13ajitesh@gmail.com"
-                class="meta bold action-btn-link"
-                >13AJITESH@GMAIL.COM</a
-              >
-              <a
-                href="https://linkedin.com/in/ajitesh-sharma"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="meta bold action-btn-link"
-                >LINKEDIN <span class="external-icon">&#8599;</span></a
-              >
-              <a
-                href="https://github.com/AJ1312"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="meta bold action-btn-link"
-                >GITHUB <span class="external-icon">&#8599;</span></a
-              >
             </div>
 
-            <p class="meta uppercase">
-              &copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash;
-              Vol. I
-            </p>
+            <div style="margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--rule-light);">
+              <a href="pages/patents.html" class="pill-btn" data-cursor="PATENT">
+                VIEW PATENT ARCHITECTURES &rarr;
+              </a>
+            </div>
           </div>
+
         </div>
-      </footer>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       COLOSSAL EDITORIAL FOOTER
+       ======================================================================== -->
+  <footer class="paper-footer" id="contact">
+    <div class="site-wrapper">
+      <span class="kicker" style="margin-bottom: 14px;">AVAILABLE FOR PRODUCTION &amp; RESEARCH ROLES</span>
+      <h2 class="footer-invitation">
+        Let's Build Something Resilient.
+      </h2>
+
+      <div class="footer-email-block">
+        <a href="mailto:13ajitesh@gmail.com" class="footer-action-button" data-cursor="EMAIL">
+          13AJITESH@GMAIL.COM &nbsp;&rarr;
+        </a>
+        <div class="footer-email-sub-buttons">
+          <a href="https://linkedin.com/in/ajitesh-sharma" target="_blank" rel="noopener noreferrer" class="pill-btn footer-sub-btn" data-cursor="LINKEDIN" aria-label="LinkedIn Profile">
+            <svg class="nav-svg" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.9 0-1.63.73-1.63 1.63s.73 1.63 1.63 1.63 1.63-.73 1.63-1.63-.73-1.63-1.63-1.63Z"/>
+            </svg>
+            <span class="btn-text">LINKEDIN &nearr;</span>
+          </a>
+          <a href="https://github.com/AJ1312" target="_blank" rel="noopener noreferrer" class="pill-btn footer-sub-btn" data-cursor="GITHUB" aria-label="GitHub Profile">
+            <svg class="nav-svg" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+              <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+            </svg>
+            <span class="btn-text">GITHUB &nearr;</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-social-strip">
+        <a href="pages/certifications.html" class="social-link-item" data-cursor="CREDENTIALS">
+          CREDENTIALS &amp; CERTIFICATIONS &rarr;
+        </a>
+        <a href="pages/patents.html" class="social-link-item" data-cursor="PATENTS">
+          PATENT REGISTRY &rarr;
+        </a>
+      </div>
+
+      <div class="footer-copyright">
+        &copy; 2026 AJITESH SHARMA &middot; THE SHARMA DISPATCH &middot; HAND-SET IN PLAYFAIR &amp; JETBRAINS MONO &middot; VELLORE, INDIA
+      </div>
     </div>
-    <!-- End container -->
+  </footer>
 
-    <svg class="sr-only" aria-hidden="true" style="display: none">
-      <defs>
-        <filter id="fm-rough">
-          <feTurbulence
-            type="turbulence"
-            baseFrequency="0.02"
-            numOctaves="3"
-            result="noise"
-          />
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="noise"
-            scale="2"
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-        </filter>
-      </defs>
-    </svg>
+  <!-- ========================================================================
+       FULLSCREEN OVERLAY MENU (CLEAN TYPOGRAPHY WITHOUT NUMBERS)
+       ======================================================================== -->
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="menu-overlay-header">
+      <span class="meta-text" style="color: rgba(238, 233, 224, 0.6);">THE SHARMA DISPATCH &bull; DIRECTORY</span>
+      <button type="button" class="menu-close-btn" data-menu-close data-cursor="CLOSE">
+        CLOSE &times;
+      </button>
+    </div>
 
-    <script src="js/main.js" defer></script>
-    <script src="js/animations.js" defer></script>
-  </body>
+    <nav class="menu-nav-links">
+      <a href="#top" class="menu-nav-item" data-cursor="HOME">INDEX</a>
+      <a href="#manifesto" class="menu-nav-item" data-cursor="ABOUT">THE MANIFESTO</a>
+      <a href="#dispatches" class="menu-nav-item" data-cursor="WORKS">SELECTED DISPATCHES</a>
+      <a href="#service" class="menu-nav-item" data-cursor="SERVICE">ACADEMIA &amp; SERVICE</a>
+      <a href="#patents" class="menu-nav-item" data-cursor="PATENTS">PATENTS &amp; RESEARCH</a>
+      <a href="#contact" class="menu-nav-item" data-cursor="CONTACT">CORRESPONDENCE</a>
+    </nav>
+
+    <div class="menu-overlay-footer">
+      <span>VELLORE, IN &bull; 12.9165&deg; N, 79.1325&deg; E</span>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <a href="https://linkedin.com/in/ajitesh-sharma" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+        <a href="https://github.com/AJ1312" target="_blank" rel="noopener noreferrer">GITHUB</a>
+        <a href="mailto:13ajitesh@gmail.com">EMAIL</a>
+      </div>
+    </div>
+  </div>
+
+</body>
 </html>

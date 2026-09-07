@@ -60,7 +60,8 @@ body::before {
   mix-blend-mode: multiply;
 }
 
-[data-theme='dark'] body::before {
+[data-theme='dark'] body::before,
+[data-theme='night'] body::before {
   opacity: 0.2;
   mix-blend-mode: overlay;
   background-image: repeating-radial-gradient(
@@ -159,18 +160,19 @@ h6 {
   --dur-slow: 0.8s;
 }
 
-[data-theme='dark'] {
-  /* Colors - Dark Theme */
-  --paper: #121212;
-  --paper-warm: #1A1A1A;
-  --paper-bright: #222222;
-  --ink: #E8E6E0;
-  --ink-soft: #A0A0A0;
-  --ink-faint: #666666;
-  --stamp: #FF4D6A;
-  --rule: #333333;
-  --rule-dark: #E8E6E0;
-  --highlight: rgba(255, 77, 106, 0.15);
+[data-theme='dark'],
+[data-theme='night'] {
+  /* Colors - Dark Theme / Night Edition (Antique Obsidian Broadsheet) */
+  --paper: #131312;
+  --paper-warm: #1C1B19;
+  --paper-bright: #24221F;
+  --ink: #EBE6DD;
+  --ink-soft: #B5B0A6;
+  --ink-faint: #7A766F;
+  --stamp: #FF5252;
+  --rule: #3E3B35;
+  --rule-dark: #B5B0A6;
+  --highlight: rgba(255, 82, 82, 0.16);
 }
 
 ::selection {
@@ -178,7 +180,8 @@ h6 {
   color: var(--paper);
 }
 
-[data-theme='dark'] ::selection {
+[data-theme='dark'] ::selection,
+[data-theme='night'] ::selection {
   background-color: var(--ink);
   color: var(--paper);
 }
@@ -1214,7 +1217,8 @@ article:hover .dispatch-index-pill {
   transition: transform 0.5s var(--ease-out), filter 0.5s ease;
 }
 
-[data-theme='dark'] .dispatch-card__image {
+[data-theme='dark'] .dispatch-card__image,
+[data-theme='night'] .dispatch-card__image {
   mix-blend-mode: normal;
   opacity: 0.8;
 }

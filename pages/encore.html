@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encore — High-Concurrency Ticket Reservation Platform | The Sharma Dispatch</title>
+    <link rel="canonical" href="https://ajiteshsharma.dev/pages/encore.html" />
+    <meta name="description" content="Deep-dive engineering report on Encore: high-concurrency ticket reservation engine with Optimistic Concurrency Control (OCC), FairHold 15-min TTL, Socket.io live seat matrix, and dual-phase AWS CI/CD to modern monorepo deployment." />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    
+    <script>
+      if (sessionStorage.getItem('broadsheet_nav_arriving') === 'true') {
+        document.documentElement.classList.add('paper-tear-pending');
+      }
+    </script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/paper-craft.css?v=fluid_20260907_v3">
+    <script src="../js/paper-engine.js?v=fluid_20260907_v3" defer></script>
+    
+    <style>
+        .feature-grid-encore {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .feature-card-encore {
+            background: var(--bg-card);
+            border: 2px solid var(--rule);
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            position: relative;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.06);
+            transition: transform 0.2s var(--ease-paper), box-shadow 0.2s ease;
+        }
+        .feature-card-encore:hover {
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 0px var(--accent-red);
+        }
+        .feature-num {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            letter-spacing: 0.14em;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .feature-title {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--ink-solid);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .phase-badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 2px;
+            margin-bottom: 12px;
+        }
+        .phase-1 {
+            background: rgba(20, 20, 20, 0.08);
+            border: 1px solid var(--rule);
+            color: var(--ink-solid);
+        }
+        .phase-2 {
+            background: var(--accent-soft);
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+        }
+        .spec-table-row {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            border-bottom: 1px dashed var(--rule-light);
+            padding: 10px 0;
+            font-size: 0.88rem;
+        }
+        @media (max-width: 600px) {
+            .spec-table-row {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+        }
+    </style>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="alternate icon" type="image/png" href="../favicon.png">
+</head>
+<body class="newspaper-theme">
+    <!-- TWO PAPER TEARING AWAY TRANSITION & ENTRANCE -->
+    <div id="paperTransitionOverlay" class="paper-tear-overlay" aria-hidden="true">
+      <div class="paper-tear-half paper-tear-left" id="paperTearLeft">
+        <div class="paper-fiber-texture"></div>
+        <div class="paper-laid-lines"></div>
+        <div class="tear-sheet-content tear-content-left">
+          <div class="tear-top-folio font-mono">
+            <span>VOL. 2026 &bull; ISSUE NO. 43</span>
+            <span class="tear-sec-tag">BROADSHEET FOLIO &bull; SEC. A</span>
+          </div>
+          <div class="tear-masthead-wrap">
+            <h1 class="tear-masthead-title font-serif">THE SHARMA</h1>
+            <div class="tear-masthead-sub font-mono">CHRONICLE OF SYSTEMS &bull; DEFENSIVE ARCHITECTURE</div>
+          </div>
+          <div class="tear-ornamental-rule"></div>
+          <div class="tear-columns-grid">
+            <div class="tear-col">
+              <span class="tear-kicker font-mono">SPECIAL REPORT</span>
+              <h2 class="tear-headline font-serif">A Systems Engineer Who Builds Things &mdash; <span style="color: var(--accent-red);">Kernel to Cloud</span></h2>
+              <p class="tear-p font-serif"><span class="tear-dropcap">A</span>s a systems engineer and security researcher at VIT Vellore, I investigate and build software engineered to hold under intense adversarial load.</p>
+              <div class="tear-col-divider"></div>
+              <div class="tear-wire-notice font-mono">VELLORE WIRE &bull; DISPATCH RECEIVED</div>
+            </div>
+            <div class="tear-col tear-col-secondary">
+              <span class="tear-kicker font-mono">CURRICULUM</span>
+              <h3 class="tear-subhead font-serif">Vellore Institute of Technology</h3>
+              <p class="tear-p-sm font-sans">B.Tech Computer Science &amp; Engineering (Spec. Information Security), 2023&ndash;2027.</p>
+              <div class="tear-badge-pill font-mono">VERIFIED ARCHIVAL COPY</div>
+            </div>
+          </div>
+          <div class="tear-bottom-folio font-mono">
+            <span>LEFT SHEET &bull; CONTINUED ON SEC. B</span>
+            <span>EST. 2023 &bull; HAND-SET MONO</span>
+          </div>
+        </div>
+        <svg class="deckle-edge deckle-right" viewBox="0 0 60 1000" preserveAspectRatio="none" aria-hidden="true">
+          <path class="deckle-white-fringe" d="M0,0 L32,0 L24,18 L36,35 L22,58 L38,82 L20,115 L35,138 L24,165 L42,198 L26,225 L38,255 L20,285 L44,325 L24,360 L38,395 L18,430 L45,475 L22,510 L40,545 L20,585 L46,630 L24,665 L41,705 L18,745 L47,790 L23,830 L41,875 L19,915 L48,965 L25,995 L30,1000 L0,1000 Z" fill="#fffdf9"></path>
+          <path class="deckle-face" d="M0,0 L26,0 L18,16 L30,33 L16,55 L32,79 L14,112 L29,135 L18,162 L36,195 L20,222 L32,252 L14,282 L38,322 L18,357 L32,392 L12,427 L39,472 L16,507 L34,542 L14,582 L40,627 L18,662 L35,702 L12,742 L41,787 L17,827 L35,872 L13,912 L42,962 L19,992 L24,1000 L0,1000 Z" fill="#f6f0e2"></path>
+        </svg>
+      </div>
+      <div class="paper-tear-seam" id="tearSeamSeal">
+        <div class="seam-badge" id="tearBadgeBtn" role="button" tabindex="0" aria-label="Tear Broadsheet to Open">
+          <div class="seam-badge-inner">
+            <img src="../images/dispatch_crest.svg" alt="Seal" class="seam-crest" />
+            <span class="seam-title font-serif">THE SHARMA DISPATCH</span>
+            <span class="seam-instruction font-mono">✂ TAP / CLICK TO TEAR OPEN ✂</span>
+          </div>
+        </div>
+      </div>
+      <div class="paper-tear-half paper-tear-right" id="paperTearRight">
+        <div class="paper-fiber-texture"></div>
+        <div class="paper-laid-lines"></div>
+        <div class="tear-sheet-content tear-content-right">
+          <div class="tear-top-folio font-mono">
+            <span class="tear-sec-tag">BROADSHEET FOLIO &bull; SEC. B</span>
+            <span>PRICE: ONE SSH SESSION</span>
+          </div>
+          <div class="tear-masthead-wrap">
+            <h1 class="tear-masthead-title font-serif">DISPATCH</h1>
+            <div class="tear-masthead-sub font-mono">ENGINEERED UNDER ADVERSARIAL RESILIENCE &bull; 2026</div>
+          </div>
+          <div class="tear-ornamental-rule"></div>
+          <div class="tear-columns-grid">
+            <div class="tear-col">
+              <span class="tear-kicker font-mono">RESEARCH DISPATCH</span>
+              <h2 class="tear-headline font-serif">Lock-Free Backends &amp; Applied AI.</h2>
+              <p class="tear-p font-serif"><span class="tear-dropcap">T</span>he boundary between infrastructure and threat landscape has collapsed. Building zero-trust authentication pipelines.</p>
+              <div class="tear-col-divider"></div>
+              <div class="tear-wire-notice font-mono">PATENTS PENDING &bull; 3 FILED INVENTIONS</div>
+            </div>
+            <div class="tear-col tear-col-secondary">
+              <span class="tear-kicker font-mono">CORRESPONDENCE</span>
+              <h3 class="tear-subhead font-serif">Open for Collaboration</h3>
+              <p class="tear-p-sm font-sans">Available for systems engineering and defensive security engagements.</p>
+              <div class="tear-badge-pill font-mono">SEC. B FOLIO VERIFIED</div>
+            </div>
+          </div>
+          <div class="tear-bottom-folio font-mono">
+            <span>RIGHT SHEET &bull; COMPLETE DISPATCH</span>
+            <span>PRESS RUN: 1ST PRINT</span>
+          </div>
+        </div>
+        <svg class="deckle-edge deckle-left" viewBox="0 0 60 1000" preserveAspectRatio="none" aria-hidden="true">
+          <path class="deckle-white-fringe" d="M60,0 L28,0 L36,18 L24,35 L38,58 L22,82 L40,115 L25,138 L36,165 L18,198 L34,225 L22,255 L40,285 L16,325 L36,360 L22,395 L42,430 L15,475 L38,510 L20,545 L40,585 L14,630 L36,665 L19,705 L42,745 L13,790 L37,830 L19,875 L41,915 L12,965 L35,995 L30,1000 L60,1000 Z" fill="#fffdf9"></path>
+          <path class="deckle-face" d="M60,0 L34,0 L42,16 L30,33 L44,55 L28,79 L46,112 L31,135 L42,162 L24,195 L40,222 L28,252 L46,282 L22,322 L42,357 L28,392 L48,427 L21,472 L44,507 L26,542 L46,582 L20,627 L42,662 L25,702 L48,742 L19,787 L43,827 L25,872 L47,912 L18,962 L41,992 L36,1000 L60,1000 Z" fill="#f6f0e2"></path>
+        </svg>
+      </div>
+    </div>
+    <div id="reading-progress-bar" class="reading-progress-bar"></div>
+    <div class="container" style="max-width: 1100px;">
+        
+        <!-- STICKY BROADSHEET TOPBAR -->
+        <div class="paper-topbar" id="top" style="margin-bottom: 20px;">
+          <div class="site-wrapper" style="padding: 0;">
+            <div class="topbar-grid">
+              <div class="topbar-left">
+                <a href="../index.html" class="topbar-brand" data-cursor="BACK" aria-label="Return to Ajitesh Sharma Front Page">
+                  <img src="../images/dispatch_crest.svg" alt="The Sharma Dispatch Crest" class="topbar-brand-crest" />
+                  <span class="topbar-brand-title">&larr;&nbsp; AJITESH SHARMA</span>
+                </a>
+              </div>
+
+              <div class="topbar-right">
+                <a href="../index.html#dispatches" class="pill-btn topbar-desktop-only" data-cursor="WORKS">
+                  SELECTED WORKS
+                </a>
+                <button type="button" class="pill-btn sound-btn" data-sound-toggle data-cursor="SOUND" aria-label="Toggle Sound" aria-pressed="true">
+                  <svg class="nav-svg sound-icon-on" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                  </svg>
+                  <span class="btn-text">AUDIO</span>
+                </button>
+                <button type="button" class="pill-btn" data-edition-toggle data-cursor="THEME" aria-label="Toggle Night Edition">
+                  <svg class="nav-svg moon-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  </svg>
+                  <span class="btn-text theme-text">NIGHT</span>
+                </button>
+                <button type="button" class="pill-btn menu-pill-btn" data-menu-open data-cursor="MENU" aria-label="Open Directory">
+                  <svg class="nav-svg menu-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                  </svg>
+                  <span class="btn-text">MENU</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <main class="dispatch-content">
+            
+            <!-- HERO -->
+            <section class="section" style="border-bottom: 4px solid var(--rule-dark); padding: 40px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <p class="kicker-label rv">DISPATCH C &mdash; FULL-STACK &amp; CLOUD ARCHITECTURE REPORT</p>
+                        <h1 class="display-xl rv" style="margin-bottom: 16px;">Encore</h1>
+                        <p class="display-sm rv" style="max-width: 860px; font-style: italic; margin-bottom: 24px;">
+                          High-Concurrency Real-Time Event Ticket Reservation Platform &amp; Dual-Phase Cloud Deployment
+                        </p>
+                        
+                        <!-- Quick Action Links -->
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px;">
+                          <a href="https://tickets.ajiteshsharma.dev" target="_blank" rel="noopener noreferrer" class="pill-btn menu-pill-btn" data-cursor="LIVE" style="padding: 8px 18px; font-size: 0.78rem;">
+                            LIVE PRODUCTION APP: tickets.ajiteshsharma.dev &nearr;
+                          </a>
+                          <a href="https://github.com/AJ1312/encore-ticket-booking" target="_blank" rel="noopener noreferrer" class="pill-btn" data-cursor="GITHUB" style="padding: 8px 18px; font-size: 0.78rem;">
+                            GITHUB: encore-ticket-booking &nearr;
+                          </a>
+                          <a href="https://github.com/AJ1312/SnapSeat-devops" target="_blank" rel="noopener noreferrer" class="pill-btn" data-cursor="AWS" style="padding: 8px 18px; font-size: 0.78rem;">
+                            PHASE 1 (AWS DEVOPS REPO) &nearr;
+                          </a>
+                        </div>
+                        
+                        <div class="newspaper-grid" style="border-top: 1px solid var(--rule); padding-top: 20px;">
+                            <div class="col-span-4 rv column-bordered">
+                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">LIVE SERVICE URL</p>
+                                <a href="https://tickets.ajiteshsharma.dev" target="_blank" class="body-sm" style="color: var(--stamp); font-weight: bold; text-decoration: underline;">tickets.ajiteshsharma.dev &nearr;</a>
+                            </div>
+                            <div class="col-span-4 rv column-bordered">
+                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">MONOREPO STACK</p>
+                                <p class="body-sm">Next.js 19, NestJS, Neon PostgreSQL, Drizzle ORM</p>
+                            </div>
+                            <div class="col-span-4 rv column-bordered">
+                                <p class="meta" style="margin-bottom: 5px; font-weight: bold;">CONCURRENCY ENGINE</p>
+                                <p class="body-sm">OCC Locks, Socket.io, BullMQ FIFO Workers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INTERACTIVE PRODUCTION PASS DEMONSTRATOR -->
+            <section class="section" style="padding: 24px 0 36px 0; border-bottom: 2px dashed var(--rule);">
+              <div class="newspaper-grid">
+                <div class="col-span-12">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                    <div>
+                      <span class="kicker-label">LIVE SYSTEM ARTIFACT &bull; VERIFIABLE RESERVATION TICKET</span>
+                      <h2 class="font-serif" style="font-size: 1.6rem; margin: 4px 0 0 0; color: var(--ink-solid);">Tactile Production Ticket Pass Simulator</h2>
+                    </div>
+                    <span class="font-mono" style="font-size: 0.72rem; color: var(--ink-soft); background: var(--bg-card); padding: 4px 10px; border: 1px solid var(--rule); border-radius: 2px;">
+                      BROADSHEET PASS NO. ENC-2026-88
+                    </span>
+                  </div>
+
+                  <div class="encore-ticket-pass">
+                    <div class="ticket-main-body">
+                      <div class="ticket-header-row">
+                        <span class="ticket-fest-title font-serif">ENCORE EVENT RESERVATION ENGINE</span>
+                        <span class="ticket-occ-badge font-mono"><span class="ticket-pulse-dot"></span> OCC v4.2 LOCK: ACTIVE</span>
+                      </div>
+                      <div class="ticket-headline font-serif">Adversarial Systems Architecture Colloquium</div>
+                      <p class="body-sm" style="color: var(--ink-soft); margin-bottom: 12px; font-size: 0.85rem;">
+                        Held atomically via Optimistic Concurrency Control with distributed 15-min FairHold™ TTL in Upstash Redis.
+                      </p>
+                      <div class="ticket-details-grid">
+                        <div class="ticket-detail-item">
+                          <span class="label font-mono">RESERVATION HOLD TTL</span>
+                          <span class="val countdown-display" id="encoreCountdown">14:59</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                          <span class="label font-mono">SEAT MATRIX</span>
+                          <span class="val font-mono">SEC A &bull; ROW 01 &bull; SEAT 14</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                          <span class="label font-mono">TRANSACTION MODE</span>
+                          <span class="val font-mono">ACID &bull; SKIP LOCKED</span>
+                        </div>
+                        <div class="ticket-detail-item">
+                          <span class="label font-mono">SIGNATURE HASH</span>
+                          <span class="val font-mono">0x7F2B...E94A</span>
+                        </div>
+                      </div>
+                      <div class="ticket-footer-note font-mono">
+                        <span>HOSTED: <a href="https://tickets.ajiteshsharma.dev" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: var(--accent-red); font-weight: bold;">tickets.ajiteshsharma.dev &nearr;</a></span>
+                        <span class="ticket-tag-accent">ZERO RACE CONDITIONS</span>
+                      </div>
+                    </div>
+                    <div class="ticket-stub">
+                      <div class="ticket-notch-top"></div>
+                      <div class="ticket-notch-bottom"></div>
+                      <div class="ticket-qr-box">
+                        <svg viewBox="0 0 80 80" width="76" height="76" aria-label="Pass QR Code" style="display: block;">
+                          <rect width="80" height="80" fill="#ffffff" />
+                          <path d="M8,8 h24 v24 h-24 z M12,12 h16 v16 h-16 z M16,16 h8 v8 h-8 z" fill="#120e0a"/>
+                          <path d="M48,8 h24 v24 h-24 z M52,12 h16 v16 h-16 z M56,16 h8 v8 h-8 z" fill="#120e0a"/>
+                          <path d="M8,48 h24 v24 h-24 z M12,52 h16 v16 h-16 z M16,56 h8 v8 h-8 z" fill="#120e0a"/>
+                          <rect x="36" y="10" width="8" height="8" fill="#c9342b" />
+                          <rect x="36" y="24" width="8" height="8" fill="#120e0a" />
+                          <rect x="36" y="38" width="8" height="8" fill="#c9342b" />
+                          <rect x="10" y="38" width="8" height="8" fill="#120e0a" />
+                          <rect x="24" y="38" width="8" height="8" fill="#120e0a" />
+                          <rect x="50" y="38" width="8" height="8" fill="#120e0a" />
+                          <rect x="64" y="38" width="8" height="8" fill="#120e0a" />
+                          <rect x="36" y="52" width="8" height="8" fill="#120e0a" />
+                          <rect x="50" y="52" width="8" height="8" fill="#120e0a" />
+                          <rect x="64" y="52" width="8" height="8" fill="#c9342b" />
+                          <rect x="36" y="64" width="8" height="8" fill="#120e0a" />
+                          <rect x="50" y="64" width="8" height="8" fill="#120e0a" />
+                          <rect x="64" y="64" width="8" height="8" fill="#120e0a" />
+                        </svg>
+                      </div>
+                      <div class="font-mono" style="font-size: 0.8rem; font-weight: 800; color: var(--ink-solid); letter-spacing: 0.1em; margin-bottom: 2px;">
+                        PASS #88219
+                      </div>
+                      <span class="font-mono" style="font-size: 0.65rem; color: var(--accent-red); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">
+                        FAIRHOLD™ VERIFIED
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- THE DUAL-PHASE EVOLUTION NARRATIVE -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label">EVOLUTIONARY GENESIS</span>
+                        <h2 class="heading-lg" style="margin: 10px 0 20px 0; font-size: 32px;">Constructed in Two Evolutionary Phases</h2>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 20px;">
+                          <!-- Phase 1 -->
+                          <div style="background: var(--bg-card); border: 2px solid var(--rule-dark); padding: 26px; border-radius: 2px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                                <span class="phase-badge phase-1">PHASE 01 &bull; INFRASTRUCTURE &amp; CLOUD DEVOPS</span>
+                                <a href="https://github.com/AJ1312/SnapSeat-devops" target="_blank" rel="noopener noreferrer" class="pill-btn" style="padding: 3px 10px; font-size: 0.7rem;">DEVOPS REPO &nearr;</a>
+                              </div>
+                              <h3 class="font-serif" style="font-size: 1.35rem; margin-bottom: 10px; color: var(--ink-solid);">The AWS &amp; Containerized CI/CD Practice</h3>
+                              <p class="body-text" style="line-height: 1.65; margin-bottom: 14px; color: var(--ink-soft);">
+                                Initiated as an intensive cloud infrastructure laboratory (under the developmental moniker <em>SnapSeat</em>), designed to simulate high-stress event ticketing deployment lifecycles with absolute zero-downtime reliability:
+                              </p>
+                              
+                              <ul style="padding-left: 18px; font-size: 0.88rem; line-height: 1.7; color: var(--ink-soft); margin-bottom: 16px;">
+                                <li><strong>Jenkins Declarative Automation:</strong> Webhook-triggered multi-stage pipeline running on EC2 agents, managing workspace isolation, automated unit testing, and Docker BuildKit builds.</li>
+                                <li><strong>SonarQube Quality Gate:</strong> Static code analysis verifying cyclomatic complexity, test coverage thresholds, and security hotspots before container staging.</li>
+                                <li><strong>Trivy Vulnerability Auditing:</strong> Comprehensive filesystem and container image scanner enforcing zero tolerance on High/Critical CVEs before registry ingestion.</li>
+                                <li><strong>Multi-Stage Docker Packaging:</strong> Minimalist container builds using Alpine/distroless runtimes, stripping development tooling to reduce image footprint and attack surface.</li>
+                                <li><strong>Amazon ECR Registry:</strong> Authenticated automated image push tagged with immutable Git commit SHAs and semantic release versions.</li>
+                                <li><strong>AWS EKS Zero-Downtime Rollout:</strong> Rolling update deployments (<code style="font-size:0.75rem;">maxUnavailable: 0</code>) orchestrated on Amazon Elastic Kubernetes Service behind NGINX Ingress and AWS ALB.</li>
+                                <li><strong>Prometheus &amp; Grafana Observability:</strong> Scrapes real-time cluster metrics, pod memory consumption, and request latency with threshold-based alert triggers.</li>
+                              </ul>
+                            </div>
+
+                            <div style="background: var(--bg-card-alt); border-top: 1px solid var(--rule); padding-top: 12px; margin-top: 10px; display: flex; justify-content: space-between; font-size: 0.78rem; font-family: var(--font-mono); color: var(--ink-soft); flex-wrap: wrap; gap: 8px;">
+                              <span>DEPLOYMENT: <b>Zero-Downtime Rolling</b></span>
+                              <span>SECURITY: <b>Trivy CVE Verified</b></span>
+                              <span>CLUSTER: <b>AWS EKS Managed</b></span>
+                            </div>
+                          </div>
+
+                          <!-- Phase 2 -->
+                          <div style="background: var(--bg-card); border: 2px solid var(--accent-red); padding: 26px; border-radius: 2px; box-shadow: 4px 4px 0px var(--accent-soft); display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                                <span class="phase-badge phase-2">PHASE 02 &bull; FULL-STACK MODERN PRODUCTION SYSTEM</span>
+                                <a href="https://tickets.ajiteshsharma.dev" target="_blank" rel="noopener noreferrer" class="pill-btn menu-pill-btn" style="padding: 3px 10px; font-size: 0.7rem;">LIVE APP &nearr;</a>
+                              </div>
+                              <h3 class="font-serif" style="font-size: 1.35rem; margin-bottom: 10px; color: var(--ink-solid);">The Complete Encore Monorepo Architecture</h3>
+                              <p class="body-text" style="line-height: 1.65; margin-bottom: 14px; color: var(--ink-soft);">
+                                Re-engineered from first principles into a state-of-the-art event ticketing platform deployed to live production on <strong>tickets.ajiteshsharma.dev</strong>:
+                              </p>
+                              
+                              <ul style="padding-left: 18px; font-size: 0.88rem; line-height: 1.7; color: var(--ink-soft); margin-bottom: 16px;">
+                                <li><strong>TypeScript Monorepo &amp; Pnpm:</strong> Workspaces sharing type-safe Zod validation schemas, business logic, and API contracts via internal packages (<code style="font-size:0.75rem;">@encore/shared</code>).</li>
+                                <li><strong>Next.js 19 (App Router) &amp; React 19:</strong> Fluid interactive seat matrix, Framer Motion animations, optimistic UI updates, and on-the-fly QR pass generation.</li>
+                                <li><strong>NestJS + Drizzle ORM + Neon:</strong> Serverless PostgreSQL running ACID transactions with Optimistic Concurrency Control (OCC) version increments to defeat race conditions.</li>
+                                <li><strong>BullMQ &amp; Upstash Redis Workers:</strong> High-speed 15-minute temporary seat reservation TTL timer with automated waitlist allocation via <code style="font-size:0.75rem;">SKIP LOCKED</code>.</li>
+                                <li><strong>Resend Transactional Mailer:</strong> Asynchronous PDF ticket pass generation with dynamic booking hashes delivered instantly via webhooks.</li>
+                              </ul>
+                            </div>
+
+                            <div style="background: var(--bg-card-alt); border-top: 1px solid var(--rule); padding-top: 12px; margin-top: 10px; display: flex; justify-content: space-between; font-size: 0.78rem; font-family: var(--font-mono); color: var(--ink-soft); flex-wrap: wrap; gap: 8px;">
+                              <span>MONOREPO: <b>pnpm Workspaces</b></span>
+                              <span>DATABASE: <b>Neon PostgreSQL</b></span>
+                              <span>BROADCAST: <b>Socket.io Sub-10ms</b></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- PHASE 1 AWS CI/CD PIPELINE FLOW SCHEMATIC -->
+                        <div class="broadsheet-pipeline" style="margin-top: 30px;">
+                          <div class="pipeline-header">
+                            <span class="kicker-label">PHASE 1 DEVOPS ARCHITECTURE &bull; AUTOMATED CI/CD FLOW</span>
+                            <h4 class="pipeline-title">Continuous Integration &amp; Continuous Deployment Pipeline</h4>
+                            <p class="pipeline-desc">From source code commit to zero-downtime Kubernetes pod rollouts on AWS Elastic Kubernetes Service (EKS).</p>
+                          </div>
+                          <div class="pipeline-steps-flow">
+                            <div class="pipeline-step-card">
+                              <span class="pipeline-step-num">[01] REPO TRIGGER</span>
+                              <h5 class="pipeline-step-title">Git Commit &amp; Push</h5>
+                              <p class="pipeline-step-sub">GitHub webhook triggers multi-branch Jenkins pipeline on code commit.</p>
+                            </div>
+                            <div class="pipeline-arrow-divider">&rarr;</div>
+                            <div class="pipeline-step-card">
+                              <span class="pipeline-step-num">[02] ORCHESTRATION</span>
+                              <h5 class="pipeline-step-title">Jenkins Engine</h5>
+                              <p class="pipeline-step-sub">Declarative pipeline orchestrates environment, linting, and automated unit test suites.</p>
+                            </div>
+                            <div class="pipeline-arrow-divider">&rarr;</div>
+                            <div class="pipeline-step-card">
+                              <span class="pipeline-step-num">[03] QUALITY &amp; CVE</span>
+                              <h5 class="pipeline-step-title">SonarQube &amp; Trivy</h5>
+                              <p class="pipeline-step-sub">Static code quality analysis + deep container filesystem vulnerability scanning (0 Critical CVEs).</p>
+                            </div>
+                            <div class="pipeline-arrow-divider">&rarr;</div>
+                            <div class="pipeline-step-card">
+                              <span class="pipeline-step-num">[04] PACKAGING</span>
+                              <h5 class="pipeline-step-title">Docker Multi-Stage</h5>
+                              <p class="pipeline-step-sub">BuildKit compiles lean, production-minified images on Alpine Linux base.</p>
+                            </div>
+                            <div class="pipeline-arrow-divider">&rarr;</div>
+                            <div class="pipeline-step-card">
+                              <span class="pipeline-step-num">[05] REGISTRY</span>
+                              <h5 class="pipeline-step-title">Amazon ECR</h5>
+                              <p class="pipeline-step-sub">Authenticated push to AWS Elastic Container Registry tagged with Git commit SHA.</p>
+                            </div>
+                            <div class="pipeline-arrow-divider">&rarr;</div>
+                            <div class="pipeline-step-card">
+                              <span class="pipeline-step-num">[06] KUBERNETES</span>
+                              <h5 class="pipeline-step-title">AWS EKS Rollout</h5>
+                              <p class="pipeline-step-sub">Zero-downtime rolling update (maxUnavailable: 0) behind AWS ALB &amp; NGINX Ingress.</p>
+                            </div>
+                            <div class="pipeline-arrow-divider">&rarr;</div>
+                            <div class="pipeline-step-card">
+                              <span class="pipeline-step-num">[07] OBSERVABILITY</span>
+                              <h5 class="pipeline-step-title">Prometheus / Grafana</h5>
+                              <p class="pipeline-step-sub">Real-time scrape of pod health, memory limits, and request latency telemetry.</p>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PHASE 2 ARCHITECTURE DIAGRAM (PREMIER BROADSHEET PIPELINE) -->
+            <section class="section" style="padding: 30px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <div class="broadsheet-pipeline" style="margin: 0;">
+                            <div class="pipeline-header">
+                                <span class="kicker-label">PHASE 2 SYSTEM TOPOLOGY &bull; REAL-TIME DATA FLOW</span>
+                                <h4 class="pipeline-title">Optimistic Concurrency, WebSockets &amp; Asynchronous Queue Mesh</h4>
+                                <p class="pipeline-desc">End-to-end data trajectory from React 19 client interactions down to atomic ACID database transactions.</p>
+                            </div>
+                            <div class="pipeline-steps-flow">
+                                <div class="pipeline-step-card">
+                                    <span class="pipeline-step-num">[01] CLIENT TIER</span>
+                                    <h5 class="pipeline-step-title">Next.js 19 Client</h5>
+                                    <p class="pipeline-step-sub">React 19 App Router &bull; Dynamic QR Pass Generator &bull; Optimistic Seat Matrix Grid</p>
+                                </div>
+                                <div class="pipeline-arrow-divider">&rarr;</div>
+                                <div class="pipeline-step-card">
+                                    <span class="pipeline-step-num">[02] EDGE &amp; INGRESS</span>
+                                    <h5 class="pipeline-step-title">Cloudflare Edge</h5>
+                                    <p class="pipeline-step-sub">DDoS Mitigation &bull; Anycast DNS Routing &bull; SSL Termination &bull; Asset Caching</p>
+                                </div>
+                                <div class="pipeline-arrow-divider">&rarr;</div>
+                                <div class="pipeline-step-card">
+                                    <span class="pipeline-step-num">[03] CORE GATEWAY</span>
+                                    <h5 class="pipeline-step-title">NestJS API Core</h5>
+                                    <p class="pipeline-step-sub">Strict Zod Contracts &bull; Argon2id Auth &bull; JWT Tokens &bull; Fastify Underlay</p>
+                                </div>
+                                <div class="pipeline-arrow-divider bidirectional">&harr;</div>
+                                <div class="pipeline-step-card">
+                                    <span class="pipeline-step-num">[04] REAL-TIME MESH</span>
+                                    <h5 class="pipeline-step-title">Socket.io Gateway</h5>
+                                    <p class="pipeline-step-sub">Sub-10ms Live Seat Matrix Broadcast &bull; Dynamic Room State Synchronization</p>
+                                </div>
+                                <div class="pipeline-arrow-divider">&rarr;</div>
+                                <div class="pipeline-step-card">
+                                    <span class="pipeline-step-num">[05] ACID STORAGE</span>
+                                    <h5 class="pipeline-step-title">Neon PostgreSQL</h5>
+                                    <p class="pipeline-step-sub">Optimistic Concurrency Control (OCC) &bull; Drizzle ORM &bull; Version Bump Isolation</p>
+                                </div>
+                                <div class="pipeline-arrow-divider bidirectional">&harr;</div>
+                                <div class="pipeline-step-card">
+                                    <span class="pipeline-step-num">[06] ASYNC QUEUE</span>
+                                    <h5 class="pipeline-step-title">BullMQ + Redis</h5>
+                                    <p class="pipeline-step-sub">15-Minute Seat Hold TTL &bull; Autonomous FIFO Waitlist Allocation &bull; SKIP LOCKED</p>
+                                </div>
+                                <div class="pipeline-arrow-divider">&rarr;</div>
+                                <div class="pipeline-step-card">
+                                    <span class="pipeline-step-num">[07] DISPATCH</span>
+                                    <h5 class="pipeline-step-title">Resend Mailer</h5>
+                                    <p class="pipeline-step-sub">Asynchronous Transactional PDF Ticket Delivery &bull; Booking Confirmation Receipts</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6 CORE ADVANTAGES (KEY PROS) -->
+            <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label">DISTRIBUTED CORRECTNESS</span>
+                        <h2 class="heading-lg" style="margin: 10px 0 20px 0; font-size: 32px;">Six Engineering Pillars of Encore</h2>
+                        
+                        <div class="feature-grid-encore">
+                          <!-- Pro 1 -->
+                          <div class="feature-card-encore">
+                            <span class="feature-num">PILLAR 01 &bull; CONCURRENCY CONTROL</span>
+                            <h3 class="feature-title">Guaranteed Double-Booking Prevention</h3>
+                            <p class="body-text" style="font-size: 0.88rem; line-height: 1.65;">
+                              Under sudden flash-sale loads, traditional row locks cause database thread exhaustion. Encore enforces <strong>Optimistic Concurrency Control (OCC)</strong> with atomic version increments within isolated PostgreSQL transactions. Any stale booking attempt is rejected gracefully at the database tier without locking the entire inventory.
+                            </p>
+                          </div>
+
+                          <!-- Pro 2 -->
+                          <div class="feature-card-encore">
+                            <span class="feature-num">PILLAR 02 &bull; CART INTEGRITY</span>
+                            <h3 class="feature-title">FairHold™ 15-Minute Temporary TTL</h3>
+                            <p class="body-text" style="font-size: 0.88rem; line-height: 1.65;">
+                              Seats are temporarily locked during the checkout flow using an active 15-minute Time-To-Live (TTL). If a customer abandons their session or payment fails, the lock expires automatically in Upstash Redis, releasing seats back to circulation without administrative intervention.
+                            </p>
+                          </div>
+
+                          <!-- Pro 3 -->
+                          <div class="feature-card-encore">
+                            <span class="feature-num">PILLAR 03 &bull; ASYNCHRONOUS QUEUES</span>
+                            <h3 class="feature-title">Autonomous FIFO Waitlist Auto-Assignment</h3>
+                            <p class="body-text" style="font-size: 0.88rem; line-height: 1.65;">
+                              When held seats expire, background <strong>BullMQ workers</strong> execute queries with <code>SELECT ... FOR UPDATE SKIP LOCKED</code> to instantly reallocate seats directly to the next person waiting in line, completely circumventing public scalp bots.
+                            </p>
+                          </div>
+
+                          <!-- Pro 4 -->
+                          <div class="feature-card-encore">
+                            <span class="feature-num">PILLAR 04 &bull; REAL-TIME STATE SYNC</span>
+                            <h3 class="feature-title">Live Real-Time Seat Availability</h3>
+                            <p class="body-text" style="font-size: 0.88rem; line-height: 1.65;">
+                              Bidirectional <strong>Socket.io feeds</strong> synchronize seat status changes (<code>AVAILABLE</code> &rarr; <code>HELD</code> &rarr; <code>BOOKED</code>) across all active browser windows in real time, eliminating client-side polling and preventing stale UI states.
+                            </p>
+                          </div>
+
+                          <!-- Pro 5 -->
+                          <div class="feature-card-encore">
+                            <span class="feature-num">PILLAR 05 &bull; STRICT INTEGRITY</span>
+                            <h3 class="feature-title">End-to-End Type Safety</h3>
+                            <p class="body-text" style="font-size: 0.88rem; line-height: 1.65;">
+                              The pnpm monorepo incorporates shared data models and <strong>Zod schemas</strong> across both Next.js frontend and NestJS backend via <code>@encore/shared</code>, eliminating runtime serialization mismatches and guaranteeing contract integrity from form input to database column.
+                            </p>
+                          </div>
+
+                          <!-- Pro 6 -->
+                          <div class="feature-card-encore">
+                            <span class="feature-num">PILLAR 06 &bull; ADVERSARIAL DEFENSE</span>
+                            <h3 class="feature-title">Production-Hardened Security</h3>
+                            <p class="body-text" style="font-size: 0.88rem; line-height: 1.65;">
+                              Incorporates GPU-resistant <strong>Argon2id</strong> password hashing, stateless JWT Bearer authorization, NestJS Throttler rate limiting against credential-stuffing, Helmet header sanitization, and 100% parameterized SQL queries via Drizzle ORM.
+                            </p>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FULL TECHNICAL SPECIFICATION LEDGER -->
+            <section class="section" style="padding: 40px 0;">
+                <div class="newspaper-grid">
+                    <div class="col-span-12">
+                        <span class="kicker-label">AUDITED SPECIFICATION</span>
+                        <h2 class="heading-lg" style="margin: 10px 0 20px 0; font-size: 32px;">Production System Ledger</h2>
+                        
+                        <div style="background: var(--bg-card); border: 2px solid var(--rule); border-radius: 2px; padding: 24px; font-family: var(--font-mono); margin-top: 16px;">
+                            <div class="spec-table-row">
+                                <span style="font-weight: 700; color: var(--accent-red);">Live Application</span>
+                                <span><a href="https://tickets.ajiteshsharma.dev" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: var(--ink-solid); font-weight: 700;">https://tickets.ajiteshsharma.dev &nearr;</a></span>
+                            </div>
+                            <div class="spec-table-row">
+                                <span style="font-weight: 700; color: var(--accent-red);">Source Monorepo</span>
+                                <span><a href="https://github.com/AJ1312/encore-ticket-booking" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: var(--ink-solid); font-weight: 700;">github.com/AJ1312/encore-ticket-booking &nearr;</a></span>
+                            </div>
+                            <div class="spec-table-row">
+                                <span style="font-weight: 700; color: var(--accent-red);">DevOps Practice Repo</span>
+                                <span><a href="https://github.com/AJ1312/SnapSeat-devops" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: var(--ink-soft);">github.com/AJ1312/SnapSeat-devops &nearr;</a> (Phase 1 Jenkins/AWS EKS)</span>
+                            </div>
+                            <div class="spec-table-row">
+                                <span style="font-weight: 700; color: var(--accent-red);">Monorepo Architecture</span>
+                                <span>TypeScript, pnpm Workspaces, packages/shared (@encore/shared)</span>
+                            </div>
+                            <div class="spec-table-row">
+                                <span style="font-weight: 700; color: var(--accent-red);">Frontend Tier</span>
+                                <span>Next.js 19 (App Router), React 19, Framer Motion, Lucide Icons, QRCode, Vercel Edge</span>
+                            </div>
+                            <div class="spec-table-row">
+                                <span style="font-weight: 700; color: var(--accent-red);">Backend API Tier</span>
+                                <span>NestJS, Express, Zod Validation, Helmet, NestJS Throttler, Render Managed Service</span>
+                            </div>
+                            <div class="spec-table-row">
+                                <span style="font-weight: 700; color: var(--accent-red);">Primary Database</span>
+                                <span>PostgreSQL (Neon Serverless), Drizzle ORM, Optimistic Concurrency Control (OCC)</span>
+                            </div>
+                            <div class="spec-table-row">
+                                <span style="font-weight: 700; color: var(--accent-red);">Queues &amp; Real-Time</span>
+                                <span>Redis (Upstash), BullMQ Workers (SKIP LOCKED), Socket.io WebSocket Gateway</span>
+                            </div>
+                            <div class="spec-table-row">
+                                <span style="font-weight: 700; color: var(--accent-red);">Testing &amp; Delivery</span>
+                                <span>Vitest E2E &amp; Integration Suite, Resend Transactional Email Delivery</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap;">
+                          <a href="https://tickets.ajiteshsharma.dev" target="_blank" rel="noopener noreferrer" class="pill-btn menu-pill-btn" data-cursor="VISIT" style="padding: 10px 22px; font-size: 0.82rem;">
+                            LAUNCH ENCORE PRODUCTION APP &nearr;
+                          </a>
+                          <a href="../index.html#dispatches" class="pill-btn" data-cursor="BACK" style="padding: 10px 22px; font-size: 0.82rem;">
+                            &larr; RETURN TO SELECTED DISPATCHES
+                          </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <!-- FOOTER -->
+        <footer class="section" style="border-top: 4px solid var(--rule-dark); padding: 40px 0;">
+            <div class="newspaper-grid">
+                <div class="col-span-12 text-center rv">
+                    <p class="meta uppercase">&copy; 2026 Ajitesh Sharma &middot; The Sharma Dispatch &mdash; Vol. I</p>
+                    <p class="body-sm" style="margin-top: 10px;">High-concurrency systems architecture report. Certified production deployment.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- FULLSCREEN OVERLAY MENU -->
+    <div class="menu-overlay" id="menuOverlay" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="menu-overlay-header">
+        <span class="meta-text" style="color: rgba(238, 233, 224, 0.6);">THE SHARMA DISPATCH &bull; DIRECTORY</span>
+        <button type="button" class="menu-close-btn" data-menu-close data-cursor="CLOSE">
+          CLOSE &times;
+        </button>
+      </div>
+
+      <nav class="menu-nav-links">
+        <a href="../index.html" class="menu-nav-item" data-cursor="HOME">INDEX</a>
+        <a href="../index.html#manifesto" class="menu-nav-item" data-cursor="ABOUT">THE MANIFESTO</a>
+        <a href="../index.html#dispatches" class="menu-nav-item" data-cursor="WORKS">SELECTED DISPATCHES</a>
+        <a href="../index.html#service" class="menu-nav-item" data-cursor="SERVICE">ACADEMIA &amp; SERVICE</a>
+        <a href="../index.html#patents" class="menu-nav-item" data-cursor="PATENTS">PATENTS &amp; RESEARCH</a>
+        <a href="../index.html#contact" class="menu-nav-item" data-cursor="CONTACT">CORRESPONDENCE</a>
+      </nav>
+
+      <div class="menu-overlay-footer">
+        <span>VELLORE, IN &bull; 12.9165&deg; N, 79.1325&deg; E</span>
+        <div style="display: flex; gap: 16px;">
+          <a href="https://linkedin.com/in/ajitesh-sharma" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+          <a href="https://github.com/AJ1312" target="_blank" rel="noopener noreferrer">GITHUB</a>
+          <a href="mailto:13ajitesh@gmail.com">EMAIL</a>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
