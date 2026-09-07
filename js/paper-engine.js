@@ -8,9 +8,37 @@
 (function () {
   'use strict';
 
-  // --- Web Audio Synthesizer (Tactile Click & Rubber Stamp Thump) ---
-  let soundEnabled = true; // Enabled by default for tactile portfolio feel
+  // --- Persistent Site-Wide Sound State ---
+  const SOUND_STORAGE_KEY = 'paper_sound_enabled';
+  const getStoredSoundPreference = () => {
+    try {
+      const stored = localStorage.getItem(SOUND_STORAGE_KEY);
+      return stored === null ? true : stored === 'true';
+    } catch (e) {
+      return true;
+    }
+  };
+
+  let soundEnabled = getStoredSoundPreference();
   let audioCtx = null;
+  let updateAllSoundButtons = () => {};
+
+  const setSoundEnabled = (enabled) => {
+    soundEnabled = Boolean(enabled);
+    try {
+      localStorage.setItem(SOUND_STORAGE_KEY, soundEnabled ? 'true' : 'false');
+    } catch (e) {}
+
+    // If muting while audio is playing, pause immediately
+    if (!soundEnabled && paperTearAudio) {
+      try {
+        paperTearAudio.pause();
+        paperTearAudio.currentTime = 0;
+      } catch (e) {}
+    }
+
+    updateAllSoundButtons();
+  };
 
   const getAudioContext = () => {
     if (!audioCtx) {
@@ -192,195 +220,166 @@
     }
   };
 
-  // --- Two Paper Tearing Away Transition & Entrance Controller ---
+  // --- Direct Access: Broadsheet Overlay Removal ---
   const initPaperTear = () => {
-    let tearOverlay = document.getElementById('paperTransitionOverlay');
-    const crestPath = isSubpage ? '../images/dispatch_crest.svg' : 'images/dispatch_crest.svg';
+    const tearOverlay = document.getElementById('paperTransitionOverlay');
+    if (tearOverlay) {
+      tearOverlay.remove();
+    }
+    document.documentElement.classList.remove('paper-tear-pending');
+    try {
+      sessionStorage.removeItem('broadsheet_nav_arriving');
+      sessionStorage.removeItem('broadsheet_tear_seen');
+    } catch (e) {}
+  };
 
-    if (!tearOverlay) {
-      tearOverlay = document.createElement('div');
-      tearOverlay.id = 'paperTransitionOverlay';
-      tearOverlay.className = 'paper-tear-overlay';
-      tearOverlay.setAttribute('aria-hidden', 'true');
-      tearOverlay.innerHTML = `
-        <div class="paper-tear-half paper-tear-left" id="paperTearLeft">
-          <div class="paper-fiber-texture"></div>
-          <div class="paper-laid-lines"></div>
-          <div class="tear-sheet-content tear-content-left">
-            <div class="tear-top-folio font-mono">
-              <span>VOL. 2026 &bull; ISSUE NO. 43</span>
-              <span class="tear-sec-tag">BROADSHEET FOLIO &bull; SEC. A</span>
-            </div>
-            <div class="tear-masthead-wrap">
-              <h1 class="tear-masthead-title font-serif">THE SHARMA</h1>
-              <div class="tear-masthead-sub font-mono">CHRONICLE OF SYSTEMS &bull; DEFENSIVE ARCHITECTURE</div>
-            </div>
-            <div class="tear-ornamental-rule"></div>
-            <div class="tear-columns-grid">
-              <div class="tear-col">
-                <span class="tear-kicker font-mono">SPECIAL REPORT</span>
-                <h2 class="tear-headline font-serif">A Systems Engineer Who Builds Things &mdash; <span style="color: var(--accent-red);">Kernel to Cloud</span></h2>
-                <p class="tear-p font-serif"><span class="tear-dropcap">A</span>s a systems engineer and security researcher at VIT Vellore, I investigate and build software engineered to hold under intense adversarial load.</p>
-                <div class="tear-col-divider"></div>
-                <div class="tear-wire-notice font-mono">VELLORE WIRE &bull; DISPATCH RECEIVED</div>
-              </div>
-              <div class="tear-col tear-col-secondary">
-                <span class="tear-kicker font-mono">CURRICULUM</span>
-                <h3 class="tear-subhead font-serif">Vellore Institute of Technology</h3>
-                <p class="tear-p-sm font-sans">B.Tech Computer Science &amp; Engineering (Spec. Information Security), 2023&ndash;2027.</p>
-                <div class="tear-badge-pill font-mono">VERIFIED ARCHIVAL COPY</div>
-              </div>
-            </div>
-            <div class="tear-bottom-folio font-mono">
-              <span>LEFT SHEET &bull; CONTINUED ON SEC. B</span>
-              <span>EST. 2023 &bull; HAND-SET MONO</span>
-            </div>
-          </div>
-          <svg class="deckle-edge deckle-right" viewBox="0 0 60 1000" preserveAspectRatio="none" aria-hidden="true">
-            <path class="deckle-white-fringe" d="M0,0 L32,0 L24,18 L36,35 L22,58 L38,82 L20,115 L35,138 L24,165 L42,198 L26,225 L38,255 L20,285 L44,325 L24,360 L38,395 L18,430 L45,475 L22,510 L40,545 L20,585 L46,630 L24,665 L41,705 L18,745 L47,790 L23,830 L41,875 L19,915 L48,965 L25,995 L30,1000 L0,1000 Z" fill="#fffdf9"></path>
-            <path class="deckle-face" d="M0,0 L26,0 L18,16 L30,33 L16,55 L32,79 L14,112 L29,135 L18,162 L36,195 L20,222 L32,252 L14,282 L38,322 L18,357 L32,392 L12,427 L39,472 L16,507 L34,542 L14,582 L40,627 L18,662 L35,702 L12,742 L41,787 L17,827 L35,872 L13,912 L42,962 L19,992 L24,1000 L0,1000 Z" fill="#f6f0e2"></path>
-          </svg>
-        </div>
-        <div class="paper-tear-seam" id="tearSeamSeal">
-          <div class="seam-badge" id="tearBadgeBtn" role="button" tabindex="0" aria-label="Tear Broadsheet to Open">
-            <div class="seam-badge-inner">
-              <img src="${crestPath}" alt="Seal" class="seam-crest" />
-              <span class="seam-title font-serif">THE SHARMA DISPATCH</span>
-              <span class="seam-instruction font-mono">✂ TAP / CLICK TO TEAR OPEN ✂</span>
-            </div>
-          </div>
-        </div>
-        <div class="paper-tear-half paper-tear-right" id="paperTearRight">
-          <div class="paper-fiber-texture"></div>
-          <div class="paper-laid-lines"></div>
-          <div class="tear-sheet-content tear-content-right">
-            <div class="tear-top-folio font-mono">
-              <span class="tear-sec-tag">BROADSHEET FOLIO &bull; SEC. B</span>
-              <span>PRICE: ONE SSH SESSION</span>
-            </div>
-            <div class="tear-masthead-wrap">
-              <h1 class="tear-masthead-title font-serif">DISPATCH</h1>
-              <div class="tear-masthead-sub font-mono">ENGINEERED UNDER ADVERSARIAL RESILIENCE &bull; 2026</div>
-            </div>
-            <div class="tear-ornamental-rule"></div>
-            <div class="tear-columns-grid">
-              <div class="tear-col">
-                <span class="tear-kicker font-mono">RESEARCH DISPATCH</span>
-                <h2 class="tear-headline font-serif">Lock-Free Backends &amp; Applied AI.</h2>
-                <p class="tear-p font-serif"><span class="tear-dropcap">T</span>he boundary between infrastructure and threat landscape has collapsed. Building zero-trust authentication pipelines.</p>
-                <div class="tear-col-divider"></div>
-                <div class="tear-wire-notice font-mono">PATENTS PENDING &bull; 3 FILED INVENTIONS</div>
-              </div>
-              <div class="tear-col tear-col-secondary">
-                <span class="tear-kicker font-mono">CORRESPONDENCE</span>
-                <h3 class="tear-subhead font-serif">Open for Collaboration</h3>
-                <p class="tear-p-sm font-sans">Available for systems engineering and defensive security engagements.</p>
-                <div class="tear-badge-pill font-mono">SEC. B FOLIO VERIFIED</div>
-              </div>
-            </div>
-            <div class="tear-bottom-folio font-mono">
-              <span>RIGHT SHEET &bull; COMPLETE DISPATCH</span>
-              <span>PRESS RUN: 1ST PRINT</span>
-            </div>
-          </div>
-          <svg class="deckle-edge deckle-left" viewBox="0 0 60 1000" preserveAspectRatio="none" aria-hidden="true">
-            <path class="deckle-white-fringe" d="M60,0 L28,0 L36,18 L24,35 L38,58 L22,82 L40,115 L25,138 L36,165 L18,198 L34,225 L22,255 L40,285 L16,325 L36,360 L22,395 L42,430 L15,475 L38,510 L20,545 L40,585 L14,630 L36,665 L19,705 L42,745 L13,790 L37,830 L19,875 L41,915 L12,965 L35,995 L30,1000 L60,1000 Z" fill="#fffdf9"></path>
-            <path class="deckle-face" d="M60,0 L34,0 L42,16 L30,33 L44,55 L28,79 L46,112 L31,135 L42,162 L24,195 L40,222 L28,252 L46,282 L22,322 L42,357 L28,392 L48,427 L21,472 L44,507 L26,542 L46,582 L20,627 L42,662 L25,702 L48,742 L19,787 L43,827 L25,872 L47,912 L18,962 L41,992 L36,1000 L60,1000 Z" fill="#f6f0e2"></path>
-          </svg>
-        </div>
-      `;
-      document.body.prepend(tearOverlay);
+  // ==========================================================================
+  // REALISTIC SPRING-PHYSICS ENGINE (Hooke's Law: F = -k*x - c*v)
+  // Inspired by React Spring & Vikram Thyagarajan's paper mechanics
+  // ==========================================================================
+  class PaperSpring {
+    constructor({ mass = 1.0, tension = 180, friction = 22, onUpdate, onRest } = {}) {
+      this.mass = mass;
+      this.tension = tension;
+      this.friction = friction;
+      this.x = 0;
+      this.target = 0;
+      this.v = 0;
+      this.onUpdate = onUpdate;
+      this.onRest = onRest;
+      this.animating = false;
+      this.rafId = null;
+      this.lastTime = null;
     }
 
-    const hasSeenTear = sessionStorage.getItem('broadsheet_tear_seen');
-    const isNavArriving = sessionStorage.getItem('broadsheet_nav_arriving') === 'true';
-    const urlParams = new URLSearchParams(window.location.search);
-    const forceReplay = urlParams.has('replay');
+    setTarget(target, initialVelocity = 0) {
+      this.target = target;
+      if (initialVelocity !== 0) this.v = initialVelocity;
+      if (!this.animating) {
+        this.animating = true;
+        this.lastTime = performance.now();
+        this.rafId = requestAnimationFrame((t) => this.step(t));
+      }
+    }
 
-    // Function to perform the graceful, weighted broadsheet tearing animation
-    let isTearingActive = false;
-    const triggerTear = (autoCloseDelay = 850) => {
-      if (isTearingActive) return;
-      isTearingActive = true;
+    step(now) {
+      if (!this.animating) return;
+      const dt = Math.min((now - (this.lastTime || now)) / 1000, 0.032);
+      this.lastTime = now;
 
-      tearOverlay.style.display = 'flex';
-      void tearOverlay.offsetWidth;
-      tearOverlay.classList.remove('is-tearing');
+      // Hooke's Law with Viscous Damping: F = -k*(x - target) - c*v
+      const fSpring = -this.tension * (this.x - this.target);
+      const fDamper = -this.friction * this.v;
+      const a = (fSpring + fDamper) / this.mass;
 
-      requestAnimationFrame(() => {
-        playPaperTearSound();
-        tearOverlay.classList.add('is-tearing');
-        sessionStorage.setItem('broadsheet_tear_seen', 'true');
-        document.documentElement.classList.remove('paper-tear-pending');
+      this.v += a * dt;
+      this.x += this.v * dt;
 
-        setTimeout(() => {
-          tearOverlay.style.display = 'none';
-          tearOverlay.classList.remove('is-tearing');
-          isTearingActive = false;
-        }, autoCloseDelay);
-      });
-    };
+      if (this.onUpdate) this.onUpdate(this.x, this.v);
 
-    // User can tap/click anywhere to rip immediately
-    tearOverlay.addEventListener('click', () => {
-      unlockAudio();
-      triggerTear(850);
+      // Spring convergence test
+      if (Math.abs(this.x - this.target) < 0.001 && Math.abs(this.v) < 0.005) {
+        this.x = this.target;
+        this.v = 0;
+        this.animating = false;
+        if (this.onUpdate) this.onUpdate(this.x, 0);
+        if (this.onRest) this.onRest();
+        return;
+      }
+
+      this.rafId = requestAnimationFrame((t) => this.step(t));
+    }
+
+    destroy() {
+      this.animating = false;
+      if (this.rafId) cancelAnimationFrame(this.rafId);
+    }
+  }
+
+  // --- Ultra-Realistic Page Transition via Double-Sided Paper Curl Reveal ---
+  let isTearTransitioning = false;
+  const triggerRealisticPaperTear = (href) => {
+    if (isTearTransitioning || !href) return;
+    isTearTransitioning = true;
+
+    // 1. Play authentic tactile paper tearing acoustic sound
+    unlockAudio();
+    if (soundEnabled) {
+      playPaperTearSound();
+    }
+
+    // 2. Build lightweight physics tearing stage
+    const stage = document.createElement('div');
+    stage.className = 'realistic-paper-tear-stage';
+    stage.setAttribute('aria-hidden', 'true');
+
+    stage.innerHTML = `
+      <div class="tear-stage-underlay" id="tearUnderlay">
+        <div class="tear-underlay-masthead">
+          <h1 class="tear-underlay-title">THE SHARMA DISPATCH</h1>
+          <div class="tear-underlay-rule"></div>
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.25em; text-transform: uppercase;">
+            INCOMING DISPATCH &bull; UNVEILING
+          </div>
+        </div>
+      </div>
+      <div class="tear-stage-curl" id="tearCurlSheet">
+        <div class="tear-curl-deckle"></div>
+      </div>
+    `;
+    document.body.appendChild(stage);
+
+    const underlay = stage.querySelector('#tearUnderlay');
+    const curlSheet = stage.querySelector('#tearCurlSheet');
+    const screenW = window.innerWidth;
+    const screenH = window.innerHeight;
+
+    // Slanted fold line angle (14 degrees clockwise from downward vertical)
+    const thetaDeg = 14;
+    const thetaRad = (thetaDeg * Math.PI) / 180;
+    const tanTheta = Math.tan(thetaRad);
+
+    // Total distance across viewport accounting for slant
+    const startOffset = screenW + screenH * tanTheta + 80;
+    const endOffset = -(screenH * tanTheta + 240);
+    const totalSpan = startOffset - endOffset;
+
+    // Configure curl leaf dimensions
+    curlSheet.style.height = `${screenH * 1.8}px`;
+
+    // 3. Drive the smooth curl reveal with React-Spring physics (Hooke's Law: F = -k*x - c*v)
+    // Calibrated for a luxurious, fluid ~620ms paper peel
+    const spring = new PaperSpring({
+      mass: 1.0,
+      tension: 30,
+      friction: 9.2,
+      onUpdate: (progress) => {
+        const p = Math.max(0, Math.min(progress, 1.04));
+        const offset = startOffset - p * totalSpan;
+        const xTop = offset;
+        const xBot = offset - screenH * tanTheta;
+
+        // Clip underlay so incoming edition is unveiled to the right of the rolling crease
+        underlay.style.clipPath = `polygon(${xTop}px 0, 100% 0, 100% 100%, ${xBot}px 100%)`;
+
+        // Proportional cylindrical curl leaf rolling to the left of the fold line
+        const curlW = Math.min(Math.max((screenW - xTop) * 0.14 + 100, 120), Math.min(screenW * 0.45, 280));
+        curlSheet.style.width = `${curlW}px`;
+        curlSheet.style.transform = `translate3d(${xTop}px, 0px, 0) rotate(${thetaDeg}deg) translateX(-100%)`;
+      },
+      onRest: () => {
+        spring.destroy();
+        window.location.href = href;
+      }
     });
 
-    // 1. ARRIVAL TRANSITION ACROSS ANY PAGE NAVIGATION (Index <-> Subpage, Subpage <-> Subpage)
-    if (isNavArriving) {
-      sessionStorage.removeItem('broadsheet_nav_arriving');
-      tearOverlay.style.display = 'flex';
-      tearOverlay.classList.remove('is-tearing');
+    // Release spring smoothly to target 1.0 with zero jerk
+    spring.setTarget(1.0, 0);
 
-      // Graceful 90ms breathing pause for eye to register folio & seal before smooth parting
-      setTimeout(() => {
-        unlockAudio();
-        triggerTear(850);
-      }, 90);
-      return;
-    }
-
-    // 2. INITIAL SITE VISIT (Never seen broadsheet tear, or forced replay)
-    if ((!hasSeenTear && !isSubpage) || forceReplay) {
-      tearOverlay.style.display = 'flex';
-      tearOverlay.classList.remove('is-tearing');
-
-      const autoTimer = setTimeout(() => {
-        triggerTear(850);
-      }, 120);
-
-      // Dismiss immediately on any user action
-      const quickDismiss = () => {
-        clearTimeout(autoTimer);
-        tearOverlay.style.display = 'none';
-        tearOverlay.classList.remove('is-tearing');
-        sessionStorage.setItem('broadsheet_tear_seen', 'true');
-        document.documentElement.classList.remove('paper-tear-pending');
-      };
-      window.addEventListener('keydown', quickDismiss, { once: true, passive: true });
-      window.addEventListener('wheel', quickDismiss, { once: true, passive: true });
-      window.addEventListener('touchstart', quickDismiss, { once: true, passive: true });
-    } else {
-      tearOverlay.style.display = 'none';
-      tearOverlay.classList.remove('is-tearing');
-      document.documentElement.classList.remove('paper-tear-pending');
-    }
-
-    // Connect Menu "✂ REPLAY TEAR ↺" Button
-    const menuTearBtn = document.getElementById('menuTearDispatchBtn');
-    if (menuTearBtn) {
-      menuTearBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        unlockAudio();
-        const menuOverlay = document.getElementById('menuOverlay');
-        if (menuOverlay) menuOverlay.classList.remove('is-active');
-        setTimeout(() => {
-          triggerTear(850);
-        }, 120);
-      });
-    }
+    // Failsafe timeout in case of unexpected tab throttling
+    setTimeout(() => {
+      window.location.href = href;
+    }, 720);
   };
 
   // --- Ultra-Fluid Page Transitions & Instant Link Prefetching ---
@@ -398,41 +397,30 @@
       document.head.appendChild(link);
     };
 
-    const navigateWithPaperTear = (href) => {
-      if (!href) return;
-
-      // 1. Arm destination page to execute opening tear on arrival
-      sessionStorage.setItem('broadsheet_nav_arriving', 'true');
-
-      // 2. Unlock audio and play tactile paper rip sound immediately
-      unlockAudio();
-      playPaperTearSound();
-
-      // 3. Smooth tactile departure on current page
-      document.body.classList.add('page-is-leaving');
-
-      // 4. Navigate at 220ms (allows gentle fade-out and audio start without abrupt visual cuts)
-      setTimeout(() => {
-        window.location.href = href;
-      }, 220);
-    };
-
     internalLinks.forEach((link) => {
       const href = link.getAttribute('href');
       if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || link.target === '_blank') {
         return;
       }
 
-      // Prefetch on pointerenter / touchstart for instant <15ms response
+      // Prefetch on pointerenter / touchstart for instant response
       link.addEventListener('pointerenter', () => prefetchUrl(href), { passive: true, once: true });
       link.addEventListener('touchstart', () => prefetchUrl(href), { passive: true, once: true });
 
-      // Fluid transition on click
+      // Realistic double-sided paper tear transition on click
       link.addEventListener('click', (e) => {
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
         e.preventDefault();
-        navigateWithPaperTear(href);
+        triggerRealisticPaperTear(href);
       });
+    });
+  };
+
+  // --- Tactile Paper Peel on Cards (Inspired by Post-It Physics) ---
+  const initPaperPeelCards = () => {
+    const cards = document.querySelectorAll('.work-card, .postal-stamp-card, .academic-letter-card');
+    cards.forEach((card) => {
+      card.classList.add('paper-peelable');
     });
   };
 
@@ -988,28 +976,43 @@
     const soundBtns = document.querySelectorAll('[data-sound-toggle]');
     if (!soundBtns.length) return;
 
-    const updateSoundBtns = () => {
+    updateAllSoundButtons = () => {
       soundBtns.forEach((btn) => {
         btn.innerHTML = soundEnabled
           ? `${ICONS.soundOn}<span class="btn-text">AUDIO</span>`
           : `${ICONS.soundOff}<span class="btn-text">MUTED</span>`;
         btn.setAttribute('aria-pressed', soundEnabled ? 'true' : 'false');
         btn.setAttribute('aria-label', soundEnabled ? 'Mute Audio Effects' : 'Enable Audio Effects');
+        btn.classList.toggle('is-muted', !soundEnabled);
       });
     };
 
-    updateSoundBtns();
+    updateAllSoundButtons();
 
     soundBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        soundEnabled = !soundEnabled;
-        updateSoundBtns();
-        if (soundEnabled) playTactileClick();
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setSoundEnabled(!soundEnabled);
+        if (soundEnabled) {
+          unlockAudio();
+          playTactileClick();
+        }
       });
     });
 
+    // Synchronize audio state across browser tabs & windows
+    window.addEventListener('storage', (e) => {
+      if (e.key === SOUND_STORAGE_KEY) {
+        soundEnabled = e.newValue === 'true';
+        updateAllSoundButtons();
+      }
+    });
+
     document.querySelectorAll('a, button, .work-card, .postal-stamp-card, .stamp-3d-vellore').forEach((el) => {
-      el.addEventListener('click', playTactileClick);
+      el.addEventListener('click', () => {
+        if (soundEnabled) playTactileClick();
+      });
     });
   };
 
@@ -1092,6 +1095,7 @@
     initCounters();
     initSoundToggle();
     initEncoreCountdown();
+    initPaperPeelCards();
   };
 
   if (document.readyState === 'loading') {

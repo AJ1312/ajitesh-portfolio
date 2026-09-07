@@ -14,11 +14,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     
-    <script>
-      if (sessionStorage.getItem('broadsheet_nav_arriving') === 'true') {
-        document.documentElement.classList.add('paper-tear-pending');
-      }
-    </script>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/paper-craft.css?v=fluid_20260907_v3">
     <script src="../js/paper-engine.js?v=fluid_20260907_v3" defer></script>
@@ -28,165 +23,84 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 20px;
-            margin: 24px 0;
+            margin: 28px 0 40px;
         }
         .feature-card-encore {
-            background: var(--bg-card);
-            border: 2px solid var(--rule);
-            border-radius: var(--radius-sm);
+            background: var(--paper-bg, #fffefb);
+            border: 1px solid var(--paper-line, rgba(0, 0, 0, 0.1));
             padding: 24px;
-            position: relative;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.06);
-            transition: transform 0.2s var(--ease-paper), box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: var(--shadow-sm, 0 2px 4px rgba(0,0,0,0.03));
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .feature-card-encore:hover {
             transform: translateY(-2px);
-            box-shadow: 6px 6px 0px var(--accent-red);
+            box-shadow: var(--shadow-md, 0 6px 16px rgba(0,0,0,0.06));
         }
-        .feature-num {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: var(--accent-red);
-            letter-spacing: 0.14em;
-            margin-bottom: 8px;
-            display: block;
-        }
-        .feature-title {
-            font-family: var(--font-serif);
+        .feature-card-encore h3 {
+            font-family: var(--font-serif, "Playfair Display", Georgia, serif);
             font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--ink-solid);
-            margin-bottom: 10px;
-            line-height: 1.2;
+            margin: 0;
+            color: var(--ink-pure, #111);
         }
-        .phase-badge {
+        .feature-card-encore p {
+            font-family: var(--font-sans, "Inter", sans-serif);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+            color: var(--ink-secondary, #444);
+        }
+        .tag-pill {
             display: inline-block;
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
+            align-self: flex-start;
+            font-family: var(--font-mono, "JetBrains Mono", monospace);
+            font-size: 0.72rem;
             text-transform: uppercase;
-            padding: 4px 10px;
+            letter-spacing: 0.05em;
+            padding: 4px 8px;
+            background: rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.08);
             border-radius: 2px;
-            margin-bottom: 12px;
+            color: var(--ink-muted, #666);
         }
-        .phase-1 {
-            background: rgba(20, 20, 20, 0.08);
-            border: 1px solid var(--rule);
-            color: var(--ink-solid);
+        [data-theme="night"] .feature-card-encore {
+            background: #1e1d1a;
+            border-color: rgba(255,255,255,0.1);
         }
-        .phase-2 {
-            background: var(--accent-soft);
-            border: 1px solid var(--accent-red);
-            color: var(--accent-red);
+        [data-theme="night"] .feature-card-encore h3 {
+            color: #f5f2eb;
         }
-        .spec-table-row {
-            display: grid;
-            grid-template-columns: 200px 1fr;
-            border-bottom: 1px dashed var(--rule-light);
-            padding: 10px 0;
-            font-size: 0.88rem;
+        [data-theme="night"] .feature-card-encore p {
+            color: #c5c0b5;
         }
-        @media (max-width: 600px) {
-            .spec-table-row {
-                grid-template-columns: 1fr;
-                gap: 4px;
-            }
+        [data-theme="night"] .tag-pill {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.12);
+            color: #a5a095;
+        }
+        .quote-box {
+            border-left: 3px solid var(--accent-red, #c0392b);
+            padding: 16px 20px;
+            margin: 28px 0;
+            background: rgba(0,0,0,0.02);
+            font-family: var(--font-serif, "Playfair Display", Georgia, serif);
+            font-style: italic;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--ink-secondary, #333);
+        }
+        [data-theme="night"] .quote-box {
+            background: rgba(255,255,255,0.02);
+            color: #d8d4cb;
         }
     </style>
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="alternate icon" type="image/png" href="../favicon.png">
 </head>
 <body class="newspaper-theme">
-    <!-- TWO PAPER TEARING AWAY TRANSITION & ENTRANCE -->
-    <div id="paperTransitionOverlay" class="paper-tear-overlay" aria-hidden="true">
-      <div class="paper-tear-half paper-tear-left" id="paperTearLeft">
-        <div class="paper-fiber-texture"></div>
-        <div class="paper-laid-lines"></div>
-        <div class="tear-sheet-content tear-content-left">
-          <div class="tear-top-folio font-mono">
-            <span>VOL. 2026 &bull; ISSUE NO. 43</span>
-            <span class="tear-sec-tag">BROADSHEET FOLIO &bull; SEC. A</span>
-          </div>
-          <div class="tear-masthead-wrap">
-            <h1 class="tear-masthead-title font-serif">THE SHARMA</h1>
-            <div class="tear-masthead-sub font-mono">CHRONICLE OF SYSTEMS &bull; DEFENSIVE ARCHITECTURE</div>
-          </div>
-          <div class="tear-ornamental-rule"></div>
-          <div class="tear-columns-grid">
-            <div class="tear-col">
-              <span class="tear-kicker font-mono">SPECIAL REPORT</span>
-              <h2 class="tear-headline font-serif">A Systems Engineer Who Builds Things &mdash; <span style="color: var(--accent-red);">Kernel to Cloud</span></h2>
-              <p class="tear-p font-serif"><span class="tear-dropcap">A</span>s a systems engineer and security researcher at VIT Vellore, I investigate and build software engineered to hold under intense adversarial load.</p>
-              <div class="tear-col-divider"></div>
-              <div class="tear-wire-notice font-mono">VELLORE WIRE &bull; DISPATCH RECEIVED</div>
-            </div>
-            <div class="tear-col tear-col-secondary">
-              <span class="tear-kicker font-mono">CURRICULUM</span>
-              <h3 class="tear-subhead font-serif">Vellore Institute of Technology</h3>
-              <p class="tear-p-sm font-sans">B.Tech Computer Science &amp; Engineering (Spec. Information Security), 2023&ndash;2027.</p>
-              <div class="tear-badge-pill font-mono">VERIFIED ARCHIVAL COPY</div>
-            </div>
-          </div>
-          <div class="tear-bottom-folio font-mono">
-            <span>LEFT SHEET &bull; CONTINUED ON SEC. B</span>
-            <span>EST. 2023 &bull; HAND-SET MONO</span>
-          </div>
-        </div>
-        <svg class="deckle-edge deckle-right" viewBox="0 0 60 1000" preserveAspectRatio="none" aria-hidden="true">
-          <path class="deckle-white-fringe" d="M0,0 L32,0 L24,18 L36,35 L22,58 L38,82 L20,115 L35,138 L24,165 L42,198 L26,225 L38,255 L20,285 L44,325 L24,360 L38,395 L18,430 L45,475 L22,510 L40,545 L20,585 L46,630 L24,665 L41,705 L18,745 L47,790 L23,830 L41,875 L19,915 L48,965 L25,995 L30,1000 L0,1000 Z" fill="#fffdf9"></path>
-          <path class="deckle-face" d="M0,0 L26,0 L18,16 L30,33 L16,55 L32,79 L14,112 L29,135 L18,162 L36,195 L20,222 L32,252 L14,282 L38,322 L18,357 L32,392 L12,427 L39,472 L16,507 L34,542 L14,582 L40,627 L18,662 L35,702 L12,742 L41,787 L17,827 L35,872 L13,912 L42,962 L19,992 L24,1000 L0,1000 Z" fill="#f6f0e2"></path>
-        </svg>
-      </div>
-      <div class="paper-tear-seam" id="tearSeamSeal">
-        <div class="seam-badge" id="tearBadgeBtn" role="button" tabindex="0" aria-label="Tear Broadsheet to Open">
-          <div class="seam-badge-inner">
-            <img src="../images/dispatch_crest.svg" alt="Seal" class="seam-crest" />
-            <span class="seam-title font-serif">THE SHARMA DISPATCH</span>
-            <span class="seam-instruction font-mono">✂ TAP / CLICK TO TEAR OPEN ✂</span>
-          </div>
-        </div>
-      </div>
-      <div class="paper-tear-half paper-tear-right" id="paperTearRight">
-        <div class="paper-fiber-texture"></div>
-        <div class="paper-laid-lines"></div>
-        <div class="tear-sheet-content tear-content-right">
-          <div class="tear-top-folio font-mono">
-            <span class="tear-sec-tag">BROADSHEET FOLIO &bull; SEC. B</span>
-            <span>PRICE: ONE SSH SESSION</span>
-          </div>
-          <div class="tear-masthead-wrap">
-            <h1 class="tear-masthead-title font-serif">DISPATCH</h1>
-            <div class="tear-masthead-sub font-mono">ENGINEERED UNDER ADVERSARIAL RESILIENCE &bull; 2026</div>
-          </div>
-          <div class="tear-ornamental-rule"></div>
-          <div class="tear-columns-grid">
-            <div class="tear-col">
-              <span class="tear-kicker font-mono">RESEARCH DISPATCH</span>
-              <h2 class="tear-headline font-serif">Lock-Free Backends &amp; Applied AI.</h2>
-              <p class="tear-p font-serif"><span class="tear-dropcap">T</span>he boundary between infrastructure and threat landscape has collapsed. Building zero-trust authentication pipelines.</p>
-              <div class="tear-col-divider"></div>
-              <div class="tear-wire-notice font-mono">PATENTS PENDING &bull; 3 FILED INVENTIONS</div>
-            </div>
-            <div class="tear-col tear-col-secondary">
-              <span class="tear-kicker font-mono">CORRESPONDENCE</span>
-              <h3 class="tear-subhead font-serif">Open for Collaboration</h3>
-              <p class="tear-p-sm font-sans">Available for systems engineering and defensive security engagements.</p>
-              <div class="tear-badge-pill font-mono">SEC. B FOLIO VERIFIED</div>
-            </div>
-          </div>
-          <div class="tear-bottom-folio font-mono">
-            <span>RIGHT SHEET &bull; COMPLETE DISPATCH</span>
-            <span>PRESS RUN: 1ST PRINT</span>
-          </div>
-        </div>
-        <svg class="deckle-edge deckle-left" viewBox="0 0 60 1000" preserveAspectRatio="none" aria-hidden="true">
-          <path class="deckle-white-fringe" d="M60,0 L28,0 L36,18 L24,35 L38,58 L22,82 L40,115 L25,138 L36,165 L18,198 L34,225 L22,255 L40,285 L16,325 L36,360 L22,395 L42,430 L15,475 L38,510 L20,545 L40,585 L14,630 L36,665 L19,705 L42,745 L13,790 L37,830 L19,875 L41,915 L12,965 L35,995 L30,1000 L60,1000 Z" fill="#fffdf9"></path>
-          <path class="deckle-face" d="M60,0 L34,0 L42,16 L30,33 L44,55 L28,79 L46,112 L31,135 L42,162 L24,195 L40,222 L28,252 L46,282 L22,322 L42,357 L28,392 L48,427 L21,472 L44,507 L26,542 L46,582 L20,627 L42,662 L25,702 L48,742 L19,787 L43,827 L25,872 L47,912 L18,962 L41,992 L36,1000 L60,1000 Z" fill="#f6f0e2"></path>
-        </svg>
-      </div>
-    </div>
     <div id="reading-progress-bar" class="reading-progress-bar"></div>
     <div class="container" style="max-width: 1100px;">
         
