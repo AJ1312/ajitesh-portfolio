@@ -426,9 +426,10 @@
                             <span class="pill-tag">C++17</span>
                             <span class="pill-tag">POSIX Threads</span>
                             <span class="pill-tag">Lock-Free Queue</span>
-                            <span class="pill-tag">eBPF / AF_PACKET</span>
+                            <span class="pill-tag">AF_PACKET</span>
                             <span class="pill-tag">JA4+ Fingerprinting</span>
-                            <span class="pill-tag">Welford CoV</span>
+                            <span class="pill-tag">Threat Alerting</span>
+                            <span class="pill-tag">Structured Logging</span>
                         </div>
 
                         <div class="newspaper-grid" style="border-top: 1px solid var(--rule); padding-top: 20px;">
@@ -447,13 +448,13 @@
                     <div class="col-span-6" style="padding-right: 20px;">
                         <span class="kicker-label" style="color: var(--stamp);">PROJECT MOTIVATION</span>
                         <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Why I Built CipherPulse</h3>
-                        <p class="body-lg" style="line-height: 1.75;"><span class="dropcap">M</span>ost of the internet's traffic is encrypted now, and newer TLS features like Encrypted Client Hello are starting to hide even the destination hostname that used to be visible during the handshake. I wanted to explore how much you can still infer about a connection — what kind of application it is, whether it's malicious — using only signals that remain visible even under full encryption: how a client negotiates its handshake, DNS lookups that precede a connection, and the shape and timing of the encrypted traffic itself. CipherPulse is a multi-threaded C++ engine built around that constraint.</p>
+                        <p class="body-lg" style="line-height: 1.75;"><span class="dropcap">M</span>ost of the internet's traffic is encrypted now, and newer TLS features like Encrypted Client Hello are starting to hide even the destination hostname that used to be visible during the handshake. I wanted to explore how much you can still infer about a connection — what kind of application it is, whether it's malicious — using only signals that remain visible even under full encryption: how a client negotiates its handshake, protocol attributes, and real-time behavioral telemetry. CipherPulse is a multi-threaded C++ engine built around that constraint.</p>
                     </div>
 
                     <div class="col-span-6" style="padding-left: 20px; border-left: 1px solid var(--rule);">
                         <span class="kicker-label" style="color: var(--stamp);">REAL-WORLD USE CASE</span>
                         <h3 class="heading-lg" style="margin: 10px 0 15px 0;">Catching Encrypted Hacker Signals</h3>
-                        <p class="body-lg" style="line-height: 1.75;"><span class="dropcap">P</span>icture a network security appliance sitting at a company's edge, watching gigabit traffic in real time. Malware on an internal machine tries to phone home to its command-and-control server over a fully encrypted connection with no recognizable hostname. CipherPulse can't decrypt the traffic — it doesn't need to. It fingerprints the way the malware's TLS client negotiates its handshake and matches it against known C2 signatures, notices that the packets checked in at suspiciously regular intervals, and flags the flow as likely C2 beaconing — all while processing packets from thousands of other simultaneous connections without a single thread ever waiting on another.</p>
+                        <p class="body-lg" style="line-height: 1.75;"><span class="dropcap">P</span>icture a network security appliance sitting at a company's edge, watching gigabit traffic in real time. Malware on an internal machine tries to phone home to its command-and-control server over a fully encrypted connection with no recognizable hostname. CipherPulse can't decrypt the traffic — it doesn't need to. It fingerprints the way the malware's TLS client negotiates its handshake and matches it against known C2 signatures, instantly triggering real-time alerts and streaming structured telemetry to logs — all while processing packets from thousands of other simultaneous connections without a single thread ever waiting on another.</p>
                     </div>
                 </div>
             </section>
@@ -479,22 +480,22 @@
 
                             <div class="cockpit-body">
                                 <div class="cockpit-btn-row">
-                                    <button class="cockpit-btn-action" id="btnCipherC2" onclick="runCipherSim('c2')">[STREAM 1] Encrypted C2 Beacon (Strict 5.0s Pulse)</button>
+                                    <button class="cockpit-btn-action" id="btnCipherC2" onclick="runCipherSim('c2')">[STREAM 1] Encrypted C2 Traffic (CobaltStrike Signature)</button>
                                     <button class="cockpit-btn-action active" id="btnCipherNormal" onclick="runCipherSim('normal')">[STREAM 2] Standard HTTPS Browsing (Stochastic)</button>
                                     <button class="cockpit-btn-action" id="btnCipherBench" onclick="runCipherSim('bench')">[STREAM 3] 100k pps Lock-Free Core Stress Test</button>
                                 </div>
 
-                                <!-- LIVE TELEMETRY: JA4+ DISSECTOR & WELFORD CoV -->
+                                <!-- LIVE TELEMETRY: JA4+ DISSECTOR & THREAT ALERTING -->
                                 <div class="telemetry-grid">
                                     <div class="telemetry-panel">
                                         <div class="telemetry-header">
-                                            <span>Welford Flow Rhythm Meter</span>
-                                            <span id="cipherVerdictBadge" class="badge-green">BENIGN (RANDOM)</span>
+                                            <span>Threat Alert &amp; Logging Meter</span>
+                                            <span id="cipherVerdictBadge" class="badge-green">BENIGN (LOW)</span>
                                         </div>
-                                        <div class="gauge-number-big" id="covScoreVal" style="color: #10b981;">0.48 <span style="font-size: 14px; color: #64748b;">(CoV &gt; 0.12 Safe)</span></div>
-                                        <div style="font-size: 12px; color: #94a3b8;" id="beaconStatusTxt">Traffic Rhythm: <b>Natural Human Interaction Delay</b></div>
+                                        <div class="gauge-number-big" id="covScoreVal" style="color: #10b981;">0.02 <span style="font-size: 14px; color: #64748b;">(Threat Score: Low)</span></div>
+                                        <div style="font-size: 12px; color: #94a3b8;" id="beaconStatusTxt">Threat Level: <b>Benign Client &mdash; Telemetry Logged</b></div>
                                         <div class="gauge-bar-track">
-                                            <div class="gauge-bar-fill" id="covGaugeFill" style="width: 48%; background: #10b981;"></div>
+                                            <div class="gauge-bar-fill" id="covGaugeFill" style="width: 10%; background: #10b981;"></div>
                                         </div>
                                     </div>
 
@@ -528,9 +529,9 @@
                                             <th style="width: 90px;">Timestamp</th>
                                             <th>Network Connection Flow</th>
                                             <th style="width: 220px;">JA4+ Fingerprint Hash</th>
-                                            <th>Traffic Rhythm</th>
+                                            <th>Threat / Risk Profile</th>
                                             <th style="width: 140px;">Security Verdict</th>
-                                            <th style="width: 120px;">Action Taken</th>
+                                            <th style="width: 160px;">Action Taken</th>
                                         </tr>
                                     </thead>
                                     <tbody id="wbCipherBody">
@@ -538,9 +539,9 @@
                                             <td>21:15:01</td>
                                             <td><b>192.168.1.45 &rarr; Google:443</b></td>
                                             <td><code>t13d151600_8daaf6152702</code></td>
-                                            <td>Random human interaction timing</td>
+                                            <td>Low risk (Threat Score: 0.02)</td>
                                             <td><span class="badge-green">SAFE (BENIGN)</span></td>
-                                            <td>Allowed</td>
+                                            <td>Logged (Benign)</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -550,12 +551,12 @@
                 </div>
             </section>
 
-            <!-- 4. INTERACTIVE 7-STAGE PIPELINE STEPPER (RETHOUGHT FROM SCRATCH!) -->
+            <!-- 4. INTERACTIVE 6-STAGE PIPELINE STEPPER (RETHOUGHT FROM SCRATCH!) -->
             <section class="section" style="padding: 40px 0; border-bottom: 1px solid var(--rule);">
                 <div class="newspaper-grid">
                     <div class="col-span-12">
                         <span class="kicker-label">SYSTEM ARCHITECTURE</span>
-                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">7-Stage Packet Inspection Pipeline</h3>
+                        <h3 class="heading-lg" style="margin: 10px 0 20px 0;">6-Stage Packet Inspection Pipeline</h3>
                         <p class="body-lg" style="margin-bottom: 25px; color: #444;">Click any stage tab below to inspect exact multi-threaded C++17 memory management and lock-free queue mechanics:</p>
 
                         <!-- STEPPER BUTTON TABS -->
@@ -564,16 +565,15 @@
                             <button class="stepper-tab-btn" onclick="switchCipherStage(2)">02. 5-Tuple Router</button>
                             <button class="stepper-tab-btn" onclick="switchCipherStage(3)">03. Fast Path</button>
                             <button class="stepper-tab-btn" onclick="switchCipherStage(4)">04. JA4+ Profiler</button>
-                            <button class="stepper-tab-btn" onclick="switchCipherStage(5)">05. DNS Correlator</button>
-                            <button class="stepper-tab-btn" onclick="switchCipherStage(6)">06. Welford CoV</button>
-                            <button class="stepper-tab-btn" onclick="switchCipherStage(7)">07. eBPF Drop</button>
+                            <button class="stepper-tab-btn" onclick="switchCipherStage(5)">05. Alerting</button>
+                            <button class="stepper-tab-btn" onclick="switchCipherStage(6)">06. Logging</button>
                         </div>
 
                         <!-- DYNAMIC STAGE DETAIL CARD -->
                         <div class="stepper-detail-card" id="cipherStageCard">
                             <h4 class="heading-lg" id="cStageTitle" style="color: var(--stamp); margin-bottom: 8px;">Stage 01: Zero-Copy RAW Ethernet Capture</h4>
                             <p class="body-lg" id="cStageDesc" style="line-height: 1.7;">
-                                Ingests ethernet frames directly from network interface sockets using Linux AF_PACKET memory-mapped ring buffers (or eBPF sock_ops). Packet headers are mapped directly without kernel-to-userspace socket copy overhead.
+                                Ingests ethernet frames directly from network interface sockets using Linux AF_PACKET memory-mapped ring buffers. Packet headers are mapped directly without kernel-to-userspace socket copy overhead.
                             </p>
 
                             <div class="algo-code-box" id="cStageCodeBox">
@@ -613,9 +613,9 @@ uint8_t* rx_ring = (uint8_t*)mmap(NULL, total_sz, PROT_READ|PROT_WRITE, MAP_SHAR
                             </div>
 
                             <div class="metric-card-styled">
-                                <div class="metric-num-bold">&lt; 0.12</div>
-                                <div class="metric-title-upper">Beacon Threshold</div>
-                                <div class="metric-text-desc">Welford Coefficient of Variation (CoV) threshold flagging automated malware pulses.</div>
+                                <div class="metric-num-bold">REAL-TIME</div>
+                                <div class="metric-title-upper">Alerts &amp; Logging</div>
+                                <div class="metric-text-desc">Sub-millisecond threat evaluation with asynchronous structured JSON telemetry logging.</div>
                             </div>
 
                             <div class="metric-card-styled">
@@ -664,7 +664,7 @@ uint8_t* rx_ring = (uint8_t*)mmap(NULL, total_sz, PROT_READ|PROT_WRITE, MAP_SHAR
                 const cipherStages = {
                     1: {
                         title: "Stage 01: Zero-Copy RAW Ethernet Capture",
-                        desc: "Ingests ethernet frames directly from network interface sockets using Linux AF_PACKET memory-mapped ring buffers (or eBPF sock_ops). Packet headers are mapped directly without kernel-to-userspace socket copy overhead.",
+                        desc: "Ingests ethernet frames directly from network interface sockets using Linux AF_PACKET memory-mapped ring buffers. Packet headers are mapped directly without kernel-to-userspace socket copy overhead.",
                         code: "// Stage 1: AF_PACKET Ring Ingress\nint sock = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));\nstruct tpacket_req req;\nsetsockopt(sock, SOL_PACKET, PACKET_RX_RING, (void*)&req, sizeof(req));\nuint8_t* rx_ring = (uint8_t*)mmap(NULL, total_sz, PROT_READ|PROT_WRITE, MAP_SHARED, sock, 0);",
                         why: "Why It Matters: Captures line-rate packet headers directly at kernel ingress without dropping packets under heavy load."
                     },
@@ -687,22 +687,16 @@ uint8_t* rx_ring = (uint8_t*)mmap(NULL, total_sz, PROT_READ|PROT_WRITE, MAP_SHAR
                         why: "Why It Matters: Identifies malicious client frameworks even when the destination hostname is encrypted."
                     },
                     5: {
-                        title: "Stage 05: Active In-Memory DNS Correlation",
-                        desc: "Monitors plaintext DNS responses on UDP port 53 to construct a local IP-to-Domain resolution cache. Expires old mappings automatically using TTL timestamps.",
-                        code: "// Stage 5: DNS Reverse Correlation Cache\ndns_cache.insert(resolved_ip, queried_domain, ttl_seconds);\nstd::string host = dns_cache.lookup(dest_ip); // 'google.com'",
-                        why: "Why It Matters: Annotates raw encrypted IP traffic with human-readable domain names for incident response."
+                        title: "Stage 05: Real-Time Threat Alerting Engine",
+                        desc: "Evaluates extracted signatures and threat scores against active security rule sets. Dispatches immediate notifications and trigger events when high-risk or malicious traffic profiles are identified.",
+                        code: "// Stage 5: Rule Matching & Alert Evaluation\nif (rule_manager->matches(flow.ja4_hash, flow.threat_score)) {\n    AlertEvent alert{flow.id, AlertLevel::CRITICAL, \"C2 Signature Match\"};\n    alert_dispatcher.dispatch(alert);\n}",
+                        why: "Why It Matters: Delivers immediate operational visibility and sub-millisecond alerting on malicious activity without blocking packet ingestion."
                     },
                     6: {
-                        title: "Stage 06: Welford Flow Timing CoV Engine",
-                        desc: "Calculates running mean and variance of packet inter-arrival timestamps using Welford's single-pass online algorithm. Computes Coefficient of Variation (CoV = std_dev / mean) in O(1) time.",
-                        code: "// Stage 6: Welford Online Variance\nwelford_update(delta_time);\ndouble cov = sqrt(running_variance) / running_mean;\nif (cov < 0.12 && packet_count >= 10) {\n    flag_beaconing_c2();\n}",
-                        why: "Why It Matters: Detects automated bot malware pulses in constant O(1) time without keeping arrays of timestamps."
-                    },
-                    7: {
-                        title: "Stage 07: Kernel eBPF Drop Rule Injection",
-                        desc: "Upon detecting a confirmed C2 beacon or malware signature, injects an ingress drop rule directly into the kernel's eBPF map, nullifying the attack at the hardware interface level.",
-                        code: "// Stage 7: eBPF Drop Rule Injection\nbpf_map_update_elem(block_map_fd, &malicious_ip, &drop_action, BPF_ANY);\n// Packet dropped in sub-microsecond latency at kernel ingress",
-                        why: "Why It Matters: Instantly stops data exfiltration channels before malware can transmit exfiltrated data."
+                        title: "Stage 06: Asynchronous Structured Logging",
+                        desc: "Streams enriched flow telemetry, security verdicts, and packet metadata into structured JSON records and binary logs via dedicated worker ring queues, preventing disk I/O from stalling hot-path packet processing.",
+                        code: "// Stage 6: Lock-Free Telemetry Output\njson_log.write_flow_telemetry(flow.id, flow.ja4_hash, flow.verdict);\noutput_queue.push(std::move(log_record)); // Non-blocking async queue",
+                        why: "Why It Matters: Ensures comprehensive forensic audit trails and SIEM streaming while isolating hot-path threads from disk latency."
                     }
                 };
 
@@ -740,18 +734,18 @@ uint8_t* rx_ring = (uint8_t*)mmap(NULL, total_sz, PROT_READ|PROT_WRITE, MAP_SHAR
                         document.getElementById('btnCipherC2').classList.add('active');
                         conn = '10.0.4.12 &rarr; 185.220.101.5 (C2 Host)';
                         ja4 = 't13d190800_c84a8b291410';
-                        rhythm = 'Strict 5.0s metronome pulse (CoV: 0.002)';
-                        badge = '<span class="badge-red">ALERT: C2 BEACON</span>';
-                        action = 'Blocked via eBPF';
-                        logTxt = `[${ts}] [FORENSIC MATCH] JA4 signature 't13d190800_c84a8b291410' matched CobaltStrike C2 framework. Welford CoV=0.002 (Strict 5.0s pulse). Injected drop rule to Kernel eBPF map.`;
+                        rhythm = 'Critical Risk (Threat Score: 0.98)';
+                        badge = '<span class="badge-red">ALERT: C2 MATCH</span>';
+                        action = 'Alert Dispatched & Logged';
+                        logTxt = `[${ts}] [FORENSIC MATCH] JA4 signature 't13d190800_c84a8b291410' matched CobaltStrike C2 framework. Threat Score=0.98 (CRITICAL). Real-time security alert dispatched and written to structured audit log.`;
 
-                        covScoreVal.innerText = '0.002';
+                        covScoreVal.innerHTML = '0.98 <span style="font-size: 14px; color: #64748b;">(Threat Score: Critical)</span>';
                         covScoreVal.style.color = '#ef4444';
-                        covGaugeFill.style.width = '96%';
+                        covGaugeFill.style.width = '98%';
                         covGaugeFill.style.background = '#ef4444';
                         cipherVerdictBadge.className = 'badge-red';
-                        cipherVerdictBadge.innerText = 'C2 BEACON (CoV < 0.12)';
-                        beaconStatusTxt.innerHTML = 'Traffic Rhythm: <b style="color: #ef4444;">Automated Metronome Pulse (5.0s)</b>';
+                        cipherVerdictBadge.innerText = 'CRITICAL ALERT';
+                        beaconStatusTxt.innerHTML = 'Threat Level: <b style="color: #ef4444;">Malicious C2 Match &mdash; Alert Fired &amp; Logged</b>';
 
                         ja4HashDisplay.innerText = 't13d190800_c84a8b291410';
                         tlsVerDisplay.innerText = 'TLS 1.3 (Sliver/Cobalt)';
@@ -760,18 +754,18 @@ uint8_t* rx_ring = (uint8_t*)mmap(NULL, total_sz, PROT_READ|PROT_WRITE, MAP_SHAR
                         document.getElementById('btnCipherBench').classList.add('active');
                         conn = '100,000 Pkts/sec Multi-Stream Burst';
                         ja4 = 'Multi-Flow Hash Ring (4 Cores)';
-                        rhythm = '0.00 us Mutex Lock Contention';
+                        rhythm = 'Benchmark Telemetry Stream';
                         badge = '<span class="badge-amber">LOCK-FREE OK</span>';
-                        action = '0 Mutex Drops';
-                        logTxt = `[${ts}] [BENCHMARK] Line-rate stress burst: 104,800 packets/sec across 4 POSIX worker threads. Lock contention: 0 us. SPSC ring utilization: 34%.`;
+                        action = 'Logged (Telemetry)';
+                        logTxt = `[${ts}] [BENCHMARK] Line-rate stress burst: 104,800 packets/sec across 4 POSIX worker threads. Lock contention: 0 us. Asynchronous log queue drain rate: 100k events/sec.`;
 
-                        covScoreVal.innerText = '0.19';
+                        covScoreVal.innerHTML = '0.00 <span style="font-size: 14px; color: #64748b;">(Contention: 0 &mu;s)</span>';
                         covScoreVal.style.color = '#f59e0b';
-                        covGaugeFill.style.width = '19%';
+                        covGaugeFill.style.width = '100%';
                         covGaugeFill.style.background = '#f59e0b';
                         cipherVerdictBadge.className = 'badge-amber';
                         cipherVerdictBadge.innerText = 'BURST ACTIVE';
-                        beaconStatusTxt.innerHTML = 'Traffic Rhythm: <b style="color: #f59e0b;">100k pps Synthetic Multi-Thread Stream</b>';
+                        beaconStatusTxt.innerHTML = 'Threat Level: <b style="color: #f59e0b;">100k pps Synthetic Multi-Thread Stream</b>';
 
                         ja4HashDisplay.innerText = 'MULTI_FLOW_HASH_RING_4X';
                         tlsVerDisplay.innerText = '100% Lock-Free SPSC';
@@ -780,18 +774,18 @@ uint8_t* rx_ring = (uint8_t*)mmap(NULL, total_sz, PROT_READ|PROT_WRITE, MAP_SHAR
                         document.getElementById('btnCipherNormal').classList.add('active');
                         conn = '192.168.1.45 &rarr; Google:443';
                         ja4 = 't13d151600_8daaf6152702';
-                        rhythm = 'Random human interaction timing';
+                        rhythm = 'Low Risk (Threat Score: 0.02)';
                         badge = '<span class="badge-green">SAFE (BENIGN)</span>';
-                        action = 'Allowed';
-                        logTxt = `[${ts}] [PASS] Clean TLS 1.3 ClientHello verified for 192.168.1.45->Google:443. Human interaction delay verified (CoV=0.48).`;
+                        action = 'Logged (Benign)';
+                        logTxt = `[${ts}] [PASS] Clean TLS 1.3 ClientHello verified for 192.168.1.45->Google:443. Threat Score=0.02 (Low). Telemetry logged to JSON audit stream.`;
 
-                        covScoreVal.innerText = '0.48';
+                        covScoreVal.innerHTML = '0.02 <span style="font-size: 14px; color: #64748b;">(Threat Score: Low)</span>';
                         covScoreVal.style.color = '#10b981';
-                        covGaugeFill.style.width = '48%';
+                        covGaugeFill.style.width = '10%';
                         covGaugeFill.style.background = '#10b981';
                         cipherVerdictBadge.className = 'badge-green';
-                        cipherVerdictBadge.innerText = 'BENIGN (RANDOM)';
-                        beaconStatusTxt.innerHTML = 'Traffic Rhythm: <b style="color: #10b981;">Natural Human Interaction Delay</b>';
+                        cipherVerdictBadge.innerText = 'BENIGN (LOW)';
+                        beaconStatusTxt.innerHTML = 'Threat Level: <b style="color: #10b981;">Natural Browsing &mdash; Telemetry Logged</b>';
 
                         ja4HashDisplay.innerText = 't13d151600_8daaf6152702';
                         tlsVerDisplay.innerText = 'TLS 1.3 (Chrome 122)';
